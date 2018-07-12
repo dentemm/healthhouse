@@ -90,3 +90,6 @@ db.sqlite3
 
 # Node
 node_modules/
+
+# Custom
+healthhouse/static/bundle/

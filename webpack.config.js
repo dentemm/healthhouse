@@ -1,17 +1,16 @@
 const path = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const NewExtractTextPlugin = require('mini-css-extract-plugin');
+const ExtractTextPlugin = require('mini-css-extract-plugin');
 
 module.exports = () => {
 
-  const CSSExtract = new NewExtractTextPlugin({
+  const CSSExtract = new ExtractTextPlugin({
     filename: 'styles.css'
   });
 
   return {
     entry: './healthhouse/static/js/index.js',
     output: {
-      path: path.join(__dirname, './healthhouse/static/test'),
+      path: path.join(__dirname, './healthhouse/static/bundle'),
       filename: 'bundle.js'
     },
     module: {
@@ -24,29 +23,11 @@ module.exports = () => {
         {
           test : /\.css$/,
           use: [
-            NewExtractTextPlugin.loader,
+            ExtractTextPlugin.loader,
             'css-loader',
             'sass-loader'
           ]
-          // use: CSSExtract.extract({
-          //   fallback: 'style-loader',
-          //   use: [
-          //     'css-loader',
-          //     'sass-loader'
-          //   ]
-          // })
         }
-        // {
-        //   test: /\.s?css$/,
-        //   use: ExtractTextPlugin.extract({
-        //     fallback: 'style-loader',
-        //     use: [
-        //       'style-loader',
-        //       'css-loader',
-        //       'sass-loader'
-        //     ]
-        //   })
-        // }
       ]
     },
     devtool: 'cheap-module-eval-source-map',

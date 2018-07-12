@@ -59,6 +59,9 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
 
+    # Added
+    'django.middleware.locale.LocaleMiddleware',
+
     'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
@@ -107,7 +110,14 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+from django.utils.translation import ugettext_lazy as _
+
+LANGUAGE_CODE = 'en-uk'
+
+LANGUAGES = (
+    ('en', _("English")),
+    ('nl', _("Dutch")),
+)
 
 TIME_ZONE = 'UTC'
 
