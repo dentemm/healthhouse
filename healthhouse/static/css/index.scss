@@ -1,5 +1,8 @@
+@import 'variables';
+
 $brand-color: 'blue';
 
 * {
   color: $brand-color;
+  font-family: $font, sans-serif !important;
 }

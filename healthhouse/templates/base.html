@@ -18,7 +18,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 
         {# Global stylesheets #}
-        <link rel="stylesheet" type="text/css" href="{% static 'bundle/css/styles.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'bundle/styles.css' %}">
 
         {% block extra_css %}
             {# Override this in templates to add extra stylesheets #}
@@ -31,7 +34,7 @@
         {% block content %}{% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static '/bundle/js/index.js' %}"></script>
+        <script type="text/javascript" src="{% static '/bundle/bundle.js' %}"></script>
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
