@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from wagtail.core.models import Page, Orderable
 from wagtail.core.blocks import StreamBlock, StructBlock, CharBlock, ListBlock
 from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 
@@ -36,8 +36,29 @@ class HomePage(Page):
     body = StreamField(HomePageStreamBlock(), null=True)
 
 HomePage.content_panels = Page.content_panels + [
-    StreamFieldPanel('body')
+    # StreamFieldPanel('body'),
+    InlinePanel('cover_images', label=_('Cover images'))
 ]
+
+class HomePageCoverImage(Orderable):
+
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='cover_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+    caption = models.CharField(blank=True, max_length=55)
+
+    class Meta:
+        verbose_name = 'Cover image'
+        verbose_name_plural = 'Cover images'
+
+HomePageCoverImage.panels = [
+    ImageChooserPanel('image'),
+    FieldPanel('caption')
+]
+
 
 class ContactPage(Page):
 
@@ -58,9 +79,20 @@ BlogIndexPage.content_panels = Page.content_panels + [
 ]
 
 class BlogPage(Page):
-    date = models.DateField(_('Date')) 
+    
+    intro = models.TextField(null=True)
+    # TEMM: need to remove null=True below
+    cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.CASCADE, related_name='+', null=True)
+    
+    date = models.DateField(_('Date'))
 
-BlogPage.content_panels = Page.content_panels + [
+
+BlogPage.content_panels = [
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('intro'),
+        ImageChooserPanel('cover_image'),
+    ], heading='Title & intro'),
     FieldPanel('date'),
     InlinePanel('gallery_images', label=_('Gallery images'))
 ]
@@ -78,7 +110,6 @@ class BlogPageGallery(Orderable):
     class Meta:
         verbose_name = 'Gallery image'
         verbose_name_plural = 'Gallery images'
-
 
 BlogPageGallery.panels = [
     ImageChooserPanel('image'),
