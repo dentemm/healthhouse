@@ -11,6 +11,13 @@ except ImportError:
 # DATABASE SETUP
 #
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'healthhouse'
+    }
+}
+
 import dj_database_url
 DATABASES['default'] =  dj_database_url.config()
 
