@@ -7,6 +7,8 @@ try:
 except ImportError:
     pass
 
+SECRET_KEY = os.environ['SECRET_KEY']
+
 #
 # DATABASE SETUP
 #
