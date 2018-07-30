@@ -70,6 +70,23 @@ class ContactPage(Page):
 
     pass
 
+class DiscoveryPage(Page):
+
+    introduction = models.TextField()
+    
+DiscoveryPage.content_panels = Page.content_panels + [
+
+    FieldPanel('introduction')
+]
+
+class AboutPage(Page):
+
+    pass 
+
+AboutPage.content_panels = Page.content_panels + [
+    InlinePanel('faq_questions', label=_('FAQ questions'))
+]
+
 class BlogIndexPage(Page):
     
     def get_context(self, request):
@@ -242,4 +259,21 @@ Partner.panels = [
 		], 
         heading='Location details'
 	)  
+]
+
+class AboutPageQuestion(Orderable):
+
+    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='faq_questions')
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+
+    class Meta:
+        verbose_name = 'FAQ question'
+        verbose_name_plural = 'FAQ questions'
+
+AboutPageQuestion.panels = [
+    MultiFieldPanel([
+        FieldPanel('question'),
+        FieldPanel('answer')
+    ])
 ]
