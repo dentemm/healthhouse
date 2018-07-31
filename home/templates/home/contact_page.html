@@ -1,0 +1,9 @@
+{% extends 'home/layout.html' %}
+
+{% block main %}
+  {% include 'home/components/map.html' %}
+{% endblock main %}
+
+{% block extra_js %}
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBHtKZB7XlS_CVrIFsPbgroMG0SgX3c-po&callback=initMap" async defer></script>
+{% endblock extra_js %}

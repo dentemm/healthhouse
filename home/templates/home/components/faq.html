@@ -1,111 +1,24 @@
 <!-- accordion minimal -->
 <section class="component">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h4>Minimal</h4>
-      </div>
-      <div class="col text-right">
-        <div class="nav nav-docs nav-lavalamp">
-          <a class="nav-item nav-link active show" data-toggle="tab" href="#component-2-1">Light</a>
-          <a class="nav-item nav-link" data-toggle="tab" href="#component-2-2">Dark</a>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="tab-content" id="component-2">
-    <div class="tab-pane show active bg-light" id="component-2-1" role="tabpanel" aria-labelledby="component-2-1">
+  <div class="tab-content">
+    <div class="tab-pane show active bg-light" role="tabpanel" aria-labelledby="component-2-1">
       <div class="component-example">
         <div class="container">
           <div class="row justify-content-center">
             <div class="col-md-6">
               <div class="accordion-group accordion-group-minimal" data-accordion-group>
-                <div class="accordion open" data-accordion>
-                  <div class="accordion-control" data-control>
-                    <h5>Panel One</h5>
-                  </div>
-                  <div class="accordion-content" data-content>
-                    <div class="accordion-content-wrapper">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quam odit voluptatum, rem libero modi labore porro commodi inventore architecto explicabo reiciendis, perspiciatis voluptatibus odio, sequi nobis? Optio, aperiam, tenetur!</p>
-                    </div>
-                  </div>
-                </div>
+                {% for item in list %}
                 <div class="accordion" data-accordion>
                   <div class="accordion-control" data-control>
-                    <h5>Panel Two</h5>
+                    <h5>{{ item.question }}</h5>
                   </div>
                   <div class="accordion-content" data-content>
                     <div class="accordion-content-wrapper">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quam odit voluptatum, rem libero modi labore porro commodi inventore architecto explicabo reiciendis, perspiciatis voluptatibus odio, sequi nobis? Optio, aperiam, tenetur!</p>
+                      <p>{{ item.answer }}</p>
                     </div>
                   </div>
                 </div>
-                <div class="accordion" data-accordion>
-                  <div class="accordion-control" data-control>
-                    <h5>Panel Three</h5>
-                  </div>
-                  <div class="accordion-content" data-content>
-                    <div class="accordion-content-wrapper">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quam odit voluptatum, rem libero modi labore porro commodi inventore architecto explicabo reiciendis, perspiciatis voluptatibus odio, sequi nobis? Optio, aperiam, tenetur!</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="component-details bg-white">
-        <div class="container">
-          <div class="row component-details-markup">
-            <div class="col">
-              <pre><code class="language-markup">&lt;div class="accordion-group accordion-group-minimal" data-accordion-group></code></pre>
-            </div>
-          </div>
-          <div class="row component-details-reference">
-            <div class="col">
-              <p>Same markup as on <a data-scroll href="#default">default accordion</a>, just add <code>.accordion-group-minimal</code> class.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="tab-pane" id="component-2-2" role="tabpanel" aria-labelledby="component-2-2">
-      <div class="component-example bg-dark text-white">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-md-6">
-              <div class="accordion-group accordion-group-minimal" data-accordion-group>
-                <div class="accordion open" data-accordion>
-                  <div class="accordion-control" data-control>
-                    <h5>Panel One</h5>
-                  </div>
-                  <div class="accordion-content" data-content>
-                    <div class="accordion-content-wrapper">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quam odit voluptatum, rem libero modi labore porro commodi inventore architecto explicabo reiciendis, perspiciatis voluptatibus odio, sequi nobis? Optio, aperiam, tenetur!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion" data-accordion>
-                  <div class="accordion-control" data-control>
-                    <h5>Panel Two</h5>
-                  </div>
-                  <div class="accordion-content" data-content>
-                    <div class="accordion-content-wrapper">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quam odit voluptatum, rem libero modi labore porro commodi inventore architecto explicabo reiciendis, perspiciatis voluptatibus odio, sequi nobis? Optio, aperiam, tenetur!</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="accordion" data-accordion>
-                  <div class="accordion-control" data-control>
-                    <h5>Panel Three</h5>
-                  </div>
-                  <div class="accordion-content" data-content>
-                    <div class="accordion-content-wrapper">
-                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius quam odit voluptatum, rem libero modi labore porro commodi inventore architecto explicabo reiciendis, perspiciatis voluptatibus odio, sequi nobis? Optio, aperiam, tenetur!</p>
-                    </div>
-                  </div>
-                </div>
+                {% endfor %}
               </div>
             </div>
           </div>

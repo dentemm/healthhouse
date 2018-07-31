@@ -68,7 +68,14 @@ HomePageCoverImage.panels = [
 
 class ContactPage(Page):
 
-    pass
+    template = 'home/contact_page.html'
+
+    class Meta:
+        pass
+
+ContactPage.content_panels = Page.content_panels + [
+
+]
 
 class DiscoveryPage(Page):
 

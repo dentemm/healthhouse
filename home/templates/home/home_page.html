@@ -29,6 +29,21 @@
             </div>
           </div>
         </div>
+        {% for image in page.cover_images.all %}
+
+        <div class="swiper-slide vh-100">
+          <div class="image image-overlay" style="background-image:url({{ image.image.file.url }})"></div>
+          <div class="caption">
+            <div class="container">
+              <div class="row justify-content-between vh-100">
+                <div class="col-md-8 align-self-center" data-swiper-parallax-y="-250%">
+                  <h1 class="display-2 font-weight-bold text-uppercase">{{ image.caption }}</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
+        {% endfor %}
         <div class="swiper-slide vh-100">
           <div class="image image-overlay" style="background-image:url({% static 'images/demo/fitness/fitness-2.jpg' %})"></div>
           <div class="caption">
@@ -99,5 +114,9 @@
     </div>
   </section>
   <!-- / presentation -->
+
+  <iframe src="https://oosterbosch.storygraaf.be" scrolling="no" height="660"
+width="100%" frameborder="no" webkitAllowFullScreen mozallowfullscreen
+allowFullScreen style="border: none;"></iframe>
 
 {% endblock main %}

@@ -34,12 +34,12 @@
         {% block content %}{% endblock %}
 
         {# Global javascript #}
-        <script type="text/javascript" src="{% static 'js/vendor.min.js' %}"></script>
-        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
-
 
         {% block extra_js %}
             {# Override this in templates to add extra javascript #}
         {% endblock %}
+
+        <script type="text/javascript" src="{% static 'js/vendor.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
     </body>
 </html>

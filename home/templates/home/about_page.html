@@ -1,0 +1,5 @@
+{% extends 'home/layout.html' %}
+
+{% block main %}
+  {% include 'home/components/faq.html' with list=page.faq_questions.all %}
+{% endblock main %}
