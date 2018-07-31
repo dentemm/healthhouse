@@ -16,6 +16,14 @@ WSGI_APPLICATION = 'healthhouse.wsgi.application'
 SECRET_KEY = os.environ['SECRET_KEY']
 
 #
+# MIDDLEWARE
+#
+
+MIDDLEWARE += [
+    'whitenoise.middleware.WhiteNoiseMiddleware'
+]
+
+#
 # DATABASE
 #
 
