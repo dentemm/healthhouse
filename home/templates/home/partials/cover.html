@@ -1,0 +1,32 @@
+<!-- cover -->
+<section class="p-0">
+  <div class="swiper-container text-white"
+    data-top-top="transform: translateY(0px);" 
+    data-top-bottom="transform: translateY(250px);">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide vh-100">
+        <div class="image image-overlay image-zoom" style="background-image:url({{ image.file.url }})"></div>
+        <div class="caption">
+          <div class="container">
+            <div class="row align-items-center vh-100">
+              <div class="col-md-8" data-swiper-parallax-y="-250%">
+                <span class="eyebrow mb-2">Travel</span>
+                <h1 class="display-2">{{ title }}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-footer mb-5">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col text-center">
+              <div class="mouse"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / cover -->
