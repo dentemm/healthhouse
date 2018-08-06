@@ -46,6 +46,15 @@ HomePage.content_panels = Page.content_panels + [
     InlinePanel('cover_images', label=_('Cover images'))
 ]
 
+HomePage.parent_page_types = []
+HomePage.subpage_types = [
+    'home.ContactPage',
+    'home.DiscoveryPage',
+    'home.AboutPage',
+    'home.BlogIndexPage',
+    'home.BlogPage' # TEMM: need to remove this
+]
+
 class HomePageCoverImage(Orderable):
 
     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='cover_images')
@@ -77,6 +86,11 @@ ContactPage.content_panels = Page.content_panels + [
 
 ]
 
+ContactPage.parent_page_types = ['home.HomePage']
+ContactPage.subpage_types = [
+    'home.BlogPage'
+]
+
 class DiscoveryPage(Page):
 
     introduction = models.TextField()
@@ -95,12 +109,15 @@ AboutPage.content_panels = Page.content_panels + [
 ]
 
 class BlogIndexPage(Page):
+
+    def blogs(self): 
+        return self.get_children().live().order_by('-first_published_at')
     
     def get_context(self, request):
 
         context = super().get_context(request)
-        blogs = self.get_children().live().order_by('-first_published_at')
-        context['blogs'] = blogs
+
+        context['blogs'] = self.blogs
         
         return context
 
@@ -109,13 +126,13 @@ BlogIndexPage.content_panels = Page.content_panels + [
 ]
 
 class BlogPage(Page):
+
+    template = 'home/blog_article_page.html'
     
     intro = models.TextField(null=True)
     # TEMM: need to remove null=True below
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
     
-    date = models.DateField(_('Date'))
-
 
 BlogPage.content_panels = [
     MultiFieldPanel([
@@ -123,7 +140,6 @@ BlogPage.content_panels = [
         FieldPanel('intro'),
         ImageChooserPanel('cover_image'),
     ], heading='Title & intro'),
-    FieldPanel('date'),
     InlinePanel('gallery_images', label=_('Gallery images'))
 ]
 
