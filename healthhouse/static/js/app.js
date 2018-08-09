@@ -82,9 +82,7 @@
 
 
     AOS: function() {
-      AOS.init({
-        duration: 800
-      });
+
     },
 
 
@@ -218,7 +216,7 @@
             1200: { items: items[0] || 1}
           }
         };
-
+        
         a.owlCarousel(options);
       });
     },
@@ -344,6 +342,12 @@
               a.removeClass("expanded");
           });
 
+      });
+
+
+      AOS.init({
+        duration: 800,
+        anchorPlacement: 'center-bottom'
       });
     }
 

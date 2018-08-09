@@ -1,5 +1,7 @@
 {% extends 'home/layout.html' %}
 
+{% load static %}
+
 {% block main %}
 
   <!-- cover -->
@@ -35,10 +37,13 @@
         <div class="col-md-12 col-lg-10">
           <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="true">
             <figure class="photo">
-              <img src="../../assets/images/demo/image-square-1.jpg" alt="Image">
+              <img src="{% static 'images/demo/coworking/coworking-1.jpg' %}" alt="Image">
             </figure>
             <figure class="photo">
-              <img src="../../assets/images/demo/image-square-2.jpg" alt="Image">
+              <img src="{% static 'images/demo/coworking/coworking-2.jpg' %}" alt="Image">
+            </figure>
+            <figure class="photo">
+              <img src="{% static 'images/demo/coworking/coworking-1.jpg' %}" alt="Image">
             </figure>
           </div>
         </div>
@@ -64,6 +69,8 @@
     </div>
   </section>
 
+  {{ page.content }}
+
 
 
   <!-- news -->
@@ -77,7 +84,7 @@
       <div class="row gutter-2">
         <div class="col-md-6 col-lg-4">
           <article class="tile">
-            <div class="tile-image" style="background-image: url(../../assets/images/demo/image-square-1.jpg)"></div>
+            <div class="tile-image" style="background-image: url({% static 'images/demo/image-square-1.jpg' %})"></div>
             <a href="">
               <div class="tile-header">
                 <span class="eyebrow mb-1">Design</span>
@@ -93,7 +100,7 @@
         </div>
         <div class="col-md-6 col-lg-4">
           <article class="tile">
-            <div class="tile-image" style="background-image: url(../../assets/images/demo/image-square-2.jpg)"></div>
+            <div class="tile-image" style="background-image: url({% static 'images/demo/image-square-2.jpg' %})"></div>
             <a href="">
               <div class="tile-header">
                 <span class="eyebrow mb-1">Design</span>
@@ -109,7 +116,7 @@
         </div>
         <div class="col-md-6 col-lg-4">
           <article class="tile">
-            <div class="tile-image" style="background-image: url(../../assets/images/demo/image-square-3.jpg)"></div>
+            <div class="tile-image" style="background-image: url({% static 'images/demo/image-square-3.jpg' %})"></div>
             <a href="">
               <div class="tile-header">
                 <span class="eyebrow mb-1">Design</span>

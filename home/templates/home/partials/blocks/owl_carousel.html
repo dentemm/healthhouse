@@ -1,12 +1,12 @@
-<div class="row justify-content-center">
-  <div class="col-md-12 col-lg-10">
-    <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="true">
-      <figure class="photo">
-        <img src="../../assets/images/demo/image-square-1.jpg" alt="Image">
-      </figure>
-      <figure class="photo">
-        <img src="../../assets/images/demo/image-square-2.jpg" alt="Image">
-      </figure>
-    </div>
-  </div>
+{% load static %}
+
+<div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="true">
+  {% for item in value %}
+  <figure class="photo">
+      <img src="{{ item.image.file.url }}" alt="Image">
+    </figure>
+  {% endfor %}
+  <figure class="photo">
+    <img src="{% static 'images/demo/coworking/coworking-1.jpg' %}" alt="Image">
+  </figure>
 </div>

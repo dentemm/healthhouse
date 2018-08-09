@@ -4,7 +4,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from wagtail.core.models import Page, Orderable
-from wagtail.core.blocks import StreamBlock, StructBlock, CharBlock, ListBlock
+from wagtail.core.blocks import StreamBlock, StructBlock, CharBlock, ListBlock, TextBlock
 from wagtail.core.fields import StreamField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -15,152 +15,6 @@ from wagtail.search import index
 from modelcluster.fields import ParentalKey
 
 from django_countries.fields import CountryField
-
-#
-# STREAMFIELD DEFINITIONS
-#
-
-class ImageWithCaptionblock(StructBlock):
-    image = ImageChooserBlock()
-    caption = CharBlock(required=False)
-
-    class Meta:
-        icon='image'
-
-class CarouselBlock(ListBlock):
-    items = ImageWithCaptionblock()
-
-class HomePageStreamBlock(StreamBlock):
-    test = ImageWithCaptionblock(label='testje', icon='image')
-    test2 = ListBlock(ImageWithCaptionblock(), label='Image slider', min=3)
-
-#
-# PAGES
-#
-
-class HomePage(Page):
-    body = StreamField(HomePageStreamBlock(), null=True)
-
-HomePage.content_panels = Page.content_panels + [
-    # StreamFieldPanel('body'),
-    InlinePanel('cover_images', label=_('Cover images'))
-]
-
-HomePage.parent_page_types = []
-HomePage.subpage_types = [
-    'home.ContactPage',
-    'home.DiscoveryPage',
-    'home.AboutPage',
-    'home.BlogIndexPage',
-    'home.BlogPage' # TEMM: need to remove this
-]
-
-class HomePageCoverImage(Orderable):
-
-    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='cover_images')
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.CASCADE,
-        related_name='+'
-    )
-    caption = models.CharField(blank=True, max_length=55)
-
-    class Meta:
-        verbose_name = 'Cover image'
-        verbose_name_plural = 'Cover images'
-
-HomePageCoverImage.panels = [
-    ImageChooserPanel('image'),
-    FieldPanel('caption')
-]
-
-
-class ContactPage(Page):
-
-    template = 'home/contact_page.html'
-
-    class Meta:
-        pass
-
-ContactPage.content_panels = Page.content_panels + [
-
-]
-
-ContactPage.parent_page_types = ['home.HomePage']
-ContactPage.subpage_types = [
-    'home.BlogPage'
-]
-
-class DiscoveryPage(Page):
-
-    introduction = models.TextField()
-    
-DiscoveryPage.content_panels = Page.content_panels + [
-
-    FieldPanel('introduction')
-]
-
-class AboutPage(Page):
-
-    pass 
-
-AboutPage.content_panels = Page.content_panels + [
-    InlinePanel('faq_questions', label=_('FAQ questions'))
-]
-
-class BlogIndexPage(Page):
-
-    def blogs(self): 
-        return self.get_children().live().order_by('-first_published_at')
-    
-    def get_context(self, request):
-
-        context = super().get_context(request)
-
-        context['blogs'] = self.blogs
-        
-        return context
-
-BlogIndexPage.content_panels = Page.content_panels + [
-    
-]
-
-class BlogPage(Page):
-
-    template = 'home/blog_article_page.html'
-    
-    intro = models.TextField(null=True)
-    # TEMM: need to remove null=True below
-    cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-    
-
-BlogPage.content_panels = [
-    MultiFieldPanel([
-        FieldPanel('title'),
-        FieldPanel('intro'),
-        ImageChooserPanel('cover_image'),
-    ], heading='Title & intro'),
-    InlinePanel('gallery_images', label=_('Gallery images'))
-]
-
-class BlogPageGallery(Orderable):
-
-    page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='gallery_images')
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.CASCADE,
-        related_name='+'
-    )
-    caption = models.CharField(blank=True, max_length=160)
-
-    class Meta:
-        verbose_name = 'Gallery image'
-        verbose_name_plural = 'Gallery images'
-
-BlogPageGallery.panels = [
-    ImageChooserPanel('image'),
-    FieldPanel('caption')
-]
 
 #
 # SNIPPETS
@@ -282,6 +136,185 @@ Partner.panels = [
 		], 
         heading='Location details'
 	)  
+]
+
+#
+# STREAMFIELD DEFINITIONS
+#
+
+class ImageWithCaptionblock(StructBlock):
+    image = ImageChooserBlock()
+    caption = CharBlock(required=False)
+
+    class Meta:
+        icon='image'
+
+class CarouselBlock(ListBlock):
+    # items = ImageWithCaptionblock()
+
+    class Meta:
+        template = 'home/partials/blocks/owl_carousel.html'
+        icon = 'image'
+
+class HomePageStreamBlock(StreamBlock):
+    test = ImageWithCaptionblock(label='testje', icon='image')
+    images = ListBlock(ImageWithCaptionblock(), label='Image slider', min=3)
+
+class BlogPageStreamBlock(StreamBlock):
+    paragraph = TextBlock(icon='edit')
+    images = ListBlock(ImageWithCaptionblock(), label='Image gallery', min=3)
+    gallery = CarouselBlock(child_block=ImageWithCaptionblock)
+
+#
+# PAGES
+#
+
+class HomePage(Page):
+    body = StreamField(HomePageStreamBlock(), null=True)
+
+HomePage.content_panels = Page.content_panels + [
+    # StreamFieldPanel('body'),
+    InlinePanel('cover_images', label=_('Cover images'))
+]
+
+HomePage.parent_page_types = []
+HomePage.subpage_types = [
+    'home.ContactPage',
+    'home.DiscoveryPage',
+    'home.AboutPage',
+    'home.BlogIndexPage',
+    'home.BlogPage' # TEMM: need to remove this
+]
+
+class HomePageCoverImage(Orderable):
+
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='cover_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+    caption = models.CharField(blank=True, max_length=55)
+
+    class Meta:
+        verbose_name = 'Cover image'
+        verbose_name_plural = 'Cover images'
+
+HomePageCoverImage.panels = [
+    ImageChooserPanel('image'),
+    FieldPanel('caption')
+]
+
+
+class ContactPage(Page):
+
+    template = 'home/contact_page.html'
+
+    class Meta:
+        pass
+
+ContactPage.content_panels = Page.content_panels + [
+
+]
+
+ContactPage.parent_page_types = ['home.HomePage']
+ContactPage.subpage_types = [
+    'home.BlogPage'
+]
+
+class DiscoveryPage(Page):
+
+    introduction = models.TextField()
+    
+DiscoveryPage.content_panels = Page.content_panels + [
+
+    FieldPanel('introduction')
+]
+
+class AboutPage(Page):
+
+    pass 
+
+AboutPage.content_panels = Page.content_panels + [
+    InlinePanel('faq_questions', label=_('FAQ questions'))
+]
+
+class BlogIndexPage(Page):
+
+    def blogs(self): 
+        return self.get_children().live().order_by('-first_published_at')
+    
+    def get_context(self, request):
+
+        context = super().get_context(request)
+
+        context['blogs'] = self.blogs
+        
+        return context
+
+BlogIndexPage.content_panels = Page.content_panels + [
+    
+]
+
+class BlogPage(Page):
+
+    template = 'home/blog_article_page.html'
+    
+    intro = models.TextField(null=True)
+    # TEMM: need to remove null=True below
+    cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+
+    content = StreamField(BlogPageStreamBlock(), null=True)
+    
+
+BlogPage.content_panels = [
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('intro'),
+        ImageChooserPanel('cover_image'),
+    ], heading='Title & intro'),
+    MultiFieldPanel([
+        StreamFieldPanel('content')
+    ], heading='Content'),
+    InlinePanel('gallery_images', label=_('Gallery images'))
+]
+
+class BlogPageGallery(Orderable):
+
+    page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='gallery_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+    caption = models.CharField(blank=True, max_length=160)
+
+    class Meta:
+        verbose_name = 'Gallery image'
+        verbose_name_plural = 'Gallery images'
+
+BlogPageGallery.panels = [
+    ImageChooserPanel('image'),
+    FieldPanel('caption')
+]
+
+class PartnerPage(Page):
+
+    visible = models.BooleanField(default=True)
+
+    def partners(self): 
+        return Partner.objects.all()
+    
+    def get_context(self, request):
+
+        context = super().get_context(request)
+
+        context['partners'] = self.partners
+        
+        return context
+
+PartnerPage.content_panels = Page.content_panels + [
+
 ]
 
 class AboutPageQuestion(Orderable):
