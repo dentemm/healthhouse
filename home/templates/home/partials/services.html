@@ -4,60 +4,17 @@
 <section class="pt-0 pattern pattern-dark">
     <div class="container">
       <div class="row boxed separated">
+        {% for partner in partners %}
         <div class="col-md-6 col-lg-4 p-5 text-center">
           <i class="svg-icon w-50 equal">
             <span>
-              <img src="{% static images/demo/illustrations/draw-1.svg %}" alt="Image">
+              <img src="{{ partner.logo.file.url }}" alt="Image">
             </span>
           </i>
-          <h4 class="fs-24 font-weight-normal">Game Development</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
+          <h4 class="fs-24 font-weight-normal">{{ partner.name }}</h4>
+          <p>{{ partner.description }}</p>
         </div>
-        <div class="col-md-6 col-lg-4 p-5 text-center">
-          <i class="svg-icon w-50 equal">
-            <span>
-              <img src="{% static 'images/demo/illustrations/draw-2.svg' %}'" alt="Image">
-            </span>
-          </i>
-          <h4 class="fs-24 font-weight-normal">Targeted Marketing</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-        </div>
-        <div class="col-md-6 col-lg-4 p-5 text-center">
-          <i class="svg-icon w-50 equal">
-            <span>
-              <img src="{% static 'images/demo/illustrations/draw-3.svg' %}" alt="Image">
-            </span>
-          </i>
-          <h4 class="fs-24 font-weight-normal">Support</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-        </div>
-        <div class="col-md-6 col-lg-4 p-5 text-center">
-          <i class="svg-icon w-50 equal">
-            <span>
-              <img src="{% static 'images/demo/illustrations/draw-4.svg' %}" alt="Image">
-            </span>
-          </i>
-          <h4 class="fs-24 font-weight-normal">SEO</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-        </div>
-        <div class="col-md-6 col-lg-4 p-5 text-center">
-          <i class="svg-icon w-50 equal">
-            <span>
-              <img src="{% static 'images/demo/illustrations/draw-5.svg' %}" alt="Image">
-            </span>
-          </i>
-          <h4 class="fs-24 font-weight-normal">Security</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-        </div>
-        <div class="col-md-6 col-lg-4 p-5 text-center">
-          <i class="svg-icon w-50 equal">
-            <span>
-              <img src="{% static 'images/demo/illustrations/draw-6.svg' %}" alt="Image">
-            </span>
-          </i>
-          <h4 class="fs-24 font-weight-normal">Fast Delivery</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor</p>
-        </div>
+        {% endfor %}
       </div>
     </div>
   </section>

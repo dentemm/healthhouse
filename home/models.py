@@ -127,6 +127,9 @@ class Partner(models.Model):
         related_name='+'
     )
 
+    def __str__(self):
+        return self.name
+
 Partner.panels = [
   	MultiFieldPanel([
         FieldPanel('name'),
@@ -183,7 +186,8 @@ HomePage.subpage_types = [
     'home.DiscoveryPage',
     'home.AboutPage',
     'home.BlogIndexPage',
-    'home.BlogPage' # TEMM: need to remove this
+    'home.BlogPage', # TEMM: need to remove this
+    'home.PartnerPage'
 ]
 
 class HomePageCoverImage(Orderable):
@@ -300,6 +304,7 @@ BlogPageGallery.panels = [
 
 class PartnerPage(Page):
 
+
     visible = models.BooleanField(default=True)
 
     def partners(self): 
@@ -315,6 +320,7 @@ class PartnerPage(Page):
 
 PartnerPage.content_panels = Page.content_panels + [
 
+    
 ]
 
 class AboutPageQuestion(Orderable):
