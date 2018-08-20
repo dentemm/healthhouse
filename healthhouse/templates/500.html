@@ -1,13 +1,17 @@
-<!DOCTYPE html>
-<html class="no-js">
-    <head>
-        <meta charset="utf-8" />
-        <title>Internal server error</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-    </head>
-    <body>
-        <h1>Internal server error</h1>
+{% extends 'home/layout.html' %}
 
-        <h2>Sorry, there seems to be an error. Please try again soon.</h2>
-    </body>
-</html>
+{% block main %}
+<div class="viewport">
+  <div class="image image-overlay image-blur" style="background-image:url(../../assets/images/demo/image-2.jpg)"></div>
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+      <div class="col-md-6 col-lg-4 text-white text-center">
+        <h1 class="error-text">500</h1>
+        <p>The page you were looking for wasn't found, if you think this might be a mistake <a href="" class="link">drop us a line</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %}
+
+{% block 'footer' %}{% endblock 'footer' %}

@@ -1,9 +1,17 @@
-{% extends "base.html" %}
+{% extends 'home/layout.html' %}
 
-{% block body_class %}template-404{% endblock %}
+{% block main %}
+<div class="viewport">
+  <div class="image image-overlay image-blur" style="background-image:url(../../assets/images/demo/image-2.jpg)"></div>
+  <div class="container">
+    <div class="row justify-content-center align-items-center vh-100">
+      <div class="col-md-6 col-lg-4 text-white text-center">
+        <h1 class="error-text">404</h1>
+        <p>The page you were looking for wasn't found, if you think this might be a mistake <a href="" class="link">drop us a line</a></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock main %}
 
-{% block content %}
-    <h1>Page not found</h1>
-
-    <h2>Sorry, this page could not be found.</h2>
-{% endblock %}
+{% block 'footer' %}{% endblock 'footer' %}

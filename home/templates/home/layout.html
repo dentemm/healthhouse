@@ -1,8 +1,14 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
 {% block body_class %}
   
 {% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/custom.css' %}">
+{% endblock extra_css %}
 
 {% block content %}
 

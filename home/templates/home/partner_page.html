@@ -1,5 +1,17 @@
 {% extends 'home/layout.html' %}
 
 {% block main %}
+
+  <section class="hero hero-with-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="text-decorated">{{ page.title }}</b></h1>
+          <p>{{ page.introduction }}</p>
+        </div>
+      </div>
+    </div>    
+  </section>
+
   {% include 'home/partials/services.html' with partners=page.partners %}
 {% endblock main %}

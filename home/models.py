@@ -174,9 +174,28 @@ class BlogPageStreamBlock(StreamBlock):
 
 class HomePage(Page):
     body = StreamField(HomePageStreamBlock(), null=True)
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    def latest_articles(self): 
+        return BlogPage.objects.live().order_by('-first_published_at')[0:4]
+
+    def get_context(self, request):
+
+        context = super().get_context(request)
+        context['latest_articles'] = self.latest_articles
+        
+        return context
 
 HomePage.content_panels = Page.content_panels + [
     # StreamFieldPanel('body'),
+    MultiFieldPanel([
+        ImageChooserPanel('logo')
+    ]),
     InlinePanel('cover_images', label=_('Cover images'))
 ]
 
@@ -251,7 +270,6 @@ class BlogIndexPage(Page):
     def get_context(self, request):
 
         context = super().get_context(request)
-
         context['blogs'] = self.blogs
         
         return context
@@ -262,14 +280,23 @@ BlogIndexPage.content_panels = Page.content_panels + [
 
 class BlogPage(Page):
 
-    template = 'home/blog_article_page.html'
-    
     intro = models.TextField(null=True)
     # TEMM: need to remove null=True below
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
 
     content = StreamField(BlogPageStreamBlock(), null=True)
+
+    template = 'home/blog_article_page.html'
     
+    def latest_articles(self): 
+        return self.get_siblings(False).live().order_by('-first_published_at')
+
+    def get_context(self, request):
+
+        context = super().get_context(request)
+        context['other_articles'] = self.latest_articles()
+
+        return context
 
 BlogPage.content_panels = [
     MultiFieldPanel([
@@ -304,7 +331,7 @@ BlogPageGallery.panels = [
 
 class PartnerPage(Page):
 
-
+    introduction = models.TextField(null=True)
     visible = models.BooleanField(default=True)
 
     def partners(self): 
@@ -318,9 +345,12 @@ class PartnerPage(Page):
         
         return context
 
-PartnerPage.content_panels = Page.content_panels + [
+PartnerPage.content_panels = [
 
-    
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('introduction')
+    ], heading='General information')
 ]
 
 class AboutPageQuestion(Orderable):

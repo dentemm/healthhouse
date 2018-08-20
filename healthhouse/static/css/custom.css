@@ -1,0 +1,9 @@
+img.hh-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.image-grayscale {
+  filter: grayscale(100%);
+}

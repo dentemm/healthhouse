@@ -2,20 +2,23 @@
 
 <!-- services -->
 <section class="pt-0 pattern pattern-dark">
-    <div class="container">
-      <div class="row boxed separated">
-        {% for partner in partners %}
-        <div class="col-md-6 col-lg-4 p-5 text-center">
-          <i class="svg-icon w-50 equal">
-            <span>
+  <div class="container">
+    <div class="row boxed separated">
+      {% for partner in partners %}
+      <div class="col-md-6 col-lg-4 p-5 text-center">
+        <i class="svg-icon w-50 equal">
+          <span>
+            <a href="{{ partner.url }}">
               <img src="{{ partner.logo.file.url }}" alt="Image">
-            </span>
-          </i>
-          <h4 class="fs-24 font-weight-normal">{{ partner.name }}</h4>
-          <p>{{ partner.description }}</p>
-        </div>
-        {% endfor %}
+            </a>
+          </span>
+        </i>
+        <h4 class="fs-24 font-weight-normal">{{ partner.name }}</h4>
+        <p>{{ partner.description }}</p>
+        <button type="button" class="btn btn-with-ico btn-primary">Website <i class="icon-plus2"></i></button>
       </div>
+      {% endfor %}
     </div>
-  </section>
-  <!-- / services -->
+  </div>
+</section>
+<!-- / services -->

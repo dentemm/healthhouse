@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static %}
+{% load static wagtailimages_tags %}
 
 {% block main %}
 
@@ -15,7 +15,7 @@
         {% for image in page.cover_images.all %}
 
         <div class="swiper-slide vh-100">
-          <div class="image image-overlay" style="background-image:url({{ image.image.file.url }})"></div>
+          <div class="image image-overlay image-blur" style="background-image:url({{ image.image.file.url }})"></div>
           <div class="caption">
             <div class="container">
               <div class="row justify-content-between vh-100">
@@ -41,6 +41,8 @@
     </div>
   </section>
   <!-- / cover -->
+
+  {% include 'home/partials/news_widget.html' with list=latest_articles %}
 
 
   <!-- presentation -->

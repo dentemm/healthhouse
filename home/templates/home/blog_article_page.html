@@ -71,8 +71,6 @@
 
   {{ page.content }}
 
-
-
   <!-- news -->
   <section class="bg-light separator-top">
     <div class="container">
@@ -82,6 +80,24 @@
         </div>
       </div>
       <div class="row gutter-2">
+        {% for item in other_articles %}
+        <div class="col-md-6 col-lg-4">
+            <article class="tile">
+              <div class="tile-image" style="background-image: url({% static 'item.cover_image.file.url' %})"></div>
+              <a href="">
+                <div class="tile-header">
+                  <span class="eyebrow mb-1">Design</span>
+                  <h3>{{ item.title }}</h3>
+                </div>
+                <div class="tile-footer">
+                  <button class="btn btn-ico btn-outline-white btn-rounded">
+                    <i class="icon-arrow-right2 fs-20"></i>
+                  </button>
+                </div>
+              </a>
+            </article>
+          </div>
+        {% endfor %}
         <div class="col-md-6 col-lg-4">
           <article class="tile">
             <div class="tile-image" style="background-image: url({% static 'images/demo/image-square-1.jpg' %})"></div>
