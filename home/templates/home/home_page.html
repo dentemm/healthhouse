@@ -5,7 +5,7 @@
 {% block main %}
 
   <!-- cover -->
-{% if page.cover_images %}
+{% if page.cover_images|lenght > 0 %}
   <section class="p-0">
     <div 
       class="swiper-container text-white"
@@ -43,7 +43,7 @@
   <!-- / cover -->
 {% else %}
 <div style="height: 1000px">
-  
+
 </div>
 {% endif %}
 
