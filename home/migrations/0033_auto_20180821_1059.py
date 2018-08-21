@@ -13,11 +13,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='homepage',
             name='discover_text',
-            field=models.CharField(default='Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui.', max_length=255, null=True),
+            field=models.CharField(max_length=255, null=True),
         ),
         migrations.AlterField(
             model_name='homepage',
             name='discover_title',
-            field=models.CharField(default='Some random title', max_length=63, null=True),
+            field=models.CharField(max_length=63, null=True),
         ),
     ]

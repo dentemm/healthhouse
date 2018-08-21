@@ -12,16 +12,16 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='healthhousesettings',
             name='email',
-            field=models.EmailField(default='test@test.com', max_length=254, null=True),
+            field=models.EmailField(max_length=254, null=True),
         ),
         migrations.AlterField(
             model_name='healthhousesettings',
             name='phone_number',
-            field=models.CharField(default='+0123456789', max_length=28, null=True),
+            field=models.CharField(max_length=28, null=True),
         ),
         migrations.AlterField(
             model_name='healthhousesettings',
             name='tagline',
-            field=models.CharField(default='Some random tagline', max_length=255, null=True),
+            field=models.CharField(max_length=255, null=True),
         ),
     ]
