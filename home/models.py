@@ -162,6 +162,10 @@ class Location(Address, index.Indexed):
 	def __str__(self):
 		return self.name
 
+	@property
+	def to_string(self):
+		return '%s %s %s' % (self.street, self.number, self.city)
+
 	def save(self, *args, **kwargs):
 
 		ctx = ssl.create_default_context()
@@ -372,13 +376,21 @@ HomePageCoverImage.panels = [
 
 class ContactPage(Page):
 
+    directions_image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+    )
+
     template = 'home/contact_page.html'
 
     class Meta:
-        pass
+        verbose_name = 'Contact page'
+        verbose_name_plural = 'Contact pages'
 
 ContactPage.content_panels = Page.content_panels + [
-
+    ImageChooserPanel('directions_image')
 ]
 
 ContactPage.parent_page_types = ['home.HomePage']

@@ -1,7 +1,36 @@
 {% extends 'home/layout.html' %}
 
+{% load static wagtailimages_tags %}
+
 {% block main %}
-  {% include 'home/components/map.html' %}
+
+  <div class="container-fluid">
+      <div class="row" data-aos="zoom-in">
+        <div class="col">
+          <div class="boxed p-5 p-lg-10">
+            <div class="container">
+              <div class="row justify-content-between align-items-center">
+                <div class="col-md-4">
+                  <h2 class="display-3 mb-1"><b>Engage</b> your visitors</h2>
+                  <p>Appropriately reintermediate resource-leveling functionalities through resource.</p>
+                  <div class="input-group mt-2">
+                    <input type="text" class="form-control px-3" placeholder="your@mail.com" aria-label="Get a free copy">
+                    <div class="input-group-append">
+                      <button class="btn btn-primary" type="button">Subscribe</button>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-7">
+                  {% image page.directions_image fill-750x550 %}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  {% include 'home/components/map.html' with location=settings.home.HealthHouseSettings.location %}
 {% endblock main %}
 
 {% block extra_js %}
