@@ -33,7 +33,6 @@ class Command(BaseCommand):
         Address.objects.all().delete()
         Location.objects.all().delete()
         Partner.objects.all().delete()
-        HomePage.objects.all().delete()
         HomePageCoverImage.objects.all().delete()
         ContactPage.objects.all().delete()
         DiscoveryPage.objects.all().delete()
