@@ -103,6 +103,7 @@ RelatedLink.panels = [
 ]
 
 class HealthHouseRelatedLink(Orderable, RelatedLink):
+    
 	page = ParentalKey(
         'home.HealthHouseSettings',
         related_name='related_links',
