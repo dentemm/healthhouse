@@ -42,6 +42,8 @@
   </section>
   <!-- / cover -->
 
+  {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}
+
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 
 

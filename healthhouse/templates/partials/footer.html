@@ -5,14 +5,15 @@
     <div class="container">
       <div class="row justify-content-center align-items-center">
         <div class="col-md-6">
-          <p class="lead">Designing beautifull interfaces since 2010</p>
+          <p class="lead">{{ settings.home.HealthHouseSettings.tagline }}</p>
         </div>
         <div class="col-md-6 text-md-right">
           <ul class="socials">
-            <li><a href="" class="icon-facebook fs-20"></a></li>
-            <li><a href="" class="icon-instagram fs-20"></a></li>
-            <li><a href="" class="icon-twitter fs-20"></a></li>
-            <li><a href="" class="icon-linkedin fs-20"></a></li>
+          {% for link in settings.home.HealthHouseSettings.related_links.all %}
+            <li>
+              <a href="{{ link.link_external }}" class="icon-{{ link.icon }} fs-20"></a>
+            </li>
+          {% endfor %}
           </ul>
         </div>
       </div>

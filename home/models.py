@@ -1,4 +1,5 @@
 import geopy
+import ssl
 
 from django.db import models
 from django.utils.translation import ugettext as _
@@ -10,16 +11,105 @@ from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPane
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.snippets.models import register_snippet
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.search import index
 
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 
 from django_countries.fields import CountryField
+
+from .variables import SOCIAL_MEDIA_CHOICES
+#
+# WAGTAIL SETTINGS
+#
+@register_setting
+class HealthHouseSettings(ClusterableModel, BaseSetting):
+
+    tagline = models.CharField(max_length=255, null=True, default='Some random tagline')
+    phone_number = models.CharField(max_length=28, null=True, default='+0123456789')
+    email = models.EmailField(null=True, default='test@test.com')
+    location = models.ForeignKey(
+        'home.Location',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+        )
+
+    class Meta:
+        verbose_name = 'Health House data'
+
+HealthHouseSettings.panels = [
+    MultiFieldPanel(
+        [
+            FieldRowPanel([
+                FieldPanel('email', classname='col6'),
+                FieldPanel('phone_number', classname='col6')
+            ])
+        ],
+        heading='contact information'
+    ),
+    FieldPanel('tagline'),
+    FieldPanel('location'),
+    InlinePanel('related_links', label='Links')
+]
 
 #
 # SNIPPETS
 #
-@register_snippet
+class LinkFields(models.Model):
+
+	link_external = models.URLField('External link', blank=True)
+
+	class Meta:
+		abstract = True
+
+LinkFields.panels = [
+	FieldPanel('link_external'),
+]
+
+class RelatedLink(LinkFields):
+
+	title = models.IntegerField(verbose_name='Link naar', choices=SOCIAL_MEDIA_CHOICES)
+	icon = models.CharField(max_length=64, null=True, blank=True)
+
+	class Meta:
+		abstract = True
+
+	def save(self, *args, **kwargs):
+
+		name = ''
+
+		if self.title == 1:
+			name = 'facebook'
+		elif self.title == 2:
+			name = 'twitter'
+		elif self.title == 3:
+			name = 'linkedin'
+		elif self.title == 4:
+			name = 'youtube'
+		elif self.title == 5:
+			name = 'instagram'
+		else:
+			name = 'link'
+
+		self.icon = name
+
+		return super(RelatedLink, self).save(*args, **kwargs)
+
+RelatedLink.panels = [
+	FieldPanel('title'),
+	MultiFieldPanel(LinkFields.panels, 'Link')
+]
+
+class HealthHouseRelatedLink(Orderable, RelatedLink):
+	page = ParentalKey(
+        'home.HealthHouseSettings',
+        related_name='related_links',
+        null=True,
+        on_delete=models.SET_NULL
+        )
+
 class Address(models.Model):
 
     city = models.CharField(max_length=40)
@@ -73,7 +163,13 @@ class Location(Address, index.Indexed):
 
 	def save(self, *args, **kwargs):
 
+		ctx = ssl.create_default_context()
+		ctx.check_hostname = False
+		ctx.verify_mode = ssl.CERT_NONE
+		geopy.geocoders.options.default_ssl_context = ctx
+
 		geolocator = geopy.geocoders.Nominatim()
+        
 		address_string = self.street + ' ' + self.number + ' ' + self.postal_code + ' ' + self.city + ' ' + str(self.country.name)
 
 		loc = geolocator.geocode(address_string)
@@ -131,11 +227,12 @@ class Partner(models.Model):
         return self.name
 
 Partner.panels = [
-  	MultiFieldPanel([
-        FieldPanel('name'),
-        FieldPanel('url'),
-        FieldPanel('description'),
-        ImageChooserPanel('logo')
+  	MultiFieldPanel(
+        [
+            FieldPanel('name'),
+            FieldPanel('url'),
+            FieldPanel('description'),
+            ImageChooserPanel('logo')
 		], 
         heading='Location details'
 	)  
@@ -181,6 +278,24 @@ class HomePage(Page):
         related_name='+'
     )
 
+    discover_title = models.CharField(
+        max_length=63,
+        null=False,
+        default='Some random title'
+        )
+    discover_text = models.CharField(
+        max_length=255,
+        null=False,
+        default='Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui.'
+        )
+    discover_link = models.ForeignKey(
+		'wagtailcore.Page',
+		null=True,
+		blank=True,
+		related_name='+',
+        on_delete=models.SET_NULL
+	)
+
     def latest_articles(self): 
         return BlogPage.objects.live().order_by('-first_published_at')[0:4]
 
@@ -193,10 +308,23 @@ class HomePage(Page):
 
 HomePage.content_panels = Page.content_panels + [
     # StreamFieldPanel('body'),
-    MultiFieldPanel([
-        ImageChooserPanel('logo')
-    ]),
-    InlinePanel('cover_images', label=_('Cover images'))
+    MultiFieldPanel(
+        [
+            ImageChooserPanel('logo')
+        ],
+        heading='General information',
+        classname='collapsible'
+    ),
+    MultiFieldPanel(
+        [
+            FieldPanel('discover_title'),
+            FieldPanel('discover_text'),
+            FieldPanel('discover_link')
+        ],
+        heading='Discover HH',
+        classname='collapsible'
+    ),
+    InlinePanel('cover_images', label=_('Cover images')),
 ]
 
 HomePage.parent_page_types = []
