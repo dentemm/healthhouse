@@ -26,9 +26,9 @@ from .variables import SOCIAL_MEDIA_CHOICES
 @register_setting
 class HealthHouseSettings(ClusterableModel, BaseSetting):
 
-    tagline = models.CharField(max_length=255, null=False, default='Some random tagline')
-    phone_number = models.CharField(max_length=28, null=False, default='+0123456789')
-    email = models.EmailField(null=False, default='test@test.com')
+    tagline = models.CharField(max_length=255, null=True)
+    phone_number = models.CharField(max_length=28, null=True)
+    email = models.EmailField(null=True)
     location = models.ForeignKey(
         'home.Location',
         on_delete=models.SET_NULL,
@@ -298,13 +298,11 @@ class HomePage(Page):
 
     discover_title = models.CharField(
         max_length=63,
-        null=False,
-        default='Some random title'
+        null=True,
         )
     discover_text = models.CharField(
         max_length=255,
-        null=False,
-        default='Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec sed odio dui.'
+        null=True,
         )
     discover_link = models.ForeignKey(
 		'wagtailcore.Page',

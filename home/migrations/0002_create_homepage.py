@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import migrations
 
-
 def create_homepage(apps, schema_editor):
     # Get models
     ContentType = apps.get_model('contenttypes.ContentType')
