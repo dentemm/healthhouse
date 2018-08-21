@@ -1,17 +1,14 @@
 {% load static wagtailimages_tags %}
 
-<div class="container">
+<div class="row justify-content-center">
   <div class="col-md-12 col-lg-10">
     <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="true">
     {% for item in value %}
-      {% image item.image height-650 as tmp_photo %}
+      {% image item.image fill-1060x650 as tmp_photo %}
       <figure class="photo">
         <img src="{{ tmp_photo.url }}" alt="Image" class="hh-image">
       </figure>
     {% endfor %}
-      <figure class="photo">
-        <img src="{% static 'images/demo/coworking/coworking-1.jpg' %}" alt="Image">
-      </figure>
     </div>
   </div>
 </div>

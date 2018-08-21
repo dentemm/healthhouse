@@ -26,9 +26,9 @@ from .variables import SOCIAL_MEDIA_CHOICES
 @register_setting
 class HealthHouseSettings(ClusterableModel, BaseSetting):
 
-    tagline = models.CharField(max_length=255, null=True, default='Some random tagline')
-    phone_number = models.CharField(max_length=28, null=True, default='+0123456789')
-    email = models.EmailField(null=True, default='test@test.com')
+    tagline = models.CharField(max_length=255, null=False, default='Some random tagline')
+    phone_number = models.CharField(max_length=28, null=False, default='+0123456789')
+    email = models.EmailField(null=False, default='test@test.com')
     location = models.ForeignKey(
         'home.Location',
         on_delete=models.SET_NULL,
@@ -103,7 +103,7 @@ RelatedLink.panels = [
 ]
 
 class HealthHouseRelatedLink(Orderable, RelatedLink):
-    
+
 	page = ParentalKey(
         'home.HealthHouseSettings',
         related_name='related_links',
@@ -251,7 +251,6 @@ class ImageWithCaptionblock(StructBlock):
         icon='image'
 
 class CarouselBlock(ListBlock):
-    # items = ImageWithCaptionblock()
 
     class Meta:
         template = 'home/partials/blocks/owl_carousel.html'
@@ -261,9 +260,23 @@ class HomePageStreamBlock(StreamBlock):
     test = ImageWithCaptionblock(label='testje', icon='image')
     images = ListBlock(ImageWithCaptionblock(), label='Image slider', min=3)
 
+class QuoteBlock(StructBlock):
+    quote = CharBlock(max_length='255')
+    author = CharBlock(max_length='64')
+
+    class Meta:
+        template = 'home/partials/blocks/quote.html'
+        icon='openquote'
+
+class ParagraphBlock(TextBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/paragraph.html'
+        icon='edit'
+
 class BlogPageStreamBlock(StreamBlock):
-    paragraph = TextBlock(icon='edit')
-    images = ListBlock(ImageWithCaptionblock(), label='Image gallery', min=3)
+    quote = QuoteBlock()
+    paragraph = ParagraphBlock()
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
 
 #
@@ -334,7 +347,6 @@ HomePage.subpage_types = [
     'home.DiscoveryPage',
     'home.AboutPage',
     'home.BlogIndexPage',
-    'home.BlogPage', # TEMM: need to remove this
     'home.PartnerPage'
 ]
 
@@ -370,9 +382,7 @@ ContactPage.content_panels = Page.content_panels + [
 ]
 
 ContactPage.parent_page_types = ['home.HomePage']
-ContactPage.subpage_types = [
-    'home.BlogPage'
-]
+ContactPage.subpage_types = []
 
 class DiscoveryPage(Page):
 
@@ -407,6 +417,14 @@ BlogIndexPage.content_panels = Page.content_panels + [
     
 ]
 
+BlogIndexPage.parent_page_types = [
+    'home.HomePage',
+]
+
+BlogIndexPage.subpage_types = [
+    'home.BlogPage',
+]
+
 class BlogPage(Page):
 
     intro = models.TextField(null=True)
@@ -417,8 +435,9 @@ class BlogPage(Page):
 
     template = 'home/blog_article_page.html'
     
-    def latest_articles(self): 
-        return self.get_siblings(False).live().order_by('-first_published_at')
+    def latest_articles(self):
+        return BlogPage.objects.live().sibling_of(self, inclusive=False).order_by('-first_published_at')[0:2]
+        # return self.get_siblings(False).live().order_by('-first_published_at')
 
     def get_context(self, request):
 
@@ -435,28 +454,14 @@ BlogPage.content_panels = [
     ], heading='Title & intro'),
     MultiFieldPanel([
         StreamFieldPanel('content')
-    ], heading='Content'),
-    InlinePanel('gallery_images', label=_('Gallery images'))
+    ], heading='Content')
 ]
 
-class BlogPageGallery(Orderable):
-
-    page = ParentalKey(BlogPage, on_delete=models.CASCADE, related_name='gallery_images')
-    image = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.CASCADE,
-        related_name='+'
-    )
-    caption = models.CharField(blank=True, max_length=160)
-
-    class Meta:
-        verbose_name = 'Gallery image'
-        verbose_name_plural = 'Gallery images'
-
-BlogPageGallery.panels = [
-    ImageChooserPanel('image'),
-    FieldPanel('caption')
+BlogPage.parent_page_types = [
+    'home.BlogIndexPage'
 ]
+
+BlogPage.subpage_types = []
 
 class PartnerPage(Page):
 
