@@ -5,6 +5,7 @@
 {% block main %}
 
   <!-- cover -->
+{% if page.cover_images %}
   <section class="p-0">
     <div 
       class="swiper-container text-white"
@@ -13,7 +14,6 @@
     >
       <div class="swiper-wrapper">
         {% for image in page.cover_images.all %}
-
         <div class="swiper-slide vh-100">
           <div class="image image-overlay image-blur" style="background-image:url({{ image.image.file.url }})"></div>
           <div class="caption">
@@ -41,14 +41,19 @@
     </div>
   </section>
   <!-- / cover -->
+{% endif %}
 
+{% if page.discover_link %}
   {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}
+{% endif %}
 
+{% if latest_articles %}
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
+{% endif %}
 
 
   <!-- presentation -->
-  <section class="section-lg">
+  {% comment %} <section class="section-lg">
     <div class="container">
       <div class="row text-center text-lg-left">
         <div class="col-12 col-lg-9">
@@ -87,7 +92,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> {% endcomment %}
   <!-- / presentation -->
 
 {% endblock main %}
