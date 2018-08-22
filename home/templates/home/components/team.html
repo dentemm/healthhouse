@@ -1,4 +1,4 @@
-{% load static %}
+{% load static wagtailimages_tags %}
 
 <!-- users -->
 <section class="component">
@@ -8,56 +8,20 @@
       <div class="component-example">
         <div class="container">
           <div class="row">
-            <div class="col-md-3">
-              <figure class="user">
-                <a href="" class="user-photo">
-                  <img src="{% static 'images/demo/user-1.jpg' %}" alt="Avatar">
-                </a>
-                <figcaption class="user-caption">
-                  <h4>John Doe</h4>
-                  <span>Head of Experience Design</span>
-                  <ul class="socials bordered">
-                    <li><a href="" class="icon-facebook fs-20"></a></li>
-                    <li><a href="" class="icon-instagram fs-20"></a></li>
-                    <li><a href="" class="icon-twitter fs-20"></a></li>
-                    <li><a href="" class="icon-linkedin fs-20"></a></li>
-                  </ul>
-                </figcaption>
-              </figure>
-            </div>
+          {% for item in list %}
             <div class="col-md-3">
               <figure class="user user-circle">
                 <a href="" class="user-photo">
-                  <img src="{% static 'images/demo/user-2.jpg' %}" alt="Avatar">
+                  {% image item.picture fill-300x300 as img %}
+                  <img src="{{ img.url }}" alt="{{ item.name }}">
                 </a>
                 <figcaption class="user-caption">
-                  <h4>John Doe</h4>
-                  <span>Head of Experience Design</span>
-                  <ul class="socials socials-sm bordered">
-                    <li><a href="" class="icon-facebook fs-20"></a></li>
-                    <li><a href="" class="icon-instagram fs-20"></a></li>
-                    <li><a href="" class="icon-twitter fs-20"></a></li>
-                  </ul>
+                  <h4>{{ item.name }}</h4>
+                  <span>{{ item.title }}</span>
                 </figcaption>
               </figure>
             </div>
-            <div class="col-md-3">
-              <figure class="user">
-                <a href="" class="user-photo">
-                  <img src="{% static 'images/demo/user-1.jpg' %}" alt="Avatar">
-                </a>
-                <figcaption class="user-caption">
-                  <h4>John Doe</h4>
-                  <span>Head of Experience Design</span>
-                  <ul class="socials bordered">
-                    <li><a href="" class="icon-facebook fs-20"></a></li>
-                    <li><a href="" class="icon-instagram fs-20"></a></li>
-                    <li><a href="" class="icon-twitter fs-20"></a></li>
-                    <li><a href="" class="icon-linkedin fs-20"></a></li>
-                  </ul>
-                </figcaption>
-              </figure>
-            </div>
+          {% endfor %}
           </div>
         </div>
       </div>

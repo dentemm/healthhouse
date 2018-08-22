@@ -19,7 +19,7 @@ from modelcluster.models import ClusterableModel
 
 from django_countries.fields import CountryField
 
-from .variables import SOCIAL_MEDIA_CHOICES
+from .variables import SOCIAL_MEDIA_CHOICES, TEAM_MEMBER_CHOICES, PARTNER_CHOICES
 #
 # WAGTAIL SETTINGS
 #
@@ -227,6 +227,7 @@ class Partner(models.Model):
         on_delete=models.CASCADE,
         related_name='+'
     )
+    partner_type = models.IntegerField(choices=PARTNER_CHOICES, null=True)
 
     def __str__(self):
         return self.name
@@ -252,7 +253,7 @@ class ImageWithCaptionblock(StructBlock):
     caption = CharBlock(required=False)
 
     class Meta:
-        icon='image'
+        icon = 'image'
 
 class CarouselBlock(ListBlock):
 
@@ -420,7 +421,51 @@ class AboutPage(Page):
     pass 
 
 AboutPage.content_panels = Page.content_panels + [
-    InlinePanel('faq_questions', label=_('FAQ questions'))
+    InlinePanel('faq_questions', label=_('FAQ questions')),
+    InlinePanel('team_members', label='Team members')
+]
+
+class AboutPageQuestion(Orderable):
+
+    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='faq_questions')
+    question = models.CharField(max_length=255)
+    answer = models.TextField()
+
+    class Meta:
+        verbose_name = 'FAQ question'
+        verbose_name_plural = 'FAQ questions'
+
+AboutPageQuestion.panels = [
+    MultiFieldPanel([
+        FieldPanel('question'),
+        FieldPanel('answer')
+    ])
+]
+
+class AboutPageTeamMember(Orderable):
+
+    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='team_members')
+    name = models.CharField(max_length=64)
+    title = models.CharField(max_length=64)
+    user_type = models.IntegerField(verbose_name='Type', choices=TEAM_MEMBER_CHOICES)
+    picture = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True
+    )
+
+    class Meta:
+        verbose_name = 'Team member'
+        verbose_name_plural = 'Team members'
+
+AboutPageTeamMember.panels = [
+    MultiFieldPanel([
+        FieldPanel('name'),
+        FieldPanel('title'),
+        ImageChooserPanel('picture'),
+        FieldPanel('user_type')
+    ])
 ]
 
 class BlogIndexPage(Page):
@@ -507,21 +552,4 @@ PartnerPage.content_panels = [
         FieldPanel('title'),
         FieldPanel('introduction')
     ], heading='General information')
-]
-
-class AboutPageQuestion(Orderable):
-
-    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='faq_questions')
-    question = models.CharField(max_length=255)
-    answer = models.TextField()
-
-    class Meta:
-        verbose_name = 'FAQ question'
-        verbose_name_plural = 'FAQ questions'
-
-AboutPageQuestion.panels = [
-    MultiFieldPanel([
-        FieldPanel('question'),
-        FieldPanel('answer')
-    ])
 ]
