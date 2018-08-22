@@ -371,7 +371,6 @@ HomePageCoverImage.panels = [
     FieldPanel('caption')
 ]
 
-
 class ContactPage(Page):
 
     directions_image = models.ForeignKey(

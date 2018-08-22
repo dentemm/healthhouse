@@ -1,9 +1,12 @@
+@media (min-width: 1200px) {
+
+  .header-sticky {
+    background: white;
+  }
+}
+
 img.hh-image {
   display: block;
   margin-left: auto;
   margin-right: auto;
-}
-
-.image-grayscale {
-  filter: grayscale(100%);
 }

@@ -12,14 +12,24 @@
       data-top-bottom="transform: translateY(250px);"
     >
       <div class="swiper-wrapper">
-        {% for image in page.cover_images.all %}
-        <div class="swiper-slide vh-100">
-          <div class="image image-overlay image-blur" style="background-image:url({{ image.image.file.url }})"></div>
+        {% for item in page.cover_images.all %}
+        <div class="swiper-slide vh-80">
+          <div class="image image-overlay image-blur" style="background-image:url({{ item.image.file.url }})"></div>
           <div class="caption">
             <div class="container">
-              <div class="row justify-content-between vh-100">
-                <div class="col-md-8 align-self-center" data-swiper-parallax-y="-250%">
-                  <h1 class="display-2 font-weight-bold text-uppercase">{{ image.caption }}</h1>
+              <div class="row justify-content-between vh-80">
+                <div class="col-md-8 offset-md-2 align-self-center" data-swiper-parallax-y="-250%">
+                  {% image page.logo original as img_logo%}
+                  <div 
+                    class="vh-25" 
+                    style="
+                      background-image:url({{ img_logo.image.file.url }});
+                      background-size:contain;
+                      background-repeat:no-repeat;
+                      background-position:center;
+                    "
+                  >
+                  </div>
                 </div>
               </div>
             </div>
