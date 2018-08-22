@@ -14,12 +14,13 @@
       <div class="swiper-wrapper">
         {% for item in page.cover_images.all %}
         <div class="swiper-slide vh-80">
-          <div class="image image-overlay image-blur" style="background-image:url({{ item.image.file.url }})"></div>
+            {% image item.image width-1800 as cover_image %}
+          <div class="image image-overlay image-blur" style="background-image:url({{ cover_image.url }})"></div>
           <div class="caption">
             <div class="container">
               <div class="row justify-content-between vh-80">
                 <div class="col-md-8 offset-md-2 align-self-center" data-swiper-parallax-y="-250%">
-                  {% image page.logo original as img_logo%}
+                  {% image page.logo original as img_logo %}
                   <div 
                     class="vh-25" 
                     style="

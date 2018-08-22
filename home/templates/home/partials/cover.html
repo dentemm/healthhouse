@@ -1,3 +1,4 @@
+{% load wagtailimages_tags %}
 
 <!-- cover -->
 <section class="p-0">
@@ -5,11 +6,12 @@
     data-top-top="transform: translateY(0px);" 
     data-top-bottom="transform: translateY(250px);">
     <div class="swiper-wrapper">
-      <div class="swiper-slide vh-100">
-        <div class="image image-overlay image-zoom" style="background-image:url({{ img }})"></div>
+      <div class="swiper-slide vh-80">
+        {% image img width-1800 as cover_image%}
+        <div class="image image-overlay image-zoom" style="background-image:url({{ cover_image.url }})"></div>
         <div class="caption">
           <div class="container">
-            <div class="row align-items-center vh-100">
+            <div class="row align-items-center vh-80">
               <div class="col-md-8" data-swiper-parallax-y="-250%">
                 {% comment %} <span class="eyebrow mb-2">Travel</span> {% endcomment %}
                 <h1 class="display-2">{{ title }}</h1>
