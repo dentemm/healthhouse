@@ -5,7 +5,6 @@
 {% block main %}
 
   <!-- cover -->
-{% if page.cover_images|length > 0 %}
   <section class="p-0">
     <div 
       class="swiper-container text-white"
@@ -41,11 +40,6 @@
     </div>
   </section>
   <!-- / cover -->
-{% else %}
-<div style="height: 1000px">
-
-</div>
-{% endif %}
 
 {% if page.discover_link %}
   {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}
