@@ -5,7 +5,7 @@ from django.db import models
 from django.utils.translation import ugettext as _
 
 from wagtail.core.models import Page, Orderable
-from wagtail.core.blocks import StreamBlock, StructBlock, CharBlock, ListBlock, TextBlock
+from wagtail.core.blocks import StreamBlock, StructBlock, CharBlock, ListBlock, TextBlock, RichTextBlock
 from wagtail.core.fields import StreamField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -270,18 +270,31 @@ class QuoteBlock(StructBlock):
 
     class Meta:
         template = 'home/partials/blocks/quote.html'
-        icon='openquote'
+        icon = 'openquote'
 
 class ParagraphBlock(TextBlock):
 
     class Meta:
         template = 'home/partials/blocks/paragraph.html'
-        icon='edit'
+        icon = 'edit'
+
+class SubtitleBlock(CharBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/subtitle.html'
+        icon = 'title'
+
+class CustomRichTextBlock(RichTextBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/rich_text.html'
 
 class BlogPageStreamBlock(StreamBlock):
+    subtitle = SubtitleBlock()
     quote = QuoteBlock()
     paragraph = ParagraphBlock()
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
+    rich_text = CustomRichTextBlock()
 
 #
 # PAGES
