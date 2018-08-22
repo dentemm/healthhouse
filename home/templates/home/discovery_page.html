@@ -1,0 +1,39 @@
+{% extends 'home/layout.html' %}
+
+{% load static %}
+
+{% block main %}
+
+  <section class="hero hero-with-header">
+    <div class="container-fluid p-0">
+      <div class="hh-parallax bg-primary">
+          <div 
+            class="hh-parallax-bg hh-image-right hh-border-left-primary"
+            style="background-image:url({% static 'images/demo/image-3.jpg' %})">
+          </div>
+          <div class="hh-parallax-content">
+            Dit is de content
+          </div>
+        </div>
+      <div class="hh-parallax bg-white">
+        <div 
+          class="hh-parallax-bg hh-image-left hh-border-right-white"
+          style="background-image:url({% static 'images/demo/image-4.jpg' %})">
+        </div>
+        <div class="hh-parallax-content">
+          Dit is de content
+        </div>
+      </div>
+      <div class="hh-parallax bg-dark-blue">
+        <div 
+          class="hh-parallax-bg hh-image-right hh-border-left-dark-blue"
+          style="background-image:url({% static 'images/demo/image-3.jpg' %})">
+        </div>
+        <div class="hh-parallax-content">
+          Dit is de content
+        </div>
+      </div>
+    </div>    
+  </section>
+
+{% endblock main %}

@@ -1,12 +1,74 @@
+img.hh-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hh-parallax .hh-parallax-bg {
+  height: 30rem;
+  background-position: center center;
+  background-size: cover;
+  background-color: transparent;
+}
+
+.hh-parallax .hh-parallax-content {
+  
+}
+
+@media (min-width: 991px) {
+  .hh-parallax {
+    height: 45rem;
+  }
+  
+  .hh-parallax .hh-parallax-bg {
+    min-height: 100%;
+    width: 60%;
+    background-attachment: fixed;
+  }
+  
+  .hh-parallax .hh-image-left {
+    border-right: 10rem solid;
+    border-top: 45rem solid transparent;
+  }
+  
+  .hh-parallax .hh-border-right-primary {
+    border-right-color: #00a1dd !important;
+  }
+
+  .hh-parallax .hh-border-left-primary {
+    border-left-color: #00a1dd !important;
+  }
+
+  .hh-parallax .hh-border-right-white {
+    border-right-color: white !important;
+  }
+  
+  .hh-parallax .hh-border-left-white {
+    border-left-color: white !important;
+  }
+
+  .hh-parallax .hh-border-right-dark-blue {
+    border-right-color: #29245a!important;
+  }
+  
+  .hh-parallax .hh-border-left-dark-blue {
+    border-left-color: #29245a !important;
+  }
+  
+  .hh-parallax .hh-image-right {
+    border-left: 10rem solid;
+    border-top: 45rem solid transparent;
+    float: right;
+  }
+  
+  .hh-parallax .hh-parallax-content {
+    width: 40%;
+  }
+}
+
 @media (min-width: 1200px) {
 
   .header-sticky {
     background: white;
   }
-}
-
-img.hh-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
