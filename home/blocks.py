@@ -9,6 +9,7 @@ from wagtail.core.blocks import (
     PageChooserBlock
 )
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.embeds.blocks import EmbedBlock
 
 from .variables import COLOR_CHOICES, IMAGE_POSITION_CHOICES
 
@@ -18,6 +19,12 @@ class ImageWithCaptionblock(StructBlock):
 
     class Meta:
         icon = 'image'
+
+class CustomEmbedBlock(EmbedBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/embed.html'
+        icon = 'media'
 
 class CarouselBlock(ListBlock):
 
@@ -76,6 +83,7 @@ class BlogPageStreamBlock(StreamBlock):
     paragraph = ParagraphBlock()
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
     rich_text = CustomRichTextBlock()
+    embed = CustomEmbedBlock()
 
 class DiscoveryPageStreamBlock(StreamBlock):
 
