@@ -422,7 +422,7 @@ AboutPageTeamMember.panels = [
 class BlogIndexPage(Page):
 
     def blogs(self): 
-        return self.get_children().live().order_by('-first_published_at')
+        return BlogPage.objects.live().order_by('-first_published_at')
     
     def get_context(self, request):
 

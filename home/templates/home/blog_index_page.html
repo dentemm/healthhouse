@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block main %}
 
@@ -11,9 +11,10 @@
         <div class="col">
           <ul class="masonry row gutter-2">
           {% for item in blogs %}
+            {% image item.cover_image width-500 as img %}
             <li class="col-md-6 col-lg-4">
               <article class="tile">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-1.jpg' %})"></div>
+                <div class="tile-image" style="background-image: url({{ img.url }})"></div>
                 <a href="{% pageurl item %}">
                   <div class="tile-footer">
                     {% comment %} <span class="eyebrow mb-1">{{Design}}</span> {% endcomment %}
@@ -23,7 +24,7 @@
               </article>
             </li>
           {% endfor %}
-            <li class="col-md-6 col-lg-4">
+            {% comment %} <li class="col-md-6 col-lg-4">
               <article class="tile">
                 <div class="tile-image" style="background-image: url({% static 'images/demo/image-1.jpg' %})"></div>
                 <a href="">
@@ -88,7 +89,7 @@
                   </div>
                 </a>
               </article>
-            </li>
+            </li> {% endcomment %}
           </ul>
         </div> 
       </div>
