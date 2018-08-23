@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static wagtailcore_tags wagtailimages_tags %}
+{% load static home_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block main %}
 
@@ -13,83 +13,17 @@
           {% for item in blogs %}
             {% image item.cover_image width-500 as img %}
             <li class="col-md-6 col-lg-4">
-              <article class="tile">
+              <article class="tile {% random_tile %}">
                 <div class="tile-image" style="background-image: url({{ img.url }})"></div>
                 <a href="{% pageurl item %}">
                   <div class="tile-footer">
                     {% comment %} <span class="eyebrow mb-1">{{Design}}</span> {% endcomment %}
-                    <h3>{{ item.title }}</h3>
+                    <h3 class="text-white">{{ item.title }}</h3>
                   </div>
                 </a>
               </article>
             </li>
           {% endfor %}
-            {% comment %} <li class="col-md-6 col-lg-4">
-              <article class="tile">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-1.jpg' %})"></div>
-                <a href="">
-                  <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="col-md-6 col-lg-4">
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-2.jpg' %})"></div>
-                <a href="">
-                  <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="col-md-6 col-lg-4">
-              <article class="tile">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-3.jpg' %})"></div>
-                <a href="">
-                  <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="col-md-6 col-lg-4">
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-4.jpg' %})"></div>
-                <a href="">
-                  <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="col-md-6 col-lg-4">
-              <article class="tile tile-long">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-5.jpg' %})"></div>
-                <a href="">
-                  <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
-                  </div>
-                </a>
-              </article>
-            </li>
-            <li class="col-md-6 col-lg-4">
-              <article class="tile">
-                <div class="tile-image" style="background-image: url({% static 'images/demo/image-6.jpg' %})"></div>
-                <a href="">
-                  <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
-                  </div>
-                </a>
-              </article>
-            </li> {% endcomment %}
           </ul>
         </div> 
       </div>

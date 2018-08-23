@@ -18,6 +18,7 @@ class ImageWithCaptionblock(StructBlock):
     caption = CharBlock(required=False)
 
     class Meta:
+        template = 'home/partials/blocks/image_caption.html'
         icon = 'image'
 
 class CustomEmbedBlock(EmbedBlock):
@@ -82,6 +83,7 @@ class BlogPageStreamBlock(StreamBlock):
     quote = QuoteBlock()
     paragraph = ParagraphBlock()
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
+    image = ImageWithCaptionblock()
     rich_text = CustomRichTextBlock()
     embed = CustomEmbedBlock()
 
