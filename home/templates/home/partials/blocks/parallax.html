@@ -1,0 +1,16 @@
+{% load static wagtailimages_tags home_tags %}
+
+<section class="hero hero-with-header">
+  <div class="container-fluid p-0">
+    {% image value.image width-1200 as img %}
+    <div class="row hh-parallax">
+      <div 
+        class="col-md-7 hh-parallax-bg hh-image-{{ value.image_position }} hh-border-{{ value.image_position|inverse_position }}-{{ value.background_color }} m-0"
+        style="background-image:url({{ img.url }})"
+      ></div>
+      <div class="col-md-5 bg-{{ value.background_color }} m-0 {% if value.image_position == 'right' %}order-md-first{% endif %}">
+        <p>Dit is de content, en die mag best een beetje langer zijn!</p>
+      </div>
+    </div>
+  </div>
+</section>

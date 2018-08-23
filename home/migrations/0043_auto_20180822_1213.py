@@ -16,6 +16,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogpage',
             name='content',
-            field=wagtail.core.fields.StreamField([('subtitle', home.models.SubtitleBlock()), ('quote', wagtail.core.blocks.StructBlock([('quote', wagtail.core.blocks.CharBlock(max_length='255')), ('author', wagtail.core.blocks.CharBlock(max_length='64'))])), ('paragraph', home.models.ParagraphBlock()), ('gallery', home.models.CarouselBlock(child_block=home.models.ImageWithCaptionblock)), ('rich_text', home.models.CustomRichTextBlock())], null=True),
+            field=wagtail.core.fields.StreamField([('subtitle', home.blocks.SubtitleBlock()), ('quote', wagtail.core.blocks.StructBlock([('quote', wagtail.core.blocks.CharBlock(max_length='255')), ('author', wagtail.core.blocks.CharBlock(max_length='64'))])), ('paragraph', home.blocks.ParagraphBlock()), ('gallery', home.blocks.CarouselBlock(child_block=home.blocks.ImageWithCaptionblock)), ('rich_text', home.blocks.CustomRichTextBlock())], null=True),
         ),
     ]

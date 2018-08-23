@@ -16,3 +16,14 @@ PARTNER_CHOICES = (
     (2, 'Structural partner'),
     (3, 'Other partner')
 )
+
+COLOR_CHOICES = [
+    ('primary', 'HH blue'),
+    ('white', 'White'),
+    ('dark-blue', 'HH dark')
+]
+
+IMAGE_POSITION_CHOICES = [
+    ('left', 'Left'),
+    ('right', 'Right')
+]

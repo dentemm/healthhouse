@@ -15,7 +15,7 @@ img.hh-image {
   
 }
 
-@media (min-width: 991px) {
+@media (min-width: 768px) {
   .hh-parallax {
     height: 45rem;
   }
@@ -25,9 +25,14 @@ img.hh-image {
     width: 60%;
     background-attachment: fixed;
   }
-  
+
   .hh-parallax .hh-image-left {
     border-right: 10rem solid;
+    border-top: 45rem solid transparent;
+  }
+
+  .hh-parallax .hh-image-right {
+    border-left: 10rem solid;
     border-top: 45rem solid transparent;
   }
   
@@ -53,16 +58,6 @@ img.hh-image {
   
   .hh-parallax .hh-border-left-dark-blue {
     border-left-color: #29245a !important;
-  }
-  
-  .hh-parallax .hh-image-right {
-    border-left: 10rem solid;
-    border-top: 45rem solid transparent;
-    float: right;
-  }
-  
-  .hh-parallax .hh-parallax-content {
-    width: 40%;
   }
 }
 
