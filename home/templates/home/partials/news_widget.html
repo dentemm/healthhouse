@@ -1,4 +1,4 @@
-{% load static wagtailimages_tags %}
+{% load wagtailimages_tags %}
 
 <!-- user carousel -->
 <section class="bg-light">
@@ -16,7 +16,7 @@
           {{ item.cover_img }}
           <a href="{{ item.url }}" class="user-photo">
             <figure class="user">
-              <img src="{{ temp_img.url }}" alt="Avatar">
+              <img src="{{ temp_img.url }}" style="filter: brightness(75%)">
               <figcaption class="user-caption">
               <h4>{{ item.title }}</h4>
               <ul class="socials">
