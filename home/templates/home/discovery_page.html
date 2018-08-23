@@ -1,39 +1,61 @@
 {% extends 'home/layout.html' %}
 
-{% load static %}
+{% load static wagtailcore_tags %}
 
 {% block main %}
 
-  <section class="hero hero-with-header">
-    <div class="container-fluid p-0">
-      <div class="hh-parallax bg-primary">
+<section class="hero">
+  {% for block in page.content %}
+    {% include_block block %}
+  {% endfor %}
+</section>
+
+  {% comment %} <section class="hero hero-with-header">
+    <div class="container-fluid m-0 p-0">
+      <div class="row hh-parallax m-0 align-items-center bg-white">
+        <div 
+          class="col-xl-8 col-lg-7 col-md-6 hh-parallax-bg hh-image-left hh-border-right-white m-0"
+          style="background-image:url({% static 'images/demo/image-3.jpg' %})"
+        ></div>
+        <div class="col-xl-4 col-lg-5 col-md-6 m-0 p-2">
+          <div class="text-center">
+            <h2 class="card-title">Special title treatment</h2>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="#" class="btn btn-outline-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+      <div class="row hh-parallax m-0 align-items-center bg-dark-blue">
+        <div 
+          class="col-xl-8 col-lg-7 col-md-6 hh-parallax-bg hh-image-right hh-border-left-dark-blue m-0"
+          style="background-image:url({% static 'images/demo/image-2.jpg' %})"
+        ></div>
+        <div class="col-xl-4 col-lg-5 col-md-6 m-0 p-2 order-md-first">
+            <div class="text-center text-white">
+              <h2 class="card-title">Special title treatment</h2>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <a href="#" class="btn btn-outline-primary">Go somewhere</a>
+            </div>
+          </div>
+      </div>
+      <div class="row hh-parallax m-0 align-items-center bg-primary">
           <div 
-            class="hh-parallax-bg hh-image-right hh-border-left-primary"
-            style="background-image:url({% static 'images/demo/image-3.jpg' %})">
-          </div>
-          <div class="hh-parallax-content">
-            Dit is de content
-          </div>
+            class="col-xl-8 col-lg-7 col-md-6 hh-parallax-bg hh-image-left hh-border-right-primary m-0"
+            style="background-image:url({% static 'images/demo/image-4.jpg' %})"
+          ></div>
+          <div class="col-xl-4 col-lg-5 col-md-6 m-0 p-2">
+              <div class="text-center text-white">
+                <h2 class="card-title">Special title treatment</h2>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-dark-blue">Go somewhere</a>
+                <a href="#" class="btn btn-outline-dark-blue">Go somewhere</a>
+              </div>
+            </div>
         </div>
-      <div class="hh-parallax bg-white">
-        <div 
-          class="hh-parallax-bg hh-image-left hh-border-right-white"
-          style="background-image:url({% static 'images/demo/image-4.jpg' %})">
-        </div>
-        <div class="hh-parallax-content">
-          Dit is de content
-        </div>
-      </div>
-      <div class="hh-parallax bg-dark-blue">
-        <div 
-          class="hh-parallax-bg hh-image-right hh-border-left-dark-blue"
-          style="background-image:url({% static 'images/demo/image-3.jpg' %})">
-        </div>
-        <div class="hh-parallax-content">
-          Dit is de content
-        </div>
-      </div>
+
     </div>    
-  </section>
+  </section> {% endcomment %}
 
 {% endblock main %}

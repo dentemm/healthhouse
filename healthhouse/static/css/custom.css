@@ -17,7 +17,7 @@ img.hh-image {
 
 @media (min-width: 768px) {
   .hh-parallax {
-    height: 45rem;
+    height: 38rem;
   }
   
   .hh-parallax .hh-parallax-bg {
@@ -28,12 +28,12 @@ img.hh-image {
 
   .hh-parallax .hh-image-left {
     border-right: 10rem solid;
-    border-top: 45rem solid transparent;
+    border-top: 38rem solid transparent;
   }
 
   .hh-parallax .hh-image-right {
     border-left: 10rem solid;
-    border-top: 45rem solid transparent;
+    border-top: 38rem solid transparent;
   }
   
   .hh-parallax .hh-border-right-primary {
@@ -63,7 +63,17 @@ img.hh-image {
 
 @media (min-width: 1200px) {
 
+  .container-fluid {
+    max-width: 100% !important;
+  }
+
   .header-sticky {
     background: white;
+  }
+}
+
+@media (min-width: 1600px) {
+  .container-fluid {
+    max-width: 100% !important;
   }
 }

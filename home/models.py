@@ -17,7 +17,7 @@ from modelcluster.models import ClusterableModel
 
 from django_countries.fields import CountryField
 
-from .blocks import HomePageStreamBlock, BlogPageStreamBlock
+from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
 from .variables import SOCIAL_MEDIA_CHOICES, TEAM_MEMBER_CHOICES, PARTNER_CHOICES
 
 #
@@ -357,10 +357,14 @@ ContactPage.subpage_types = []
 class DiscoveryPage(Page):
 
     introduction = models.TextField()
+    content = StreamField(DiscoveryPageStreamBlock(), null=True)
     
 DiscoveryPage.content_panels = Page.content_panels + [
 
-    FieldPanel('introduction')
+    FieldPanel('introduction'),
+    MultiFieldPanel([
+        StreamFieldPanel('content')
+    ], heading='Content')
 ]
 
 class AboutPage(Page):

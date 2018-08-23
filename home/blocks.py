@@ -1,4 +1,13 @@
-from wagtail.core.blocks import StreamBlock, StructBlock, CharBlock, ListBlock, TextBlock, RichTextBlock, ChoiceBlock
+from wagtail.core.blocks import (
+    StreamBlock,
+    StructBlock,
+    CharBlock,
+    ListBlock,
+    TextBlock,
+    RichTextBlock,
+    ChoiceBlock,
+    PageChooserBlock
+)
 from wagtail.images.blocks import ImageChooserBlock
 
 from .variables import COLOR_CHOICES, IMAGE_POSITION_CHOICES
@@ -19,8 +28,12 @@ class CarouselBlock(ListBlock):
 class ParallaxBlock(StructBlock):
 
     image = ImageChooserBlock()
+    title = CharBlock(max_length=64)
+    info_text = CharBlock(max_length=255)
     background_color = ChoiceBlock(choices=COLOR_CHOICES)
     image_position = ChoiceBlock(choices=IMAGE_POSITION_CHOICES)
+
+    links = ListBlock(PageChooserBlock())
     
     class Meta:
         template = 'home/partials/blocks/parallax.html'
@@ -52,12 +65,18 @@ class CustomRichTextBlock(RichTextBlock):
         template = 'home/partials/blocks/rich_text.html'
 
 class HomePageStreamBlock(StreamBlock):
+
     test = ImageWithCaptionblock(label='testje', icon='image')
     images = ListBlock(ImageWithCaptionblock(), label='Image slider', min=3)
 
 class BlogPageStreamBlock(StreamBlock):
+
     subtitle = SubtitleBlock()
     quote = QuoteBlock()
     paragraph = ParagraphBlock()
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
     rich_text = CustomRichTextBlock()
+
+class DiscoveryPageStreamBlock(StreamBlock):
+
+    parallax = ParallaxBlock()
