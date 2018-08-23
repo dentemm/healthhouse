@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static %}
+{% load static wagtailcore_tags %}
 
 {% block main %}
 
@@ -14,10 +14,10 @@
             <li class="col-md-6 col-lg-4">
               <article class="tile">
                 <div class="tile-image" style="background-image: url({% static 'images/demo/image-1.jpg' %})"></div>
-                <a href="">
+                <a href="{% pageurl item %}">
                   <div class="tile-footer">
-                    <span class="eyebrow mb-1">Design</span>
-                    <h3>Quick guide on traveling with friends.</h3>
+                    {% comment %} <span class="eyebrow mb-1">{{Design}}</span> {% endcomment %}
+                    <h3>{{ item.title }}</h3>
                   </div>
                 </a>
               </article>
