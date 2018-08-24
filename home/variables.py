@@ -14,7 +14,8 @@ TEAM_MEMBER_CHOICES = (
 PARTNER_CHOICES = (
     (1, 'Founding partner'),
     (2, 'Structural partner'),
-    (3, 'Other partner')
+    (3, 'Other partner'),
+    (4, 'No partner')
 )
 
 COLOR_CHOICES = [

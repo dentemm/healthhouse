@@ -20,9 +20,10 @@ def random_tile():
 #
 
 @register.filter
-def number_with_dots(value):
-    
-    return value.replace(',', '.')
+def numberify(value):
+
+    string_number = str(value)
+    return string_number.replace(',', '.')
 
 @register.filter
 def inverse_position(value):

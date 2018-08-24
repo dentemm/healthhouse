@@ -220,27 +220,39 @@ Location.panels = [
 class Partner(models.Model):
 
     name = models.CharField(max_length=128)
-    url = models.URLField(verbose_name='Website url')
-    description = models.TextField()
+    url = models.URLField(verbose_name='Website')
+    description = models.TextField(null=True)
     logo = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,
         related_name='+'
     )
     partner_type = models.IntegerField(choices=PARTNER_CHOICES, null=True)
+    recent_visitor = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'Partners & visitors'
+        verbose_name_plural = 'Partners & visitors'
+
 Partner.panels = [
   	MultiFieldPanel(
         [
-            FieldPanel('name'),
-            FieldPanel('url'),
+            FieldRowPanel([
+                FieldPanel('name', classname='col6'),
+                FieldPanel('partner_type', classname='col6')
+            ]),
+            FieldRowPanel([
+                ImageChooserPanel('logo', classname='col6'),
+                FieldPanel('url', classname='col6')
+                
+            ]),
             FieldPanel('description'),
-            ImageChooserPanel('logo')
+            FieldPanel('recent_visitor')
 		], 
-        heading='Location details'
+        heading='Partner informatation'
 	)  
 ]
 

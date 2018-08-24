@@ -1,4 +1,4 @@
-{% load static %}
+{% load static home_tags %}
 
 <!-- map -->
 
@@ -36,8 +36,8 @@
         function initMap() {
             // Styles a map in night mode.
           var map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: 50.865303, lng: 4.668004},
-            // center: {lat: {{ location.latitude }}, lng: {{ location.longitude|floatformat:6 }} },
+            // center: {lat: 50.865303, lng: 4.668004},
+            center: {lat: {{ location.latitude|numberify }}, lng: {{ location.longitude|numberify }} },
             zoom: 16,
             disableDefaultUI: false,
             styles: [
