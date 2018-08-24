@@ -25,7 +25,7 @@ def number_with_dots(value):
     return value.replace(',', '.')
 
 @register.filter
-def inverse_image_position(value):
+def inverse_position(value):
 
     if (value == 'right'):
         return 'left'
