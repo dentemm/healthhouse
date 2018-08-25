@@ -292,6 +292,15 @@ class HomePage(Page):
         on_delete=models.SET_NULL
 	)
 
+    visit_title = models.CharField(
+        max_length=63,
+        null=True
+    )
+    visit_text = models.CharField(
+        max_length=255,
+        null=True,
+        )
+
     def latest_articles(self): 
         return BlogPage.objects.live().order_by('-first_published_at')[0:4]
 
@@ -311,6 +320,7 @@ HomePage.content_panels = Page.content_panels + [
         heading='General information',
         classname='collapsible'
     ),
+    InlinePanel('cover_images', label=_('Cover images')),
     MultiFieldPanel(
         [
             FieldPanel('discover_title'),
@@ -320,8 +330,15 @@ HomePage.content_panels = Page.content_panels + [
         heading='Discover HH',
         classname='collapsible'
     ),
-    InlinePanel('cover_images', label=_('Cover images')),
-    InlinePanel('recent_visitors', label=_('Recent visits'))
+    MultiFieldPanel(
+        [
+            FieldPanel('visit_title'),
+            FieldPanel('visit_text'),
+            InlinePanel('recent_visitors', label=_('Recent visits'))
+        ],
+        heading='Recent visits',
+        classname='collapsible'
+    )
 ]
 
 HomePage.parent_page_types = []

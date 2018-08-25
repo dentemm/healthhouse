@@ -61,7 +61,7 @@
 {% endif %}
 
 {% if page.recent_visitors %}
-  {% include 'home/components/visitors.html' with list=page.recent_visitors.all %}
+  {% include 'home/components/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
 {% endif %}
 
 

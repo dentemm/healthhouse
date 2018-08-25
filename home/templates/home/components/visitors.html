@@ -3,33 +3,25 @@
 <!-- partners -->
 <section class="component">
   <div class="container">
-    <div class="row align-items-center">
-      <div class="col">
-        <h4>Default</h4>
+    <div class="row justify-content-center mb-5">
+        <div class="col-md-8 col-lg-6 text-center">
+          <h2 class="text-dark-blue">{{ title }}</h2>
+          <p class="lead">{{ info_text }}</p>
+        </div>
       </div>
-    </div>
-  </div>
-  <div class="tab-content" id="component-1">
-
-    <div class="tab-pane show active" id="component-1-1" role="tabpanel" aria-labelledby="component-1-1">
-      <div class="component-example">
-        <div class="container">
-          <div class="row">
-            <div class="col partners align-items-center">
-              <div class="owl-carousel" data-items="[6,4,2]" data-loop="true" data-autoplay="true">
-                {% for item in list %}
-                <a href="{{ item.visitor.url }}">
-                  <div class="logo">
-                    {% image item.visitor.logo height-120 %}
-                  </div>
-                </a>
-                {% endfor %}
+      <div class="row">
+        <div class="col partners align-items-center">
+          <div class="owl-carousel" data-items="[6,4,2]" data-loop="true" data-autoplay="true">
+            {% for item in list %}
+            <a href="{{ item.visitor.url }}">
+              <div class="logo">
+                {% image item.visitor.logo height-120 %}
               </div>
-            </div>
+            </a>
+            {% endfor %}
           </div>
         </div>
       </div>
     </div>
-  </div>
 </section>
 <!-- / partners -->
