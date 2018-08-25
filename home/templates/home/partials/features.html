@@ -1,0 +1,35 @@
+  <!-- features -->
+  <section class="separator-top py-0">
+    <div class="container mt-4">
+      <div class="row justify-content-center">
+        <div class="col-12 text-center">
+          <h1>{{ title }}</h1>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid">
+      <div class="row justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+          <div class="row separated">
+            {% for item in list %}
+            <div class="col-md-4 pt-2 pb-10 pl-md-3 pr-md-2 text-center text-md-left">
+                <i class="svg-icon fs-60 text-primary mb-2">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" width="46" height="62" d="M1 1 L47 1 L47 63 L1 63 Z" style="stroke-dasharray: 216px, 218px; stroke-dashoffset: 0px;"></path>
+                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M9,63L9,2" style="stroke-dasharray: 61px, 63px; stroke-dashoffset: 0px;"></path>
+                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M14,15L42,15" style="stroke-dasharray: 28px, 30px; stroke-dashoffset: 0px;"></path>
+                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M14,21L42,21" style="stroke-dasharray: 28px, 30px; stroke-dashoffset: 0px;"></path>
+                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M55,1L55,54L59,62L63,54L63,1Z" style="stroke-dasharray: 132px, 134px; stroke-dashoffset: 0px;"></path>
+                    <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M55,11L63,11" style="stroke-dasharray: 8px, 10px; stroke-dashoffset: 0px;"></path>
+                    </svg>
+                  </i>
+              <h5 class="font-weight-normal">{{ item.title }}</h5>
+              <p>{{ item.text }}</p>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- / features -->

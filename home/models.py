@@ -301,6 +301,11 @@ class HomePage(Page):
         null=True,
         )
 
+    feature_title = models.CharField(
+        max_length=63,
+        null=True
+    )
+
     def latest_articles(self): 
         return BlogPage.objects.live().order_by('-first_published_at')[0:4]
 
@@ -320,7 +325,13 @@ HomePage.content_panels = Page.content_panels + [
         heading='General information',
         classname='collapsible'
     ),
-    InlinePanel('cover_images', label=_('Cover images')),
+    MultiFieldPanel(
+        [
+            InlinePanel('cover_images', label=_('Cover images')),
+        ],
+        heading='Cover images',
+        classname='collapsible collapsed'
+    ),
     MultiFieldPanel(
         [
             FieldPanel('discover_title'),
@@ -328,7 +339,15 @@ HomePage.content_panels = Page.content_panels + [
             FieldPanel('discover_link')
         ],
         heading='Discover HH',
-        classname='collapsible'
+        classname='collapsible collapsed'
+    ),
+    MultiFieldPanel(
+        [
+            FieldPanel('feature_title'),
+            InlinePanel('features', label='Core values'),
+        ],
+        heading='Core values',
+        classname='collapsible collapsed collapsed'
     ),
     MultiFieldPanel(
         [
@@ -337,7 +356,7 @@ HomePage.content_panels = Page.content_panels + [
             InlinePanel('recent_visitors', label=_('Recent visits'))
         ],
         heading='Recent visits',
-        classname='collapsible'
+        classname='collapsible collapsed'
     )
 ]
 
@@ -367,6 +386,21 @@ class HomePageCoverImage(Orderable):
 HomePageCoverImage.panels = [
     ImageChooserPanel('image'),
     FieldPanel('caption')
+]
+
+class HomePageFeatures(Orderable):
+
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='features')
+    title = models.CharField(max_length=128)
+    text = models.CharField(max_length=255)
+
+    class Meta:
+        verbose_name = 'Core value'
+        verbose_name_plural = 'Core values'
+
+HomePageFeatures.panels = [
+    FieldPanel('title'),
+    FieldPanel('text')
 ]
 
 class HomePageVisitors(Orderable):

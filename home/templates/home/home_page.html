@@ -56,6 +56,10 @@
   {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}
 {% endif %}
 
+{% if page.features %}
+  {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
+{% endif %}
+
 {% if latest_articles %}
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
