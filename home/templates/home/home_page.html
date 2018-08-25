@@ -64,7 +64,7 @@
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
-{% if page.recent_visitors %}
+{% if page.recent_visitors.all > 0 %}
   {% include 'home/components/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
 {% endif %}
 
