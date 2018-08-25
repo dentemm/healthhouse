@@ -9,6 +9,7 @@ from wagtail.core.fields import StreamField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.search import index
 
@@ -217,7 +218,7 @@ Location.panels = [
 ]
 
 @register_snippet
-class Partner(models.Model):
+class Partner(index.Indexed, models.Model):
 
     name = models.CharField(max_length=128)
     url = models.URLField(verbose_name='Website')
@@ -249,11 +250,17 @@ Partner.panels = [
                 FieldPanel('url', classname='col6')
                 
             ]),
-            FieldPanel('description'),
-            FieldPanel('recent_visitor')
+            FieldRowPanel([
+                FieldPanel('description', classname='col8'),
+                FieldPanel('recent_visitor', classname='col4')               
+            ])
 		], 
         heading='Partner informatation'
 	)  
+]
+
+Partner.search_field = [
+    index.SearchField('name', partial_match=True)
 ]
 
 #
@@ -314,6 +321,7 @@ HomePage.content_panels = Page.content_panels + [
         classname='collapsible'
     ),
     InlinePanel('cover_images', label=_('Cover images')),
+    InlinePanel('recent_visitors', label=_('Recent visits'))
 ]
 
 HomePage.parent_page_types = []
@@ -342,6 +350,23 @@ class HomePageCoverImage(Orderable):
 HomePageCoverImage.panels = [
     ImageChooserPanel('image'),
     FieldPanel('caption')
+]
+
+class HomePageVisitors(Orderable):
+
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='recent_visitors')
+    visitor = models.ForeignKey(
+        'home.Partner',
+        on_delete=models.CASCADE,
+        related_name='+'
+    )
+
+    class Meta:
+        verbose_name = 'Recent visit'
+        verbose_name_plural = 'Recent visits'
+
+HomePageVisitors.panels = [
+    SnippetChooserPanel('visitor')
 ]
 
 class ContactPage(Page):

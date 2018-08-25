@@ -60,6 +60,10 @@
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
+{% if page.recent_visitors %}
+  {% include 'home/components/visitors.html' with list=page.recent_visitors.all %}
+{% endif %}
+
 
   <!-- presentation -->
   {% comment %} <section class="section-lg">
