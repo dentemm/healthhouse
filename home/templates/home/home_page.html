@@ -4,53 +4,53 @@
 
 {% block main %}
 
-  <!-- cover -->
-  <section class="p-0">
-    <div 
-      class="swiper-container text-white"
-      data-top-top="transform: translateY(0px);" 
-      data-top-bottom="transform: translateY(250px);"
-    >
-      <div class="swiper-wrapper">
-        {% for item in page.cover_images.all %}
-        <div class="swiper-slide vh-80">
-            {% image item.image width-1800 as cover_image %}
-          <div class="image image-overlay image-blur" style="background-image:url({{ cover_image.url }})"></div>
-          <div class="caption">
-            <div class="container">
-              <div class="row justify-content-between vh-80">
-                <div class="col-md-8 offset-md-2 align-self-center" data-swiper-parallax-y="-250%">
-                  {% image page.logo original as img_logo %}
-                  <div 
-                    class="vh-25" 
-                    style="
-                      background-image:url({{ img_logo.image.file.url }});
-                      background-size:contain;
-                      background-repeat:no-repeat;
-                      background-position:center;
-                    "
-                  >
-                  </div>
+<!-- cover -->
+<section class="p-0">
+  <div 
+    class="swiper-container text-white"
+    data-top-top="transform: translateY(0px);" 
+    data-top-bottom="transform: translateY(250px);"
+  >
+    <div class="swiper-wrapper">
+      {% for item in page.cover_images.all %}
+      <div class="swiper-slide vh-80">
+          {% image item.image width-1800 as cover_image %}
+        <div class="image image-overlay image-blur" style="background-image:url({{ cover_image.url }})"></div>
+        <div class="caption">
+          <div class="container">
+            <div class="row justify-content-between vh-80">
+              <div class="col-md-8 offset-md-2 align-self-center" data-swiper-parallax-y="-250%">
+                {% image page.logo original as img_logo %}
+                <div 
+                  class="vh-25" 
+                  style="
+                    background-image:url({{ img_logo.image.file.url }});
+                    background-size:contain;
+                    background-repeat:no-repeat;
+                    background-position:center;
+                  "
+                >
                 </div>
               </div>
             </div>
           </div>
-        </div>        
-        {% endfor %}
-        <div class="swiper-footer">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col text-center">
-                <div class="mouse"></div>
-              </div>
+        </div>
+      </div>        
+      {% endfor %}
+      <div class="swiper-footer">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col text-center">
+              <div class="mouse"></div>
             </div>
           </div>
         </div>
       </div>
-      <div class="swiper-pagination swiper-pagination-vertical"></div>
     </div>
-  </section>
-  <!-- / cover -->
+    <div class="swiper-pagination swiper-pagination-vertical"></div>
+  </div>
+</section>
+<!-- / cover -->
 
 {% if page.discover_link %}
   {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}

@@ -11,8 +11,8 @@ img.hh-image {
   background-color: transparent;
 }
 
-.hh-parallax .hh-parallax-content {
-  
+.pattern::before, .pattern::after {
+  border-radius: 0px;
 }
 
 @media (min-width: 768px) {
@@ -58,22 +58,5 @@ img.hh-image {
   
   .hh-parallax .hh-border-left-dark-blue {
     border-left-color: #29245a !important;
-  }
-}
-
-@media (min-width: 1200px) {
-
-  .container-fluid {
-    max-width: 100% !important;
-  }
-
-  .header-sticky {
-    background: white;
-  }
-}
-
-@media (min-width: 1600px) {
-  .container-fluid {
-    max-width: 100% !important;
   }
 }
