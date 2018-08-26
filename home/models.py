@@ -356,7 +356,7 @@ HomePage.content_panels = Page.content_panels + [
                 label='Masonry images',
                 help_text='Currently designed to hold 8 images',
                 min_num=8,
-                max_num=9
+                max_num=8
             )
         ],
         heading='Masonry images (designed for 8 images)',
