@@ -347,7 +347,20 @@ HomePage.content_panels = Page.content_panels + [
             InlinePanel('features', label='Core values'),
         ],
         heading='Core values',
-        classname='collapsible collapsed collapsed'
+        classname='collapsible collapsed'
+    ),
+    MultiFieldPanel(
+        [
+            InlinePanel(
+                'masonry_images',
+                label='Masonry images',
+                help_text='Currently designed to hold 8 images',
+                min_num=8,
+                max_num=9
+            )
+        ],
+        heading='Masonry images (designed for 8 images)',
+        classname='collapsible collapsed'
     ),
     MultiFieldPanel(
         [
@@ -401,6 +414,20 @@ class HomePageFeatures(Orderable):
 HomePageFeatures.panels = [
     FieldPanel('title'),
     FieldPanel('text')
+]
+
+class HomePageMasonry(Orderable):
+
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='masonry_images')
+    image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+    )
+
+HomePageMasonry.panels = [
+    ImageChooserPanel('image')
 ]
 
 class HomePageVisitors(Orderable):

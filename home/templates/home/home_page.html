@@ -56,60 +56,20 @@
   {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}
 {% endif %}
 
-{% if page.features.all > 0 %}
+{% if page.features.all %}
   {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
+{% endif %}
+
+{% if page.masonry_images.all %}
+  {% include 'home/partials/home_masonry.html' with list=page.masonry_images.all %}
 {% endif %}
 
 {% if latest_articles %}
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
-{% if page.recent_visitors.all > 0 %}
-  {% include 'home/components/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
+{% if page.recent_visitors.all %}
+  {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
 {% endif %}
-
-
-  <!-- presentation -->
-  {% comment %} <section class="section-lg">
-    <div class="container">
-      <div class="row text-center text-lg-left">
-        <div class="col-12 col-lg-9">
-          <div class="row">
-            <div class="col-lg-8">
-              <h2>A good place <br>to build your startup.</h2>
-              <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-            </div>
-          </div>
-          <div class="row gutter-0">
-            <div class="col-sm-6 col-lg-4">
-              <div class="bordered rising p-3">
-                <i class="icon-maximize text-green fs-40 mb-3"></i>
-                <h4 class="mb-0">1000 ft<sup>2</sup></h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-              <div class="bordered rising p-3">
-                <i class="icon-users2 text-green fs-40 mb-3"></i>
-                <h4 class="mb-0">80</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div>
-            <div class="col-sm-6 col-lg-4">
-              <div class="bordered rising p-3">
-                <i class="icon-wifi2 text-green fs-40 mb-3"></i>
-                <h4 class="mb-0">100mb</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-12 col-lg-3 presentation presentation-responsive">
-          <img class="left-25 vertical-align" src="{% static 'images/demo/stock/plant.png' %}" alt="Image">
-        </div>
-      </div>
-    </div>
-  </section> {% endcomment %}
-  <!-- / presentation -->
 
 {% endblock main %}
