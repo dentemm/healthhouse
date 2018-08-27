@@ -211,9 +211,9 @@
           autoplaySpeed: 400,
           autoplayHoverPause: true,
           responsive: {
-            0: { items: items[2] || 1 },
-            576: { items: items[1] || 1 },
-            1200: { items: items[0] || 1}
+            0: { items: items[2] || 2 },
+            576: { items: items[1] || 2 },
+            1200: { items: items[0] || 2}
           }
         };
         
