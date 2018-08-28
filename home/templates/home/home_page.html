@@ -68,6 +68,8 @@
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
+{% include 'home/partials/numbers.html' %}
+
 {% include 'home/partials/news_letter.html' %}
 
 {% if page.recent_visitors.all %}
