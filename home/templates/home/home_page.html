@@ -68,7 +68,7 @@
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
-{% include 'home/partials/news_letter.html' %}
+{% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
 
 {% include 'home/partials/numbers.html' with url=page.cover_images.all.0.image %}
 

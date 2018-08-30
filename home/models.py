@@ -311,6 +311,7 @@ class HomePage(Page):
     )
 
     feature_title = models.CharField(
+        verbose_name='title',
         max_length=63,
         null=True
     )
@@ -352,7 +353,12 @@ HomePage.content_panels = Page.content_panels + [
     MultiFieldPanel(
         [
             FieldPanel('feature_title'),
-            InlinePanel('features', label='Core values'),
+            InlinePanel(
+                'features',
+                label='Core values',
+                min_num=3,
+                max_num=3
+                ),
         ],
         heading='Core values',
         classname='collapsible collapsed'
@@ -420,8 +426,8 @@ HomePageCoverImage.panels = [
 class HomePageFeatures(Orderable):
 
     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='features')
-    title = models.CharField(max_length=128)
-    text = models.CharField(max_length=255)
+    title = models.CharField(verbose_name='Core value', max_length=128)
+    text = models.CharField(verbose_name='Description', max_length=255)
 
     class Meta:
         verbose_name = 'Core value'
