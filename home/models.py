@@ -268,7 +268,7 @@ Partner.search_field = [
 #
 
 class HomePage(Page):
-    body = StreamField(HomePageStreamBlock(), null=True)
+
     logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -301,6 +301,15 @@ class HomePage(Page):
         null=True,
         )
 
+    newsletter_title = models.CharField(
+        max_length=64,
+        null=True
+    )
+    newsletter_info = models.CharField(
+        max_length=255,
+        null=True
+    )
+
     feature_title = models.CharField(
         max_length=63,
         null=True
@@ -317,7 +326,6 @@ class HomePage(Page):
         return context
 
 HomePage.content_panels = Page.content_panels + [
-    # StreamFieldPanel('body'),
     MultiFieldPanel(
         [
             ImageChooserPanel('logo')
@@ -361,6 +369,14 @@ HomePage.content_panels = Page.content_panels + [
         ],
         heading='Masonry images (designed for 8 images)',
         classname='collapsible collapsed'
+    ),
+    MultiFieldPanel(
+        [
+            FieldPanel('newsletter_title'),
+            FieldPanel('newsletter_info')
+        ],
+        heading='Newsletter',
+        classname="collapsible collapsed"
     ),
     MultiFieldPanel(
         [

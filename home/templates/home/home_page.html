@@ -64,13 +64,13 @@
   {% include 'home/partials/home_masonry.html' with list=page.masonry_images.all %}
 {% endif %}
 
-{% include 'home/partials/numbers.html' with url=page.cover_images.all.0.image.file.url %}
-
 {% if latest_articles %}
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
 {% include 'home/partials/news_letter.html' %}
+
+{% include 'home/partials/numbers.html' with url=page.cover_images.all.0.image %}
 
 {% if page.recent_visitors.all %}
   {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
