@@ -9,13 +9,19 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search import views as search_views
 
+from .gallery import urls as gallery_urls
+from .api import api_router
+
 urlpatterns = [
     url(r'^django-admin/', admin.site.urls),
 
     url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
 
-    url(r'^search/$', search_views.search, name='search')
+    url(r'^search/$', search_views.search, name='search'),
+
+    url(r'^gallery/', include(gallery_urls)),
+    url(r'^api/', api_router.urls)
 ]
 
 urlpatterns += i18n_patterns(
