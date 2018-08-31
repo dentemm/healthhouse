@@ -9,7 +9,6 @@ from wagtail.documents import urls as wagtaildocs_urls
 
 from search import views as search_views
 
-from .gallery import urls as gallery_urls
 from .api import api_router
 
 urlpatterns = [
@@ -20,7 +19,6 @@ urlpatterns = [
 
     url(r'^search/$', search_views.search, name='search'),
 
-    url(r'^gallery/', include(gallery_urls)),
     url(r'^api/', api_router.urls)
 ]
 
