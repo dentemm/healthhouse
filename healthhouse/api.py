@@ -15,10 +15,12 @@ api_router = WagtailAPIRouter('wagtailapi')
 class ImageDownloadURLField(Field):
     
     def get_attribute(self, instance):
+
         return instance
 
     def to_representation(self, image):
-        return get_full_url(self.context['request'], image.url)
+
+        return get_full_url(self.context['request'], image.file.url)
 
 class CustomImageSerializer(ImageSerializer):
     download_url = ImageDownloadURLField(read_only=True)
@@ -26,11 +28,11 @@ class CustomImageSerializer(ImageSerializer):
 class CustomImagesAPIEndpoint(BaseAPIEndpoint):
     base_serializer_class = CustomImageSerializer
     filter_backends = [FieldsFilter, OrderingFilter, SearchFilter]
-    body_fields = BaseAPIEndpoint.body_fields + ['title', 'detail_url']
+    body_fields = BaseAPIEndpoint.body_fields + ['title', 'download_url']
     meta_fields = BaseAPIEndpoint.meta_fields + ['tags']
     meta_fields.remove('type')
     meta_fields.remove('detail_url')
-    listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['title', 'tags']
+    listing_default_fields = BaseAPIEndpoint.listing_default_fields + ['title', 'tags', 'download_url']
     nested_default_fields = BaseAPIEndpoint.nested_default_fields + ['title']
     name = 'images'
     model = get_image_model()
