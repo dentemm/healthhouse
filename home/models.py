@@ -291,6 +291,15 @@ class HomePage(Page):
 		related_name='+',
         on_delete=models.SET_NULL
 	)
+    discover_link_text = models.CharField(max_length=32, null=True)
+    discover_link2 = models.ForeignKey(
+		'wagtailcore.Page',
+		null=True,
+		blank=True,
+		related_name='+',
+        on_delete=models.SET_NULL
+	)
+    discover_link2_text = models.CharField(max_length=32, null=True)
 
     visit_title = models.CharField(
         max_length=63,
@@ -345,7 +354,15 @@ HomePage.content_panels = Page.content_panels + [
         [
             FieldPanel('discover_title'),
             FieldPanel('discover_text'),
-            FieldPanel('discover_link')
+            FieldRowPanel([
+                FieldPanel('discover_link', classname='col6'),
+                FieldPanel('discover_link_text', classname='col6')
+            ]),
+            FieldRowPanel([
+                FieldPanel('discover_link2', classname='col6'),
+                FieldPanel('discover_link2_text', classname='col6')
+            ]),
+
         ],
         heading='Discover HH',
         classname='collapsible collapsed'
