@@ -56,7 +56,7 @@ HealthHouseSettings.panels = [
 ]
 
 #
-# SNIPPETS
+# HELPERS
 #
 class LinkFields(models.Model):
 
@@ -101,7 +101,7 @@ class RelatedLink(LinkFields):
 RelatedLink.panels = [
 	FieldPanel('title'),
 	MultiFieldPanel(LinkFields.panels, 'Link')
-]
+]    
 
 class HealthHouseRelatedLink(Orderable, RelatedLink):
 
@@ -148,6 +148,9 @@ Address.panels = [
 	),
 ]
 
+#
+# SNIPPETS
+#
 @register_snippet
 class Location(Address, index.Indexed):
 
@@ -403,13 +406,20 @@ HomePage.content_panels = Page.content_panels + [
     ),
     MultiFieldPanel(
         [
+            InlinePanel('numbers', min_num=3, max_num=3)
+        ],
+        heading='Interesting numbers',
+        classname='collapsible collapsed'
+    ),
+    MultiFieldPanel(
+        [
             FieldPanel('visit_title'),
             FieldPanel('visit_text'),
             InlinePanel('recent_visitors', label=_('Recent visits'))
         ],
         heading='Recent visits',
         classname='collapsible collapsed'
-    )
+    ),  
 ]
 
 HomePage.parent_page_types = []
@@ -467,6 +477,51 @@ class HomePageMasonry(Orderable):
 
 HomePageMasonry.panels = [
     ImageChooserPanel('image')
+]
+
+class HomePageNumber(Orderable, ClusterableModel):
+
+    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='numbers')
+    number = models.ForeignKey('home.InterestingNumber', on_delete=models.SET_NULL, null=True)
+
+    def __str__(self):
+        return '%d + %s' % (self.number, self.identifier)
+
+HomePageNumber.panels = [
+    SnippetChooserPanel('number')   
+]
+
+class Bullet(Orderable, models.Model):
+
+    bullet = models.CharField(max_length=64)
+    number = ParentalKey('home.InterestingNumber', on_delete=models.CASCADE, related_name='bullets', null=True)
+
+    def __str__(self):
+        return self.bullet
+
+Bullet.panels = [
+    FieldPanel('bullet')
+]
+
+@register_snippet
+class InterestingNumber(ClusterableModel, models.Model):
+
+    number = models.IntegerField()
+    identifier = models.CharField(verbose_name='label', max_length=28)
+
+    def __str__(self):
+        return '%d %s' % (self.number, self.identifier)
+
+InterestingNumber.panels = [
+    MultiFieldPanel([
+        FieldRowPanel(
+            [
+                FieldPanel('number', classname='col4'),
+                FieldPanel('identifier', classname='col4')
+            ]
+        )
+    ], heading='Interesting number'),
+    InlinePanel('bullets', label='Bullets', classname='col6')
 ]
 
 class HomePageVisitors(Orderable):

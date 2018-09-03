@@ -70,7 +70,9 @@
 
 {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
 
-{% include 'home/partials/numbers.html' with url=page.cover_images.all.0.image %}
+{% if page.numbers.all %}
+  {% include 'home/partials/numbers.html' with numbers=page.numbers %}
+{% endif %}
 
 {% if page.recent_visitors.all %}
   {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
