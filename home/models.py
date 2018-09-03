@@ -328,6 +328,18 @@ class HomePage(Page):
         null=True
     )
 
+    number_title = models.CharField(
+        verbose_name='title',
+        max_length=63,
+        null=True
+    )
+    number_image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='+'
+    )
+
     def latest_articles(self): 
         return BlogPage.objects.live().order_by('-first_published_at')[0:4]
 
@@ -406,6 +418,8 @@ HomePage.content_panels = Page.content_panels + [
     ),
     MultiFieldPanel(
         [
+            FieldPanel('number_title'),
+            ImageChooserPanel('number_image'),
             InlinePanel('numbers', min_num=3, max_num=3)
         ],
         heading='Interesting numbers',

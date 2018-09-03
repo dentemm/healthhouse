@@ -71,7 +71,7 @@
 {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
 
 {% if page.numbers.all %}
-  {% include 'home/partials/numbers.html' with numbers=page.numbers %}
+  {% include 'home/partials/numbers.html' with numbers=page.numbers.all title=page.number_title img=page.number_image %}
 {% endif %}
 
 {% if page.recent_visitors.all %}
