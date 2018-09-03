@@ -53,7 +53,7 @@
 <!-- / cover -->
 
 {% if page.discover_link %}
-  {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link %}
+  {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link link_text=page.discover_link_text link2=page.discover_link2 link2_text=page.discover_link2_text %}
 {% endif %}
 
 {% if page.features.all %}
