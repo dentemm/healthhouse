@@ -4,31 +4,53 @@
 
 {% block main %}
 
-  <div class="container-fluid">
+<section class="bg-light">
+    <div class="container-full">
       <div class="row" data-aos="zoom-in">
         <div class="col">
-          <div class="boxed p-5 p-lg-10">
-            <div class="container">
-              <div class="row justify-content-between align-items-center">
-                <div class="col-md-4">
-                  <h2 class="display-3 mb-1"><b>Engage</b> your visitors</h2>
-                  <p>Appropriately reintermediate resource-leveling functionalities through resource.</p>
-                  <div class="input-group mt-2">
-                    <input type="text" class="form-control px-3" placeholder="your@mail.com" aria-label="Get a free copy">
-                    <div class="input-group-append">
-                      <button class="btn btn-primary" type="button">Subscribe</button>
+          <div class="container-full">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-md-6 p-10">
+                <span class="eyebrow mb-1 text-primary">Get in touch with us</span>
+                <h2>We’ll get back to you as soon as possible.</h2>
+                <form>
+                  <div class="form-row mb-1">
+                    <div class="col">
+                      <input type="text" class="form-control form-control-minimal" placeholder="Name">
                     </div>
                   </div>
-                </div>
-                <div class="col-md-7">
-                  {% image page.directions_image fill-750x550 %}
-                </div>
+                  <div class="form-row mb-1">
+                    <div class="col-12">
+                      <input type="text" class="form-control form-control-minimal" placeholder="Mail">
+                    </div>
+                  </div>
+                  <div class="form-row mb-1">
+                    <div class="col-12">
+                      <input type="text" class="form-control form-control-minimal" placeholder="Phone">
+                    </div>
+                  </div>
+                  <div class="form-row mb-1">
+                    <div class="col">
+                      <textarea class="form-control form-control-minimal" id="exampleFormControlTextarea1" rows="3" placeholder="Your Message"></textarea>
+                    </div>
+                  </div>
+                  <div class="form-row mt-3">
+                    <div class="col">
+                      <button class="btn btn-primary px-5">Contact us</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-6">
+                {% image page.directions_image fill-1000x650 as img %}
+                <img src="{{ img.url }}" />
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    </section>
 
   {% include 'home/components/map.html' with location=settings.home.HealthHouseSettings.location %}
 {% endblock main %}

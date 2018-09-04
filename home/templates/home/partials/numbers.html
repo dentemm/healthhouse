@@ -11,14 +11,12 @@
         </div>
         <div class="row gutter-1">
         {% for item in numbers %}
-        <div class="col-md-6 col-lg-4 text-dark">
+        <div class="offset-md-3 col-md-6 col-lg-4 text-dark">
             <div class="accordion-group accordion-group-feature" data-accordion-group="">
               <div class="accordion aos-init aos-animate" data-accordion="" data-aos="fade-up">
                 <div class="accordion-control" data-control="">
-                  <i class="fw-25 svg-icon fs-50 text-primary">
-                    {{ item.number.number }}
-                  </i>
-                  <h4 class="fs-16">{{ item.number.identifier }}</h4>
+                  <p class="fs-40 text-primary">{{ item.number.number }}</p>
+                  <h4 class="fs-24">{{ item.number.identifier }}</h4>
                 </div>
                 <div class="accordion-content" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease;">
                   <div class="accordion-content-wrapper">
@@ -37,7 +35,7 @@
         {% endfor %}
         </div>
       </div>
-      <div class="col-12 col-lg-3 presentation presentation-responsive">
+      <div class="d-none d-lg-block col-lg-3 presentation presentation-responsive">
         {% image img width-1000 as img %}
         <img class="left-25 vertical-align" src="{{ img.url }}" alt="Image">
       </div>
