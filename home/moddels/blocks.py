@@ -11,7 +11,7 @@ from wagtail.core.blocks import (
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
-from .variables import COLOR_CHOICES, IMAGE_POSITION_CHOICES
+from ..variables import COLOR_CHOICES, IMAGE_POSITION_CHOICES
 
 class ImageWithCaptionblock(StructBlock):
     image = ImageChooserBlock()

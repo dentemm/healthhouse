@@ -18,7 +18,7 @@ from modelcluster.models import ClusterableModel
 
 from django_countries.fields import CountryField
 
-from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
+from .moddels.blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
 from .variables import SOCIAL_MEDIA_CHOICES, TEAM_MEMBER_CHOICES, PARTNER_CHOICES
 
 #
@@ -61,12 +61,21 @@ HealthHouseSettings.panels = [
 class LinkFields(models.Model):
 
 	link_external = models.URLField('External link', blank=True)
+	link_page = models.ForeignKey(
+		'wagtailcore.Page',
+        verbose_name='Link to page',
+        on_delete=models.SET_NULL,
+		null=True,
+		blank=True,
+		related_name='+'
+	)
 
 	class Meta:
 		abstract = True
 
 LinkFields.panels = [
 	FieldPanel('link_external'),
+    FieldPanel('link_page')
 ]
 
 class RelatedLink(LinkFields):
@@ -100,7 +109,9 @@ class RelatedLink(LinkFields):
 
 RelatedLink.panels = [
 	FieldPanel('title'),
-	MultiFieldPanel(LinkFields.panels, 'Link')
+	MultiFieldPanel([
+        FieldPanel('link_external'),
+    ], heading='Link'),
 ]    
 
 class HealthHouseRelatedLink(Orderable, RelatedLink):
@@ -535,7 +546,7 @@ InterestingNumber.panels = [
             ]
         )
     ], heading='Interesting number'),
-    InlinePanel('bullets', label='Bullets', classname='col6')
+    InlinePanel('bullets', label='Bullets')
 ]
 
 class HomePageVisitors(Orderable):

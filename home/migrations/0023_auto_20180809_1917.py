@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogpage',
             name='content',
-            field=wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.TextBlock(icon='edit')), ('images', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock()), ('caption', wagtail.core.blocks.CharBlock(required=False))]), label='Image gallery', min=3)), ('gallery', home.blocks.CarouselBlock(child_block=home.blocks.ImageWithCaptionblock))], null=True),
+            field=wagtail.core.fields.StreamField([('paragraph', wagtail.core.blocks.TextBlock(icon='edit')), ('images', wagtail.core.blocks.ListBlock(wagtail.core.blocks.StructBlock([('image', wagtail.images.blocks.ImageChooserBlock()), ('caption', wagtail.core.blocks.CharBlock(required=False))]), label='Image gallery', min=3)), ('gallery', home.moddels.blocks.CarouselBlock(child_block=home.moddels.blocks.ImageWithCaptionblock))], null=True),
         ),
     ]
