@@ -6,7 +6,7 @@ from django.utils.translation import ugettext as _
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import StreamField
-from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel
+from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
@@ -300,20 +300,24 @@ class HomePage(Page):
         )
     discover_link = models.ForeignKey(
 		'wagtailcore.Page',
+        verbose_name='Link1',
 		null=True,
 		blank=True,
 		related_name='+',
         on_delete=models.SET_NULL
 	)
-    discover_link_text = models.CharField(max_length=32, null=True)
+    discover_link_alternative = models.URLField(verbose_name='Link1 - Alternative', null=True, blank=True)
+    discover_link_text = models.CharField(verbose_name='Link text', max_length=32, null=True)
     discover_link2 = models.ForeignKey(
 		'wagtailcore.Page',
+        verbose_name='Link2',
 		null=True,
 		blank=True,
 		related_name='+',
         on_delete=models.SET_NULL
 	)
-    discover_link2_text = models.CharField(max_length=32, null=True)
+    discover_link2_alternative = models.URLField(verbose_name='Link2 - Alternative', null=True, blank=True)
+    discover_link2_text = models.CharField(verbose_name='Link2 text', max_length=32, null=True)
 
     visit_title = models.CharField(
         max_length=63,
@@ -354,6 +358,22 @@ class HomePage(Page):
     def latest_articles(self): 
         return BlogPage.objects.live().order_by('-first_published_at')[0:4]
 
+    def discover_link_1(self):
+        
+        if self.discover_link:
+            return self.discover_link.url
+        
+        elif self.discover_link_alternative:
+            return self.discover_link_alternative
+
+    def discover_link_2(self):
+
+        if self.discover_link2:
+            return self.discover_link2.url
+        
+        elif self.discover_link2_alternative:
+            return self.discover_link2_alternative
+
     def get_context(self, request):
 
         context = super().get_context(request)
@@ -381,11 +401,17 @@ HomePage.content_panels = Page.content_panels + [
             FieldPanel('discover_title'),
             FieldPanel('discover_text'),
             FieldRowPanel([
-                FieldPanel('discover_link', classname='col6'),
+                PageChooserPanel('discover_link'),
+                FieldPanel('discover_link_alternative', classname='col6')
+            ]),
+            FieldRowPanel([
                 FieldPanel('discover_link_text', classname='col6')
             ]),
             FieldRowPanel([
-                FieldPanel('discover_link2', classname='col6'),
+                PageChooserPanel('discover_link2'),
+                FieldPanel('discover_link2_alternative', classname='col6')
+            ]),
+            FieldRowPanel([
                 FieldPanel('discover_link2_text', classname='col6')
             ]),
 

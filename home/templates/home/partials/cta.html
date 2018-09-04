@@ -19,12 +19,12 @@
             <div id="typed-strings">
                 <p>{{ title }}</p>
             </div>
-            <p>{{ subtitle }}</p>
+            <p>{{ subtitle }} - {{ link2 }}</p>
           </div>
           <div class="col-md-4 pl-4">
-            <a href="{{ link.url }}" class="btn btn-with-ico btn-info mb-2">{{ link_text }} <i class="icon-angle-right"></i></a>
+            <a href="{{ link }}" class="btn btn-with-ico btn-info mb-2">{{ link_text }} <i class="icon-angle-right"></i></a>
           {% if link2 %}
-            <a href="{{ link2.url }}" class="btn btn-with-ico btn-white">{{ link2_text }} <i class="icon-angle-right"></i></a>
+            <a href="{{ link2 }}" class="btn btn-with-ico btn-white">{{ link2_text }} <i class="icon-angle-right"></i></a>
           {% endif %}
           </div>
         </div>

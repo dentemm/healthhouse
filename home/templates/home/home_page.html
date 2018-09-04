@@ -52,9 +52,7 @@
 </section>
 <!-- / cover -->
 
-{% if page.discover_link %}
-  {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link link_text=page.discover_link_text link2=page.discover_link2 link2_text=page.discover_link2_text %}
-{% endif %}
+{% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link_1 link_text=page.discover_link_text link2=page.discover_link_2 link2_text=page.discover_link2_text %}
 
 {% if page.features.all %}
   {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
