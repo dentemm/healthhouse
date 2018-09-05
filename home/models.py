@@ -11,6 +11,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.search import index
 
 from modelcluster.fields import ParentalKey
@@ -592,7 +593,7 @@ HomePageVisitors.panels = [
     SnippetChooserPanel('visitor')
 ]
 
-class ContactPage(Page):
+class ContactPage(AbstractEmailForm):
 
     directions_image = models.ForeignKey(
         'wagtailimages.Image',
@@ -602,6 +603,7 @@ class ContactPage(Page):
     )
 
     template = 'home/contact_page.html'
+    landing_page_template = 'home/contact.html'
 
     class Meta:
         verbose_name = 'Contact page'
