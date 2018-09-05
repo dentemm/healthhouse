@@ -3,6 +3,7 @@ import ssl
 
 from django.db import models
 from django.utils.translation import ugettext as _
+from django.shortcuts import render
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import StreamField
@@ -605,16 +606,48 @@ class ContactPage(AbstractEmailForm):
     template = 'home/contact_page.html'
     landing_page_template = 'home/contact.html'
 
+    def serve(self, request, *args, **kwargs):
+
+        ctx = self.get_context(request)
+
+        if request.method == 'POST':
+            form = self.get_form(request.POST, page=self, user=request.user)
+
+            if form.is_valid():
+                self.process_form_submission(form)
+
+                return render(request, self.get_landing_page_template(request), ctx)
+
+        else:
+            form = self.get_form(page=self, user=request.user)
+
+            ctx['form'] = form
+
+            return render(request, self.get_template(request), ctx)
+
+    def get_landing_page_template(self, request, *args, **kwargs):
+        return self.landing_page_template
+
     class Meta:
         verbose_name = 'Contact page'
         verbose_name_plural = 'Contact pages'
 
 ContactPage.content_panels = Page.content_panels + [
-    ImageChooserPanel('directions_image')
+    ImageChooserPanel('directions_image'),
+    MultiFieldPanel(
+        [
+            InlinePanel('form_fields', label='Form fields'),
+        ],
+        heading='Form fields',
+        classname='collapsible collapsed'
+    )
 ]
 
 ContactPage.parent_page_types = ['home.HomePage']
 ContactPage.subpage_types = []
+
+class ContactPageFormField(AbstractFormField):
+    page = ParentalKey('home.ContactPage', related_name='form_fields')
 
 class DiscoveryPage(Page):
 
