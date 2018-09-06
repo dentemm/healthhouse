@@ -11,13 +11,14 @@
         </div>
         <div class="row gutter-1">
         {% for item in numbers %}
-        <div class="offset-md-3 col-md-6 offset-lg-0 col-lg-4 text-dark">
+          <div class="offset-md-3 col-md-6 offset-lg-0 col-lg-4 text-dark">
             <div class="accordion-group accordion-group-feature" data-accordion-group="">
               <div class="accordion aos-init aos-animate" data-accordion="" data-aos="fade-up">
-                <div class="accordion-control" data-control="">
+                <div class="accordion-control {% if not item.bullets.all %}inactive{% endif %}" data-control="">
                   <p class="fs-40 text-primary">{{ item.number }}</p>
                   <h4 class="fs-24">{{ item.identifier }}</h4>
                 </div>
+                {% if item.bullets.all %}
                 <div class="accordion-content" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease;">
                   <div class="accordion-content-wrapper">
                     <ul class="list-group list-group-minimal">
@@ -29,6 +30,7 @@
                     </ul>
                   </div>
                 </div>
+                {% endif %}
               </div>
             </div>
           </div>   

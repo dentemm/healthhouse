@@ -15,6 +15,14 @@ img.hh-image {
   border-radius: 0px;
 }
 
+.accordion-control.inactive {
+  cursor: default;
+} 
+
+.accordion-control.inactive::after {
+  content: '';
+} 
+
 @media (min-width: 768px) {
   .hh-parallax {
     height: 38rem;
