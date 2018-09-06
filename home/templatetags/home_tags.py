@@ -2,6 +2,8 @@ import random
 
 from django import template
 
+from ..models import HomePage
+
 register = template.Library()
 
 #
@@ -14,6 +16,11 @@ def random_tile():
     ext = ['', 'tile-short', 'tile-long']
 
     return random.choice(ext)
+
+@register.simple_tag
+def menu_items():
+
+    return HomePage.objects.all()[0].get_children().live().in_menu()
 
 #
 # TEMPLATE FILTERS

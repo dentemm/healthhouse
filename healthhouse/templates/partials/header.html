@@ -1,4 +1,4 @@
- {% load static wagtailcore_tags %}   
+ {% load static wagtailcore_tags home_tags %}   
     
     <!-- header -->
     <header class="header-sticky header-light bg-white">
@@ -9,34 +9,16 @@
             <img class="navbar-logo navbar-logo-dark" src="{% static 'images/hh/hh_logo_minimal.png' %}" alt="Logo">
           </a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="burger"><span></span></span></button>
-
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav align-items-center mr-auto">
+              {% menu_items as menu_items %}
+              {% for item in menu_items %}
               <li class="nav-item">
-                <a class="nav-link" href="/" role="button">
-                  Discover
+                <a class="nav-link" href="{% pageurl item %}" role="button">
+                  {{ item.title }}
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/" role="button">
-                  Contact
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/" role="button">
-                  News
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/" role="button">
-                  About
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="/" role="button">
-                  Partners
-                </a>
-              </li>
+              {% endfor %}
             </ul>
           </div>
         </nav>
