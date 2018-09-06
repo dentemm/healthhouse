@@ -19,39 +19,44 @@
       </div>
     </div>
   </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="mb-1">
-          <img class="logo-sm" src="{% static 'images/hh/hh_logo_edited.png' %}" alt="Logo">
+  <div class="separator-bottom py-10">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="mb-1">
+            <img class="logo-sm" src="{{ settings.home.HealthHouseSettings.logo_white.file.url }}" alt="Logo">
+          </div>
+          {% comment %} <span class="copyright-text">© GO. 2018 All Right Reserved</span> {% endcomment %}
         </div>
-        {% comment %} <span class="copyright-text">© GO. 2018 All Right Reserved</span> {% endcomment %}
-      </div>
-      <div class="col col-lg-2">
-        <ul class="list-group list-group-minimal">
-          {% comment %} <li class="list-group-item"><a href="">Programs</a></li>
-          <li class="list-group-item"><a href="">Trainers</a></li>
-          <li class="list-group-item"><a href="">Spa</a></li>
-          <li class="list-group-item"><a href="">Events</a></li>
-          <li class="list-group-item"><a href="">Schedule</a></li> {% endcomment %}
-        </ul>
-      </div>
-      <div class="col col-lg-2">
-        <ul class="list-group list-group-minimal">
-          {% comment %} <li class="list-group-item"><a href="">Contacts</a></li>
-          <li class="list-group-item"><a href="">About Us</a></li>
-          <li class="list-group-item"><a href="">Legal Information</a></li> {% endcomment %}
-        </ul>
-      </div>
-      <div class="col-lg-4 text-lg-right">
-        <a href="tel:{{ settings.home.HealthHouseSettings.phone_number }}" class="phone bordered">
-            {{ settings.home.HealthHouseSettings.phone_number }}
-        </a>
-        {% comment %} <div class="mb-2"></div>
-        <a href="mailto:{{ settings.home.HealthHouseSettings.email }}" class="email bordered">
-            {{ settings.home.HealthHouseSettings.email }}
-        </a> {% endcomment %}
+        <div class="col col-lg-2">
+          <ul class="list-group list-group-minimal">
+            {% comment %} <li class="list-group-item"><a href="">Programs</a></li>
+            <li class="list-group-item"><a href="">Trainers</a></li>
+            <li class="list-group-item"><a href="">Spa</a></li>
+            <li class="list-group-item"><a href="">Events</a></li>
+            <li class="list-group-item"><a href="">Schedule</a></li> {% endcomment %}
+          </ul>
+        </div>
+        <div class="col col-lg-2">
+          <ul class="list-group list-group-minimal">
+            {% comment %} <li class="list-group-item"><a href="">Contacts</a></li>
+            <li class="list-group-item"><a href="">About Us</a></li>
+            <li class="list-group-item"><a href="">Legal Information</a></li> {% endcomment %}
+          </ul>
+        </div>
+        <div class="col-12 col-lg-4 col-xl-3 text-lg-right">
+          <a href="tel:{{ settings.home.HealthHouseSettings.phone_number }}" class="phone bordered">
+              {{ settings.home.HealthHouseSettings.phone_number }}
+          </a>
+          <div class="mb-2"></div>
+          <a href="mailto:{{ settings.home.HealthHouseSettings.email }}" class="hh-email phone bordered">
+              {{ settings.home.HealthHouseSettings.email }}
+          </a>
+        </div>
       </div>
     </div>
+  </div>
+  <div class="container text-right py-1">
+    Created by <a href="mailto:tim@thinkmobile.be" class="text-primary">Think Mobile</a>
   </div>
 </footer>

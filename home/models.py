@@ -32,6 +32,29 @@ class HealthHouseSettings(ClusterableModel, BaseSetting):
     tagline = models.CharField(max_length=255, null=True)
     phone_number = models.CharField(max_length=28, null=True)
     email = models.EmailField(null=True)
+
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True,
+        blank=True
+    )
+    logo_minimal = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True,
+        blank=True
+    )
+    logo_white = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True,
+        blank=True
+    )
+
     location = models.ForeignKey(
         'home.Location',
         on_delete=models.SET_NULL,
@@ -50,8 +73,13 @@ HealthHouseSettings.panels = [
                 FieldPanel('phone_number', classname='col6')
             ])
         ],
-        heading='contact information'
+        heading='Contact information'
     ),
+    MultiFieldPanel([
+        ImageChooserPanel('logo'),
+        ImageChooserPanel('logo_minimal'),
+        ImageChooserPanel('logo_white')
+    ], heading='Logos', classname='collapsible collapsed'),
     FieldPanel('tagline'),
     FieldPanel('location'),
     InlinePanel('related_links', label='Links')

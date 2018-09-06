@@ -23,6 +23,14 @@ img.hh-image {
   content: '';
 } 
 
+.logo-sm {
+  max-height: 7rem;
+}
+
+.hh-email::before {
+  content: "\f003";
+}
+
 @media (min-width: 768px) {
   .hh-parallax {
     height: 38rem;
