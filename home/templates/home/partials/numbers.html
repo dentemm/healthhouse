@@ -11,17 +11,17 @@
         </div>
         <div class="row gutter-1">
         {% for item in numbers %}
-        <div class="offset-md-3 col-md-6 col-lg-4 text-dark">
+        <div class="offset-md-3 col-md-6 offset-lg-0 col-lg-4 text-dark">
             <div class="accordion-group accordion-group-feature" data-accordion-group="">
               <div class="accordion aos-init aos-animate" data-accordion="" data-aos="fade-up">
                 <div class="accordion-control" data-control="">
-                  <p class="fs-40 text-primary">{{ item.number.number }}</p>
-                  <h4 class="fs-24">{{ item.number.identifier }}</h4>
+                  <p class="fs-40 text-primary">{{ item.number }}</p>
+                  <h4 class="fs-24">{{ item.identifier }}</h4>
                 </div>
                 <div class="accordion-content" data-content="" style="max-height: 0px; overflow: hidden; transition: max-height 300ms ease;">
                   <div class="accordion-content-wrapper">
                     <ul class="list-group list-group-minimal">
-                      {% for bullet in item.number.bullets.all %}
+                      {% for bullet in item.bullets.all %}
                       <li class="list-group-item d-flex justify-content-between align-items-center">
                         {{ bullet }} <i class="icon-check2 fs-20"></i>
                       </li>

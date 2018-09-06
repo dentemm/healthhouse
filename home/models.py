@@ -376,6 +376,12 @@ class HomePage(Page):
         elif self.discover_link2_alternative:
             return self.discover_link2_alternative
 
+    def numbers(self):
+        return InterestingNumber.objects.all()[0:3]
+
+    def recent_visitors(self):
+        return Partner.objects.all().filter(recent_visitor=True)
+
     def get_context(self, request):
 
         context = super().get_context(request)
@@ -459,7 +465,6 @@ HomePage.content_panels = Page.content_panels + [
         [
             FieldPanel('number_title'),
             ImageChooserPanel('number_image'),
-            InlinePanel('numbers', min_num=3, max_num=3)
         ],
         heading='Interesting numbers',
         classname='collapsible collapsed'
@@ -468,7 +473,6 @@ HomePage.content_panels = Page.content_panels + [
         [
             FieldPanel('visit_title'),
             FieldPanel('visit_text'),
-            InlinePanel('recent_visitors', label=_('Recent visits'))
         ],
         heading='Recent visits',
         classname='collapsible collapsed'
@@ -532,17 +536,17 @@ HomePageMasonry.panels = [
     ImageChooserPanel('image')
 ]
 
-class HomePageNumber(Orderable, ClusterableModel):
+# class HomePageNumber(Orderable, ClusterableModel):
 
-    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='numbers')
-    number = models.ForeignKey('home.InterestingNumber', on_delete=models.SET_NULL, null=True)
+#     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='numbers')
+#     number = models.ForeignKey('home.InterestingNumber', on_delete=models.SET_NULL, null=True)
 
-    def __str__(self):
-        return '%d + %s' % (self.number, self.identifier)
+#     def __str__(self):
+#         return '%d + %s' % (self.number, self.identifier)
 
-HomePageNumber.panels = [
-    SnippetChooserPanel('number')   
-]
+# HomePageNumber.panels = [
+#     SnippetChooserPanel('number')   
+# ]
 
 class Bullet(Orderable, models.Model):
 
@@ -575,23 +579,6 @@ InterestingNumber.panels = [
         )
     ], heading='Interesting number'),
     InlinePanel('bullets', label='Bullets')
-]
-
-class HomePageVisitors(Orderable):
-
-    page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='recent_visitors')
-    visitor = models.ForeignKey(
-        'home.Partner',
-        on_delete=models.CASCADE,
-        related_name='+'
-    )
-
-    class Meta:
-        verbose_name = 'Recent visit'
-        verbose_name_plural = 'Recent visits'
-
-HomePageVisitors.panels = [
-    SnippetChooserPanel('visitor')
 ]
 
 class ContactPage(AbstractEmailForm):
