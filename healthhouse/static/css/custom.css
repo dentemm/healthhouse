@@ -1,3 +1,13 @@
+header {
+  border-radius: 0.25rem;
+  margin: 15px;
+  width: calc(100% - 30px);
+}
+
+.navbar-nav .nav-link {
+  font-size: 1rem;
+}
+
 img.hh-image {
   display: block;
   margin-left: auto;
