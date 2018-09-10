@@ -9,9 +9,9 @@
     </div>
     <div class="row" data-aos="fade-left">
       <div class="col">
-        <div class="owl-carousel visible" data-items="[4]" data-nav="true" data-margin="10">
+        <div class="owl-carousel visible" data-items="[4, 2, 1]" data-nav="true" data-margin="10">
         {% for item in list %}
-          {% image item.cover_image fill-400x400 as temp_img %}
+          {% image item.cover_image fill-700x700 as temp_img %}
           {{ item.cover_img }}
           <a href="{{ item.url }}" class="user-photo">
             <figure class="user">

@@ -1,4 +1,4 @@
-{% load static %}
+{% load home_tags wagtailcore_tags %}
 
 <footer class="bg-dark-blue text-white">
   <div class="separator-bottom py-5">
@@ -22,7 +22,7 @@
   <div class="separator-bottom py-10">
     <div class="container">
       <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-3">
           <div class="mb-1">
             <img class="logo-sm" src="{{ settings.home.HealthHouseSettings.logo_white.file.url }}" alt="Logo">
           </div>
@@ -30,14 +30,15 @@
         </div>
         <div class="col col-lg-2">
           <ul class="list-group list-group-minimal">
-            {% comment %} <li class="list-group-item"><a href="">Programs</a></li>
-            <li class="list-group-item"><a href="">Trainers</a></li>
-            <li class="list-group-item"><a href="">Spa</a></li>
-            <li class="list-group-item"><a href="">Events</a></li>
-            <li class="list-group-item"><a href="">Schedule</a></li> {% endcomment %}
+          {% menu_items as menu_items %}
+          {% for item in menu_items %}
+            <li class="list-group-item">
+              <a href="{% pageurl item %}">{{ item.title }}</a>
+            </li>
+          {% endfor %}
           </ul>
         </div>
-        <div class="col col-lg-2">
+        <div class="col col-lg-3">
           <ul class="list-group list-group-minimal">
             {% comment %} <li class="list-group-item"><a href="">Contacts</a></li>
             <li class="list-group-item"><a href="">About Us</a></li>
