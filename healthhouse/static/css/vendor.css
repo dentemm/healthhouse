@@ -157,7 +157,6 @@
   top: 50%;
   margin-left: -40px;
   margin-top: -40px;
-  background: url("owl.video.play.png") no-repeat;
   cursor: pointer;
   z-index: 1;
   -webkit-backface-visibility: hidden;
@@ -1165,10 +1164,6 @@ button.swiper-pagination-bullet {
 
 .video-js .vjs-big-play-button .vjs-icon-placeholder:before, .vjs-button > .vjs-icon-placeholder:before {
   text-align: center; }
-
-@font-face {
-  font-family: VideoJS;
-  src: url("font/VideoJS.eot?#iefix") format("eot"); }
 
 @font-face {
   font-family: VideoJS;
