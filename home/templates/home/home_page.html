@@ -15,7 +15,7 @@
       {% for item in page.cover_images.all %}
       <div class="swiper-slide vh-80">
           {% image item.image width-1800 as cover_image %}
-        <div class="image image-overlay image-blured" style="background-image:url({{ cover_image.url }})"></div>
+        <div class="image image-overlay" style="background-image:url({{ cover_image.url }})"></div>
         <div class="caption">
           <div class="container">
             <div class="row justify-content-between vh-80">
