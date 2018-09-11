@@ -99,3 +99,7 @@ img.hh-image {
 .hh-hover:hover p {
 color: rgba(255, 255, 255, 0.5);
 }
+
+.accordion-group-minimal .accordion-control::after {
+  color: white;
+  background-color: #00a1dd;}

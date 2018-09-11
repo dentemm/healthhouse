@@ -679,7 +679,7 @@ DiscoveryPage.content_panels = Page.content_panels + [
 
 class AboutPage(Page):
 
-    pass 
+    pass
 
 AboutPage.content_panels = Page.content_panels + [
     InlinePanel('faq_questions', label=_('FAQ questions')),

@@ -1,0 +1,33 @@
+<!-- accordion minimal -->
+<section class="component">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h4>Frequently Asked Questions</h4>
+      </div>
+    </div>
+  </div>
+  <div class="bg-light">
+    <div class="container py-4">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10 col-sm-12">
+          <div class="accordion-group accordion-group-minimal" data-accordion-group>
+            {% for item in list %}
+            <div class="accordion" data-accordion>
+              <div class="accordion-control" data-control>
+                <h5>{{ item.question }}</h5>
+              </div>
+              <div class="accordion-content" data-content>
+                <div class="accordion-content-wrapper">
+                  <p>{{ item.answer }}</p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- / accordion minimal -->

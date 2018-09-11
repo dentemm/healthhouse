@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
 {% block main %}
-  {% include 'home/components/faq.html' with list=page.faq_questions.all %}
-  {% include 'home/components/team.html' with list=page.team_members.all %}
+  {% include 'home/partials/faq.html' with list=page.faq_questions.all %}
+  {% include 'home/partials/team.html' with list=page.team_members.all %}
 {% endblock main %}
