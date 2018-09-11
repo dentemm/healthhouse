@@ -9,7 +9,7 @@
           {% image item.image width-450 as bg_img %}
           {% image item.image width-1200 as img%}
           <li class="col-6 col-md-4 col-lg-3 filtr-item" data-category="all, branding" data-sort="value">
-            <figure class="photo equal {% cycle '' 'equal-long' '' 'equal-long' 'equal-long' %} ">
+            <figure class="photo equal {% cycle '' 'equal-short' '' 'equal-short' 'equal-short' %} ">
               <a href="{{ img.url }}" 
                 style="background-image: url({{ bg_img.url }});">
               </a>
