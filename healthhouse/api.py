@@ -20,7 +20,9 @@ class ImageDownloadURLField(Field):
 
     def to_representation(self, image):
 
-        return get_full_url(self.context['request'], image.file.url)
+        return image.file.url
+
+        # return get_full_url(self.context['request'], image.file.url)
 
 class CustomImageSerializer(ImageSerializer):
     download_url = ImageDownloadURLField(read_only=True)
