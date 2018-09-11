@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 from django.utils.translation import ugettext_lazy as _
 
-LANGUAGE_CODE = 'en-uk'
+LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
     ('en', _("English")),

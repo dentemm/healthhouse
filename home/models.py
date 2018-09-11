@@ -307,6 +307,39 @@ Partner.search_field = [
     index.SearchField('name', partial_match=True)
 ]
 
+@register_snippet
+class TeamMember(Orderable):
+
+    name = models.CharField(max_length=64)
+    title = models.CharField(max_length=64)
+    bio = models.TextField(null=True)
+    user_type = models.IntegerField(verbose_name='Type', choices=TEAM_MEMBER_CHOICES)
+    picture = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Team member'
+        verbose_name_plural = 'Team members'
+
+TeamMember.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('name', classname='col6'),
+            FieldPanel('user_type', classname='col6')
+        ]),
+        FieldPanel('title'),
+        ImageChooserPanel('picture'),
+        FieldPanel('bio')
+    ], heading='Team member')
+]
+
 #
 # PAGES
 #
@@ -665,13 +698,27 @@ DiscoveryPage.content_panels = Page.content_panels + [
     ], heading='Content')
 ]
 
-class AboutPage(Page):
+DiscoveryPage.parent_page_types = ['home.HomePage']
+DiscoveryPage.subpage_types = ['home.DiscoveryDetailPage']
+
+class DiscoveryDetailPage(Page):
 
     pass
 
+DiscoveryDetailPage.content_panels = Page.content_panels + [
+
+]
+
+DiscoveryPage.parent_page_types = ['home.DiscoveryPage']
+DiscoveryPage.subpage_types = []
+
+class AboutPage(Page):
+
+    def team_members(self):
+        return TeamMember.objects.all()
+
 AboutPage.content_panels = Page.content_panels + [
-    InlinePanel('faq_questions', label=_('FAQ questions')),
-    InlinePanel('team_members', label='Team members')
+    InlinePanel('faq_questions', label=_('FAQ questions'))
 ]
 
 class AboutPageQuestion(Orderable):
@@ -688,32 +735,6 @@ AboutPageQuestion.panels = [
     MultiFieldPanel([
         FieldPanel('question'),
         FieldPanel('answer')
-    ])
-]
-
-class AboutPageTeamMember(Orderable):
-
-    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='team_members')
-    name = models.CharField(max_length=64)
-    title = models.CharField(max_length=64)
-    user_type = models.IntegerField(verbose_name='Type', choices=TEAM_MEMBER_CHOICES)
-    picture = models.ForeignKey(
-        'wagtailimages.Image',
-        on_delete=models.SET_NULL,
-        related_name='+',
-        null=True
-    )
-
-    class Meta:
-        verbose_name = 'Team member'
-        verbose_name_plural = 'Team members'
-
-AboutPageTeamMember.panels = [
-    MultiFieldPanel([
-        FieldPanel('name'),
-        FieldPanel('title'),
-        ImageChooserPanel('picture'),
-        FieldPanel('user_type')
     ])
 ]
 
