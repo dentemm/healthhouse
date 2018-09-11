@@ -28,3 +28,9 @@ IMAGE_POSITION_CHOICES = [
     ('left', 'Left'),
     ('right', 'Right')
 ]
+
+ICON_CHOICES = [
+    ('icon-ecommerce_graph3', 'Graph'),
+    ('icon-basic_eye', 'Eye'),
+    ('icon-basic_message_multiple', 'Text balloon')
+]

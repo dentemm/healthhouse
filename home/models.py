@@ -21,7 +21,7 @@ from modelcluster.models import ClusterableModel
 from django_countries.fields import CountryField
 
 from .moddels.blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .variables import SOCIAL_MEDIA_CHOICES, TEAM_MEMBER_CHOICES, PARTNER_CHOICES
+from .variables import SOCIAL_MEDIA_CHOICES, TEAM_MEMBER_CHOICES, PARTNER_CHOICES, ICON_CHOICES
 
 #
 # WAGTAIL SETTINGS
@@ -540,6 +540,7 @@ class HomePageFeatures(Orderable):
     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='features')
     title = models.CharField(verbose_name='Core value', max_length=128)
     text = models.CharField(verbose_name='Description', max_length=255)
+    icon = models.CharField(verbose_name='Icon', max_length=40, choices=ICON_CHOICES, null=True)
 
     class Meta:
         verbose_name = 'Core value'
@@ -547,7 +548,8 @@ class HomePageFeatures(Orderable):
 
 HomePageFeatures.panels = [
     FieldPanel('title'),
-    FieldPanel('text')
+    FieldPanel('text'),
+    FieldPanel('icon')
 ]
 
 class HomePageMasonry(Orderable):
