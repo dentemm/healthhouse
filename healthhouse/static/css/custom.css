@@ -86,3 +86,16 @@ img.hh-image {
     border-left-color: #29245a !important;
   }
 }
+
+
+
+/* TEMM TESTS */
+
+.hh-hover:hover {
+  background-color: #00a1dd;
+  color: white;
+}
+
+.hh-hover:hover p {
+color: rgba(255, 255, 255, 0.5);
+}
