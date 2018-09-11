@@ -6,16 +6,10 @@
     <div class="row boxed separated">
       {% for partner in partners %}
       <div class="col-md-6 col-lg-4 p-5 text-center d-flex flex-column justify-content-between">
-        <div>
-          <i class="svg-icon w-75 equal">
-              <span class="m-2">
-                <a href="{{ partner.url }}">
-                  {% image partner.logo width-250 class='img-fluid' %}
-                </a>
-              </span>
-            </i>
-            <h4 class="fs-24 font-weight-normal">{{ partner.name }}</h4>
-        </div>
+        <a href="{{ partner.url }}">
+          {% image partner.logo height-250 class='img-fluid' %}
+        </a>
+        <h4 class="fs-24 font-weight-normal">{{ partner.name }}</h4>
         <p>{{ partner.description }}</p>
         <button type="button" class="btn btn-with-ico btn-primary">Website <i class="icon-plus2"></i></button>
       </div>
