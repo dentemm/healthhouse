@@ -6,7 +6,8 @@ from wagtail.core.blocks import (
     TextBlock,
     RichTextBlock,
     ChoiceBlock,
-    PageChooserBlock
+    PageChooserBlock,
+    URLBlock
 )
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
@@ -42,6 +43,7 @@ class ParallaxBlock(StructBlock):
     image_position = ChoiceBlock(choices=IMAGE_POSITION_CHOICES)
 
     links = ListBlock(PageChooserBlock())
+    external_links = ListBlock(URLBlock())
     
     class Meta:
         template = 'home/partials/blocks/parallax.html'
