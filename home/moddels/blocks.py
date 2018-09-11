@@ -34,6 +34,11 @@ class CarouselBlock(ListBlock):
         template = 'home/partials/blocks/owl_carousel.html'
         icon = 'image'
 
+class CustomURLBlock(StructBlock):
+
+    url = URLBlock(required=False)
+    title = CharBlock(max_length=28, required=False)
+
 class ParallaxBlock(StructBlock):
 
     image = ImageChooserBlock()
@@ -42,8 +47,8 @@ class ParallaxBlock(StructBlock):
     background_color = ChoiceBlock(choices=COLOR_CHOICES)
     image_position = ChoiceBlock(choices=IMAGE_POSITION_CHOICES)
 
-    links = ListBlock(PageChooserBlock())
-    external_links = ListBlock(URLBlock())
+    links = ListBlock(PageChooserBlock(), required=False)
+    external_links = ListBlock(CustomURLBlock(), required=False)
     
     class Meta:
         template = 'home/partials/blocks/parallax.html'

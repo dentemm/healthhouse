@@ -25,6 +25,18 @@
             {{ item }}
           </a>
         {% endfor %}
+        {% for item in value.external_links %}
+            <a
+            href="{{ item.url }}"
+          {% if color == 'primary' %}
+            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}dark-blue mb-1 mr-1"
+          {% else %}
+            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}primary mb-1 mr-1"
+          {% endif %}
+          >
+            {{ item.title }}
+          </a>
+        {% endfor %}
       </div>
     </div>
   </div>
