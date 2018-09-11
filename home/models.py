@@ -566,18 +566,6 @@ HomePageMasonry.panels = [
     ImageChooserPanel('image')
 ]
 
-# class HomePageNumber(Orderable, ClusterableModel):
-
-#     page = ParentalKey(HomePage, on_delete=models.CASCADE, related_name='numbers')
-#     number = models.ForeignKey('home.InterestingNumber', on_delete=models.SET_NULL, null=True)
-
-#     def __str__(self):
-#         return '%d + %s' % (self.number, self.identifier)
-
-# HomePageNumber.panels = [
-#     SnippetChooserPanel('number')   
-# ]
-
 class Bullet(Orderable, models.Model):
 
     bullet = models.CharField(max_length=64)
@@ -621,7 +609,7 @@ class ContactPage(AbstractEmailForm):
     )
 
     template = 'home/contact_page.html'
-    landing_page_template = 'home/contact.html'
+    landing_page_template = 'home/contact_page.html'
 
     def serve(self, request, *args, **kwargs):
 
@@ -629,18 +617,16 @@ class ContactPage(AbstractEmailForm):
 
         if request.method == 'POST':
             form = self.get_form(request.POST, page=self, user=request.user)
-
+            
             if form.is_valid():
                 self.process_form_submission(form)
-
+                
                 return render(request, self.get_landing_page_template(request), ctx)
+            
+        form = self.get_form(page=self, user=request.user)                
+        ctx['form'] = form 
 
-        else:
-            form = self.get_form(page=self, user=request.user)
-
-            ctx['form'] = form
-
-            return render(request, self.get_template(request), ctx)
+        return render(request, self.get_template(request), ctx)
 
     def get_landing_page_template(self, request, *args, **kwargs):
         return self.landing_page_template
@@ -758,7 +744,6 @@ BlogIndexPage.subpage_types = [
 class BlogPage(Page):
 
     intro = models.TextField(null=True)
-    # TEMM: need to remove null=True below
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
 
     content = StreamField(BlogPageStreamBlock(), null=True)
@@ -767,7 +752,6 @@ class BlogPage(Page):
     
     def latest_articles(self):
         return BlogPage.objects.live().sibling_of(self, inclusive=False).order_by('-first_published_at')[0:2]
-        # return self.get_siblings(False).live().order_by('-first_published_at')
 
     def get_context(self, request):
 

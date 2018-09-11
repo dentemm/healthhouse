@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static wagtailimages_tags %}
+{% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
 
 {% block main %}
 
@@ -13,63 +13,20 @@
             <div class="col-md-6 p-10">
               <span class="eyebrow mb-1 text-primary">Get in touch with us</span>
               <h2>We’ll get back to you as soon as possible.</h2>
+              <form action="{% pageurl page %}" method="POST">
 
+                {{ form.errors }}
 
-
-                        {% comment %} <!-- RD Mailform-->
-          <form id="contact_form" data-form-output="form-output-global" data-form-type="contact" method="POST" action="{% pageurl page %}" class="rd-mailform text-left" novalidate="novalidate" method="POST">
-            {% csrf_token %}
-              <div class="range">
-              {% if success_message %}
-                 ------ {{ success_message }} -----
-              {% endif %}
-              {% if messages %}
-                {% for message in messages %}
-                  {{ messages }} TEMMM
+                {% csrf_token %}
+                {% for field in form %}
+                  <div class="form-row mb-1">
+                    <div class="col">
+                      {% render_field field class+="form-control form-control-minimal" placeholder=field.label rows=3 %} 
+                    </div>
+                  </div>
                 {% endfor %}
-              {% endif %}
-              {% for field in form %}
-                {% if field.field.widget|form_class == 'TextInput' %}
-                <div class="cell-lg-6">
-                  <div class="form-group">
-                    <label for="{{ field.id_for_label }}" class="form-label rd-input-label form-label-sm">{{ field.help_text }}</label>
-                    <input id="{{ field.id_for_label }}" name="{{ field.name }}" {% if field.label == 'Email' %}type="email"{% else %}type="text"{% endif %} {% if field.field.required %}data-constraints="@Required"{% endif %} class="form-control form-control-has-validation form-control-last-child input-sm">
-                    <span class="form-validation"></span> 
-                  </div>
-                </div>
-                {% elif field.field.widget|form_class == 'EmailInput'%}
-                <div class="cell-lg-12 offset-top-20 offset-lg-top-30">
-                  <div class="form-group">
-                    <label for="{{ field.id_for_label }}" class="form-label rd-input-label form-label-sm">{{ field.help_text }}</label>
-                    <input id="{{ field.id_for_label }}" type="email" name="{{ field.name }}" data-constraints="@Required @Email" class="form-control form-control-has-validation form-control-last-child input-sm"><span class="form-validation"></span>
-                  </div>
-                </div>
-                {% else %}
-                <div class="cell-lg-12 offset-top-20 offset-lg-top-30">
-                  <div class="form-group">
-                    <label for="{{ field.id_for_label }}" class="form-label rd-input-label form-label-sm"">{{ field.help_text }}</label>
-                    <textarea id="{{ field.id_for_label }}" name="{{ field.name }}" data-constraints="@Required" style="height: 150px" class="form-control form-control-has-validation form-control-last-child  input-sm"></textarea>
-                    <span class="form-validation"></span>
-                  </div>
-                </div>
-                {% endif %}
-              {% endfor %}
-              </div>
-              <div class="range range-xs-center range-lg-left text-center text-lg-left offset-top-30">
-                <div class="cell-xs-8 cell-sm-6">
-                  <button type="submit" class="btn btn-lg btn-block btn-primary">Verzenden</button>
-                </div>
-              </div>
-            </form> {% endcomment %}
 
-
-
-              {{ form }}
-
-              {% for field in form %}{{ field }} --- {% endfor %}
-
-              <form>
-                <div class="form-row mb-1">
+                <!-- <div class="form-row mb-1">
                   <div class="col">
                     <input type="text" class="form-control form-control-minimal" placeholder="Name">
                   </div>
@@ -88,7 +45,7 @@
                   <div class="col">
                     <textarea class="form-control form-control-minimal" id="exampleFormControlTextarea1" rows="3" placeholder="Your Message"></textarea>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-row mt-3">
                   <div class="col">
                     <button class="btn btn-primary px-5">Contact us</button>
