@@ -142,3 +142,20 @@ color: rgba(255, 255, 255, 0.5);
 
 
 /* TEMM TESTS */
+
+.hh-parallax2 {
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100%;
+}
+
+.bg-primary-alpha {
+  background-color: #00a1dddd;
+  padding: 50px;
+}
+
+.bg-white-alpha {
+  background-color: #ffffffdd;
+  padding: 50px;
+}

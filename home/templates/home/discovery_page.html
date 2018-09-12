@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static wagtailcore_tags %}
+{% load static wagtailcore_tags wagtailimages_tags %}
 
 {% block main %}
 
@@ -8,6 +8,23 @@
   {% for block in page.content %}
     {% include_block block %}
   {% endfor %}
+</section>
+
+<section class="hero">
+  <div class="container-full p-0 m-0 hh-parallax2" style="background-image: url({{ page.content.0.value.image.file.url }})">
+    <div class="row bg-{{ color }} align-items-center">
+      <div class="offset-md-2 col-md-4 bg-primary-alpha">
+        Dit is de inhoud
+      </div>
+    </div>
+  </div>
+  <div class="container-full p-0 m-0 hh-parallax2" style="background-image: url({{ page.content.1.value.image.file.url }})">
+      <div class="row bg-{{ color }} align-items-center">
+        <div class="offset-md-7 col-md-4 bg-white-alpha">
+          Dit is de inhoud
+        </div>
+      </div>
+    </div>
 </section>
 
 {% endblock main %}
