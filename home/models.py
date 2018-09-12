@@ -779,7 +779,7 @@ class BlogPage(Page):
     template = 'home/blog_article_page.html'
     
     def latest_articles(self):
-        return BlogPage.objects.live().sibling_of(self, inclusive=False).order_by('-first_published_at')[0:2]
+        return BlogPage.objects.live().sibling_of(self, inclusive=False).order_by('-first_published_at')[0:3]
 
     def get_context(self, request):
 

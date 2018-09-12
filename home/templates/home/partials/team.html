@@ -2,29 +2,36 @@
 
 <!-- users -->
 <section class="component">
-  <div class="tab-content" id="component-1">
-
-    <div class="tab-pane show active" id="component-1-1" role="tabpanel" aria-labelledby="component-1-1">
-      <div class="component-example">
-        <div class="container">
-          <div class="row">
-          {% for item in list %}
-            <div class="col-md-3">
-              <figure class="user user-circle">
-                <a href="" class="user-photo">
-                  {% image item.picture fill-300x300 as img %}
-                  <img src="{{ img.url }}" alt="{{ item.name }}">
-                </a>
-                <figcaption class="user-caption">
-                  <h4>{{ item.name }}</h4>
-                  <span>{{ item.title }}</span>
-                </figcaption>
-              </figure>
+  <div class="container">
+    <div class="row bg-green">
+    {% for item in list %}
+      <div class="col-md-4">
+        <div class="hh-user bg-red">
+          <div class="flipper">
+            <div class="front">
+                {% image item.picture fill-400x400 as img %}
+                <img src="{{ img.url }}" alt="{{ item.name }}">
             </div>
-          {% endfor %}
+            <div class="back bg-primary">
+              <p>TEST</p>
+            </div>
           </div>
         </div>
       </div>
+      <div class="col-md-4">
+          <div class="hh-user bg-red">
+            <div class="flipper">
+              <div class="front">
+                  {% image item.picture fill-400x400 as img %}
+                  <img src="{{ img.url }}" alt="{{ item.name }}">
+              </div>
+              <div class="back bg-primary">
+                <p>TEST</p>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
     </div>
   </div>
 </section>
