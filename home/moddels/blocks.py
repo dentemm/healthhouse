@@ -34,6 +34,16 @@ class CarouselBlock(ListBlock):
         template = 'home/partials/blocks/owl_carousel.html'
         icon = 'image'
 
+class ListItemBlock(StructBlock):
+
+    item = CharBlock(max_length=255)
+
+class CustomListBlock(ListBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/list.html'
+        icon = 'list-ul'
+
 class CustomURLBlock(StructBlock):
 
     url = URLBlock(required=False)
@@ -55,8 +65,8 @@ class ParallaxBlock(StructBlock):
         icon = 'code'
 
 class QuoteBlock(StructBlock):
-    quote = CharBlock(max_length='255')
-    author = CharBlock(max_length='64')
+    quote = CharBlock(max_length=255)
+    author = CharBlock(max_length=64)
 
     class Meta:
         template = 'home/partials/blocks/quote.html'
@@ -90,6 +100,7 @@ class BlogPageStreamBlock(StreamBlock):
     quote = QuoteBlock()
     paragraph = ParagraphBlock()
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
+    unordered_list = CustomListBlock(child_block=ListItemBlock)
     image = ImageWithCaptionblock()
     rich_text = CustomRichTextBlock()
     embed = CustomEmbedBlock()
