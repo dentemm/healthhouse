@@ -327,6 +327,7 @@ class TeamMember(Orderable):
     class Meta:
         verbose_name = 'Team member'
         verbose_name_plural = 'Team members'
+        ordering = ['sort_order']
 
 TeamMember.panels = [
     MultiFieldPanel([
@@ -562,6 +563,7 @@ class HomePageCoverImage(Orderable):
     class Meta:
         verbose_name = 'Cover image'
         verbose_name_plural = 'Cover images'
+        ordering = ['sort_order']
 
 HomePageCoverImage.panels = [
     ImageChooserPanel('image'),
@@ -578,6 +580,7 @@ class HomePageFeatures(Orderable):
     class Meta:
         verbose_name = 'Core value'
         verbose_name_plural = 'Core values'
+        ordering = ['sort_order']
 
 HomePageFeatures.panels = [
     FieldPanel('title'),
@@ -606,6 +609,9 @@ class Bullet(Orderable, models.Model):
 
     def __str__(self):
         return self.bullet
+
+    class Meta:
+        ordering = ['sort_order']
 
 Bullet.panels = [
     FieldPanel('bullet')
@@ -730,6 +736,7 @@ class AboutPageQuestion(Orderable):
     class Meta:
         verbose_name = 'FAQ question'
         verbose_name_plural = 'FAQ questions'
+        ordering = ['sort_order']
 
 AboutPageQuestion.panels = [
     MultiFieldPanel([
