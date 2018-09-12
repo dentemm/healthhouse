@@ -3,30 +3,19 @@
 <!-- users -->
 <section class="component">
   <div class="container">
-    <div class="row bg-green">
+    <div class="row">
     {% for item in list %}
       <div class="col-md-4">
-        <div class="hh-user bg-red">
-          <div class="flipper">
-            <div class="front">
-                {% image item.picture fill-400x400 as img %}
-                <img src="{{ img.url }}" alt="{{ item.name }}">
-            </div>
-            <div class="back bg-primary">
-              <p>TEST</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-          <div class="hh-user bg-red">
-            <div class="flipper">
+          <div class="hh-rotate">
+            <div class="rotate-container">
               <div class="front">
                   {% image item.picture fill-400x400 as img %}
                   <img src="{{ img.url }}" alt="{{ item.name }}">
               </div>
-              <div class="back bg-primary">
-                <p>TEST</p>
+              <div class="back">
+                <p>
+                  {{ item.bio }}
+                </p>
               </div>
             </div>
           </div>
