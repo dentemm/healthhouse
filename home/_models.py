@@ -20,7 +20,7 @@ from modelcluster.models import ClusterableModel
 
 from django_countries.fields import CountryField
 
-from .moddels.blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
+from .models.blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
 from .variables import SOCIAL_MEDIA_CHOICES, TEAM_MEMBER_CHOICES, PARTNER_CHOICES, ICON_CHOICES
 
 #

@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='blogpage',
             name='content',
-            field=wagtail.core.fields.StreamField([('quote', wagtail.core.blocks.StructBlock([('quote', wagtail.core.blocks.CharBlock(max_length='255')), ('author', wagtail.core.blocks.CharBlock(max_length='64'))])), ('paragraph', home.moddels.blocks.ParagraphBlock()), ('gallery', home.moddels.blocks.CarouselBlock(child_block=home.moddels.blocks.ImageWithCaptionblock))], null=True),
+            field=wagtail.core.fields.StreamField([('quote', wagtail.core.blocks.StructBlock([('quote', wagtail.core.blocks.CharBlock(max_length='255')), ('author', wagtail.core.blocks.CharBlock(max_length='64'))])), ('paragraph', home.models.blocks.ParagraphBlock()), ('gallery', home.models.blocks.CarouselBlock(child_block=home.models.blocks.ImageWithCaptionblock))], null=True),
         ),
         migrations.DeleteModel(
             name='BlogPageGallery',

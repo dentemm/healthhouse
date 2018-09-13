@@ -132,7 +132,7 @@ color: rgba(255, 255, 255, 0.5);
   }
 
   .hh-parallax .hh-border-right-dark-blue {
-    border-right-color: #29245a!important;
+    border-right-color: #29245a !important;
   }
   
   .hh-parallax .hh-border-left-dark-blue {
@@ -151,11 +151,19 @@ color: rgba(255, 255, 255, 0.5);
 }
 
 .bg-primary-alpha {
-  background-color: #00a1dddd;
+  background-color: #00a1ddee;
   padding: 50px;
+  padding-bottom: 350px;
 }
 
 .bg-white-alpha {
-  background-color: #ffffffdd;
+  background-color: #ffffffee;
   padding: 50px;
+  padding-bottom: 350px;
+}
+
+.bg-dark-blue-alpha {
+  background-color: #29245aee;
+  padding: 50px;
+  padding-bottom: 350px;
 }
