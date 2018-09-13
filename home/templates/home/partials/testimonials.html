@@ -1,61 +1,32 @@
-  <!-- testimonial -->
-  <section class="component">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col">
-          <h4>Testimonial</h4>
-        </div>
+<section class="m-0 py-5">
+  <div class="container mb-0">
+    <div class="row align-items-center">
+      <div class="col">
+        <h2 class="text-center">Testimonials</h2>
       </div>
     </div>
-    <div class="tab-content" id="component-1">
-      <div class="tab-pane show active" id="component-1-1" role="tabpanel" aria-labelledby="component-1-1">
-        <div class="component-example">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-md-10 col-lg-8">
-                <div class="owl-carousel visible accent" data-dots="true" data-loop="true" data-margin="100" data-autoplay="true">
-                  <blockquote class="blockquote blockquote-1">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <footer class="blockquote-footer">
-                      <div class="media align-items-center">
-                        <img class="avatar user-rounded" src="../assets/images/demo/user-1.jpg" alt="Avatar">
-                        <div class="media-body ml-2">
-                          <span class="d-block mb-0 text-black">Michael Doe</span>
-                          <small>Google CEO</small>
-                        </div>
-                      </div>
-                    </footer>
-                  </blockquote>
-                  <blockquote class="blockquote blockquote-1">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <footer class="blockquote-footer">
-                      <div class="media align-items-center">
-                        <img class="avatar user-rounded" src="../assets/images/demo/user-2.jpg" alt="Avatar">
-                        <div class="media-body ml-2">
-                          <span class="d-block mb-0 text-black">Michael Doe</span>
-                          <small>Google CEO</small>
-                        </div>
-                      </div>
-                    </footer>
-                  </blockquote>
-                  <blockquote class="blockquote blockquote-1">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                    <footer class="blockquote-footer">
-                      <div class="media align-items-center">
-                        <img class="avatar user-rounded" src="../assets/images/demo/user-3.jpg" alt="Avatar">
-                        <div class="media-body ml-2">
-                          <span class="d-block mb-0 text-black">Michael Doe</span>
-                          <small>Google CEO</small>
-                        </div>
-                      </div>
-                    </footer>
-                  </blockquote>
+  </div>
+  <div class="container mt-0">
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+        <div class="owl-carousel accent" data-loop="true" data-autoplay="true" data-autoplay-speed="7000" data-animate-out="fadeOut">
+        {% for item in list %}
+          <blockquote class="blockquote blockquote-1 text-primary">
+            <p class="text-dark">{{ item.quote }}</p>
+            <footer class="blockquote-footer">
+              <div class="media align-items-center">
+                <div class="media-body ml-2">
+                  <span class="d-block mb-0 text-primary">{{ item.name }}</span>
+                {% if item.company %}
+                  <small>{{ item.company}}</small>
+                {% endif %}
                 </div>
               </div>
-            </div>
-          </div>
+            </footer>
+          </blockquote>
+        {% endfor %}
         </div>
       </div>
     </div>
-  </section>
-  <!-- / testimonial -->
+  </div>
+</section>

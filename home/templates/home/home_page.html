@@ -58,6 +58,10 @@
   {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
 {% endif %}
 
+{% if page.testimonials.all %}
+  {% include 'home/partials/testimonials.html' with list=page.testimonials.all %}
+{% endif %}
+
 {% if page.masonry_images.all %}
   {% include 'home/partials/home_masonry.html' with list=page.masonry_images.all %}
 {% endif %}

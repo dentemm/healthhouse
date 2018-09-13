@@ -269,3 +269,61 @@ MeetingRoom.panels = [
         ImageChooserPanel('image')
     ], heading='Meeting room')
 ]
+
+@register_snippet
+class Project(models.Model):
+
+    title = models.CharField(max_length=155, null=True, blank=False)
+    text = models.TextField(null=True)
+    image = models.ForeignKey(
+      'wagtailimages.Image',
+      on_delete=models.CASCADE,
+      related_name='+'
+    )
+    link_title = models.CharField(max_length=24, null=True)
+    link = models.URLField(null=True)
+
+    def __str__(self):
+        return self.title
+
+Project.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col8'),
+        ]),
+        FieldRowPanel([
+            FieldPanel('link_title', classname='col6'),
+            FieldPanel('link', classname='col6'),
+        ]),
+        FieldRowPanel([
+            FieldPanel('text', classname='col9')
+        ]),
+        ImageChooserPanel('image')
+    ], heading='Project information')
+]
+
+@register_snippet
+class Testimonial(models.Model):
+
+    quote = models.CharField(max_length=255)
+    name = models.CharField(max_length=32)
+    visible = models.BooleanField(default=True)
+    company = models.CharField(max_length=64, null=True)
+
+    def __str__(self):
+        return self.name + ': "' + self.quote + '"'
+
+Testimonial.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('quote', classname='col9')
+        ]),
+        FieldRowPanel([
+            FieldPanel('name', classname='col6'),
+            FieldPanel('visible', classname='col6')
+        ]),
+        FieldRowPanel([
+            FieldPanel('company', classname='col6')
+        ])
+    ], heading='Testimonial')
+]

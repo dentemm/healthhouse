@@ -38,5 +38,6 @@ ICON_CHOICES = [
 DISCOVERY_PAGE_CHOICES = [
     ('storylines', 'Storylines'),
     ('meeting_rooms', 'Meeting rooms'),
-    ('expo_rooms', 'Exhibition areas')
+    ('expo_rooms', 'Exhibition areas'),
+    ('projects', 'Projects')
 ]

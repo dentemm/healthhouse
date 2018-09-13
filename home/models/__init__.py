@@ -15,7 +15,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom
+from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial
 from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
@@ -261,6 +261,9 @@ class HomePage(Page):
     def numbers(self):
         return InterestingNumber.objects.all()[0:3]
 
+    def testimonials(self):
+        return Testimonial.objects.all().filter(visible=True)
+
     def recent_visitors(self):
         return Partner.objects.all().filter(recent_visitor=True)
 
@@ -397,15 +400,30 @@ class HomePageFeatures(Orderable):
     text = models.CharField(verbose_name='Description', max_length=255)
     icon = models.CharField(verbose_name='Icon', max_length=40, choices=ICON_CHOICES, null=True)
 
+    link_title = models.CharField(max_length=24, null=True)
+    link = models.ForeignKey(
+		'wagtailcore.Page',
+        verbose_name='Link',
+		null=True,
+		blank=True,
+		related_name='+',
+        on_delete=models.SET_NULL
+	)
+
     class Meta:
         verbose_name = 'Core value'
         verbose_name_plural = 'Core values'
         ordering = ['sort_order']
 
 HomePageFeatures.panels = [
-    FieldPanel('title'),
+
+    FieldRowPanel([
+        FieldPanel('title', classname='col6'),
+        FieldPanel('icon', classname='col6')
+    ]),
     FieldPanel('text'),
-    FieldPanel('icon')
+    FieldPanel('link_title'),
+    PageChooserPanel('link')
 ]
 
 class HomePageMasonry(Orderable):
@@ -449,6 +467,15 @@ class ContactPage(AbstractEmailForm):
     template = 'home/contact_page.html'
     landing_page_template = 'home/contact_page.html'
 
+    def save(self, *args, **kwargs):
+
+        if not self.from_address:
+            self.from_address = 'tim.claes@live.be'
+            self.to_address = 'tim.claes@live.be'
+            self.subject = 'Webform via HH website!'
+
+        super(ContactPage, self).save(*args, **kwargs)
+
     def serve(self, request, *args, **kwargs):
 
         ctx = self.get_context(request)
@@ -459,6 +486,8 @@ class ContactPage(AbstractEmailForm):
             if form.is_valid():
                 self.process_form_submission(form)
                 
+                ctx['form'] = self.get_form(page=self, user=request.user)
+
                 return render(request, self.get_landing_page_template(request), ctx)
             
         form = self.get_form(page=self, user=request.user)                
@@ -522,6 +551,9 @@ class DiscoveryDetailPage(Page):
 
         elif (self.discover_detail == 'expo_rooms'):
             return ExpoArea.objects.all()
+
+        elif (self.discover_detail == 'projects'):
+            return Project.objects.all()
 
         return []
 

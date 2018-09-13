@@ -196,7 +196,8 @@
           autoplay = a.data('autoplay'),
           autoplaySpeed = a.data('autoplay-speed'),
           rtl = a.data('rtl'),
-          autoheight = a.data('autoheight');
+          autoheight = a.data('autoheight'),
+          animateOut = a.data('animate-out');
 
         var options = {
           nav: nav || false,
@@ -214,7 +215,8 @@
             0: { items: items[2] || 2 },
             576: { items: items[1] || 2 },
             1200: { items: items[0] || 2}
-          }
+          },
+          animateOut: animateOut || false,
         };
         
         a.owlCarousel(options);

@@ -1,4 +1,4 @@
-<section class="separator-top py-0">
+<section class="separator-top separator-bottom py-0">
   <div class="container mt-4">
     <div class="row justify-content-center">
       <div class="col-12 text-center">
@@ -13,8 +13,11 @@
           {% for item in list %}
           <div class="col-10 offset-1 col-sm-8 offset-sm-2 col-md-4 offset-md-0 pt-2 pb-10 pl-md-3 pr-md-2 text-center text-md-left">
             <i class="{{ item.icon }} fs-60 mb-2 text-primary"></i>
-            <h5 class="font-weight-normal">{{ item.title }}</h5>
+            <h5 class="font-weight-normal">{{ item.title }}</h5>       
             <p>{{ item.text }}</p>
+            <button class="btn btn-outline-primary">
+              <a href="{{ item.link.url }}">{{ item.link_title }}</a>
+            </button>
           </div>
           {% endfor %}
         </div>
