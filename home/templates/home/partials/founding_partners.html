@@ -1,0 +1,27 @@
+<section class="bg-light">
+  <div class="container">
+    <div class="row justify-content-between">
+      <div class="col-12 col-lg-7">
+        <ul class="masonry gallery gutter-2">
+        {% for item in list %}
+          <li class="col-md-6 {% if forloop.counter == 2 %}mt-10{% endif %}">
+            <a href="{{ item.url }}" target="_blank">
+            <div class="boxed rising hh-hover p-4">
+              <i class="icon-weather_sun fs-50 mb-2"></i>
+              <h4>{{ item.name }}</h4>
+              <p>{{ item.description }}</p>
+            </div>
+            </a>
+          </li>
+        {% endfor %}
+        </ul>
+      </div>
+
+      <div class="col-12 col-lg-4 align-self-center text-center text-md-left">
+        <h2 class="h1"><b>Founding</b> partners.</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet placeat velit provident blanditiis, dolore nobis cum voluptates</p>
+        <button type="button" class="btn btn-primary btn-rounded mt-2 px-5">Get in Touch</button>
+      </div>
+    </div>
+  </div>
+</section>

@@ -658,6 +658,9 @@ class PartnerPage(Page):
 
     def partners(self): 
         return Partner.objects.all()
+
+    def founding_partners(self):
+        return Partner.objects.filter(partner_type=1)
     
     def get_context(self, request):
 
