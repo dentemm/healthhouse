@@ -1,15 +1,19 @@
 {% extends 'home/layout.html' %}
 
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block main %}
 
 <section class="hero">
   {% for item in page.content %}
-  <div class="container-full p-0 m-0 hh-parallax2" style="background-image: url({{ item.image.file.url }})">
-    <div class="row align-items-center">
-      <div class="offset-md-{% cycle 0 6 1 7 %} col-md-4 bg-{% cycle 'primary' 'white' 'dark-blue' %}-alpha">
-        {{ item }}
+  {% image item.image width-2000 as img %}
+  <div class="container-full p-0 m-0 hh-parallax2" style="background-image: url({{ img.url }})">
+    <div class="row align-items-center px-5">
+      <div class="offset-md-{% cycle 0 6 1 7 %} col-md-4 bg-{% cycle 'primary' 'white' 'dark-blue' %}-alpha hh-card">
+        <h5 class="card-title text-{% cycle 'dark' 'dark' 'white' %}">{{ item.title }}</h5>
+        <p class="text-{% cycle 'white' '' '' %}">
+          {{ item.text }}
+        </p>
       </div>
     </div>
   </div>

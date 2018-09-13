@@ -183,6 +183,7 @@ InterestingNumber.panels = [
 class Storyline(models.Model):
 
     title = models.CharField(max_length=155, null=True, blank=False)
+    text = models.TextField(null=True)
     image = models.ForeignKey(
       'wagtailimages.Image',
       on_delete=models.CASCADE,
@@ -197,7 +198,9 @@ Storyline.panels = [
         FieldRowPanel([
             FieldPanel('title', classname='col8'),
         ]),
-        
+        FieldRowPanel([
+            FieldPanel('text', classname='col9')
+        ]),
         ImageChooserPanel('image')
     ], heading='Storyline')
 ]
