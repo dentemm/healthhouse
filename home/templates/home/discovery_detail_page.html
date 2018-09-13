@@ -13,7 +13,21 @@
         <h5 class="card-title text-{% cycle 'dark' 'dark' 'white' %}">{{ item.title }}</h5>
         <p class="text-{% cycle 'white' '' '' %}">
           {{ item.text }}
+          {% if item.bullets %}
+          <ul class="text-{% cycle 'white' '' '' %}">
+            {% for bullet in item.bullets.all %}
+            <li>
+              {{ bullet.item }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
         </p>
+        {% if item.company %}
+        <div class="d-flex justify-content-end">
+          {% image item.company.logo height-75 class='img-fluid' %}
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>

@@ -6,12 +6,14 @@ from django.db import models
 from wagtail.core.models import Orderable
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
 
 from modelcluster.models import ClusterableModel
+from modelcluster.fields import ParentalKey
 
-from .helpers import Address
+from .helpers import Address, GeneralBullet
 from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES
 
 @register_snippet
@@ -189,6 +191,11 @@ class Storyline(models.Model):
       on_delete=models.CASCADE,
       related_name='+'
     )
+    company = models.ForeignKey(
+        Partner,
+        on_delete=models.SET_NULL,
+        null=True
+        )
 
     def __str__(self):
         return self.title
@@ -201,12 +208,13 @@ Storyline.panels = [
         FieldRowPanel([
             FieldPanel('text', classname='col9')
         ]),
-        ImageChooserPanel('image')
+        ImageChooserPanel('image'),
+        SnippetChooserPanel('company')
     ], heading='Storyline')
 ]
 
 @register_snippet
-class ExpoArea(models.Model):
+class ExpoArea(ClusterableModel, models.Model):
 
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
@@ -228,8 +236,13 @@ ExpoArea.panels = [
             FieldPanel('text', classname='col9')
         ]),
         ImageChooserPanel('image')
-    ], heading='Exhibition area')
+    ], heading='Exhibition area'),
+    InlinePanel('bullets', label='Bullets')
 ]
+
+class ExpoAreaBullet(GeneralBullet):
+
+    expo_area = ParentalKey(ExpoArea, on_delete=models.CASCADE, related_name='bullets', null=True)
 
 @register_snippet
 class MeetingRoom(models.Model):

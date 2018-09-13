@@ -21,21 +21,28 @@ class Address(models.Model):
         return '%s - %s' % (self.city, self.street)
 
 Address.panels = [
-	MultiFieldPanel([
-			FieldRowPanel([
-					FieldPanel('street', classname='col8'),
-					FieldPanel('number', classname='col4')
+		MultiFieldPanel([
+				FieldRowPanel([
+						FieldPanel('street', classname='col8'),
+						FieldPanel('number', classname='col4')
 				]
-			),
-			FieldRowPanel([
-					FieldPanel('city', classname='col8'),
-					FieldPanel('postal_code', classname='col4')
-				]
-			),
-			FieldRowPanel([
-					FieldPanel('country', classname='col6'),
-				]
-			),
-		], heading='Address details'
-	),
+		),
+		FieldRowPanel([
+				FieldPanel('city', classname='col8'),
+				FieldPanel('postal_code', classname='col4')
+		]),
+		FieldRowPanel([
+				FieldPanel('country', classname='col6'),
+				]),
+		],
+		heading='Address details'
+		)
+]
+
+class GeneralBullet(models.Model):
+
+		item = models.CharField(max_length=64)
+
+GeneralBullet.panels = [
+	FieldPanel('item')
 ]
