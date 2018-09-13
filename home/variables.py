@@ -34,3 +34,9 @@ ICON_CHOICES = [
     ('icon-basic_eye', 'Eye'),
     ('icon-basic_message_multiple', 'Text balloon')
 ]
+
+DISCOVERY_PAGE_CHOICES = [
+    ('storylines', 'Storylines'),
+    ('meeting_rooms', 'Meeting rooms'),
+    ('expo_rooms', 'Exhibition areas')
+]

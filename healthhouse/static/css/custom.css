@@ -21,6 +21,31 @@ img.hh-image {
   background-color: transparent;
 }
 
+.hh-parallax2 {
+  background-attachment: fixed;
+  background-position: center center;
+  background-size: cover;
+  min-height: 100%;
+}
+
+.bg-primary-alpha {
+  background-color: #00a1ddee;
+  padding: 50px;
+  padding-bottom: 350px;
+}
+
+.bg-white-alpha {
+  background-color: #ffffffee;
+  padding: 50px;
+  padding-bottom: 350px;
+}
+
+.bg-dark-blue-alpha {
+  background-color: #29245aee;
+  padding: 50px;
+  padding-bottom: 350px;
+}
+
 .pattern::before, .pattern::after {
   border-radius: 0px;
 }
@@ -142,28 +167,3 @@ color: rgba(255, 255, 255, 0.5);
 
 
 /* TEMM TESTS */
-
-.hh-parallax2 {
-  background-attachment: fixed;
-  background-position: center center;
-  background-size: cover;
-  min-height: 100%;
-}
-
-.bg-primary-alpha {
-  background-color: #00a1ddee;
-  padding: 50px;
-  padding-bottom: 350px;
-}
-
-.bg-white-alpha {
-  background-color: #ffffffee;
-  padding: 50px;
-  padding-bottom: 350px;
-}
-
-.bg-dark-blue-alpha {
-  background-color: #29245aee;
-  padding: 50px;
-  padding-bottom: 350px;
-}

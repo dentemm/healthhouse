@@ -17,70 +17,65 @@ from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES
 @register_snippet
 class Location(Address, index.Indexed):
 
-	name = models.CharField(verbose_name='location name', max_length=64)
-	longitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
-	latitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
-
-	class Meta:
-		verbose_name = 'location'
-		verbose_name_plural = 'locations'
-		ordering = ['name', ]
-
-	def __str__(self):
-		return self.name
-
-	@property
-	def to_string(self):
-		return '%s %s %s' % (self.street, self.number, self.city)
-
-	def save(self, *args, **kwargs):
-
-		ctx = ssl.create_default_context()
-		ctx.check_hostname = False
-		ctx.verify_mode = ssl.CERT_NONE
-		geopy.geocoders.options.default_ssl_context = ctx
-
-		geolocator = geopy.geocoders.Nominatim()
+    name = models.CharField(verbose_name='location name', max_length=64)
+    longitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
+    
+    class Meta:
+		    verbose_name = 'location'
+		    verbose_name_plural = 'locations'
+		    ordering = ['name', ]
         
-		address_string = self.street + ' ' + self.number + ' ' + self.postal_code + ' ' + self.city + ' ' + str(self.country.name)
+    def __str__(self):
+		    return self.name
+        
+    @property
+    def to_string(self):
+		    return '%s %s %s' % (self.street, self.number, self.city)
+        
+    def save(self, *args, **kwargs):
 
-		loc = geolocator.geocode(address_string)
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        geopy.geocoders.options.default_ssl_context = ctx
 
-		if not isinstance(loc, geopy.location.Location):
+        geolocator = geopy.geocoders.Nominatim()
+            
+        address_string = self.street + ' ' + self.number + ' ' + self.postal_code + ' ' + self.city + ' ' + str(self.country.name)
 
-			alternative = self.street + ' ' + self.postal_code + ' ' + self.city + ' ' + str(self.country.name)
-			loc = geolocator.geocode(alternative)
+        loc = geolocator.geocode(address_string)
+        
+        if not isinstance(loc, geopy.location.Location):
 
-		if isinstance(loc, geopy.location.Location):
+            alternative = self.street + ' ' + self.postal_code + ' ' + self.city + ' ' + str(self.country.name)
+            loc = geolocator.geocode(alternative)
+            
+        if isinstance(loc, geopy.location.Location):
 
-			self.latitude = loc.latitude
-			self.longitude = loc.longitude
-
-		return super(Location, self).save(*args, **kwargs)
+            self.latitude = loc.latitude
+            self.longitude = loc.longitude
+            
+        return super(Location, self).save(*args, **kwargs)
 
 Location.panels = [
-	MultiFieldPanel([
-			FieldRowPanel([
-					FieldPanel('name', classname='col6'),
-				]	
-			),
-			FieldRowPanel([
-					FieldPanel('street', classname='col8'),
-					FieldPanel('number', classname='col4')
-				]
-			),
-			FieldRowPanel([
-					FieldPanel('city', classname='col8'),
-					FieldPanel('postal_code', classname='col4')
-				]
-			),
-			FieldRowPanel([
-					FieldPanel('country', classname='col6'),
-				]
-			),
-		],
-		heading='Location details'
-	)
+	  MultiFieldPanel([
+			  FieldRowPanel([
+					  FieldPanel('name', classname='col6'),
+				    ]	
+			  ),
+			  FieldRowPanel([
+					  FieldPanel('street', classname='col8'),
+					  FieldPanel('number', classname='col4')
+          ]),
+        FieldRowPanel([
+            FieldPanel('city', classname='col8'),
+            FieldPanel('postal_code', classname='col4')
+        ]),
+        FieldRowPanel([
+            FieldPanel('country', classname='col6'),
+        ]),
+    ], heading='Location details')
 ]
 
 @register_snippet
@@ -182,4 +177,27 @@ InterestingNumber.panels = [
         )
     ], heading='Interesting number'),
     InlinePanel('bullets', label='Bullets')
+]
+
+@register_snippet
+class Storyline(models.Model):
+
+    title = models.CharField(max_length=155, null=True, blank=False)
+    image = models.ForeignKey(
+      'wagtailimages.Image',
+      on_delete=models.CASCADE,
+      related_name='+'
+    )
+
+    def __str__(self):
+        return self.title
+
+Storyline.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col8'),
+        ]),
+        
+        ImageChooserPanel('image')
+    ], heading='Storyline')
 ]

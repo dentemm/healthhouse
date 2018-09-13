@@ -15,8 +15,8 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .snippets import InterestingNumber, Partner, TeamMember
-from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES
+from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline
+from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
 # WAGTAIL SETTINGS
@@ -51,7 +51,7 @@ class HealthHouseSettings(ClusterableModel, BaseSetting):
     )
 
     location = models.ForeignKey(
-        'home.Location',
+        Location,
         on_delete=models.SET_NULL,
         null=True,
         related_name='+'
@@ -495,14 +495,29 @@ DiscoveryPage.subpage_types = ['home.DiscoveryDetailPage']
 
 class DiscoveryDetailPage(Page):
 
-    pass
+    discover_detail = models.CharField(max_length=28, choices=DISCOVERY_PAGE_CHOICES, null=True)
+
+    template = 'home/discovery_detail_page.html'
+
+    def content(self):
+
+        if (self.discover_detail == 'storylines'):
+            return Storyline.objects.all()
+
+        elif (self.discover_detail == 'meeting_rooms'):
+            return []
+
+        elif (self.discover_detail == 'expo_rooms'):
+            return []
+
+        return []
 
 DiscoveryDetailPage.content_panels = Page.content_panels + [
-
+    FieldPanel('discover_detail')
 ]
 
-DiscoveryPage.parent_page_types = ['home.DiscoveryPage']
-DiscoveryPage.subpage_types = []
+DiscoveryDetailPage.parent_page_types = ['home.DiscoveryPage']
+DiscoveryDetailPage.subpage_types = []
 
 class AboutPage(Page):
 
