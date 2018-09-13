@@ -656,24 +656,40 @@ class PartnerPage(Page):
     introduction = models.TextField(null=True)
     visible = models.BooleanField(default=True)
 
-    def partners(self): 
-        return Partner.objects.all()
+    founding_title = models.CharField(max_length=28, null=True)
+    founding_text = models.CharField(max_length=155, null=True)
+
+    structural_title = models.CharField(max_length=28, null=True)
+    structural_text = models.CharField(max_length=155, null=True)
 
     def founding_partners(self):
         return Partner.objects.filter(partner_type=1)
-    
-    def get_context(self, request):
 
-        context = super().get_context(request)
-
-        context['partners'] = self.partners
-        
-        return context
+    def structural_partners(self):
+        return Partner.objects.filter(partner_type=2)
 
 PartnerPage.content_panels = [
 
     MultiFieldPanel([
         FieldPanel('title'),
         FieldPanel('introduction')
-    ], heading='General information')
+    ],
+    heading='General information'
+    ),
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('founding_title', classname='col7'),
+            FieldPanel('founding_text', classname='col7')
+        ])
+    ],
+    heading='Founding partners'
+    ),
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('structural_title', classname='col7'),
+            FieldPanel('structural_text', classname='col7')
+        ])
+    ],
+    heading='Structural partners'
+    )
 ]

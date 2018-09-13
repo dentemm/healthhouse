@@ -2,7 +2,7 @@
 
 {% block main %}
 
-  <section class="hero hero-with-header">
+  <section class="py-9 mt-5">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,6 +15,6 @@
 
   {% include 'home/partials/founding_partners.html' with list=page.founding_partners %}
 
-  {% include 'home/partials/services.html' with partners=page.partners %}
+  {% include 'home/partials/structural_partners.html' with list=page.structural_partners %}
 
 {% endblock main %}
