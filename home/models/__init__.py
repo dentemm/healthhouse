@@ -15,7 +15,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline
+from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom
 from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
@@ -518,10 +518,10 @@ class DiscoveryDetailPage(Page):
             return Storyline.objects.all()
 
         elif (self.discover_detail == 'meeting_rooms'):
-            return []
+            return MeetingRoom.objects.all()
 
         elif (self.discover_detail == 'expo_rooms'):
-            return []
+            return ExpoArea.objects.all()
 
         return []
 

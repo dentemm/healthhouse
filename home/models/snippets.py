@@ -204,3 +204,55 @@ Storyline.panels = [
         ImageChooserPanel('image')
     ], heading='Storyline')
 ]
+
+@register_snippet
+class ExpoArea(models.Model):
+
+    title = models.CharField(max_length=155, null=True, blank=False)
+    text = models.TextField(null=True)
+    image = models.ForeignKey(
+      'wagtailimages.Image',
+      on_delete=models.CASCADE,
+      related_name='+'
+    )
+
+    def __str__(self):
+        return self.title
+
+ExpoArea.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col8'),
+        ]),
+        FieldRowPanel([
+            FieldPanel('text', classname='col9')
+        ]),
+        ImageChooserPanel('image')
+    ], heading='Exhibition area')
+]
+
+@register_snippet
+class MeetingRoom(models.Model):
+
+    title = models.CharField(max_length=155, null=True, blank=False)
+    text = models.TextField(null=True)
+    image = models.ForeignKey(
+      'wagtailimages.Image',
+      on_delete=models.CASCADE,
+      related_name='+'
+    )
+
+    def __str__(self):
+        return self.title
+
+MeetingRoom.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col8'),
+        ]),
+        FieldRowPanel([
+            FieldPanel('text', classname='col9')
+        ]),
+        ImageChooserPanel('image')
+    ], heading='Meeting room')
+]

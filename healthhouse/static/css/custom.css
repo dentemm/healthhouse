@@ -34,15 +34,15 @@ img.hh-image {
 }
 
 .bg-primary-alpha {
-  background-color: #00a1ddee;
+  background-color: #00a1dddd;
 }
 
 .bg-white-alpha {
-  background-color: #ffffffee;
+  background-color: #ffffffdd;
 }
 
 .bg-dark-blue-alpha {
-  background-color: #29245aee;
+  background-color: #29245add;
 }
 
 .pattern::before, .pattern::after {
