@@ -91,6 +91,13 @@ class Partner(index.Indexed, models.Model):
         on_delete=models.CASCADE,
         related_name='+'
     )
+    logo_white = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True,
+        blank=True
+    )
     partner_type = models.IntegerField(choices=PARTNER_CHOICES, null=True)
     recent_visitor = models.BooleanField(default=False)
 
@@ -110,6 +117,7 @@ Partner.panels = [
             ]),
             FieldRowPanel([
                 ImageChooserPanel('logo', classname='col6'),
+                ImageChooserPanel('logo_white', classname='col6'),
                 FieldPanel('url', classname='col6')
                 
             ]),

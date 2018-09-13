@@ -3,8 +3,7 @@
 {% load wagtailcore_tags %}
 
 {% block main %}
-
-<section class="py-9 mt-5">
+<section class="py-8 mt-6">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -14,11 +13,9 @@
       </div>
     </div>    
   </section>
-
-<section class="py-0">
-  {% for block in page.content %}
-    {% include_block block %}
-  {% endfor %}
-</section>
-
+  <section class="py-0">
+    {% for block in page.content %}
+      {% include_block block %}
+    {% endfor %}
+  </section>
 {% endblock main %}
