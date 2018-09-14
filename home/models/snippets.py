@@ -245,7 +245,7 @@ ExpoArea.panels = [
         ]),
         ImageChooserPanel('image')
     ], heading='Exhibition area'),
-    InlinePanel('bullets', label='Bullets')
+    InlinePanel('bullets', label='Extra information (bullet list)')
 ]
 
 class ExpoAreaBullet(GeneralBullet):
@@ -253,7 +253,7 @@ class ExpoAreaBullet(GeneralBullet):
     expo_area = ParentalKey(ExpoArea, on_delete=models.CASCADE, related_name='bullets', null=True)
 
 @register_snippet
-class MeetingRoom(models.Model):
+class MeetingRoom(ClusterableModel, models.Model):
 
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
@@ -275,8 +275,13 @@ MeetingRoom.panels = [
             FieldPanel('text', classname='col9')
         ]),
         ImageChooserPanel('image')
-    ], heading='Meeting room')
+    ], heading='Meeting room'),
+    InlinePanel('bullets', label='Extra information (bullet list)')
 ]
+
+class MeetingRoomBullet(GeneralBullet):
+
+    expo_area = ParentalKey(MeetingRoom, on_delete=models.CASCADE, related_name='bullets', null=True)
 
 @register_snippet
 class Project(models.Model):
