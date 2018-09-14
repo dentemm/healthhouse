@@ -4,8 +4,8 @@
 
 {% block main %}
 
-<section class="py-8 mt-6">
-    <div class="container">
+  <section class="hero hero-with-header pt-10">
+    <div class="container pt-5">
       <div class="row justify-content-center">
         <div class="col-md-8">
           <h1 class="text-decorated">{{ page.title }}</b></h1>
@@ -14,7 +14,7 @@
       </div>
     </div>    
   </section>
-  <section class="hero">
+  <section class="py-0">
     {% for item in page.content %}
     {% image item.image width-2000 as img %}
     <div class="container-full p-0 m-0 hh-parallax2" style="background-image: url({{ img.url }})">
@@ -39,6 +39,11 @@
             </ul>
             {% endif %}
           </p>
+          {% if item.link %}
+          <a href="{{ page.link }}" class="btn btn-{% cycle 'dark-blue' 'primary' 'primary' %}">
+            {{ item.link_title }}
+          </a>
+          {% endif %}
         </div>
       </div>
     </div>

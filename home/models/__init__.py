@@ -538,7 +538,7 @@ DiscoveryPage.subpage_types = ['home.DiscoveryDetailPage']
 class DiscoveryDetailPage(Page):
 
     introduction = models.TextField(null=True)
-    discover_detail = models.CharField(max_length=28, choices=DISCOVERY_PAGE_CHOICES, null=True)
+    discover_detail = models.CharField(verbose_name='Page type', max_length=28, choices=DISCOVERY_PAGE_CHOICES, null=True)
 
     template = 'home/discovery_detail_page.html'
 
