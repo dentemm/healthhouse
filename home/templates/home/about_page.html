@@ -1,6 +1,19 @@
 {% extends 'home/layout.html' %}
 
 {% block main %}
+
+  <section class="hero hero-with-header pt-10 pb-5">
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="text-decorated">{{ page.title }}</b></h1>
+          <p>{{ page.introduction }}</p>
+        </div>
+      </div>
+    </div>    
+  </section>
+
+  {% include 'home/partials/tabs.html' with list=page.topics.all %}
   {% include 'home/partials/faq.html' with list=page.faq_questions.all %}
   {% include 'home/partials/team.html' with list=page.team_members.all %}
 {% endblock main %}

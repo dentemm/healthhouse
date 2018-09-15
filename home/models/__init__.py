@@ -568,12 +568,32 @@ DiscoveryDetailPage.subpage_types = []
 
 class AboutPage(Page):
 
+    description = models.TextField(null=True)
+
     def team_members(self):
         return TeamMember.objects.all()
 
 AboutPage.content_panels = Page.content_panels + [
-    InlinePanel('faq_questions', label=_('FAQ questions'))
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('description')
+    ], heading='General information'),
+    MultiFieldPanel([
+        InlinePanel('topics', label='Topics (mission, vision, ...)')
+    ],
+    heading='Topics (mission, vision, ...)',
+    classname='collapsible collapsed'
+    ),
+    MultiFieldPanel([
+        InlinePanel('faq_questions', label=_('FAQ questions'))
+    ],
+    heading='FAQ questions',
+    classname='collapsible collapsed' 
+    )
 ]
+
+AboutPage.parent_page_types = ['home.HomePage']
+AboutPage.subpage_types = []
 
 class AboutPageQuestion(Orderable):
 
@@ -590,6 +610,26 @@ AboutPageQuestion.panels = [
     MultiFieldPanel([
         FieldPanel('question'),
         FieldPanel('answer')
+    ])
+]
+
+class AboutPageTopic(Orderable):
+
+    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='topics')
+    title = models.CharField(verbose_name='Name', max_length=28)
+    description = models.TextField(verbose_name='Content')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Topic: (mission, vision, ...)'
+        verbose_name_plural = 'Topics'
+
+AboutPageTopic.panels = [
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('description')
     ])
 ]
 
