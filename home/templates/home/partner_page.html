@@ -12,8 +12,8 @@
     </div>    
   </section>
 
-  {% include 'home/partials/founding_partners.html' with list=page.founding_partners %}
+  {% include 'home/partials/founding_partners.html' with list=page.founding_partners text=page.founding_text %}
 
-  {% include 'home/partials/structural_partners.html' with list=page.structural_partners %}
+  {% include 'home/partials/structural_partners.html' with list=page.structural_partners text=page.structural_text %}
 
 {% endblock main %}

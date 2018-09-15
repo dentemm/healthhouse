@@ -6,6 +6,7 @@ from django.db import models
 from wagtail.core.models import Orderable
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPanel, InlinePanel
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
@@ -339,4 +340,35 @@ Testimonial.panels = [
             FieldPanel('company', classname='col6')
         ])
     ], heading='Testimonial')
+]
+
+@register_snippet
+class PressArticle(models.Model):
+
+    title = models.CharField(max_length=64)
+    description = models.TextField(max_length=300)
+
+    link = models.URLField(blank=True, null=True)
+    document = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
+    def __str__(self):
+        return self.title
+
+PressArticle.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col8'),
+            FieldPanel('description', classname='col8'),
+            FieldPanel('link', classname='col6'),
+            DocumentChooserPanel('document', classname='col6')
+        ]),
+    ],
+    heading='Press article'
+    )
 ]

@@ -4,7 +4,7 @@
 
 <div class="container-full p-0 m-0">
   {% image value.image width-1500 as img %}
-  <div class="row hh-parallax bg-{{ color }} align-items-center">
+  <div class="row hh-parallax bg-{{ color }} align-items-center" id="{{ value.title|slugify }}">
     <div 
       class="col-xl-8 col-lg-7 col-md-6 hh-parallax-bg hh-image-{{ position }} hh-border-{{ position|inverse_position }}-{{ color }} m-0"
       style="background-image:url({{ img.url }})"

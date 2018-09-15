@@ -595,27 +595,26 @@ AboutPageQuestion.panels = [
 
 class BlogIndexPage(Page):
 
+    introduction = models.TextField(null=True)
+    press_title = models.CharField(max_length=32, null=True)
+    press_text = models.CharField(max_length=255, null=True)
+
     def blogs(self): 
         return BlogPage.objects.live().order_by('-first_published_at')
-    
-    def get_context(self, request):
-
-        context = super().get_context(request)
-        context['blogs'] = self.blogs
-        
-        return context
 
 BlogIndexPage.content_panels = Page.content_panels + [
-    
+    FieldPanel('introduction'),
+    MultiFieldPanel([
+        FieldPanel('press_title'),
+        FieldPanel('press_text')
+    ],
+    heading='Press',
+    classname='collapsible collapsed'
+    )
 ]
 
-BlogIndexPage.parent_page_types = [
-    'home.HomePage',
-]
-
-BlogIndexPage.subpage_types = [
-    'home.BlogPage',
-]
+BlogIndexPage.parent_page_types = ['home.HomePage']
+BlogIndexPage.subpage_types = ['home.BlogPage']
 
 class BlogPage(Page):
 
@@ -647,10 +646,7 @@ BlogPage.content_panels = [
     ], heading='Content')
 ]
 
-BlogPage.parent_page_types = [
-    'home.BlogIndexPage'
-]
-
+BlogPage.parent_page_types = ['home.BlogIndexPage']
 BlogPage.subpage_types = []
 
 class PartnerPage(Page):
@@ -695,3 +691,6 @@ PartnerPage.content_panels = [
     heading='Structural partners'
     )
 ]
+
+PartnerPage.parent_page_types = ['home.HomePage']
+BlogPage.subpage_types = []
