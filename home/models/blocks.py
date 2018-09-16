@@ -12,8 +12,6 @@ from wagtail.core.blocks import (
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.embeds.blocks import EmbedBlock
 
-from ..variables import COLOR_CHOICES, IMAGE_POSITION_CHOICES
-
 class ImageWithCaptionblock(StructBlock):
     image = ImageChooserBlock()
     caption = CharBlock(required=False)
@@ -54,8 +52,6 @@ class ParallaxBlock(StructBlock):
     image = ImageChooserBlock()
     title = CharBlock(max_length=64)
     info_text = CharBlock(max_length=255)
-    background_color = ChoiceBlock(choices=COLOR_CHOICES)
-    image_position = ChoiceBlock(choices=IMAGE_POSITION_CHOICES)
 
     links = ListBlock(PageChooserBlock(), required=False)
     external_links = ListBlock(CustomURLBlock(), required=False)

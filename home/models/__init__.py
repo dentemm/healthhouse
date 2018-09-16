@@ -570,8 +570,11 @@ class AboutPage(Page):
 
     description = models.TextField(null=True)
 
-    def team_members(self):
-        return TeamMember.objects.all()
+    def core_team_members(self):
+        return TeamMember.objects.filter(user_type=1)
+
+    def board_members(self):
+        return TeamMember.objects.filter(user_type=2)
 
 AboutPage.content_panels = Page.content_panels + [
     MultiFieldPanel([

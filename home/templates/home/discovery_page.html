@@ -3,7 +3,7 @@
 {% load wagtailcore_tags %}
 
 {% block main %}
-<section class="hero hero-with-header pt-10 pb-5">
+  <section class="hero hero-with-header pt-10 pb-5">
     <div class="container pt-5">
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,7 +15,14 @@
   </section>
   <section class="py-0">
     {% for block in page.content %}
-      {% include_block block %}
+      <!--
+      {% cycle 'right' 'left' as position %}
+      {% cycle 'left' 'right' as reverse %}
+      {% cycle 'primary' 'white' 'dark-blue' as color %}
+      {% cycle 'white' '' 'white' as text_color %}
+      {% cycle 'dark-blue' 'primary' 'primary' as btn_color %}
+      -->
+      {% include_block block with pos=position rev_pos=reverse color=color text_color=text_color btn_color=btn_color %}
     {% endfor %}
   </section>
 {% endblock main %}

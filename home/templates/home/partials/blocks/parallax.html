@@ -1,26 +1,20 @@
-{% load static wagtailimages_tags home_tags %}
-
-{% with color=value.background_color position=value.image_position %}
+{% load static wagtailimages_tags %}
 
 <div class="container-full p-0 m-0">
   {% image value.image width-1500 as img %}
   <div class="row hh-parallax bg-{{ color }} align-items-center" id="{{ value.title|slugify }}">
     <div 
-      class="col-xl-8 col-lg-7 col-md-6 hh-parallax-bg hh-image-{{ position }} hh-border-{{ position|inverse_position }}-{{ color }} m-0"
+      class="col-xl-8 col-lg-7 col-md-6 hh-parallax-bg hh-image-{{ pos }} hh-border-{{ rev_pos }}-{{ color }} m-0"
       style="background-image:url({{ img.url }})"
     ></div>
-    <div class="col-xl-4 col-lg-5 col-md-6 m-0 {% if position == 'right' %}order-md-first{% endif %}">
-      <div class="text-center {% if color != 'white' %}text-white{% endif %} p-5">
+    <div class="col-xl-4 col-lg-5 col-md-6 m-0 {% if pos == 'right' %}order-md-first{% endif %}">
+      <div class="text-center text-{{ text_color }} p-5">
         <h2>{{ value.title }}</h2>
         <p>{{ value.info_text }}</p>
         {% for item in value.links %}
           <a
             href="{{ item.url }}"
-          {% if color == 'primary' %}
-            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}dark-blue mb-1 mr-1"
-          {% else %}
-            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}primary mb-1 mr-1"
-          {% endif %}
+            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}{{ btn_color }} mb-1 mr-1"
           >
             {{ item }}
           </a>
@@ -28,11 +22,7 @@
         {% for item in value.external_links %}
             <a
             href="{{ item.url }}"
-          {% if color == 'primary' %}
-            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}dark-blue mb-1 mr-1"
-          {% else %}
-            class="btn btn-{% if forloop.counter|divisibleby:'2' %}outline-{% endif %}primary mb-1 mr-1"
-          {% endif %}
+            class="btn btn-{% if forloop.counter0|divisibleby:'2' %}outline-{% endif %}{{ btn_color }} mb-1 mr-1"
           >
             {{ item.title }}
           </a>
@@ -41,5 +31,3 @@
     </div>
   </div>
 </div>
-
-{% endwith %}

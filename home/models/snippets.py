@@ -203,11 +203,15 @@ class Storyline(ClusterableModel, models.Model):
     company = models.ForeignKey(
         Partner,
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        blank=True
         )
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['pk']
 
 Storyline.panels = [
     MultiFieldPanel([
@@ -310,6 +314,9 @@ class Project(ClusterableModel, models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering = ['pk']
 
 Project.panels = [
     MultiFieldPanel([

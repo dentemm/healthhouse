@@ -30,7 +30,7 @@
             {{ item.text }}
           </p>
           {% if item.bullets %}
-          <ul class="text-{% cycle 'white' '' 'white' %}">
+          <ul class="{% cycle 'text-white' 'hh-list' 'text-white' %}">
             {% for bullet in item.bullets.all %}
             <li>
               {{ bullet.item }}

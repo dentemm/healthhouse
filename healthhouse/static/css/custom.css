@@ -37,6 +37,9 @@ img.hh-image {
   min-height: 30rem;
 }
 
+.hh-list {
+  color: #999}
+
 .bg-primary-alpha {
   background-color: #00a1dddd;
 }
@@ -98,7 +101,7 @@ color: rgba(255, 255, 255, 0.5);
 
 .hh-rotate, .front, .back {
   width: 100%;
-  height: 700px;
+  height: 400px;
 }
 
 .hh-rotate .rotate-container {

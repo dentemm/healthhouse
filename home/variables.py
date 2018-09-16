@@ -18,17 +18,6 @@ PARTNER_CHOICES = (
     (4, 'No partner')
 )
 
-COLOR_CHOICES = [
-    ('primary', 'HH blue'),
-    ('white', 'White'),
-    ('dark-blue', 'HH dark')
-]
-
-IMAGE_POSITION_CHOICES = [
-    ('left', 'Left'),
-    ('right', 'Right')
-]
-
 ICON_CHOICES = [
     ('icon-ecommerce_graph3', 'Graph'),
     ('icon-basic_eye', 'Eye'),
