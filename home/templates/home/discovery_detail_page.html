@@ -26,18 +26,18 @@
           </a>
           {% endif %}
           <h5 class="card-title text-{% cycle 'dark' 'dark' 'white' %}">{{ item.title }}</h5>
-          <p class="text-{% cycle 'white' '' '' %}">
+          <p class="text-{% cycle 'white' '' 'white' %}">
             {{ item.text }}
-            {% if item.bullets %}
-            <ul class="text-{% cycle 'white' '' '' %}">
-              {% for bullet in item.bullets.all %}
-              <li>
-                {{ bullet.item }}
-              </li>
-              {% endfor %}
-            </ul>
-            {% endif %}
           </p>
+          {% if item.bullets %}
+          <ul class="text-{% cycle 'white' '' 'white' %}">
+            {% for bullet in item.bullets.all %}
+            <li>
+              {{ bullet.item }}
+            </li>
+            {% endfor %}
+          </ul>
+          {% endif %}
           {% if item.link %}
           <a href="{{ item.link }}" class="btn btn-{% cycle 'dark-blue' 'primary' 'primary' %}" target='_blank'>
             {{ item.link_title }}

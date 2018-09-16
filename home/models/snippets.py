@@ -191,7 +191,7 @@ InterestingNumber.panels = [
 ]
 
 @register_snippet
-class Storyline(models.Model):
+class Storyline(ClusterableModel, models.Model):
 
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
@@ -219,8 +219,13 @@ Storyline.panels = [
         ]),
         ImageChooserPanel('image'),
         SnippetChooserPanel('company')
-    ], heading='Storyline')
+    ], heading='Storyline'),
+    InlinePanel('bullets', label='Extra information (bullet list)')
 ]
+
+class StorylineBullet(GeneralBullet):
+
+    expo_area = ParentalKey(Storyline, on_delete=models.CASCADE, related_name='bullets', null=True)
 
 @register_snippet
 class ExpoArea(ClusterableModel, models.Model):
@@ -235,6 +240,9 @@ class ExpoArea(ClusterableModel, models.Model):
 
     def __str__(self):
         return self.title
+
+    class Meta:
+        ordering=['id']
 
 ExpoArea.panels = [
     MultiFieldPanel([
@@ -267,6 +275,9 @@ class MeetingRoom(ClusterableModel, models.Model):
     def __str__(self):
         return self.title
 
+    class Meta:
+        ordering=['id']
+
 MeetingRoom.panels = [
     MultiFieldPanel([
         FieldRowPanel([
@@ -285,7 +296,7 @@ class MeetingRoomBullet(GeneralBullet):
     expo_area = ParentalKey(MeetingRoom, on_delete=models.CASCADE, related_name='bullets', null=True)
 
 @register_snippet
-class Project(models.Model):
+class Project(ClusterableModel, models.Model):
 
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
@@ -313,8 +324,13 @@ Project.panels = [
             FieldPanel('text', classname='col9')
         ]),
         ImageChooserPanel('image')
-    ], heading='Project information')
+    ], heading='Project information'),
+    InlinePanel('bullets', label='Extra information (bullet list)')
 ]
+
+class ProjectBullet(GeneralBullet):
+
+    project = ParentalKey(Project, on_delete=models.CASCADE, related_name='bullets', null=True)
 
 @register_snippet
 class Testimonial(models.Model):
