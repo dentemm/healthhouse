@@ -13,6 +13,9 @@ from wagtail.search import index
 
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
+from modelcluster.contrib.taggit import ClusterTaggableManager
+
+from taggit.models import TaggedItemBase
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
 from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial
@@ -659,12 +662,17 @@ BlogIndexPage.content_panels = Page.content_panels + [
 BlogIndexPage.parent_page_types = ['home.HomePage']
 BlogIndexPage.subpage_types = ['home.BlogPage']
 
+class BlogpageTag(TaggedItemBase):
+
+    content_object = ParentalKey('home.BlogPage', on_delete=models.CASCADE, related_name='tagged_blogs')
+
 class BlogPage(Page):
 
     intro = models.TextField(null=True)
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-
     content = StreamField(BlogPageStreamBlock(), null=True)
+
+    tags = ClusterTaggableManager(through=BlogpageTag, blank=True)
 
     template = 'home/blog_article_page.html'
     
@@ -686,7 +694,15 @@ BlogPage.content_panels = [
     ], heading='Title & intro'),
     MultiFieldPanel([
         StreamFieldPanel('content')
-    ], heading='Content')
+    ], heading='Content'),
+    MultiFieldPanel([
+        FieldPanel('tags')
+    ], heading='Tags')
+]
+
+BlogPage.search_fields = Page.search_fields + [
+    index.SearchField('intro'),
+    index.SearchField('tags')
 ]
 
 BlogPage.parent_page_types = ['home.BlogIndexPage']

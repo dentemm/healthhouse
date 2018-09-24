@@ -25,7 +25,7 @@
               {% image item.company.logo max-125x125 class='float-right ml-1' %}
           </a>
           {% endif %}
-          <h5 class="card-title text-{% cycle 'dark' 'dark' 'white' %}">{{ item.title }}</h5>
+          <h5 class="card-title text-{% cycle 'white' 'dark' 'white' %}">{{ item.title }}</h5>
           <p class="text-{% cycle 'white' '' 'white' %}">
             {{ item.text }}
           </p>
