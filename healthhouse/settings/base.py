@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'wagtail.documents',
     'wagtail.images',
     'wagtail.search',
+    'wagtail.contrib.postgres_search',
     'wagtail.admin',
     'wagtail.core',
     'wagtail.api.v2',
@@ -100,6 +101,17 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'healthhouse'
+    }
+}
+
+# Search
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.contrib.postgres_search.backend',
+        # PS: dutch also exists: https://stackoverflow.com/questions/39751892/get-full-list-of-full-text-search-configuration-languages
+        'SEARCH_CONFIG': 'english', 'dutch'
+        'ATOMIC_REBUILD': True
     }
 }
 

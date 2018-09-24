@@ -11,9 +11,9 @@ except ImportError:
 # GENERAL SETTINGS
 #
 
-INSTALLED_APPS = INSTALLED_APPS + [
-    'wagtail.contrib.postgres_search',
-]
+# INSTALLED_APPS = INSTALLED_APPS + [
+#     'wagtail.contrib.postgres_search',
+# ]
 
 WSGI_APPLICATION = 'healthhouse.wsgi.application'
 
@@ -63,14 +63,14 @@ DEFAULT_FILE_STORAGE = 'home.storage.custom_storages.MediaStorage'
 # SEARCH
 #
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.contrib.postgres_search.backend',
-        # PS: dutch also exists: https://stackoverflow.com/questions/39751892/get-full-list-of-full-text-search-configuration-languages
-        'SEARCH_CONFIG': 'english',
-        'ATOMIC_REBUILD': True
-    }
-}
+# WAGTAILSEARCH_BACKENDS = {
+#     'default': {
+#         'BACKEND': 'wagtail.contrib.postgres_search.backend',
+#         # PS: dutch also exists: https://stackoverflow.com/questions/39751892/get-full-list-of-full-text-search-configuration-languages
+#         'SEARCH_CONFIG': 'english',
+#         'ATOMIC_REBUILD': True
+#     }
+# }
 
 #
 # MAILING FUNCTIONALITY

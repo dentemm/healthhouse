@@ -4,6 +4,8 @@ from django.shortcuts import render
 from wagtail.core.models import Page
 from wagtail.search.models import Query
 
+from home.models import BlogPage
+
 
 def search(request):
     search_query = request.GET.get('query', None)
