@@ -85,8 +85,8 @@ Location.panels = [
 class Partner(index.Indexed, models.Model):
 
     name = models.CharField(max_length=128)
-    url = models.URLField(verbose_name='Website')
-    description = models.TextField(null=True)
+    url = models.URLField(verbose_name='Website', blank=True)
+    description = models.TextField(null=True, blank=True)
     logo = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.CASCADE,

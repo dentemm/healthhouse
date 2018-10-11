@@ -14,7 +14,7 @@
       </div>
     </div>    
   </section>
-  <section>
+  <section class="pt-3 pb-5">
     <div class="container-fluid">
       <div class="row">
         <div class="col">
@@ -31,6 +31,30 @@
                 </a>
               </article>
             </li>
+          {% endfor %}
+          </ul>
+        </div> 
+      </div>
+    </div>
+  </section>
+  <section class="pt-0">
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="text-decorated">{{ page.press_title }}</b></h1>
+          <p>{{ page.press_text }}</p>
+        </div>
+      </div>
+    </div>    
+  </section>
+  <section class="pt-3 pb-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <ul class="masonry row gutter-2">
+          {% for item in page.press_articles.all %}
+            {% image item.cover_image width-500 as img %}
+            <p>{{ item }}</p>
           {% endfor %}
           </ul>
         </div> 

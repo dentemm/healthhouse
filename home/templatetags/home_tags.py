@@ -40,3 +40,11 @@ def inverse_position(value):
     elif (value == 'left'):
         return 'right'
     return ''
+
+@register.filter
+def startswith(text, starts):
+
+    if isinstance(text, str):
+        return text.startswith(starts)
+    
+    return False

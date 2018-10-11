@@ -18,7 +18,7 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial
+from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle
 from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
@@ -645,8 +645,13 @@ class BlogIndexPage(Page):
     press_title = models.CharField(max_length=32, null=True)
     press_text = models.CharField(max_length=255, null=True)
 
+    template = 'home/blog_index_page.html'
+
     def blogs(self): 
         return BlogPage.objects.live().order_by('-first_published_at')
+
+    def press_articles(self):
+        return PressArticle.objects.all().order_by('-id')
 
 BlogIndexPage.content_panels = Page.content_panels + [
     FieldPanel('introduction'),
