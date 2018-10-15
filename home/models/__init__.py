@@ -579,6 +579,9 @@ class AboutPage(Page):
     def board_members(self):
         return TeamMember.objects.filter(user_type=2)
 
+    def brand_ambassadors(self):
+        return TeamMember.objects.filter(user_type=3)
+
 AboutPage.content_panels = Page.content_panels + [
     MultiFieldPanel([
         FieldPanel('title'),

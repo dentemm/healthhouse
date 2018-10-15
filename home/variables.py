@@ -8,7 +8,8 @@ SOCIAL_MEDIA_CHOICES = (
 
 TEAM_MEMBER_CHOICES = (
     (1, 'Core team'),
-    (2, 'Board member')
+    (2, 'Board member'),
+    (3, 'Brand ambassador')
 )
 
 PARTNER_CHOICES = (

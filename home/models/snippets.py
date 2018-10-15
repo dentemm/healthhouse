@@ -139,6 +139,7 @@ Partner.search_field = [
 class TeamMember(Orderable):
 
     name = models.CharField(max_length=64)
+    email = models.EmailField(null=True, blank=True)
     title = models.CharField(max_length=64)
     bio = models.TextField(null=True)
     user_type = models.IntegerField(verbose_name='Type', choices=TEAM_MEMBER_CHOICES)
@@ -161,7 +162,8 @@ TeamMember.panels = [
     MultiFieldPanel([
         FieldRowPanel([
             FieldPanel('name', classname='col6'),
-            FieldPanel('user_type', classname='col6')
+            FieldPanel('user_type', classname='col6'),
+            FieldPanel('email', classname='col6')
         ]),
         FieldPanel('title'),
         ImageChooserPanel('picture'),
