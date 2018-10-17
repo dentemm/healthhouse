@@ -37,7 +37,7 @@
       </div>
     </div>
   </section>
-  <section class="pt-0">
+  <section class="pt-0 pattern pattern-dark">
     <div class="container pt-5">
       <div class="row justify-content-center">
         <div class="col-md-8">
@@ -45,10 +45,8 @@
           <p>{{ page.press_text }}</p>
         </div>
       </div>
-    </div>    
-  </section>
-  <section class="pt-3 pb-5">
-    <div class="container">
+    </div>  
+        <div class="container">
       <div class="row">
       {% for item in page.press_articles.all %}
         {% image item.cover_image width-500 as img %}
@@ -58,14 +56,21 @@
               <h5 class="card-title">{{ item.title }}</h5>
               <p class="card-text">{{ item.description }}</p>
             {% if item.link %}
-              <a href="{{ item.link }}" target="_blank" class="btn btn-primary">Go somewhere</a>
+              <a href="{{ item.link }}" class="btn btn-with-ico btn-primary mb-2" target="_blank">
+                {{ item.link_title }} <i class="icon-angle-right"></i>
+                </a><br/>
+            {% endif %}
+            {% if item.document %}
+              <a href="{{ item.document.file.url }}" class="btn btn-with-ico btn-primary mb-2" target="_blank">
+                  {{ item.document_link_title }} <i class="icon-angle-right"></i>
+              </a>
             {% endif %}
             </div>
           </div>
         </div>
       {% endfor %}
       </div>
-    </div>
+    </div>  
   </section>
 
 {% endblock main %}

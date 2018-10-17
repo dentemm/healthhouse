@@ -14,6 +14,7 @@
   </section>
 
   {% include 'home/partials/tabs.html' with list=page.topics.all %}
-  {% include 'home/partials/faq.html' with list=page.faq_questions.all %}
   {% include 'home/partials/team.html' with core_team=page.core_team_members.all board_team=page.board_members.all %}
+  {% include 'home/partials/faq.html' with list=page.faq_questions.all %}
+
 {% endblock main %}

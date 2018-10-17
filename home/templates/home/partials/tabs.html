@@ -1,11 +1,11 @@
   <section class="component">
     <div class="container">
-      <div class="row">
+      <div class="row justify-content-center">
         <div class="col-lg-8">
           <div class="nav nav-tabs mb-2">
             {% for item in list %}
             <a class="nav-item nav-link {% if forloop.first %}active{% endif %}" data-toggle="tab" href="#tab-{{ forloop.counter }}">
-              <h4>{{ item.title }}</h4>
+              <h4 class="text-black">{{ item.title }}</h4>
             </a>
             {% endfor %}
           </div>

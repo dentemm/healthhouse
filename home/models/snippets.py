@@ -374,6 +374,8 @@ class PressArticle(models.Model):
     description = models.TextField(max_length=300)
 
     link = models.URLField(blank=True, null=True)
+    link_title = models.CharField(max_length=32, blank=True, null=True)
+
     document = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -381,6 +383,7 @@ class PressArticle(models.Model):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    document_link_title = models.CharField(max_length=32, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -391,7 +394,9 @@ PressArticle.panels = [
             FieldPanel('title', classname='col8'),
             FieldPanel('description', classname='col8'),
             FieldPanel('link', classname='col6'),
-            DocumentChooserPanel('document', classname='col6')
+            FieldPanel('link_title', classname='col6'),
+            DocumentChooserPanel('document', classname='col6'),
+            FieldPanel('document_link_title', classname='col6')
         ]),
     ],
     heading='Press article'

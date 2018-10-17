@@ -1,23 +1,21 @@
 {% load static wagtailimages_tags %}
 
 <!-- users -->
-<section class="component">
+<section class="component pt-5">
   <div class="container">
-
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
         <h2><b>Core</b> team</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perspiciatis eligendi doloremque.</p>
       </div>
     </div>
-
     <div class="row">
     {% for item in core_team %}
       <div class="col-lg-4 col-md-6">
           <div class="hh-rotate">
             <div class="rotate-container">
               <div class="front">
-              {% image item.picture fill-400x400 as img %}
+              {% image item.picture fill-500x500 as img %}
                 <figure class="use" style="position: relative;">
                   <a href="" class="userhoto">
                       <img src="{{ img.url }}" alt="{{ item.name }}">
