@@ -604,11 +604,18 @@ AboutPage.content_panels = Page.content_panels + [
 AboutPage.parent_page_types = ['home.HomePage']
 AboutPage.subpage_types = []
 
-class AboutPageQuestion(Orderable):
+AboutPage.search_fields = Page.search_fields + [
+    index.SearchField('description')
+]
+
+class AboutPageQuestion(index.Indexed, Orderable):
 
     page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='faq_questions')
     question = models.CharField(max_length=255)
     answer = models.TextField()
+
+    def __str__(self):
+        return self.question
 
     class Meta:
         verbose_name = 'FAQ question'
@@ -620,6 +627,11 @@ AboutPageQuestion.panels = [
         FieldPanel('question'),
         FieldPanel('answer')
     ])
+]
+
+AboutPageQuestion.search_fields = [
+    index.SearchField('question'),
+    index.SearchField('answer')
 ]
 
 class AboutPageTopic(Orderable):
@@ -642,6 +654,11 @@ AboutPageTopic.panels = [
     ])
 ]
 
+AboutPageTopic.search_fields = [
+    index.SearchField('title'),
+    index.SearchField('description')
+]
+ 
 class BlogIndexPage(Page):
 
     introduction = models.TextField(null=True)

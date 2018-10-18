@@ -10,30 +10,55 @@
         <div class="container">
         <h1>Search</h1>
 
-        <form action="{% url 'search' %}" method="get">
+        {% comment %} <form action="{% url 'search' %}" method="get">
             <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
             <input type="submit" value="Search" class="button">
-        </form>
+        </form> {% endcomment %}
 
     {% if search_results %}
-        <ul>
-            {% for result in search_results %}
-                <li>
-                    <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-                    {% if result.search_description %}
-                        {{ result.search_description }}
-                    {% endif %}
-                </li>
-            {% endfor %}
-        </ul>
 
-        {% if search_results.has_previous %}
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="row gutter-1">
+            {% for result in search_results %}
+                <div class="col-12">
+                    <div class="boxed p-2">
+                    <div class="row align-items-center justify-content-between">
+                        <div class="col-sm-9">
+                        <div class="media align-items-center">
+                            <div class="media-body">
+                            <h5 class="mb-0">{{ result }}</h5>
+                            <span class="text-muted">Senior UI Designer</span>
+                            </div>
+                        </div>
+                        </div>
+                        <div class="col-sm-3 text-md-right">
+                            {% if result.page %}
+                            <a href="{% pageurl result.page %}" class="btn btn-primary"> 
+                            More
+                            </a>
+                            {% else %}
+                            <a href="{% pageurl result %}" class="btn btn-primary"> 
+                            More
+                            </a>
+                            {% endif %}
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+                </div>
+            </div>
+        </div>
+
+        {% comment %} {% if search_results.has_previous %}
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
         {% endif %}
 
         {% if search_results.has_next %}
             <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-        {% endif %}
+        {% endif %} {% endcomment %}
     {% elif search_query %}
         No results found
     {% endif %}
