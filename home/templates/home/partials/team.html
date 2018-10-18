@@ -1,6 +1,5 @@
 {% load static wagtailimages_tags %}
 
-<!-- users -->
 <section class="component pt-5">
   <div class="container">
     <div class="row justify-content-center">
@@ -12,94 +11,28 @@
     <div class="row">
     {% for item in core_team %}
       <div class="col-lg-4 col-md-6">
-          <div class="hh-rotate">
-            <div class="rotate-container">
-              <div class="front">
-              {% image item.picture fill-500x500 as img %}
-                <figure class="use" style="position: relative;">
-                  <a href="" class="userhoto">
-                      <img src="{{ img.url }}" alt="{{ item.name }}">
-                  </a>
-                  <figcaption class="user-caption" style="display: block; position:absolute; bottom:0; right:0">
-                    <h4>{{ item.name }}</h4>
-                    <span>{{ item.title }}</span>
-                  </figcaption>
-                </figure>
-              </div>
-              <div class="back bg-blue p-2">
-                <h4 class="text-white">{{ item.name }}</h4>
-                <p class="text-white">
-                  {{ item.bio }}
-                </p>
-              </div>
+      {% image item.picture fill-500x500 as img %}
+        <figure class="user">
+          <a href="" class="user-photo">
+            <img src="{{ img.url }}" alt="{{ item.name }}">
+          </a>
+          <figcaption class="user-caption">
+            <h4>{{ item.name }}</h4>
+            <span>{{ item.title }}</span>
+            <div class="socials">
+              <button class="social btn btn-primary" data-toggle="modal" data-target="#exampleModal-{{ item.id }}">Show more</button>
             </div>
-          </div>
-        </div>
-    {% endfor %}
-    {% for item in core_team %}
-    {% if forloop.first %}
-
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal-2">
-        Launch demo modal
-      </button>
-
-      <a href="#exampleModal-2" data-toggle="modal">
-
-      <div class="col-lg-4 col-md-6">
-            {% image item.picture fill-500x500 as img %}
-              <figure class="use" style="position: relative;">
-                <a class="userhoto">
-                    <img src="{{ img.url }}" alt="{{ item.name }}">
-                </a>
-                <figcaption class="user-caption" style="display: block; position:absolute; bottom:0; right:0">
-                  <h4>{{ item.name }}</h4>
-                  <span>{{ item.title }}</span>
-                </figcaption>
-              </figure>
+          </figcaption>
+        </figure>
       </div>
-    </a>
-
-
-    {% endif %}
+      {% include 'home/partials/user_modal.html' with item=item %}
     {% endfor %}
     </div>
-
     <div class="row justify-content-center">
       <div class="col-md-6 text-center">
         <h2><b>Board</b> of directors</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio, perspiciatis eligendi doloremque.</p>
       </div>
     </div>
-
   </div>
 </section>
-
-<div class="modal fade" id="exampleModal-2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-image">
-          <img src="path/to/image" alt="Image" class="modal-image">
-          <button type="button" class="close close-absolute" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true" class="icon-x"></span>
-          </button>
-        </div>
-        <div class="modal-body text-center">
-          <h3>Modal title</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias alias ipsam minima, dolore! Modi enim porro neque quaerat blanditiis. Ipsa aliquam quam maxime rerum eum accusamus nulla, molestiae soluta repellendus!</p>
-        </div>
-        <div class="modal-footer gutter-1">
-          <div class="container-fluid">
-            <div class="row gutter-1">
-              <div class="col-8">
-                <button type="button" class="btn btn-block btn-primary">Save changes</button>
-              </div>
-              <div class="col-4">
-                <button type="button" class="btn btn-block btn-red">Cancel</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- / users -->
