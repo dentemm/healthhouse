@@ -5,8 +5,8 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-image">
-          {% image item.picture fill-500x500 as img %}
-        <img src="{{ img.url }}" alt="Image" class="modal-image">
+          {% image item.picture fill-400x400 as img %}
+        <img src="{{ img.url }}" alt="Image" class="img-fluid" style="width: 100%">
         <button type="button" class="close close-absolute" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="icon-x"></span>
         </button>
@@ -15,21 +15,20 @@
         <h3 class="mb-0">{{ item.name }}</h3>
         <p>{{ item.title }}</p>
         <div>
-          <p>{{ item.bio }}</p>
+          <p class="text-left">{{ item.bio }}</p>
         </div>
       </div>
-      {% comment %} <div class="modal-footer gutter-1">
+      {% if item.email %}
+      <div class="modal-footer gutter-1">
         <div class="container-fluid">
           <div class="row gutter-1">
-            <div class="col-8">
-              <button type="button" class="btn btn-block btn-primary">Save changes</button>
-            </div>
-            <div class="col-4">
-              <button type="button" class="btn btn-block btn-red">Cancel</button>
+            <div class="col-12">
+              <a href="mailto:{{item.email}}" class="btn btn-block btn-outline-primary">Contact</a>
             </div>
           </div>
         </div>
-      </div> {% endcomment %}
+      </div>
+      {% endif %}
     </div>
   </div>
 </div>
