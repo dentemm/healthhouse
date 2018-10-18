@@ -15,7 +15,7 @@ from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 
 from .helpers import Address, GeneralBullet
-from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES
+from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES
 
 @register_snippet
 class Location(Address, index.Indexed):
@@ -402,3 +402,26 @@ PressArticle.panels = [
     heading='Press article'
     )
 ]
+
+@register_snippet
+class Directions(ClusterableModel, models.Model):
+
+    transportation_means = models.CharField(choices=TRANSPORTATION_CHOICES, max_length=32)
+
+    def __str__(self):
+        return '%d %s' % (self.number, self.identifier)
+
+Directions.panels = [
+    MultiFieldPanel([
+        FieldRowPanel(
+            [
+                FieldPanel('transportation_means', classname='col6'),
+            ]
+        )
+    ], heading='Directions'),
+    InlinePanel('bullets', label='Bullets')
+]
+
+class DirectionsBullets(GeneralBullet):
+
+    directions = ParentalKey(Directions, on_delete=models.CASCADE, related_name='bullets', null=True)

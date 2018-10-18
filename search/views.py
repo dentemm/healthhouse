@@ -5,7 +5,7 @@ from wagtail.core.models import Page
 from wagtail.search.models import Query
 from wagtail.search.backends import get_search_backend
 
-from home.models import BlogPage, AboutPageQuestion
+from home.models import BlogPage, AboutPageQuestion, AboutPageTopic
 
 
 def search(request):
@@ -20,7 +20,9 @@ def search(request):
 
         query = Query.get(search_query)
 
+        # Adding non - page models to the search results
         search_results += backend.search(search_query, AboutPageQuestion.objects.all()).results()
+        search_results += backend.search(search_query, AboutPageTopic.objects.all()).results()
 
         # Record hit
         query.add_hit()

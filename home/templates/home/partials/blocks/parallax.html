@@ -23,7 +23,15 @@
             <a
             href="{{ item.url }}"
             class="btn btn-{% if forloop.counter0|divisibleby:'2' %}outline-{% endif %}{{ btn_color }} mb-1 mr-1"
-            targer="_blank"
+            target="_blank"
+          >
+            {{ item.title }}
+          </a>
+        {% endfor %}
+        {% for item in value.mail_links %}
+            <a
+            href="mailto:{{ item.url }}"
+            class="btn btn-{% if forloop.counter0|divisibleby:'2' %}outline-{% endif %}{{ btn_color }} mb-1 mr-1"
           >
             {{ item.title }}
           </a>

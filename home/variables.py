@@ -31,3 +31,9 @@ DISCOVERY_PAGE_CHOICES = [
     ('expo_rooms', 'Exhibition areas'),
     ('projects', 'Projects')
 ]
+
+TRANSPORTATION_CHOICES = [
+    ('CAR', 'By car'),
+    ('TRAIN', 'Train'),
+    ('BUS', 'Bus')
+]

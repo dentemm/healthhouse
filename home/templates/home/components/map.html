@@ -1,10 +1,7 @@
 {% load static home_tags %}
 
-<!-- map -->
-
 {% if location %}
-
-<section id="default" class="component">
+<section id="default" class="component py-0">
   <div class="component-example component-example-fit">
     <section class="map py-10">
       <div class="container">
@@ -36,7 +33,6 @@
         function initMap() {
             // Styles a map in night mode.
           var map = new google.maps.Map(document.getElementById('map'), {
-            // center: {lat: 50.865303, lng: 4.668004},
             center: {lat: {{ location.latitude|numberify }}, lng: {{ location.longitude|numberify }} },
             zoom: 16,
             disableDefaultUI: false,
@@ -216,6 +212,4 @@
     </section>
   </div>
 </section>
-<!-- / map -->
-
 {% endif %}

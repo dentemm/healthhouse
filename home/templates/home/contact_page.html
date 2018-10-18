@@ -3,44 +3,43 @@
 {% load static wagtailcore_tags wagtailimages_tags widget_tweaks %}
 
 {% block main %}
-
-<section class="bg-light pb-0">
-  <div class="container-full">
-    <div class="row" data-aos="zoom-in">
-      <div class="col">
-        <div class="container-full">
-          <div class="row justify-content-between align-items-center">
-            <div class="col-md-6 p-10">
-              <span class="eyebrow mb-1 text-primary">Get in touch with us</span>
-              <h2>We’ll get back to you as soon as possible.</h2>
-              <form action="{% pageurl page %}" method="POST">
-                {{ form.errors }}
-                {% csrf_token %}
-                {% for field in form %}
-                  <div class="form-row mb-1">
+  <section class="bg-light pb-0">
+    <div class="container-full">
+      <div class="row" data-aos="zoom-in">
+        <div class="col">
+          <div class="container-full">
+            <div class="row justify-content-between align-items-center">
+              <div class="col-md-6 p-10">
+                <span class="eyebrow mb-1 text-primary">Get in touch with us</span>
+                <h2>We’ll get back to you as soon as possible.</h2>
+                <form action="{% pageurl page %}" method="POST">
+                  {{ form.errors }}
+                  {% csrf_token %}
+                  {% for field in form %}
+                    <div class="form-row mb-1">
+                      <div class="col">
+                        {% render_field field class+="form-control form-control-minimal" placeholder=field.label rows=3 %} 
+                      </div>
+                    </div>
+                  {% endfor %}
+                  <div class="form-row mt-3">
                     <div class="col">
-                      {% render_field field class+="form-control form-control-minimal" placeholder=field.label rows=3 %} 
+                      <button class="btn btn-primary px-5">Contact us</button>
                     </div>
                   </div>
-                {% endfor %}
-                <div class="form-row mt-3">
-                  <div class="col">
-                    <button class="btn btn-primary px-5">Contact us</button>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="col-md-6">
-              {% image page.directions_image fill-1000x650 as img %}
-              <img src="{{ img.url }}" />
+                </form>
+              </div>
+              <div class="col-md-6">
+                {% image page.directions_image fill-1000x650 as img %}
+                <img src="{{ img.url }}" />
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-
+  </section>
+  {% include 'home/partials/directions.html' %}
   {% include 'home/components/map.html' with location=settings.home.HealthHouseSettings.location %}
 {% endblock main %}
 

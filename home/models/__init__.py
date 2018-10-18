@@ -18,7 +18,7 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 from taggit.models import TaggedItemBase
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle
+from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions
 from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
@@ -520,7 +520,7 @@ ContactPage.parent_page_types = ['home.HomePage']
 ContactPage.subpage_types = []
 
 class ContactPageFormField(AbstractFormField):
-    page = ParentalKey('home.ContactPage', related_name='form_fields')
+    page = ParentalKey(ContactPage, related_name='form_fields')
 
 class DiscoveryPage(Page):
 

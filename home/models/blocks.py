@@ -1,4 +1,5 @@
 from wagtail.core.blocks import (
+    EmailBlock,
     StreamBlock,
     StructBlock,
     CharBlock,
@@ -47,6 +48,11 @@ class CustomURLBlock(StructBlock):
     url = URLBlock(required=False)
     title = CharBlock(max_length=28, required=False)
 
+class CustomEmailLinkBlock(StructBlock):
+
+    url = EmailBlock(required=False)
+    title = CharBlock(max_length=28, required=False)
+
 class ParallaxBlock(StructBlock):
 
     image = ImageChooserBlock()
@@ -55,6 +61,7 @@ class ParallaxBlock(StructBlock):
 
     links = ListBlock(PageChooserBlock(), required=False)
     external_links = ListBlock(CustomURLBlock(), required=False)
+    mail_links = ListBlock(CustomEmailLinkBlock(), required=False)
     
     class Meta:
         template = 'home/partials/blocks/parallax.html'

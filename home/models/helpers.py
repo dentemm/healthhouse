@@ -41,7 +41,7 @@ Address.panels = [
 
 class GeneralBullet(models.Model):
 
-		item = models.CharField(max_length=64)
+		item = models.CharField(max_length=128)
 
 GeneralBullet.panels = [
 	FieldPanel('item')
