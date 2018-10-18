@@ -6,62 +6,50 @@
 {% block title %}Search{% endblock %}
 
 {% block main %}
-    <section>
-        <div class="container">
-        <h1>Search</h1>
-
-        {% comment %} <form action="{% url 'search' %}" method="get">
-            <input type="text" name="query"{% if search_query %} value="{{ search_query }}"{% endif %}>
-            <input type="submit" value="Search" class="button">
-        </form> {% endcomment %}
+  <section>
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="text-decorated">Search results</h1>
+        </div>
+      </div>
 
     {% if search_results %}
-
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="row gutter-1">
-            {% for result in search_results %}
-                <div class="col-12">
-                    <div class="boxed p-2">
-                    <div class="row align-items-center justify-content-between">
-                        <div class="col-sm-9">
-                        <div class="media align-items-center">
-                            <div class="media-body">
-                            <h5 class="mb-0">{{ result }}</h5>
-                            <span class="text-muted">Senior UI Designer</span>
-                            </div>
-                        </div>
-                        </div>
-                        <div class="col-sm-3 text-md-right">
-                            {% if result.page %}
-                            <a href="{% pageurl result.page %}" class="btn btn-primary"> 
-                            More
-                            </a>
-                            {% else %}
-                            <a href="{% pageurl result %}" class="btn btn-primary"> 
-                            More
-                            </a>
-                            {% endif %}
-                        </div>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="row gutter-1">
+          {% for result in search_results %}
+            <div class="col-12">
+              <div class="boxed scaling p-2">
+                <div class="row align-items-center justify-content-between">
+                  <div class="col-sm-9">
+                    <div class="media align-items-center">
+                      <div class="media-body">
+                        <h5 class="mb-0">{{ result }}</h5>
+                      </div>
                     </div>
-                    </div>
+                  </div>
+                  <div class="col-sm-3 text-md-right">
+                  {% if result.page %}
+                    <a href="{% pageurl result.page %}" class="btn btn-primary"> 
+                      More
+                    </a>
+                  {% else %}
+                    <a href="{% pageurl result %}" class="btn btn-primary"> 
+                      More
+                    </a>
+                    {% endif %}
+                  </div>
                 </div>
-            {% endfor %}
-
-                </div>
+              </div>
             </div>
+          {% endfor %}
+          </div>
         </div>
-
-        {% comment %} {% if search_results.has_previous %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.previous_page_number }}">Previous</a>
-        {% endif %}
-
-        {% if search_results.has_next %}
-            <a href="{% url 'search' %}?query={{ search_query|urlencode }}&amp;page={{ search_results.next_page_number }}">Next</a>
-        {% endif %} {% endcomment %}
+      </div>
     {% elif search_query %}
         No results found
     {% endif %}
-        </div>
-    </section>
+    </div>
+  </section>
 {% endblock %}
