@@ -72,9 +72,9 @@
 
 {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
 
-{% if page.numbers.all and page.number_title %}
+<!-- {% if page.numbers.all and page.number_title %}
   {% include 'home/partials/numbers.html' with numbers=page.numbers.all title=page.number_title img=page.number_image %}
-{% endif %}
+{% endif %} -->
 
 {% if page.recent_visitors.all %}
   {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
