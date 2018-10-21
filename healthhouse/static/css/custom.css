@@ -8,6 +8,14 @@ header {
   font-size: 1rem;
 }
 
+.dropdown-menu .dropdown-item > span{
+  color: white;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #29245a;
+}
+
 .btn-outline-primary:hover a, .btn-outline-primary a:hover {
   color: white;
 }

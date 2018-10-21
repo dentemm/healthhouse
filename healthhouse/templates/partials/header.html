@@ -19,7 +19,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Discover
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% slugurl 'discover'  %}#experience-center">
                 <span>Expo</span>
               </a>
@@ -41,7 +41,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               News
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% slugurl 'news'  %}#news">
                 <span>News</span>
               </a>
@@ -55,7 +55,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               About
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% slugurl 'about'  %}#mission">
                 <span>Misson & Vison</span>
               </a>
@@ -73,7 +73,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Partners
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% slugurl 'our-partners'  %}#founding">
                 <span>Founding</span>
               </a>
@@ -87,7 +87,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Contact
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="{% slugurl 'contact'  %}#contact">
                 <span>Contact us</span>
               </a>
@@ -109,7 +109,9 @@
         </ul>
         <form class="form-inline" action="{% url 'search' %}" method="get">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-primary my-2 my-sm-0" type="submit">
+              <i class="icon-search text-white"></i>
+            </button>
         </form>
       </div>
     </nav>
