@@ -62,6 +62,14 @@ class HealthHouseSettings(ClusterableModel, BaseSetting):
         related_name='+'
         )
 
+    error_image = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True,
+        blank=True
+    )
+
     class Meta:
         verbose_name = 'Health House data'
 
@@ -86,13 +94,22 @@ HealthHouseSettings.panels = [
         ImageChooserPanel('logo'),
         ImageChooserPanel('logo_minimal'),
         ImageChooserPanel('logo_white')
-    ], heading='Logos', classname='collapsible collapsed'),
+    ], 
+        heading='Logos',
+        classname='collapsible collapsed'
+    ),
     FieldPanel('tagline'),
     MultiFieldPanel([
         InlinePanel('related_links', label='External links')
     ],
-    heading='External links',
-    classname='collapsible collapsed'
+        heading='External links',
+        classname='collapsible collapsed'
+    ),
+    MultiFieldPanel([
+        ImageChooserPanel('error_image')
+    ],
+        heading='Error pages',
+        classname='collapsible collapsed'
     )
 ]
 
