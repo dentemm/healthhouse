@@ -2,12 +2,16 @@
 
 {% block main %}
 <div class="viewport">
-  <div class="image image-overlay image-blur" style="background-image:url({{ settings.home.HealthHouseSettings.error_image.file.url }})"></div>
+  <div class="image image-overlay" style="background-image:url({{ settings.home.HealthHouseSettings.error_image.file.url }})"></div>
   <div class="container">
     <div class="row justify-content-center align-items-center vh-100">
       <div class="col-md-6 col-lg-4 text-white text-center">
         <h1 class="error-text">404</h1>
-        <p>The page you were looking for wasn't found, if you think this might be a mistake <a href="mailto:{{ settings.home.HealthHouseSettings.email }}" class="link">drop us a line</a></p>
+        <p class="text-white fs-20">The page you were looking for wasn't found, if you think this might be a mistake 
+          <a href="mailto:{{ settings.home.HealthHouseSettings.email }}" class="text-primary">
+            please let us know
+          </a>
+        </p>
       </div>
     </div>
   </div>
