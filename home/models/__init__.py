@@ -490,10 +490,11 @@ class ContactPage(AbstractEmailForm):
 
     def save(self, *args, **kwargs):
 
+        self.to_address = 'info@health-house.be'
+        self.subject = 'Webform via HH website!'
+
         if not self.from_address:
             self.from_address = 'tim.claes@live.be'
-            self.to_address = 'tim.claes@live.be'
-            self.subject = 'Webform via HH website!'
 
         super(ContactPage, self).save(*args, **kwargs)
 
