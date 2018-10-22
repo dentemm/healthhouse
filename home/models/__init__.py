@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
+from django.contrib import messages
 
 from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import StreamField
@@ -507,6 +508,8 @@ class ContactPage(AbstractEmailForm):
                 self.process_form_submission(form)
                 
                 ctx['form'] = self.get_form(page=self, user=request.user)
+
+                messages.success(request, 'Thank you for your message!')
 
                 return render(request, self.get_landing_page_template(request), ctx)
             

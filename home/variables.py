@@ -20,6 +20,8 @@ PARTNER_CHOICES = (
 )
 
 ICON_CHOICES = [
+    ('icon-basic_target', 'Target'),
+    ('icon-basic_heart', 'Heart'),
     ('icon-ecommerce_graph3', 'Graph'),
     ('icon-basic_eye', 'Eye'),
     ('icon-basic_message_multiple', 'Text balloon')

@@ -12,6 +12,15 @@
               <div class="col-md-6 p-10">
                 <span class="eyebrow mb-1 text-primary">Get in touch with us</span>
                 <h2>We’ll get back to you as soon as possible.</h2>
+
+                {% if messages %}
+                  <div class="messages mb-2">
+                      {% for message in messages %}
+                      <p class="eyebrow text-green">{{ message }}</p>
+                      {% endfor %}
+                  </div>
+                {% endif %}
+
                 <form action="{% pageurl page %}" method="POST">
                   {{ form.errors }}
                   {% csrf_token %}
