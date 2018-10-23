@@ -485,16 +485,14 @@ class ContactPage(AbstractEmailForm):
         related_name='+'
     )
 
+    thank_you_text = models.CharField(default='Thank you for your message!', max_length=160)
+
     template = 'home/contact_page.html'
-    landing_page_template = 'home/contact_page.html'
 
     def save(self, *args, **kwargs):
 
-        self.to_address = 'info@health-house.be'
-        self.subject = 'Webform via HH website!'
-
         if not self.from_address:
-            self.from_address = 'tim.claes@live.be'
+            self.from_address = 'info@health-house.be'
 
         super(ContactPage, self).save(*args, **kwargs)
 
@@ -510,7 +508,7 @@ class ContactPage(AbstractEmailForm):
                 
                 ctx['form'] = self.get_form(page=self, user=request.user)
 
-                messages.success(request, 'Thank you for your message!')
+                messages.success(request, self.thank_you_text)
 
                 return render(request, self.get_landing_page_template(request), ctx)
             
@@ -520,7 +518,7 @@ class ContactPage(AbstractEmailForm):
         return render(request, self.get_template(request), ctx)
 
     def get_landing_page_template(self, request, *args, **kwargs):
-        return self.landing_page_template
+        return self.template
 
     class Meta:
         verbose_name = 'Contact page'
@@ -528,6 +526,18 @@ class ContactPage(AbstractEmailForm):
 
 ContactPage.content_panels = Page.content_panels + [
     ImageChooserPanel('directions_image'),
+    MultiFieldPanel(
+        [
+            FieldPanel('subject'),
+            FieldPanel('thank_you_text'),
+            FieldRowPanel([
+                FieldPanel('to_address', classname='col6'),
+                FieldPanel('from_address', classname='col6')
+            ])
+        ],
+        heading='Form configuration',
+        classname='collapsible collapsed'
+    ),
     MultiFieldPanel(
         [
             InlinePanel('form_fields', label='Form fields'),

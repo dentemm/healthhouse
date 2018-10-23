@@ -143,7 +143,7 @@ LANGUAGE_CODE = 'en'
 
 LANGUAGES = (
     ('en', _("English")),
-    ('nl', _("Dutch")),
+    # ('nl', _("Dutch")),
 )
 
 TIME_ZONE = 'UTC'
