@@ -18,6 +18,8 @@ from modelcluster.contrib.taggit import ClusterTaggableManager
 
 from taggit.models import TaggedItemBase
 
+from wagtailcaptcha.models import WagtailCaptchaForm
+
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
 from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions
 from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
@@ -476,7 +478,7 @@ Bullet.panels = [
     FieldPanel('bullet')
 ]
 
-class ContactPage(AbstractEmailForm):
+class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
 
     directions_image = models.ForeignKey(
         'wagtailimages.Image',
