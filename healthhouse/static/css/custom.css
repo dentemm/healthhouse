@@ -4,6 +4,10 @@ header {
   width: calc(100% - 30px);
 }
 
+div.rich-text > p > b {
+  color: darkgray;
+}
+
 .navbar-nav .nav-link {
   font-size: 1rem;
 }

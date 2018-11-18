@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.contrib import messages
 
 from wagtail.core.models import Page, Orderable
-from wagtail.core.fields import StreamField
+from wagtail.core.fields import StreamField, RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
@@ -393,7 +393,8 @@ HomePage.subpage_types = [
     'home.DiscoveryPage',
     'home.AboutPage',
     'home.BlogIndexPage',
-    'home.PartnerPage'
+    'home.PartnerPage',
+    'home.PrivacyPage'
 ]
 
 class HomePageCoverImage(Orderable):
@@ -810,4 +811,23 @@ PartnerPage.content_panels = [
 ]
 
 PartnerPage.parent_page_types = ['home.HomePage']
-BlogPage.subpage_types = []
+PartnerPage.subpage_types = []
+
+class PrivacyPage(Page):
+
+    policy = RichTextField()
+
+    template = 'home/privacy_policy.html'
+
+PrivacyPage.content_panels = [
+
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('policy')
+    ],
+    heading='General information'
+    )
+]
+
+PrivacyPage.parent_page_types = ['home.HomePage']
+PrivacyPage.subpage_types = []

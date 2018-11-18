@@ -1,0 +1,15 @@
+{% extends 'home/layout.html' %}
+
+{% load wagtailcore_tags %}
+
+{% block main %}
+  <section class="hero hero-with-header pt-10 pb-5">
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-10">
+          <p>{{ page.policy|richtext }}</p>
+        </div>
+      </div>
+    </div>    
+  </section>
+{% endblock main %}

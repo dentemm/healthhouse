@@ -1,4 +1,4 @@
-{% load static wagtailuserbar %}
+{% load static wagtailcore_tags wagtailuserbar %}
 
 <!DOCTYPE html>
 <html class="no-js">
@@ -72,5 +72,19 @@
 
         <script type="text/javascript" src="{% static 'js/vendor.min.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/app.js' %}"></script>
+
+        <script type="text/javascript" id="cookieinfo" src="{% static 'js/cookiescript.min.js' %}"
+            data-height="50px"
+            data-bg="#29245a"
+            data-font-family="Rubik, sans-serif"
+            data-font-size="18px"
+            data-fg="#ffffff99"
+            data-divlinkbg="#00a1dd"
+            data-divlink="#fff"
+            data-close-text="Agree"
+            data-moreinfo="{% slugurl 'privacy-policy' %}"
+        >
+        </script>
+
     </body>
 </html>
