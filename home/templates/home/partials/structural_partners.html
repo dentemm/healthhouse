@@ -10,9 +10,9 @@
       </div>
     </div>
     <div class="row boxed separated">
-      {% for item in list %}
+    {% for item in list %}
       <div class="col-md-6 col-lg-4 col-xl-3 p-5 text-center d-flex flex-column justify-content-between">
-      {% if partner.url %}
+      {% if item.url %}
         <a href="{{ partner.url }}" target="_blank">
           {% image item.logo max-135x135 class='img-fluid' %}
         </a>
@@ -23,7 +23,7 @@
       {% endif %}
         <button type="button" class="btn btn-with-ico btn-primary">Website <i class="icon-angle-right"></i></button>
       </div>
-      {% endfor %}
+    {% endfor %}
     </div>
   </div>
 </section>
