@@ -25,9 +25,18 @@
                   {{ form.errors }}
                   {% csrf_token %}
                   {% for field in form %}
-                    <div class="form-row mb-1">
+                    <div class="form-row {% if forloop.last %}mb-3{% else %}mb-1{% endif %}">
                       <div class="col">
+                      {% if field.field.widget.input_type == 'select' %}
+                        <div class="row" style="padding: 0.9375rem">
+                          <div class="col-5 align-self-center">{{ field.label }}</div>
+                          <div class="col-7">
+                            {% render_field field class+="form-control form-control-minimal" placeholder=field.label rows=3 %}
+                          </div>
+                        </div>
+                      {% else %}
                         {% render_field field class+="form-control form-control-minimal" placeholder=field.label rows=3 %} 
+                      {% endif %}          
                       </div>
                     </div>
                   {% endfor %}
