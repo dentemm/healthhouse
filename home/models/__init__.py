@@ -488,6 +488,9 @@ class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
         related_name='+'
     )
 
+    def directions(self):
+        return Directions.objects.all()
+
     thank_you_text = models.CharField(default='Thank you for your message!', max_length=160)
 
     template = 'home/contact_page.html'

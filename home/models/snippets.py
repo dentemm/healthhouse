@@ -408,6 +408,13 @@ class Directions(ClusterableModel, models.Model):
 
     transportation_means = models.CharField(choices=TRANSPORTATION_CHOICES, max_length=32)
 
+    def __str__(self):
+        return self.transportation_means
+
+    class Meta:
+        verbose_name = 'directions'
+        verbose_name_plural = 'directions'
+
 Directions.panels = [
     MultiFieldPanel([
         FieldRowPanel(
