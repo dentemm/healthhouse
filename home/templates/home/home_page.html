@@ -54,6 +54,10 @@
 
 {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link_1 link_text=page.discover_link_text link2=page.discover_link_2 link2_text=page.discover_link2_text %}
 
+{% if latest_articles %}
+  {% include 'home/partials/news_widget.html' with list=latest_articles %}
+{% endif %}
+
 {% if page.features.all %}
   {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
 {% endif %}
@@ -64,10 +68,6 @@
 
 {% if page.masonry_images.all %}
   {% include 'home/partials/home_masonry.html' with list=page.masonry_images.all %}
-{% endif %}
-
-{% if latest_articles %}
-  {% include 'home/partials/news_widget.html' with list=latest_articles %}
 {% endif %}
 
 {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
