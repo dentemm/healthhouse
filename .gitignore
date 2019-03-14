@@ -94,3 +94,7 @@ node_modules/
 
 # Custom
 healthhouse/static/bundle/
+
+# Calendar
+calendar/build/
+calendar/node_modules/
