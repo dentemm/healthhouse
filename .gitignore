@@ -98,3 +98,4 @@ healthhouse/static/bundle/
 # Calendar
 calendar/build/
 calendar/node_modules/
+calendar/yarn.lock
