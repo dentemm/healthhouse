@@ -1,9 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
 
-const title = 'My Minimal React Webpack Babel Setup';
+import Calendar from './components/CalendarWrapper';
+
+class App extends React.Component {
+  
+  render() {
+    return <Calendar test={'tim'} />
+  }
+}
 
 ReactDOM.render(
-  <div>{title}</div>,
+  <App />,
   document.getElementById('app')
 );
+
+module.hot.accept();
