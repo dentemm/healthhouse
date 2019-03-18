@@ -14,7 +14,7 @@ class CalendarHeader extends React.Component {
           </button>
         </div>
         <div className="calendar__title">
-          <h4>{this.props.month.format('MMMM YYYY')}</h4>
+          <h3>{this.props.month.format('MMMM YYYY')}</h3>
         </div>      
         <div className="calendar__button">
           <button

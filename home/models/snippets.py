@@ -1,5 +1,6 @@
 import geopy
 import ssl
+from datetime import datetime, date, time
 
 from django.db import models
 
@@ -10,6 +11,7 @@ from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.snippets.models import register_snippet
 from wagtail.search import index
+from wagtail.api import APIField
 
 from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
@@ -429,3 +431,58 @@ Directions.panels = [
 class DirectionsBullets(GeneralBullet):
 
     directions = ParentalKey(Directions, on_delete=models.CASCADE, related_name='bullets', null=True)
+
+class CalendarItem(models.Model):
+
+    title = models.CharField(max_length=40)
+    description = models.TextField()
+    date = models.DateField(default=date.today)
+    start = models.TimeField(default=time(9, 00))
+    end = models.TimeField(default=time(10, 00))
+    image = models.ForeignKey(
+      'wagtailimages.Image',
+      on_delete=models.CASCADE,
+      related_name='+',
+      blank=True
+    )
+
+    def __str__(self):
+        return self.title
+
+CalendarItem.api_fields = [
+    APIField('title'),
+    APIField('description'),
+    APIField('date')
+]
+
+@register_snippet
+class PublicEvent(CalendarItem):
+
+    max_attendees = models.IntegerField(default=0, blank=False)
+    price = models.IntegerField(default=0, blank=False)
+
+    def __str__(self):
+        return self.title
+
+PublicEvent.panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col8'),
+        ]),
+        FieldRowPanel([
+            FieldPanel('description', classname='col8')
+        ]),
+        FieldRowPanel([
+            FieldPanel('price', classname='col6'),
+            FieldPanel('max_attendees', classname='col6')
+        ]),
+        FieldRowPanel([
+            FieldPanel('date', classname='col6')
+        ]),
+        FieldRowPanel([
+            FieldPanel('start', classname='col6'),
+            FieldPanel('end', classname='col6')         
+        ]),
+        ImageChooserPanel('image')
+    ], heading='Public Event')
+]
