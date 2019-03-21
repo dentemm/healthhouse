@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {connect} from 'react-redux';
 
 import * as moment from 'moment';
 
@@ -46,4 +47,10 @@ class CalendarDays extends React.Component {
    }
 }
 
-export default CalendarDays;
+const mapStateToProps = (state) => {
+  return {
+    data: state.calendar.test
+  };
+};
+
+export default connect(mapStateToProps)(CalendarDays);

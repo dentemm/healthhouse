@@ -1,18 +1,22 @@
 import { combineReducers } from 'redux';
 
+import {
+  FETCH_DATA
+} from './actions';
+
 const initialState = {
-  loading: true,
+  test: false
 };
 
 const calendarReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
-    case 'TEST': 
+    case FETCH_DATA: 
 
       return {
         ...state,
-        loading: false
+        test: true
       };  
 
     default: 

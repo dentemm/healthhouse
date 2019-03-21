@@ -1,5 +1,9 @@
 import * as React from 'react';
 
+import {connect} from 'react-redux';
+
+import { fetchData } from '../redux/actions';
+
 class CalendarHeader extends React.Component {
 
   render() {
@@ -8,7 +12,7 @@ class CalendarHeader extends React.Component {
         <div className="calendar__button">
           <button
             className="btn btn-dark-blue"
-            onClick={() => this.props.updateMonth(-1)}
+            onClick={() => this.updateMonth(-1)}
           >
             Prev
           </button>
@@ -19,7 +23,7 @@ class CalendarHeader extends React.Component {
         <div className="calendar__button">
           <button
             className="btn btn-dark-blue"
-            onClick={() => this.props.updateMonth(1)}
+            onClick={() => this.updateMonth(1)}
           >
             Next
           </button>
@@ -28,6 +32,19 @@ class CalendarHeader extends React.Component {
       </div>
     );
   }
+
+  updateMonth = (by) => {
+    
+    this.props.fetchData();
+    this.props.updateMonth(by);
+  }
 }
 
-export default CalendarHeader;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchData: () => dispatch(fetchData()),
+    dispatch
+  }
+}
+
+export default connect(null, mapDispatchToProps)(CalendarHeader);
