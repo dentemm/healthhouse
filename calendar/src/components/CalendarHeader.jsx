@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import {connect} from 'react-redux';
 
-import { fetchData } from '../redux/actions';
+import { testAction } from '../redux/actions';
 
 class CalendarHeader extends React.Component {
 
@@ -35,16 +35,16 @@ class CalendarHeader extends React.Component {
 
   updateMonth = (by) => {
     
-    this.props.fetchData();
+    this.props.testAction();
     this.props.updateMonth(by);
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchData: () => dispatch(fetchData()),
+    testAction: () => dispatch(testAction()),
     dispatch
-  }
-}
+  };
+};
 
 export default connect(null, mapDispatchToProps)(CalendarHeader);

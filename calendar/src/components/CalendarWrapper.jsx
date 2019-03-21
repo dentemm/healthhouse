@@ -1,7 +1,11 @@
-import * as React from 'react';
 import * as moment from 'moment';
 
-import MicrosoftLogin from "react-microsoft-login";
+import * as React from 'react';
+import { connect } from 'react-redux';
+
+import MicrosoftLogin from 'react-microsoft-login';
+
+import { setToken } from '../redux/actions';
 
 import CalendarHeader from './CalendarHeader';
 import CalendarDays from './CalendarDays';
@@ -53,6 +57,8 @@ class CalendarWrapper extends React.Component {
     if (!err && data) {
       const token = data.accessToken;
 
+      this.props.setToken(token);
+
       const getCountQuery = '$count=true';
       const contentQuery = '$select=subject,body,isCancelled,start,end,location';
       const filterQuery = `$filter=start/dateTime ge '2018-01-01'`;
@@ -89,10 +95,6 @@ class CalendarWrapper extends React.Component {
           console.log(error);
         });
     }
-
-    
-
-
   }
 
   selectDay = (day) => {
@@ -109,4 +111,11 @@ class CalendarWrapper extends React.Component {
   }
 }
 
- export default CalendarWrapper;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setToken: (token) => dispatch(setToken(token)),
+    dispatch
+  };
+};
+
+ export default connect(null, mapDispatchToProps)(CalendarWrapper);

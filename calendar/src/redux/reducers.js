@@ -1,23 +1,32 @@
 import { combineReducers } from 'redux';
 
 import {
-  FETCH_DATA
+  TEST_ACTION,
+  SET_TOKEN
 } from './actions';
 
 const initialState = {
-  test: false
+  test: false,
+  token: ''
 };
 
 const calendarReducer = (state = initialState, action) => {
 
   switch (action.type) {
 
-    case FETCH_DATA: 
+    case TEST_ACTION: 
 
       return {
         ...state,
         test: true
       };  
+    
+    case SET_TOKEN:
+
+      return {
+        ...state,
+        token: action.payload
+      }
 
     default: 
       return state;
