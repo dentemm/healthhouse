@@ -24,11 +24,16 @@
       <div class="row">
         <div class="col-lg-3">
           <div class="mb-1">
-            <img class="logo-sm" src="{{ settings.home.HealthHouseSettings.logo_white.file.url }}" alt="Logo">
+            <a href="{% slugurl 'home' %}">
+              <img class="logo-sm" src="{{ settings.home.HealthHouseSettings.logo_white.file.url }}" alt="Logo">
+            </a>
           </div>
         </div>
         <div class="col col-lg-2">
           <ul class="list-group list-group-minimal">
+            <li class="list-group-item">
+              <a href="{% slugurl 'home' %}">Home</a>
+            </li>
           {% menu_items as menu_items %}
           {% for item in menu_items %}
             <li class="list-group-item">

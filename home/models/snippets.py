@@ -17,7 +17,7 @@ from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 
 from .helpers import Address, GeneralBullet
-from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES
+from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES, EVENT_CHOICES
 
 @register_snippet
 class Location(Address, index.Indexed):
@@ -456,21 +456,23 @@ CalendarItem.api_fields = [
 ]
 
 @register_snippet
-class PublicEvent(CalendarItem):
+class Event(CalendarItem):
 
     max_attendees = models.IntegerField(default=0, blank=False)
     price = models.IntegerField(default=0, blank=False)
+    event_type = models.IntegerField(choices=EVENT_CHOICES, null=True)
 
     def __str__(self):
         return self.title
 
-PublicEvent.panels = [
+Event.panels = [
     MultiFieldPanel([
         FieldRowPanel([
-            FieldPanel('title', classname='col8'),
+            FieldPanel('title', classname='col7'),
+            FieldPanel('event_type', classname='col5')
         ]),
         FieldRowPanel([
-            FieldPanel('description', classname='col8')
+            FieldPanel('description', classname='col7')
         ]),
         FieldRowPanel([
             FieldPanel('price', classname='col6'),

@@ -6,6 +6,10 @@ SOCIAL_MEDIA_CHOICES = (
     (5, 'Instagram')
 )
 
+EVENT_CHOICES = (
+    (1, 'Public Thursday'),
+)
+
 TEAM_MEMBER_CHOICES = (
     (1, 'Core team'),
     (2, 'Board member'),

@@ -816,6 +816,20 @@ PartnerPage.content_panels = [
 PartnerPage.parent_page_types = ['home.HomePage']
 PartnerPage.subpage_types = []
 
+class EventListPage(Page):
+
+    introduction = models.TextField(null=True)
+
+EventListPage.content_panels = [
+
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('introduction')
+    ],
+    heading='General information'
+    )
+]
+
 class PrivacyPage(Page):
 
     policy = RichTextField()

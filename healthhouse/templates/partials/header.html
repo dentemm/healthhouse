@@ -10,11 +10,11 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="burger"><span></span></span></button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav align-items-center mr-auto">
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link" href="/" role="button">
               Home
             </a>
-          </li>
+          </li> {% endcomment %}
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Discover
@@ -97,15 +97,6 @@
               </a>
             </div>
           </li>
-      
-          <!-- {% menu_items as menu_items %}
-          {% for item in menu_items %}
-          <li class="nav-item">
-            <a class="nav-link" href="{% pageurl item %}" role="button">
-              {{ item.title }}
-            </a>
-          </li>
-          {% endfor %} -->
         </ul>
         <form class="form-inline" action="{% url 'search' %}" method="get">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
