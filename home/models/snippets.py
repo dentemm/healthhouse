@@ -459,8 +459,9 @@ CalendarItem.api_fields = [
 class Event(CalendarItem):
 
     max_attendees = models.IntegerField(default=0, blank=False)
-    price = models.IntegerField(default=0, blank=False)
+    price = models.DecimalField(default=0, blank=False, decimal_places=2, max_digits=6)
     event_type = models.IntegerField(choices=EVENT_CHOICES, null=True)
+    link = models.URLField('External link', blank=True)
 
     def __str__(self):
         return self.title
@@ -479,12 +480,17 @@ Event.panels = [
             FieldPanel('max_attendees', classname='col6')
         ]),
         FieldRowPanel([
+            FieldPanel('link', classname='col6')
+        ]),
+        ImageChooserPanel('image'),
+    ], heading='General information'),
+    MultiFieldPanel([
+        FieldRowPanel([
             FieldPanel('date', classname='col6')
         ]),
         FieldRowPanel([
             FieldPanel('start', classname='col6'),
             FieldPanel('end', classname='col6')         
-        ]),
-        ImageChooserPanel('image')
-    ], heading='Public Event')
+        ]),       
+    ], heading='Date/time information')
 ]

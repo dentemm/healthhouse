@@ -394,6 +394,7 @@ HomePage.subpage_types = [
     'home.AboutPage',
     'home.BlogIndexPage',
     'home.PartnerPage',
+    'home.EventListPage',
     'home.PrivacyPage'
 ]
 
@@ -820,6 +821,8 @@ class EventListPage(Page):
 
     introduction = models.TextField(null=True)
 
+    template = 'home/agenda_page.html'
+
 EventListPage.content_panels = [
 
     MultiFieldPanel([
@@ -829,6 +832,9 @@ EventListPage.content_panels = [
     heading='General information'
     )
 ]
+
+EventListPage.parent_page_types = ['home.HomePage']
+EventListPage.subpage_types = []
 
 class PrivacyPage(Page):
 
