@@ -1,6 +1,6 @@
 import geopy
 import ssl
-from datetime import datetime, date, time
+from datetime import date, time
 
 from django.db import models
 

@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.db import models
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
@@ -21,7 +23,7 @@ from taggit.models import TaggedItemBase
 from wagtailcaptcha.models import WagtailCaptchaForm
 
 from .blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
-from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions
+from .snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
 from ..variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
@@ -264,6 +266,10 @@ class HomePage(Page):
 
     def latest_articles(self): 
         return BlogPage.objects.live().order_by('-first_published_at')[0:4]
+
+    def upcoming_events(self):
+        return Event.objects.all()
+        # return Event.objects.all().filter(date_gte=date.today()).order_by('date')[0:4]
 
     def discover_link_1(self):
         

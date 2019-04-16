@@ -70,6 +70,8 @@
   {% include 'home/partials/home_masonry.html' with list=page.masonry_images.all %}
 {% endif %}
 
+{% include 'home/partials/events_widget.html' with list=page.upcoming_events %}
+
 {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
 
 {% if page.numbers.all and page.number_title %}
