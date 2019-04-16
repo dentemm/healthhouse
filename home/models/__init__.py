@@ -269,7 +269,7 @@ class HomePage(Page):
 
     def upcoming_events(self):
         # return Event.objects.all()
-        return Event.objects.all().filter(date_gte=date.today()).order_by('date')[0:4]
+        return Event.objects.all().filter(date__gte=date.today()).order_by('date')[0:4]
 
     def discover_link_1(self):
         
