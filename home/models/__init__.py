@@ -830,7 +830,7 @@ class EventListPage(Page):
     template = 'home/agenda_page.html'
 
     def events(self):
-        return Event.objects.all().filter(date_gte=date.today()).order_by('date')
+        return Event.objects.all().filter(date__gte=date.today()).order_by('date')
         # return Event.objects.all().filter(date__gte=date.today()).order_by('date')[0:4]
 
 EventListPage.content_panels = [
