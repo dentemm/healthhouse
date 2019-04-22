@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 <section class="bg-white py-5">
   <div class="container">
@@ -25,6 +25,9 @@
         </div>
       </div>
     </div>
+    <a href="{% slugurl 'calendar' %}" class="btn btn-with-ico btn-primary mb-2">
+      Calendar overview <i class="icon-angle-right"></i>
+    </a>
   </div>
 </section>
   

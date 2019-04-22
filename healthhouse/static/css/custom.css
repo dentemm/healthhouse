@@ -49,6 +49,17 @@ img.hh-image {
   min-height: 30rem;
 }
 
+[class*="rounded"].shadow {
+  border-radius: 0.25rem !important;
+}
+
+.rounded-left.img-fluid {
+  border-top-left-radius: 0.25rem !important;
+  border-bottom-left-radius: 0.25rem !important;
+  border-top-right-radius: 0rem !important;
+  border-bottom-right-radius: 0rem !important;
+}
+
 .hh-list {
   color: #999}
 
