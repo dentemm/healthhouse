@@ -61,7 +61,7 @@ class CalendarWrapper extends React.Component {
 
       const getCountQuery = '$count=true';
       const contentQuery = '$select=subject,body,isCancelled,start,end,location';
-      const filterQuery = `$filter=start/dateTime ge '2018-01-01'`;
+      const filterQuery = `$filter=start/dateTime ge '2018-04-20T00:00'`;
       const orderByQuery = '$orderBy=start/dateTime';
       const limitByQuery = '$top=50';
 
@@ -80,7 +80,7 @@ class CalendarWrapper extends React.Component {
         })
       }
 
-      fetch('https://graph.microsoft.com/v1.0/me/calendars/', config)
+      fetch('https://graph.microsoft.com/v1.0/me/events/' + queryString, config)
         .then(response => {
 
           console.log(response.status);
