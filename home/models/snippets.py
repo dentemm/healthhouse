@@ -145,6 +145,7 @@ class TeamMember(Orderable):
     title = models.CharField(max_length=64)
     bio = models.TextField(null=True)
     user_type = models.IntegerField(verbose_name='Type', choices=TEAM_MEMBER_CHOICES)
+    sort_order = models.IntegerField(verbose_name='Display order', default=0)
     picture = models.ForeignKey(
         'wagtailimages.Image',
         on_delete=models.SET_NULL,
@@ -158,7 +159,7 @@ class TeamMember(Orderable):
     class Meta:
         verbose_name = 'Team member'
         verbose_name_plural = 'Team members'
-        ordering = ['sort_order']
+        ordering = ['sort_order', 'name']
 
 TeamMember.panels = [
     MultiFieldPanel([
@@ -169,7 +170,8 @@ TeamMember.panels = [
         ]),
         FieldPanel('title'),
         ImageChooserPanel('picture'),
-        FieldPanel('bio')
+        FieldPanel('bio'),
+        FieldPanel('sort_order')
     ], heading='Team member')
 ]
 
