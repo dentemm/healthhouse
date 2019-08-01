@@ -20,7 +20,8 @@ PARTNER_CHOICES = (
     (1, 'Founding partner'),
     (2, 'Structural partner'),
     (3, 'Other partner'),
-    (4, 'No partner')
+    (4, 'No partner'),
+    (5, 'Trusted member')
 )
 
 ICON_CHOICES = [
