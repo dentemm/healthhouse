@@ -788,11 +788,17 @@ class PartnerPage(Page):
     structural_title = models.CharField(max_length=28, null=True)
     structural_text = models.CharField(max_length=155, null=True)
 
+    trusted_title = models.CharField(max_length=28, null=True)
+    trusted_text = models.CharField(max_length=155, null=True)
+
     def founding_partners(self):
         return Partner.objects.filter(partner_type=1)
 
     def structural_partners(self):
         return Partner.objects.filter(partner_type=2)
+
+    def trusted_members(self):
+        return Partner.objects.filter(partner_type=5)
 
 PartnerPage.content_panels = [
 
@@ -800,7 +806,7 @@ PartnerPage.content_panels = [
         FieldPanel('title'),
         FieldPanel('introduction')
     ],
-    heading='General information'
+        heading='General information'
     ),
     MultiFieldPanel([
         FieldRowPanel([
@@ -808,7 +814,7 @@ PartnerPage.content_panels = [
             FieldPanel('founding_text', classname='col7')
         ])
     ],
-    heading='Founding partners'
+        heading='Founding partners'
     ),
     MultiFieldPanel([
         FieldRowPanel([
@@ -816,7 +822,15 @@ PartnerPage.content_panels = [
             FieldPanel('structural_text', classname='col7')
         ])
     ],
-    heading='Structural partners'
+        heading='Structural partners'
+    ),
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('trusted_title', classname='col7'),
+            FieldPanel('trusted_text', classname='col7')
+        ])
+    ],
+        heading='Trusted members'
     )
 ]
 

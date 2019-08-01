@@ -1,0 +1,30 @@
+{% load wagtailimages_tags %}
+
+<!-- services -->
+<section class="pt-5" id="trusted">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 text-center">
+        <h2>Trusted <b>members</b></h2>
+        <p>{{ text }}</p>
+      </div>
+    </div>
+    <div class="row boxed separated">
+    {% for item in list %}
+      <div class="col-md-6 col-lg-4 col-xl-3 p-5 text-center d-flex flex-column justify-content-between">
+      {% if item.url %}
+        <a href="{{ partner.url }}" target="_blank">
+          {% image item.logo max-135x135 class='img-fluid' %}
+        </a>
+      {% endif %}
+        <h4 class="fs-24 font-weight-normal">{{ item.name }}</h4>
+      {% if partner.description %}
+        <p>{{ item.description }}</p>
+      {% endif %}
+        <button type="button" class="btn btn-with-ico btn-primary">Website <i class="icon-angle-right"></i></button>
+      </div>
+    {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- / services -->
