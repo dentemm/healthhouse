@@ -16,8 +16,8 @@ from wagtail.api import APIField
 from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 
-from .helpers import Address, GeneralBullet
-from ..variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES, EVENT_CHOICES
+from ..helpers import Address, GeneralBullet
+from ...variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES, EVENT_CHOICES
 
 @register_snippet
 class Location(Address, index.Indexed):
@@ -464,8 +464,13 @@ class Event(CalendarItem):
     price = models.DecimalField(default=0, blank=False, decimal_places=2, max_digits=6)
     event_type = models.IntegerField(choices=EVENT_CHOICES, null=True)
     link = models.URLField('External link', blank=True)
+    is_private = models.BooleanField('Private event?', default=False)
 
     def __str__(self):
+
+        if self.is_private:
+            return self.title + '   ** PRIVATE **'
+
         return self.title
 
 Event.panels = [
@@ -482,7 +487,8 @@ Event.panels = [
             FieldPanel('max_attendees', classname='col6')
         ]),
         FieldRowPanel([
-            FieldPanel('link', classname='col6')
+            FieldPanel('link', classname='col6'),
+            FieldPanel('is_private', classname='col6')
         ]),
         ImageChooserPanel('image'),
     ], heading='General information'),

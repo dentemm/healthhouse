@@ -5,7 +5,7 @@ from wagtail.core.models import Page
 from wagtail.search.models import Query
 from wagtail.search.backends import get_search_backend
 
-from home.models import BlogPage, AboutPageQuestion, AboutPageTopic
+from home.models.pages import BlogPage, AboutPageQuestion, AboutPageTopic
 
 
 def search(request):

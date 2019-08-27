@@ -2,7 +2,7 @@ import os
 
 from django.core.management.base import BaseCommand, CommandError
 
-from home.models import (
+from home.models.pages import (
   HealthHouseSettings,
   LinkFields,               # abstract
   RelatedLink,              #abstract

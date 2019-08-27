@@ -2,7 +2,7 @@ import random
 
 from django import template
 
-from ..models import HomePage
+from ..models.pages import HomePage
 
 register = template.Library()
 

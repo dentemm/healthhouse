@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block title %}
+    {% if self.seo_title %}{{ self.seo_title }}{% else %}{{ self.title }}{% endif %}
+{% endblock %}
+
 {% block body_class %}{% endblock %}
 
 {% block extra_css %}
