@@ -24,11 +24,8 @@
           <p>You need a password to access this page.</p>
           <form action="{{ action_url }}" method="POST">
               {% csrf_token %}
-
               {{ form.non_field_errors }}
-
               <div>
-                  {{ form.password.errors }}
                   {{ form.password.label_tag }}
                   {{ form.password }}
               </div>
@@ -36,6 +33,12 @@
               {% for field in form.hidden_fields %}
                   {{ field }}
               {% endfor %}
+
+              <div class="mt-1">
+              {% for error in form.password.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+              </div>
               <input type="submit" value="Continue" class="btn btn-primary mt-2"/>
           </form>
         </div>
