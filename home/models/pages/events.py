@@ -7,7 +7,7 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from ..snippets import Event
-from ...forms.private_event_form import TestForm
+from ...forms.private_event_form import EventVisitorForm
 
 class EventListPage(Page):
 
@@ -71,7 +71,7 @@ class PrivateEventPage(Page):
 
         if request.method == 'POST':
 
-            form = TestForm(request.POST)
+            form = EventVisitorForm(request.POST)
 
             if form.is_valid():
                 print('form is valid')
@@ -95,8 +95,8 @@ class PrivateEventPage(Page):
             print('get context - POST')
             return ctx
 
-        test_form = TestForm()
-        ctx['test_form'] = test_form
+        form = EventVisitorForm()
+        ctx['form'] = form
 
         return ctx
 

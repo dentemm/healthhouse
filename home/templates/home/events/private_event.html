@@ -8,7 +8,7 @@
     <div class="container">
       <form method="POST">
         {% csrf_token %}
-        {% for field in test_form %}
+        {% for field in form %}
           <div class="form-group">
           <label for="exampleFormControlSelect1">{{ field.label }}</label>
           {% render_field field class+="form-control" %}
