@@ -74,10 +74,19 @@ class PrivateEventPage(Page):
             form = EventVisitorForm(request.POST)
 
             if form.is_valid():
+
+                # form.cleaned_data['event_id'] = self.event.pk
+
                 print('form is valid')
                 print(form)
 
-                form.save()
+                visitor = form.save(commit=False)
+
+                visitor.event_id = self.event.pk
+
+                visitor.save()
+
+                print(visitor)
 
             print('dit werkt!')
             return super(PrivateEventPage, self).serve(request)
@@ -91,6 +100,10 @@ class PrivateEventPage(Page):
         print('get context')
 
         if request.method == 'POST':
+
+            form = EventVisitorForm(request.POST)
+
+            ctx['form'] = form
 
             print('get context - POST')
             return ctx

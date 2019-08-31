@@ -2,23 +2,17 @@ from django import forms
 
 from ..models.helpers.events import EventVisitor
 
-class TestForm(forms.Form):
-
-    name = forms.CharField(label='My test name', max_length=50)
-    number = forms.IntegerField(label='Number')
-
-    def save(self):
-        print('saving form')
-        print(self.cleaned_data)
-        print('**********')
-
 class EventVisitorForm(forms.ModelForm):
     
     class Meta:
         model = EventVisitor
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'company', 'brings_guest', 'email']
 
-    def save(self):
-        print('saving form')
-        print(self.cleaned_data)
-        print('**********')
+    # def save(self, commit=True):
+    #     print('saving form')
+    #     print(self.cleaned_data)
+    #     print('**********')
+
+    #     # TODO
+
+    #     super(EventVisitorForm, self).save(commit=commit)

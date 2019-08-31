@@ -14,6 +14,9 @@
           {% render_field field class+="form-control" %}
           </div>
         {% endfor %}
+        {% if form.errors %}
+          {{form.errors}}
+        {% endif %}
         <input type="submit" value="Continue" class="btn btn-primary mt-2"/>
       </form>
       <form method="POST">
