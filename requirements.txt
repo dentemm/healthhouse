@@ -30,7 +30,7 @@ requests==2.21.0
 s3transfer==0.1.13
 six==1.11.0
 Unidecode==0.4.21
-urllib3==1.23
+urllib3==1.24.2
 wagtail==2.6.1
 wagtail-django-recaptcha==1.0
 webencodings==0.5.1
