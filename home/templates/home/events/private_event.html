@@ -5,27 +5,40 @@
 {% block main %}
 
   <section class="bg-white">
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="text-decorated">{{ page.event.title }}</h1>
+          <p>{{ page.event_information }}</p>
+        </div>
+      </div>
+    </div>
     <div class="container">
-      {% for visitor in page.event.visitors.all %}
-        {{visitor}}
-      {% endfor %}
-      {{ remaining_places }}
       <div class="row">
         <div class="col-lg-5">
+          <h3 class="text-primary">Subscribe</h3>
           <form method="POST">
             {% csrf_token %}
             {% for field in form %}
               <div class="form-group">
               <label for="exampleFormControlSelect1">{{ field.label }}</label>
-              {% render_field field class+="form-control" %}
+          {% with WIDGET_ERROR_CLASS='is-invalid' WIDGET_REQUIRED_CLASS='form-control' %}
+            {% render_field field %}
+          {% endwith %}
+            {% if field.errors %}
+              {% for error in field.errors %}
+                <div class="text-danger">
+                  {{ error }}
+                </div>
+              {% endfor %}
+            {% endif %}
               </div>
             {% endfor %}
-            {% if form.errors %}
-              {{form.errors}}
-            {% endif %}
             {% if messages %}
               {% for message in messages %}
+              <div class="text-primary">
                 {{message}}
+              </div>
               {% endfor %}
             {% endif %}
             {% if remaining_places == 0 %}
@@ -33,19 +46,33 @@
                 This event is fully booked!
               </div>
             {% endif %}
-            <input type="submit" value="Continue" class="btn btn-primary mt-2" {% if remaining_places == 0 %}disabled{% endif %} />
+            <input type="submit" value="Continue" class="btn btn-primary mt-2 mb-5" {% if remaining_places == 0 %}disabled{% endif %} />
           </form>
         </div>
         <div class="col-lg-6 offset-lg-1">
+          <h3 class="text-primary">Practical information</h3>
           <div class="media align-items-center mb-0">
-            <i class="icon-basic_pin1 fs-40 mb-1 mr-1 text-primary"></i>
+            <i class="icon-basic_calendar fs-40 mb-1 mr-2 text-primary"></i>
             <div class="media-body">
-              <h5 class="fs-20 font-weight-normal">Address</h5>
+              <h5 class="fs-20 font-weight-normal">{{ page.event.date|date:'F j' }}</h5>
             </div>
           </div>
-          <p class="pl-5 mb-0">{{ settings.home.HealthHouseSettings.location }}</p>
-          <p class="pl-5 mb-0">{{ settings.home.HealthHouseSettings.location.street }} {{settings.home.HealthHouseSettings.location.number}}</p>
-          <p class="pl-5 mb-0">{{ settings.home.HealthHouseSettings.location.city }}</p>
+          <p class="pl-6 mb-4">{{ page.event.start|date:'G:i' }}h - {{ page.event.end|date:'G:i' }}h</p>
+          <div class="media align-items-center mb-0">
+            <i class="icon-basic_pin1 fs-40 mb-1 mr-2 text-primary"></i>
+            <div class="media-body">
+              <h5 class="fs-20 font-weight-normal">{{ settings.home.HealthHouseSettings.location }}</h5>
+            </div>
+          </div>
+          <p class="pl-6 mb-0">{{ settings.home.HealthHouseSettings.location.street }} {{settings.home.HealthHouseSettings.location.number}}</p>
+          <p class="pl-6 mb-4">{{ settings.home.HealthHouseSettings.location.city }}</p>
+          <div class="media align-items-center mb-0">
+            <i class="icon-basic_question fs-40 mb-1 mr-2 text-primary"></i>
+            <div class="media-body">
+              <h5 class="fs-20 font-weight-normal">Questions?</h5>
+            </div>
+          </div>
+          <p class="pl-6 mb-4">{{ page.question_text }}</p>
         </div>
       </div>
     </div>

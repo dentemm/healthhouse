@@ -469,7 +469,7 @@ class Event(CalendarItem):
     def __str__(self):
 
         if self.is_private:
-            return self.title + '   ** PRIVATE **'
+            return self.title + ' * PRIVATE EVENT *'
 
         return self.title
 

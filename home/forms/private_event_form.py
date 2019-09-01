@@ -7,12 +7,3 @@ class EventVisitorForm(forms.ModelForm):
     class Meta:
         model = EventVisitor
         fields = ['first_name', 'last_name', 'company', 'email']
-
-    # def save(self, commit=True):
-    #     print('saving form')
-    #     print(self.cleaned_data)
-    #     print('**********')
-
-    #     # TODO
-
-    #     super(EventVisitorForm, self).save(commit=commit)

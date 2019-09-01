@@ -4,7 +4,7 @@ from django.db import models
 from django.contrib import messages
 
 from wagtail.core.models import Page
-from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
+from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPanel
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from ..snippets import Event
@@ -61,6 +61,8 @@ class PrivateEventPage(Page):
 
     template = 'home/events/private_event.html'
 
+    event_information = models.TextField('Introduction text', null=True)
+    question_text = models.TextField(verbose_name='Contact information', null=True)
     event = models.ForeignKey(
         Event,
         on_delete=models.CASCADE,
@@ -74,7 +76,7 @@ class PrivateEventPage(Page):
 
             form = EventVisitorForm(request.POST)
 
-            if form.is_valid():
+            if form.is_valid() and self.get_remaining() > 0:
                 visitor = form.save(commit=False)
                 visitor.event_id = self.event.pk
 
@@ -87,9 +89,7 @@ class PrivateEventPage(Page):
     def get_context(self, request):
 
         ctx = super(PrivateEventPage, self).get_context(request)
-
-        remaining = self.event.max_attendees - self.event.visitors.count()
-        ctx['remaining_places'] = remaining if remaining > 0 else 0
+        ctx['remaining_places'] = self.get_remaining()
 
         if request.method == 'POST':
 
@@ -98,7 +98,7 @@ class PrivateEventPage(Page):
 
                 form = EventVisitorForm()
                 ctx['form'] = form
-                messages.success(request, 'Form submission successful')
+                messages.success(request, 'Thank you for subscribing, see you at the event!')
                 return ctx
 
             ctx['form'] = form
@@ -108,11 +108,25 @@ class PrivateEventPage(Page):
         ctx['form'] = form
 
         return ctx
+    
+    def get_remaining(self):
 
-PrivateEventPage.content_panels = Page.content_panels + [
+        remaining = self.event.max_attendees - self.event.visitors.count()
+        return remaining if remaining > 0 else 0
+
+PrivateEventPage.content_panels = [
+    MultiFieldPanel([
+        FieldRowPanel([
+            FieldPanel('title', classname='col6')
+        ]),
+        FieldRowPanel([
+            FieldPanel('event_information', classname='col8'),
+            FieldPanel('question_text', classname='col8')
+        ])
+    ], heading='General information'),
     MultiFieldPanel([
         SnippetChooserPanel('event')
-    ])
+    ], heading='Choose event')
 ]
 
 PrivateEventPage.subpage_types = []
