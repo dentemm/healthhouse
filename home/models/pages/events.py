@@ -1,6 +1,7 @@
 from datetime import date
 
 from django.db import models
+from django.contrib import messages
 
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel
@@ -74,21 +75,11 @@ class PrivateEventPage(Page):
             form = EventVisitorForm(request.POST)
 
             if form.is_valid():
-
-                # form.cleaned_data['event_id'] = self.event.pk
-
-                print('form is valid')
-                print(form)
-
                 visitor = form.save(commit=False)
-
                 visitor.event_id = self.event.pk
 
                 visitor.save()
 
-                print(visitor)
-
-            print('dit werkt!')
             return super(PrivateEventPage, self).serve(request)
 
         return super(PrivateEventPage, self).serve(request)
@@ -97,15 +88,20 @@ class PrivateEventPage(Page):
 
         ctx = super(PrivateEventPage, self).get_context(request)
 
-        print('get context')
+        remaining = self.event.max_attendees - self.event.visitors.count()
+        ctx['remaining_places'] = remaining if remaining > 0 else 0
 
         if request.method == 'POST':
 
             form = EventVisitorForm(request.POST)
+            if form.is_valid():
+
+                form = EventVisitorForm()
+                ctx['form'] = form
+                messages.success(request, 'Form submission successful')
+                return ctx
 
             ctx['form'] = form
-
-            print('get context - POST')
             return ctx
 
         form = EventVisitorForm()

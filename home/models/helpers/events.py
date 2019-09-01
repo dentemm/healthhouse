@@ -4,12 +4,15 @@ from ..snippets import Event
 
 class EventVisitor(models.Model):
   
-    first_name = models.CharField(max_length=40, null=False)
-    last_name = models.CharField(max_length=40, null=False)
-    company = models.CharField(max_length=30, null=False)
-    brings_guest = models.BooleanField(default=False)
-    email = models.EmailField(max_length=90, null=False)
+    first_name = models.CharField('First name', max_length=40, null=False)
+    last_name = models.CharField('Last name', max_length=40, null=False)
+    company = models.CharField('Company / Organisation', max_length=30, null=False)
+    email = models.EmailField('Email', max_length=90, null=False)
+    phone = models.CharField('Phone numer', max_length=16, blank=True, null=True)
     event = models.ForeignKey(Event, related_name='visitors', on_delete=models.CASCADE, null=True, blank=True)
+
+    def __str__(self):
+        return self.last_name + ' ' + self.first_name
 
     class Meta:
 		    verbose_name = 'visitor'

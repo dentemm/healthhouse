@@ -6,7 +6,7 @@ class EventVisitorForm(forms.ModelForm):
     
     class Meta:
         model = EventVisitor
-        fields = ['first_name', 'last_name', 'company', 'brings_guest', 'email']
+        fields = ['first_name', 'last_name', 'company', 'email']
 
     # def save(self, commit=True):
     #     print('saving form')
