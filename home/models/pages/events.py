@@ -57,6 +57,10 @@ PrivateEventListPage.subpage_types = [
     'home.PrivateEventPage',
 ]
 
+class PrivateEventVisitorPage(Page):
+
+    template = 'home/events/visitor_overview.html'
+
 class PrivateEventPage(Page):
 
     template = 'home/events/private_event.html'
@@ -71,6 +75,11 @@ class PrivateEventPage(Page):
     )
 
     def serve(self, request):
+
+        if self.get_descendants().count() == 0:
+            print('geen kinderen!')
+
+            self.add_child(instance=PrivateEventVisitorPage(title='visitors', slug='visitors', live=True))
 
         if request.method == 'POST':
 
@@ -133,3 +142,8 @@ PrivateEventPage.subpage_types = []
 PrivateEventPage.parent_page_types = [
    PrivateEventListPage
 ]
+
+PrivateEventVisitorPage.parent_page_types = [
+    PrivateEventPage
+]
+PrivateEventVisitorPage.subpage_types = []
