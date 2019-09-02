@@ -1,0 +1,15 @@
+{% extends 'home/layout.html' %}
+
+{% block main %}
+
+    <!-- team -->
+    <section class="bg-white">
+
+    {% for item in page.private_events %}
+      {% include 'home/events/partials/private_event_list_item.html' with item=item %}
+    {% endfor %}
+
+    </section>
+    <!-- / team -->
+
+{% endblock main %}
