@@ -8,6 +8,7 @@ from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPan
 from wagtail.snippets.edit_handlers import SnippetChooserPanel
 
 from ..snippets import Event
+from ..helpers.events import EventVisitor
 from ...forms.private_event_form import EventVisitorForm
 
 class EventListPage(Page):
@@ -66,6 +67,9 @@ PrivateEventListPage.subpage_types = [
 class PrivateEventVisitorPage(Page):
 
     template = 'home/events/visitor_overview.html'
+
+    def visitors(self):
+        return self.get_parent().specific.event.visitors.all()
 
 class PrivateEventPage(Page):
 

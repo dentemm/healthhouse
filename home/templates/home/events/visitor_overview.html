@@ -10,6 +10,9 @@
         <div class="col-md-8">
           <h1 class="text-decorated">{{ page.title }}</h1>
           <p>{{ page.event_information }}</p>
+          {% for visitor in page.visitors %}
+            <div>{{ visitor }}</div>
+          {% endfor %}
         </div>
       </div>
     </div>
