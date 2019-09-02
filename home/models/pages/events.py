@@ -39,17 +39,8 @@ class PrivateEventListPage(Page):
 
     template = 'home/events/private_agenda.html'
 
-    def private_events(self):
-
-        return self.get_descendants() \
-                        .all() \
-                        .exact_type(PrivateEventPage) 
-
-    # def events(self):
-    #     return Event.objects.all() \
-    #                 .filter(date__gte=date.today()) \
-    #                 .filter(is_private=True) \
-    #                 .order_by('date')
+    def events(self):
+        return PrivateEventPage.objects.all().order_by('event__date')
 
 PrivateEventListPage.content_panels = [
 
