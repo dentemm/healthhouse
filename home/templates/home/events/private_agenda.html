@@ -5,7 +5,7 @@
     <!-- team -->
     <section class="bg-white">
 
-    {% for item in page.events %}
+    {% for item in page.events.all %}
       {% include 'home/events/partials/private_event_list_item.html' with item=item %}
     {% endfor %}
 

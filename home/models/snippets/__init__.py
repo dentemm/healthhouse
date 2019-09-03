@@ -473,6 +473,9 @@ class Event(CalendarItem):
 
         return self.title
 
+    class Meta:
+        ordering = ['-date']
+
 Event.panels = [
     MultiFieldPanel([
         FieldRowPanel([

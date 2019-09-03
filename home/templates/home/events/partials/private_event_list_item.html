@@ -4,20 +4,15 @@
   <div class="row">
     <div class="col-md-12 offset-lg-1 col-lg-10 px-3">
 
-      {% image item.image fill-400x400 as temp_img %}
+      {% image item.event.image fill-259x250 as temp_img %}
 
         <div class="row shadow rounded">
-
           <div class="col-sm-4 col-md-3 p-0">
-            <img class="img-fluid rounded-left" src="{{ temp_img.url }}" style="filter: brightness(70%)" />
-            <div class="card-img-overlay text-white d-flex flex-column align-items-center justify-content-center">
-              <h1 class="font-weight-bold">{{ item.date|date:'d' }}</h1>
-              <h2 class="font-weight-bold">{{ item.date|date:'M'|upper }}</h2>
-            </div>
+            <img class="img-fluid" src="{{ temp_img.url }}" style="filter: brightness(70%)" />
           </div>
-
           <div class="col-sm-8 col-md-9 py-1 pl-3">
-            <h3>{{ item.title }}</h3>
+            <h2>{{ item.event.title }}</h2>
+            <h5>{{ item.event.date }}</h5>
             <p>{{ item.description }}</p>
             <div class="d-flex">
               <a href="{% pageurl item %}" class="btn btn-with-ico btn-primary mb-2">
