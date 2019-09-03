@@ -59,8 +59,8 @@ class PrivateEventVisitorPage(Page):
 
     template = 'home/events/visitor_overview.html'
 
-    def visitors(self):
-        return self.get_parent().specific.event.visitors.all()
+    def event(self):
+        return self.get_parent().specific.event
 
 class PrivateEventPage(Page):
 
