@@ -1,7 +1,9 @@
 from datetime import date
 
 from django.db import models
+from django.core.mail import EmailMessage
 from django.contrib import messages
+from django.template.loader import get_template
 
 from wagtail.core.models import Page
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPanel
@@ -90,6 +92,7 @@ class PrivateEventPage(Page):
                 visitor = form.save(commit=False)
                 visitor.event_id = self.event.pk
 
+                self.send_email(visitor)
                 visitor.save()
 
             return super(PrivateEventPage, self).serve(request)
@@ -123,6 +126,22 @@ class PrivateEventPage(Page):
 
         remaining = self.event.max_attendees - self.event.visitors.count()
         return remaining if remaining > 0 else 0
+
+    def send_email(self, visitor):
+
+        subject = 'Subscription to private event: ' + self.event.name
+        receivers = ['events@health-house.be', ]
+        sender = 'events@health-house.be'
+
+        ctx = {}
+        ctx['visitor'] = visitor
+        ctx['event'] = self.event
+        ctx['remaining'] = self.get_remaining()
+        content = get_template('home/mails/private_event_subscription.html').render(ctx)
+        
+        msg = EmailMessage(subject, content, to=receivers, from_email=sender)
+        msg.content_subtype = 'html'
+        msg.send()
 
 PrivateEventPage.content_panels = [
     MultiFieldPanel([

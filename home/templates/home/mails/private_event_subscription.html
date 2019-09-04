@@ -1,0 +1,22 @@
+<h1>Event: {{event.name}} / {{event.date|date:'j b'}}</h1>
+<hr>
+<h3>Details</h3>
+<p>
+	<b>Name: {{ visitor.last_name }} {{ visitor.first_name }}</b>
+<p>
+<p>
+	<b>Organisation: {{ visitor.company }}</b>
+<p>
+<p>
+	<b>Email: {{ visitor.email }}</b>
+<p>
+{% if visitor.phone %}
+<p>
+	<b>Phone: {{ visitor.phone }}</b>
+<p>
+{% endif %}
+<hr>
+<b>Info</b>
+<p>
+  There are {{ remaining }} out of {{ event.max_attendees }} remaining places available for this event!
+</p>
