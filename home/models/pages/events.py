@@ -129,14 +129,14 @@ class PrivateEventPage(Page):
 
     def send_email(self, visitor):
 
-        subject = 'Subscription to private event: ' + self.event.name
+        subject = 'Subscription to private event: ' + self.event.title
         receivers = ['events@health-house.be', ]
         sender = 'events@health-house.be'
 
         ctx = {}
         ctx['visitor'] = visitor
         ctx['event'] = self.event
-        ctx['remaining'] = self.get_remaining()
+        ctx['remaining'] = self.get_remaining() - 1
         content = get_template('home/mails/private_event_subscription.html').render(ctx)
         
         msg = EmailMessage(subject, content, to=receivers, from_email=sender)

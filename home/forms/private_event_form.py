@@ -6,4 +6,4 @@ class EventVisitorForm(forms.ModelForm):
     
     class Meta:
         model = EventVisitor
-        fields = ['first_name', 'last_name', 'company', 'email']
+        fields = ['first_name', 'last_name', 'company', 'email', 'phone']

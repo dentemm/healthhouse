@@ -21,9 +21,9 @@
             {% csrf_token %}
             {% for field in form %}
               <div class="form-group">
-              <label for="exampleFormControlSelect1">{{ field.label }}</label>
-          {% with WIDGET_ERROR_CLASS='is-invalid' WIDGET_REQUIRED_CLASS='form-control' %}
-            {% render_field field %}
+              <label>{{ field.label }}</label>
+          {% with WIDGET_ERROR_CLASS='is-invalid' %}
+            {% render_field field class+="form-control" %}
           {% endwith %}
             {% if field.errors %}
               {% for error in field.errors %}
