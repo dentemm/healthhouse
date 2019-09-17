@@ -1,0 +1,7 @@
+<h1>Contact form</h1>
+<hr>
+{% for field in form %}
+<p>
+  <b>{{ field.label}}:</b> {{field.value}}
+</p>
+{% enfor %}

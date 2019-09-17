@@ -1,6 +1,8 @@
 from datetime import date
 
 from django.db import models
+from django.core.mail import EmailMessage
+from django.template.loader import get_template
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
 from django.contrib import messages
@@ -534,6 +536,20 @@ class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
 
     def get_landing_page_template(self, request, *args, **kwargs):
         return self.template
+
+    def send_mail(self, form):
+
+        subject = self.subject
+        receivers = [self.to_address, ]
+        sender = self.from_address
+
+        ctx = {}
+        ctx['form'] = form
+        content = get_template('home/mails/contact_form.html').render(ctx)
+        
+        msg = EmailMessage(subject, content, to=receivers, from_email=sender)
+        msg.content_subtype = 'html'
+        msg.send()
 
     class Meta:
         verbose_name = 'Contact page'
