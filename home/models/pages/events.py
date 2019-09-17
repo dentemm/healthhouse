@@ -22,7 +22,6 @@ class EventListPage(Page):
     def events(self):
         return Event.objects.all() \
                     .filter(date__gte=date.today()) \
-                    .exclude(is_private=True) \
                     .exclude(event_type=2) \
                     .order_by('date')
 
