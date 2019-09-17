@@ -90,6 +90,49 @@
             </div>
           </div>
           <p class="pl-6 mb-4">{{ page.question_text }}</p>
+          <p class="pl-6 mb-4">{{ settings.home.HealthHouseSettings.location.city }}</p>
+          <div class="media align-items-center mb-0">
+            {% comment %} <i class="icon-basic_eye fs-40 mb-0 mr-2 text-primary"></i> {% endcomment %}
+            <div class="media-body">
+            </div>
+          </div>
+          <div class="pl-6 mb-4">
+            {% image page.event.image height-250 as img %}
+            <div class="row">
+              <div class="col-6">
+                <a href="#" data-toggle="modal" data-target="#privateModal">
+                  <img class="photo img-responsive">
+                    <img src="{{ img.url }}" alt="Image" class="hh-image">
+                  </figure>
+                </a>
+              </div>
+            </div>    
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="privateModal" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-image">
+          {% image page.event.image original as img %}
+            <img src="{{ img.url }}" alt="Image" class="modal-image">
+            <button type="button" class="close close-absolute" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="icon-x"></span>
+            </button>
+          </div>
+          <div class="modal-body text-center">
+            <p>{{ page.event.description }}</p>
+          </div>
+          <div class="modal-footer gutter-1">
+            <div class="container-fluid">
+              <div class="row gutter-1">
+                <div class="offset-1 col-10">
+                  <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

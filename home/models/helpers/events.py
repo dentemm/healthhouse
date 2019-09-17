@@ -1,8 +1,9 @@
 from django.db import models
 
 from ..snippets import Event
+from ..helpers import TimeStampMixin
 
-class EventVisitor(models.Model):
+class EventVisitor(TimeStampMixin, models.Model):
   
     first_name = models.CharField('First name', max_length=40, null=False)
     last_name = models.CharField('Last name', max_length=40, null=False)
@@ -18,5 +19,6 @@ class EventVisitor(models.Model):
     class Meta:
 		    verbose_name = 'visitor'
 		    verbose_name_plural = 'visitors'
+            # ordering = ['created_at']
 		    ordering = ['last_name', 'first_name']
 
