@@ -1,7 +1,9 @@
 <h1>Contact form</h1>
 <hr>
 {% for field in form %}
-<p>
-  <b>{{ field.label}}:</b> {{field.value}}
-</p>
-{% enfor %}
+  {% if field.label and field.value %}
+  <p>
+    <b>{{ field.label}}:</b> {{field.value}}
+  </p>
+  {% endif %}
+{% endfor %}

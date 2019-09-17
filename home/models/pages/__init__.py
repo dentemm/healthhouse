@@ -522,13 +522,14 @@ class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
             
             if form.is_valid():
                 self.process_form_submission(form)
-                
                 ctx['form'] = self.get_form(page=self, user=request.user)
-
                 messages.success(request, self.thank_you_text)
-
                 return render(request, self.get_landing_page_template(request), ctx)
-            
+
+            else: 
+                ctx['form'] = form
+                return render(request, self.get_landing_page_template(request), ctx)
+
         form = self.get_form(page=self, user=request.user)                
         ctx['form'] = form 
 
@@ -538,6 +539,8 @@ class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
         return self.template
 
     def send_mail(self, form):
+
+        print('sending mail!')
 
         subject = self.subject
         receivers = [self.to_address, ]
