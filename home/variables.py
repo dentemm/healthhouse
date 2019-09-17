@@ -8,7 +8,15 @@ SOCIAL_MEDIA_CHOICES = (
 
 EVENT_CHOICES = (
     (1, 'Public Thursday'),
+    (2, 'Private Event')
 )
+
+CATERING_CHOICES = [
+    (0, 'No catering'),
+    (1, 'Sandwiches'),
+    (2, 'Walking dinner'),
+    (3, 'Reception')
+]
 
 TEAM_MEMBER_CHOICES = (
     (1, 'Core team'),

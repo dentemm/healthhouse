@@ -17,7 +17,7 @@ from modelcluster.models import ClusterableModel
 from modelcluster.fields import ParentalKey
 
 from ..helpers import Address, GeneralBullet
-from ...variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES, EVENT_CHOICES
+from ...variables import PARTNER_CHOICES, TEAM_MEMBER_CHOICES, TRANSPORTATION_CHOICES, EVENT_CHOICES, CATERING_CHOICES
 
 @register_snippet
 class Location(Address, index.Indexed):
@@ -465,10 +465,11 @@ class Event(CalendarItem):
     event_type = models.IntegerField(choices=EVENT_CHOICES, null=True)
     link = models.URLField('External link', blank=True)
     is_private = models.BooleanField('Private event?', default=False)
+    catering = models.IntegerField(choices=CATERING_CHOICES, default=0)
 
     def __str__(self):
 
-        if self.is_private:
+        if self.event_type == 2 or self.is_private:
             return self.title + ' * PRIVATE EVENT *'
 
         return self.title
@@ -491,7 +492,8 @@ Event.panels = [
         ]),
         FieldRowPanel([
             FieldPanel('link', classname='col6'),
-            FieldPanel('is_private', classname='col6')
+            FieldPanel('catering', classname='col6'),
+            # FieldPanel('is_private', classname='col6')
         ]),
         ImageChooserPanel('image'),
     ], heading='General information'),

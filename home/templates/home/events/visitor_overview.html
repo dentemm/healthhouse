@@ -17,6 +17,11 @@
               <div class="col-2">{{ visitor.company }}</div>
               <div class="col-2">{% if visitor.phone %}{{ visitor.phone }}{% endif %}</div>
               <div class="col-2">{{ visitor.email }}</div>
+            {% if visitor.diet_info and visitor.diet_info != '' %}
+              <div class="col-8 offset-1">
+                <p class="text-primary"><b class="text-primary">Diet info: </b> {{ visitor.diet_info }}</p>
+              </div>
+            {% endif %}
             </div>
           {% endfor %}
           </div>

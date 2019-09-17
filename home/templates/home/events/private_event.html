@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load widget_tweaks %}
+{% load widget_tweaks wagtailimages_tags %}
 
 {% block main %}
 
@@ -21,17 +21,30 @@
             {% csrf_token %}
             {% for field in form %}
               <div class="form-group">
-              <label>{{ field.label }}</label>
-          {% with WIDGET_ERROR_CLASS='is-invalid' %}
-            {% render_field field class+="form-control" %}
-          {% endwith %}
-            {% if field.errors %}
-              {% for error in field.errors %}
-                <div class="text-danger">
-                  {{ error }}
-                </div>
-              {% endfor %}
-            {% endif %}
+
+              {% if field.label == 'Diet info' %}
+                {% if page.event.catering == 2 %}
+                <p class="text-green">
+                  There will be a walking dinner at this event, if you have any food allergies or intolerances you can state them below.
+                </p>
+                <label>{{ field.label }} (Optional)</label>
+              {% with WIDGET_ERROR_CLASS='is-invalid' %}
+                {% render_field field class+="form-control" attr+='' %}
+              {% endwith %}
+                {% endif %}       
+              {% else %}
+                <label>{{ field.label }}</label>
+            {% with WIDGET_ERROR_CLASS='is-invalid' %}
+              {% render_field field class+="form-control" %}
+            {% endwith %}
+              {% endif %}
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <div class="text-danger">
+                    {{ error }}
+                  </div>
+                {% endfor %}
+              {% endif %}
               </div>
             {% endfor %}
             {% if messages %}
@@ -50,6 +63,10 @@
           </form>
         </div>
         <div class="col-lg-6 offset-lg-1">
+          {% comment %} {% image page.event.image height-200 as img %}
+          <figure class="photo">
+            <img src="{{ img.url }}" alt="Image" class="hh-image">
+          </figure> {% endcomment %}
           <h3 class="text-primary">Practical information</h3>
           <div class="media align-items-center mb-0">
             <i class="icon-basic_calendar fs-40 mb-1 mr-2 text-primary"></i>
