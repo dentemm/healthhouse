@@ -27,8 +27,8 @@
               </div>
             {% endif %}
             {% if visitor.diet_info and visitor.diet_info != '' %}
-              <div class="col-8 offset-1">
-                <p class="text-primary"><b class="text-primary">Diet info: </b> {{ visitor.diet_info }}</p>
+              <div class="col-8">
+                <p class="text-primary pl-4"><b class="text-primary">Diet info: </b> {{ visitor.diet_info }}</p>
               </div>
             {% endif %}
             </div>
@@ -37,7 +37,6 @@
         </div>
       </div>
     </div>
-
     <div class="modal fade" id="deleteUser" aria-hidden="true">
       <div class="modal-dialog modal-sm modal-dialog-centered">
         <form action="{% pageurl page %}" method="POST">
