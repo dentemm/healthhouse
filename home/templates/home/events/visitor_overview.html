@@ -14,11 +14,10 @@
           {% for visitor in page.event.visitors.all %}
             <div class="row align-items-center mb-1">
               <div class="col-1">{{ forloop.counter }}</div>
-              <div class="col-2">{{ visitor.last_name }}</div>
-              <div class="col-2">{{ visitor.first_name }}</div>
+              <div class="col-3">{{ visitor.last_name }} {{ visitor.first_name }}</div>
               <div class="col-2">{{ visitor.company }}</div>
               <div class="col-2">{% if visitor.phone %}{{ visitor.phone }}{% endif %}</div>
-              <div class="col-2">{{ visitor.email }}</div>
+              <div class="col-3">{{ visitor.email }}</div>
             {% if request.user and request.user.is_authenticated %}
               <div class="col-1">
                 <button class="btn bg-white" data-toggle="modal" data-target="#deleteUser" data-id={{ visitor.pk }}>
