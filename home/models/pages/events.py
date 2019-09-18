@@ -64,6 +64,30 @@ class PrivateEventVisitorPage(Page):
     def event(self):
         return self.get_parent().specific.event
 
+    def serve(self, request):
+
+        if request.method == 'POST':
+
+            if (request.user and request.user.is_authenticated):
+                form = request.POST
+
+                try:
+                    pk = form.get('userid')
+                    visitor = EventVisitor.objects.get(pk=pk)
+                    visitor.delete()
+
+                    return super(PrivateEventVisitorPage, self).serve(request)
+
+                except:
+                    return super(PrivateEventVisitorPage, self).serve(request)
+
+                return super(PrivateEventVisitorPage, self).serve(request)
+
+            else: 
+                pass
+
+        return super(PrivateEventVisitorPage, self).serve(request)
+
 class PrivateEventPage(Page):
 
     template = 'home/events/private_event.html'
@@ -80,8 +104,6 @@ class PrivateEventPage(Page):
     def serve(self, request):
 
         if self.get_descendants().count() == 0:
-            print('geen kinderen!')
-
             self.add_child(instance=PrivateEventVisitorPage(title='visitors', slug='visitors', live=True))
 
         if request.method == 'POST':
