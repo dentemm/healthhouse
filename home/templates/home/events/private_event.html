@@ -52,9 +52,35 @@
               <div class="text-primary">
                 {{message}}
               </div>
+
+
+              <div class="modal fade" id="successmodal" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-body text-center">
+                      <h5 class="font-weight-normal">Success!</h5>
+                      <p>Thank you for subscribing, see you at the event!</p>
+                    </div>
+                    <div class="modal-footer gutter-1">
+                      <div class="container-fluid">
+                        <div class="row gutter-1">
+                          <div class="offset-1 col-10">
+                            <button type="button" class="btn btn-block btn-primary" data-dismiss="modal">Close</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+              <script defer>
+                setTimeout(() => $('#successmodal').modal('show'), 500)
+              </script>
               {% endfor %}
             {% endif %}
-            {% if remaining_places == 0 %}
+            {% if remaining_places == 0 and not messages %}
               <div class="text-danger">
                 This event is fully booked!
               </div>
@@ -139,6 +165,7 @@
         </div>
       </div>
     </div>
+
   </section>
 
 {% endblock main %}
