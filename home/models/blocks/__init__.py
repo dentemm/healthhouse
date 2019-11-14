@@ -20,12 +20,14 @@ class ImageWithCaptionblock(StructBlock):
     class Meta:
         template = 'home/partials/blocks/image_caption.html'
         icon = 'image'
+        label = 'Single Image'
 
 class CustomEmbedBlock(EmbedBlock):
 
     class Meta:
         template = 'home/partials/blocks/embed.html'
         icon = 'media'
+        label = 'Video Embed'
 
 class CarouselBlock(ListBlock):
 
@@ -42,6 +44,7 @@ class CustomListBlock(ListBlock):
     class Meta:
         template = 'home/partials/blocks/list.html'
         icon = 'list-ul'
+        label = 'List'
 
 class CustomURLBlock(StructBlock):
 
@@ -106,6 +109,7 @@ class ButtonLinkBlock(StructBlock):
     class Meta:
         template = 'home/partials/blocks/buttonlink.html'
         icon = 'site'
+        label = 'Button link'
 
 class BlogPageStreamBlock(StreamBlock):
 
