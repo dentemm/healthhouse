@@ -97,6 +97,16 @@ class HomePageStreamBlock(StreamBlock):
     test = ImageWithCaptionblock(label='testje', icon='image')
     images = ListBlock(ImageWithCaptionblock(), label='Image slider', min=3)
 
+class ButtonLinkBlock(StructBlock):
+
+    button_text = CharBlock(max_lenght=64, required=True)
+    internal_link = ListBlock(PageChooserBlock(), required=False)
+    external_link = URLBlock(required=False)
+
+    class Meta:
+        template = 'home/partials/blocks/buttonlink.html'
+        icon = 'site'
+
 class BlogPageStreamBlock(StreamBlock):
 
     subtitle = SubtitleBlock()
@@ -107,6 +117,7 @@ class BlogPageStreamBlock(StreamBlock):
     image = ImageWithCaptionblock()
     rich_text = CustomRichTextBlock()
     embed = CustomEmbedBlock()
+    link = ButtonLinkBlock()
 
 class DiscoveryPageStreamBlock(StreamBlock):
 
