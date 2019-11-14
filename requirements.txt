@@ -6,10 +6,10 @@ chardet==3.0.4
 dj-database-url==0.5.0
 Django==2.1.11
 django-countries==5.3.1
-django-modelcluster==4.3
+django-modelcluster==5.0
 django-recaptcha==1.4.0
 django-storages==1.6.6
-django-taggit==0.23.0
+django-taggit==1.1.0
 django-treebeard==4.3
 django-widget-tweaks==1.4.2
 djangorestframework==3.8.2
@@ -31,8 +31,8 @@ s3transfer==0.1.13
 six==1.11.0
 Unidecode==0.4.21
 urllib3==1.24.2
-wagtail==2.6.3
+wagtail==2.7
 wagtail-django-recaptcha==1.0
 webencodings==0.5.1
 whitenoise==3.3.1
-Willow==1.1
+Willow==1.3
