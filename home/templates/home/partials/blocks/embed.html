@@ -21,8 +21,6 @@
         
     const videoId = getId('{{ value.url }}');
 
-    console.log(videoId);
-
     $('iframe').attr('src', `//www.youtube.com/embed/${videoId}`);
   }
 </script>

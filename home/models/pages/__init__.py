@@ -543,8 +543,6 @@ class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
 
     def send_mail(self, form):
 
-        print('sending mail!')
-
         subject = self.subject
         receivers = [self.to_address, ]
         sender = self.from_address
