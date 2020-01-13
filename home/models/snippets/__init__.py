@@ -317,6 +317,13 @@ class Project(ClusterableModel, models.Model):
     )
     link_title = models.CharField(max_length=24, null=True)
     link = models.URLField(null=True)
+    logo = models.ForeignKey(
+        'wagtailimages.Image',
+        on_delete=models.SET_NULL,
+        related_name='+',
+        null=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.title
@@ -336,7 +343,8 @@ Project.panels = [
         FieldRowPanel([
             FieldPanel('text', classname='col9')
         ]),
-        ImageChooserPanel('image')
+        ImageChooserPanel('image'),
+        ImageChooserPanel('logo')
     ], heading='Project information'),
     InlinePanel('bullets', label='Extra information (bullet list)')
 ]

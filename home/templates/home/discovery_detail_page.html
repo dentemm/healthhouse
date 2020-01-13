@@ -20,28 +20,35 @@
     <div class="container-full p-0 m-0 hh-parallax2" style="background-image: url({{ img.url }})">
       <div class="row align-items-center px-5">
         <div class="offset-sm-{% cycle 0 3 1 2 %} col-sm-8 offset-lg-{% cycle 0 6 1 7 %} col-lg-4 bg-{% cycle 'primary' 'white' 'dark-blue' %}-alpha hh-card">
-          {% if item.company %}
+        {% if item.company %}
           <a href="{{ item.company.url }}" target="_blank">
               {% image item.company.logo max-125x125 class='float-right ml-1' %}
           </a>
-          {% endif %}
+        {% endif %}
           <h5 class="card-title text-{% cycle 'white' 'dark' 'white' %}">{{ item.title }}</h5>
           <p class="text-{% cycle 'white' '' 'white' %}">
             {{ item.text }}
           </p>
-          {% if item.bullets %}
+        {% if item.bullets %}
           <ul class="{% cycle 'text-white' 'hh-list' 'text-white' %}">
-            {% for bullet in item.bullets.all %}
+          {% for bullet in item.bullets.all %}
             <li>
               {{ bullet.item }}
             </li>
-            {% endfor %}
+          {% endfor %}
           </ul>
+        {% endif %}
+        {% if item.link %}
+          <div class="d-flex justify-content-between align-items-end">
+            <div>
+              <a href="{{ item.link }}" class="btn btn-{% cycle 'dark-blue' 'primary' 'primary' %}" target='_blank'>
+                {{ item.link_title }}
+              </a>
+            </div>
+          {% if item.logo %}
+            {% image item.logo height-100 %}
           {% endif %}
-          {% if item.link %}
-          <a href="{{ item.link }}" class="btn btn-{% cycle 'dark-blue' 'primary' 'primary' %}" target='_blank'>
-            {{ item.link_title }}
-          </a>
+          </div>
           {% endif %}
         </div>
       </div>
