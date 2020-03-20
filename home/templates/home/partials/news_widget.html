@@ -1,4 +1,4 @@
-{% load wagtailimages_tags %}
+{% load wagtailimages_tags wagtailcore_tags %}
 
 <section class="bg-secondary pattern pattern-dark py-5">
   <div class="container">
@@ -28,6 +28,9 @@
         </div>
       </div>
     </div>
+    <a href="{% slugurl 'news' %}" class="btn btn-with-ico btn-primary mb-2">
+      News overview <i class="icon-angle-right"></i>
+    </a>
   </div>
 </section>
   
