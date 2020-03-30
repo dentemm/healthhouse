@@ -21,8 +21,8 @@ def search(request):
         query = Query.get(search_query)
 
         # Adding non - page models to the search results
-        search_results += backend.search(search_query, AboutPageQuestion.objects.all()).results()
-        search_results += backend.search(search_query, AboutPageTopic.objects.all()).results()
+        # search_results += backend.search(search_query, AboutPageQuestion.objects.all()).results()
+        # search_results += backend.search(search_query, AboutPageTopic.objects.all()).results()
 
         # Record hit
         query.add_hit()

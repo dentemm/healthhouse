@@ -96,7 +96,7 @@ class PrivateEventPage(Page):
     question_text = models.TextField(verbose_name='Contact information', null=True)
     event = models.ForeignKey(
         Event,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         null=False,
         blank=False
     )

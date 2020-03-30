@@ -695,10 +695,10 @@ AboutPageQuestion.panels = [
     ])
 ]
 
-AboutPageQuestion.search_fields = [
-    index.SearchField('question'),
-    index.SearchField('answer')
-]
+# AboutPageQuestion.search_fields = [
+#     index.SearchField('question'),
+#     index.SearchField('answer')
+# ]
 
 class AboutPageTopic(Orderable):
 

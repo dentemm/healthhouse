@@ -112,8 +112,7 @@ WAGTAILSEARCH_BACKENDS = {
     'default': {
         'BACKEND': 'wagtail.contrib.postgres_search.backend',
         # PS: dutch also exists: https://stackoverflow.com/questions/39751892/get-full-list-of-full-text-search-configuration-languages
-        'SEARCH_CONFIG': 'english', 'dutch'
-        'ATOMIC_REBUILD': True
+        'SEARCH_CONFIG': 'english',  # 'dutch',
     }
 }
 
