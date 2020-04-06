@@ -803,7 +803,7 @@ BlogPage.subpage_types = []
 
 class CoronaIndexPage(Page):
 
-    template = 'home/corona_index_page.html'
+    template = 'home/corona/corona_index_page.html'
 
     def articles(self): 
         return CoronaArticlePage.objects.live().order_by('-last_published_at')
@@ -833,13 +833,27 @@ class CoronaArticlePage(Page):
 
     tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
 
+    template = 'home/corona/corona_detail_page.html'
+
     def previous_url(self):
         return self.request.META.get('HTTP_REFERER')
 
-    # def related_articles(self):
+    def related_articles(self):
 
-    #     for tag in self.tags:
-    #         print(tag)
+        all_articles = CoronaArticlePage.objects.all()
+
+        if all_articles.count <= 4:
+            return all_articles
+
+        if self.tags.length == 0:
+            return []
+
+        # else:
+
+
+
+        # for tag in self.tags:
+        #     print(tag)
 
 
 

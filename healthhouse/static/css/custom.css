@@ -209,9 +209,9 @@ color: rgba(255, 255, 255, 0.5);
     -moz-transform: translate(0, -120%);
     transform: translate(0, -120%);
     }
+
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.35rem;
+    padding-left: 0.35rem;
+  }
 }
-
-
-
-
-/* TEMM TESTS */

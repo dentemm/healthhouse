@@ -7,11 +7,11 @@
   <!-- cover -->
   {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image %}
 
-  {% comment %} <section class="pt-5 pb-7">
+  <section class="pt-5 pb-7">
     <div class="container">
       <div class="row justify-content-center mb-1">
         <div class="col-md-10 col-lg-8">
-          <p class="lead">{{ page.intro }}</p>
+          <p class="lead">{{ page.title }}</p>
           <hr class="w-25">
         </div>
       </div>
@@ -19,7 +19,7 @@
       {% include_block block %}
     {% endfor %} 
     </div>
-  </section> {% endcomment %}
+  </section>
 
   <!-- news -->
   {% comment %} {% if page.latest_articles %}

@@ -4,4 +4,45 @@
 
 {% block main %}
 
+  <section class="hero hero-with-header pt-10 pb-5"  id="news">
+    <div class="container pt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <h1 class="text-decorated">{{ page.title }}</b></h1>
+          <p>{{ page.introduction }}</p>
+        </div>
+      </div>
+    </div>    
+  </section>
+
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <section class="pt-3 pb-5">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col">
+          <ul class="masonry row gutter-2">
+          {% for item in page.articles %}
+            {% image item.cover_image width-500 as img %}
+            <li class="col-sm-6 col-md-4 col-lg-3">
+              <article class="tile {% random_tile %}">
+                <div class="tile-image" style="background-image: url({{ img.url }}); filter:brightness(66%);"></div>
+                <a href="{% pageurl item %}">
+                  <div class="tile-footer">
+                    <h3 class="text-white">{{ item.title }}</h3>
+                  </div>
+                </a>
+              </article>
+            </li>
+          {% endfor %}
+          </ul>
+        </div> 
+      </div>
+    </div>
+  </section>
 {% endblock main %}
