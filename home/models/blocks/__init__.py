@@ -126,3 +126,8 @@ class BlogPageStreamBlock(StreamBlock):
 class DiscoveryPageStreamBlock(StreamBlock):
 
     parallax = ParallaxBlock()
+
+# class CoronaArticleStreamBlock(StreamBlock):
+
+#     rich_text = CustomRichTextBlock()
+#     unordered_list = CustomListBlock(child_block=ListItemBlock)
