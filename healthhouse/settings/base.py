@@ -184,3 +184,15 @@ WAGTAIL_SITE_NAME = "healthhouse"
 BASE_URL = 'http://health-house.be'
 
 PASSWORD_REQUIRED_TEMPLATE = 'home/events/login.html'
+
+WAGTAILADMIN_RICH_TEXT_EDITORS = {
+    'default': {
+        'WIDGET': 'wagtail.admin.rich_text.DraftailRichTextArea',
+        'OPTIONS': {
+            'features': ['h2', 'bold', 'italic', 'link', 'document-link']
+        }
+    },
+    'legacy': {
+        'WIDGET': 'wagtail.admin.rich_text.HalloRichTextArea',
+    }
+}

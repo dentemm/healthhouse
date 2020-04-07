@@ -20,7 +20,7 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from modelcluster.contrib.taggit import ClusterTaggableManager
 
-from taggit.models import TaggedItemBase
+from taggit.models import TaggedItemBase, Tag
 
 from wagtailcaptcha.models import WagtailCaptchaForm
 
@@ -808,6 +808,18 @@ class CoronaIndexPage(Page):
     def articles(self): 
         return CoronaArticlePage.objects.live().order_by('-last_published_at')
 
+    def all_tags(self):
+
+        tags = []
+        pages = CoronaArticlePage.objects.live()
+
+        for page in pages:
+            tags += page.get_tags()
+
+        tags = sorted(set(tags))
+
+        return tags
+
 CoronaIndexPage.content_panels = Page.content_panels + [
     # FieldPanel('introduction'),
     # MultiFieldPanel([
@@ -835,6 +847,14 @@ class CoronaArticlePage(Page):
 
     template = 'home/corona/corona_detail_page.html'
 
+    # related articles
+    related_title = models.CharField(verbose_name='Title related art.', max_length=64, default='Related articles')
+
+    def get_tags(self):
+        tags = self.tags.all()
+
+        return tags
+
     def previous_url(self):
         return self.request.META.get('HTTP_REFERER')
 
@@ -846,7 +866,9 @@ class CoronaArticlePage(Page):
             return all_articles
 
         if self.tags.length == 0:
-            return []
+            return all_articles
+
+            
 
         # else:
 
@@ -865,6 +887,9 @@ CoronaArticlePage.content_panels = [
     # MultiFieldPanel([
     #     StreamFieldPanel('content')
     # ], heading='Content'),
+    MultiFieldPanel([
+        FieldPanel('related_title')
+    ], heading='Related articles'),
     MultiFieldPanel([
         FieldPanel('tags')
     ], heading='Tags')

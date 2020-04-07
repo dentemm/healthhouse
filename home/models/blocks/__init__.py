@@ -29,6 +29,13 @@ class CustomEmbedBlock(EmbedBlock):
         icon = 'media'
         label = 'Video Embed'
 
+class CoronaEmbedBlock(EmbedBlock):
+
+    class Meta:
+        template = 'home/corona/blocks/embed.html'
+        icon = 'media'
+        label = 'Video embed'
+
 class CarouselBlock(ListBlock):
 
     class Meta:
@@ -127,7 +134,13 @@ class DiscoveryPageStreamBlock(StreamBlock):
 
     parallax = ParallaxBlock()
 
-# class CoronaArticleStreamBlock(StreamBlock):
+class CoronaArticleStreamBlock(StreamBlock):
 
-#     rich_text = CustomRichTextBlock()
-#     unordered_list = CustomListBlock(child_block=ListItemBlock)
+    paragraph = ParagraphBlock()
+    rich_text = CustomRichTextBlock()
+    unordered_list = CustomListBlock(child_block=ListItemBlock)
+
+class CoronaSidebarStreamBlock(StreamBlock):
+
+    embed = CoronaEmbedBlock()
+    
