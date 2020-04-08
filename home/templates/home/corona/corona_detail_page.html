@@ -5,7 +5,7 @@
 {% block main %}
 
   <!-- cover -->
-  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image %}
+  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous %}
 
   <section class="pt-5 pb-7">
     <div class="container">
@@ -15,24 +15,23 @@
           <hr class="w-25">
         </div>
       </div>
-    {% for block in page.content %}
-      {% include_block block %}
-    {% endfor %} 
     </div>
   </section>
 
-  <div class="container bg-secondary">
+  <div class="container">
   <div class="row">
     <div class="col-lg-8 col-xs-12">
-      <div class="bg-primary w-100">
-        test
+      <div class="w-100">
+        {% for block in page.content %}
+          {% include_block block %}
+        {% endfor %} 
       </div>
     </div>
 
     <div class="col-lg-4 col-xs-12">
 
       <div class="bg-primary w-100">
-        test
+        Hier komt de zijbalk
       </div>
 
     </div>

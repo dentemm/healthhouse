@@ -25,7 +25,7 @@ from taggit.models import TaggedItemBase, Tag
 from wagtailcaptcha.models import WagtailCaptchaForm
 
 from .events import EventListPage, PrivateEventListPage
-from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock
+from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock
 from ..snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
@@ -842,6 +842,7 @@ class CoronaArticlePageTag(TaggedItemBase):
 class CoronaArticlePage(Page):
 
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    content = StreamField(CoronaArticleStreamBlock(), null=True)
 
     tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
 
@@ -850,13 +851,17 @@ class CoronaArticlePage(Page):
     # related articles
     related_title = models.CharField(verbose_name='Title related art.', max_length=64, default='Related articles')
 
+    def get_context(self, request):
+
+        context = super().get_context(request)
+        context['previous'] = request.META.get('HTTP_REFERER')
+
+        return context
+
     def get_tags(self):
         tags = self.tags.all()
 
         return tags
-
-    def previous_url(self):
-        return self.request.META.get('HTTP_REFERER')
 
     def related_articles(self):
 
@@ -884,6 +889,9 @@ CoronaArticlePage.content_panels = [
         FieldPanel('title'),
         ImageChooserPanel('cover_image'),
     ], heading='Title & intro'),
+    MultiFieldPanel([
+        StreamFieldPanel('content')
+    ], heading='Main content'),
     # MultiFieldPanel([
     #     StreamFieldPanel('content')
     # ], heading='Content'),
