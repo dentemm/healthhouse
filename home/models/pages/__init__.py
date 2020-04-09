@@ -25,7 +25,7 @@ from taggit.models import TaggedItemBase, Tag
 from wagtailcaptcha.models import WagtailCaptchaForm
 
 from .events import EventListPage, PrivateEventListPage
-from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock
+from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock
 from ..snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
@@ -843,7 +843,10 @@ class CoronaArticlePageTag(TaggedItemBase):
 class CoronaArticlePage(Page):
 
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    author = models.CharField('Author or resource', max_length=64, null=True)
+
     content = StreamField(CoronaArticleStreamBlock(), null=True)
+    sidebar = StreamField(CoronaSidebarStreamBlock(), null=True)
 
     tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
 
@@ -888,14 +891,15 @@ class CoronaArticlePage(Page):
 CoronaArticlePage.content_panels = [
     MultiFieldPanel([
         FieldPanel('title'),
+        FieldPanel('author'),
         ImageChooserPanel('cover_image'),
     ], heading='Title & intro'),
     MultiFieldPanel([
         StreamFieldPanel('content')
     ], heading='Main content'),
-    # MultiFieldPanel([
-    #     StreamFieldPanel('content')
-    # ], heading='Content'),
+    MultiFieldPanel([
+        StreamFieldPanel('sidebar')
+    ], heading='Sidebar content'),
     MultiFieldPanel([
         FieldPanel('related_title')
     ], heading='Related articles'),

@@ -5,9 +5,22 @@
 {% block main %}
 
   <!-- cover -->
-  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous %}
+  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous author=page.author %}
 
-  <div class="container">
+  <div class="container mb-5">
+
+    <div class="row mt-4 mb-2">
+      <div class="col-lg-8 col-xs-12">
+        <div class="w-100">
+          <div class="row justify-content-center mb-3">
+            <div class="col-md-10 col-lg-8">
+              <p class="lead text-primary font-weight-bold">{{ page.author }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row">
       <div class="col-lg-8 col-xs-12">
         <div class="w-100">
@@ -18,13 +31,12 @@
       </div>
 
       <div class="col-lg-4 col-xs-12">
-
         <div class="bg-primary w-100">
-          Hier komt de zijbalk
+          {% for block in page.sidebar %}
+            {% include_block block %}
+          {% endfor %} 
         </div>
-
       </div>
-    
     </div>
   </div>
 

@@ -22,6 +22,15 @@ class ImageWithCaptionblock(StructBlock):
         icon = 'image'
         label = 'Single Image'
 
+class CoronaImageBlock(StructBlock):
+    image = ImageChooserBlock()
+    caption = CharBlock(required=False)
+
+    class Meta:
+        template = 'home/corona/blocks/single_image.html'
+        icon = 'image'
+        label = 'Single Image'
+
 class CustomEmbedBlock(EmbedBlock):
 
     class Meta:
@@ -144,5 +153,6 @@ class CoronaArticleStreamBlock(StreamBlock):
 
 class CoronaSidebarStreamBlock(StreamBlock):
 
+    image = CoronaImageBlock()
     embed = CoronaEmbedBlock()
     
