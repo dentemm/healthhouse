@@ -7,36 +7,25 @@
   <!-- cover -->
   {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous %}
 
-  <section class="pt-5 pb-7">
-    <div class="container">
-      <div class="row justify-content-center mb-1">
-        <div class="col-md-10 col-lg-8">
-          <p class="lead">{{ page.title }}</p>
-          <hr class="w-25">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-xs-12">
+        <div class="w-100">
+          {% for block in page.content %}
+            {% include_block block %}
+          {% endfor %} 
         </div>
       </div>
-    </div>
-  </section>
 
-  <div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-xs-12">
-      <div class="w-100">
-        {% for block in page.content %}
-          {% include_block block %}
-        {% endfor %} 
+      <div class="col-lg-4 col-xs-12">
+
+        <div class="bg-primary w-100">
+          Hier komt de zijbalk
+        </div>
+
       </div>
+    
     </div>
-
-    <div class="col-lg-4 col-xs-12">
-
-      <div class="bg-primary w-100">
-        Hier komt de zijbalk
-      </div>
-
-    </div>
-  
-  </div>
   </div>
 
   <!-- news -->
