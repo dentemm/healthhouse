@@ -136,9 +136,11 @@ class DiscoveryPageStreamBlock(StreamBlock):
 
 class CoronaArticleStreamBlock(StreamBlock):
 
+    subtitle = SubtitleBlock()
     paragraph = ParagraphBlock()
     rich_text = CustomRichTextBlock()
     unordered_list = CustomListBlock(child_block=ListItemBlock)
+    link = ButtonLinkBlock()
 
 class CoronaSidebarStreamBlock(StreamBlock):
 

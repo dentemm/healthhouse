@@ -803,6 +803,9 @@ BlogPage.subpage_types = []
 
 class CoronaIndexPage(Page):
 
+    intro = models.CharField('Introduction', max_length=512, default='Introduction text here ...')
+    info_tags = models.CharField
+
     template = 'home/corona/corona_index_page.html'
 
     def articles(self): 
@@ -820,15 +823,13 @@ class CoronaIndexPage(Page):
 
         return tags
 
-CoronaIndexPage.content_panels = Page.content_panels + [
-    # FieldPanel('introduction'),
-    # MultiFieldPanel([
-    #     FieldPanel('press_title'),
-    #     FieldPanel('press_text')
-    # ],
-    # heading='Press',
-    # classname='collapsible collapsed'
-    # )
+CoronaIndexPage.content_panels = [
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('intro')
+    ],
+        heading='General information'
+    ),
 ]
 
 CoronaIndexPage.parent_page_types = ['home.HomePage']
