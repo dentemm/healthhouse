@@ -1,0 +1,13 @@
+<div class="row mb-3">
+  <div class="col-md-12 col-lg-10">
+  {% if value.internal_link %}
+    <a href="{{ value.interal_link }}" class="btn btn-with-ico btn-primary mb-2">
+      {{ value.button_text }} <i class="icon-angle-right"></i>
+    </a>
+  {% elif value.external_link %}
+    <a href="{{ value.external_link }}" class="btn btn-with-ico btn-primary mb-2" target="_blank">
+      {{ value.button_text }} <i class="icon-angle-right"></i>
+    </a>
+  {% endif %}
+  </div>
+</div>

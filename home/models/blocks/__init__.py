@@ -62,6 +62,13 @@ class CustomListBlock(ListBlock):
         icon = 'list-ul'
         label = 'List'
 
+class CoronaListBlock(ListBlock):
+
+    class Meta:
+        template = 'home/corona/blocks/list.html'
+        icon = 'list-ul'
+        label = 'List'
+
 class CustomURLBlock(StructBlock):
 
     url = URLBlock(required=False)
@@ -100,16 +107,33 @@ class ParagraphBlock(TextBlock):
         template = 'home/partials/blocks/paragraph.html'
         icon = 'edit'
 
+class CoronaParagraphBlock(TextBlock):
+
+    class Meta:
+        template = 'home/corona/blocks/paragraph.html'
+        icon = 'edit'
+
 class SubtitleBlock(CharBlock):
 
     class Meta:
         template = 'home/partials/blocks/subtitle.html'
         icon = 'title'
 
+class CoronaSubtitleBlock(CharBlock):
+
+    class Meta:
+        template = 'home/corona/blocks/subtitle.html'
+        icon = 'title'
+
 class CustomRichTextBlock(RichTextBlock):
 
     class Meta:
         template = 'home/partials/blocks/rich_text.html'
+
+class CoronaRichTextBlock(RichTextBlock):
+
+    class Meta:
+        template = 'home/corona/blocks/rich_text.html'
 
 class HomePageStreamBlock(StreamBlock):
 
@@ -124,6 +148,17 @@ class ButtonLinkBlock(StructBlock):
 
     class Meta:
         template = 'home/partials/blocks/buttonlink.html'
+        icon = 'site'
+        label = 'Button link'
+
+class CoronaButtonLinkBlock(StructBlock):
+
+    button_text = CharBlock(max_lenght=64, required=True)
+    internal_link = ListBlock(PageChooserBlock(), required=False)
+    external_link = URLBlock(required=False)
+
+    class Meta:
+        template = 'home/corona/blocks/buttonlink.html'
         icon = 'site'
         label = 'Button link'
 
@@ -145,11 +180,11 @@ class DiscoveryPageStreamBlock(StreamBlock):
 
 class CoronaArticleStreamBlock(StreamBlock):
 
-    subtitle = SubtitleBlock()
-    paragraph = ParagraphBlock()
-    rich_text = CustomRichTextBlock()
-    unordered_list = CustomListBlock(child_block=ListItemBlock)
-    link = ButtonLinkBlock()
+    subtitle = CoronaSubtitleBlock()
+    paragraph = CoronaParagraphBlock()
+    rich_text = CoronaRichTextBlock()
+    unordered_list = CoronaListBlock(child_block=ListItemBlock)
+    link = CoronaButtonLinkBlock()
 
 class CoronaSidebarStreamBlock(StreamBlock):
 
