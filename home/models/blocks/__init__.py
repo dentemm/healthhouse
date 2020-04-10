@@ -51,6 +51,12 @@ class CarouselBlock(ListBlock):
         template = 'home/partials/blocks/owl_carousel.html'
         icon = 'image'
 
+class CoronaCarouselBlock(ListBlock):
+
+    class Meta:
+        template = 'home/corona/blocks/owl_carousel.html'
+        icon = 'image'
+
 class ListItemBlock(StructBlock):
 
     item = CharBlock(max_length=255)
@@ -190,4 +196,5 @@ class CoronaSidebarStreamBlock(StreamBlock):
 
     image = CoronaImageBlock()
     embed = CoronaEmbedBlock()
+    gallery = CoronaCarouselBlock(child_block=CoronaImageBlock)
     
