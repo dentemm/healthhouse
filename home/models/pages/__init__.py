@@ -843,7 +843,7 @@ class CoronaArticlePageTag(TaggedItemBase):
 class CoronaArticlePage(Page):
 
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-    author = models.CharField('Author or resource', max_length=64, null=True)
+    author = models.CharField('Author or resource', max_length=64, null=True, blank=True)
 
     content = StreamField(CoronaArticleStreamBlock(), null=True)
     sidebar = StreamField(CoronaSidebarStreamBlock(), null=True)
