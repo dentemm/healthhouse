@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load home_tags wagtailcore_tags wagtailimages_tags %}
+{% load static home_tags wagtailcore_tags wagtailimages_tags %}
 
 {% block main %}
 
@@ -12,34 +12,20 @@
           <p style="font-size: 1.25rem">{{ page.intro }}</p>
         </div>
         <div class="col-md-12 pt-5" id="corona-tags">
-        {% for tag in page.all_tags %}
-          <button class="btn btn-outline-primary mb-1 mr-1">
-            <span style="font-size: 1.25rem">{{ tag }}</span>
-          </button>
-        {% endfor %}
-
         </div>
       </div>
     </div>    
   </section>
 
-  {% comment %} <div class="alert alert-warning alert-dismissible fade show" role="alert">
-    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div> {% endcomment %}
-
-
   <section class="pt-3 pb-5">
     <div class="container-fluid">
       <div class="row">
         <div class="col">
-          <ul class="masonry row gutter-2">
+          <ul class="row gutter-2">
           {% for item in page.articles %}
             {% image item.cover_image width-500 as img %}
-            <li class="col-sm-6 col-md-4 col-lg-3">
-              <article class="tile {% random_tile %}">
+            <li class="col-sm-6 col-md-4 col-lg-3 sort-item" data-item-tags="{% for tag in item.tags.all %}{{tag}}{% if forloop.last %}{% else %},{% endif %}{% endfor %}">
+              <article class="tile">
                 <div class="tile-image" style="background-image: url({{ img.url }}); filter:brightness(66%);"></div>
                 <a href="{% pageurl item %}">
                   <div class="tile-footer">
@@ -55,3 +41,24 @@
     </div>
   </section>
 {% endblock main %}
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/tagsort.js' %}"></script>
+  <script>
+
+    $(document).ready(function() {
+
+      console.log("ready")
+
+      $('#corona-tags').tagSort({
+        items:'.sort-item',
+        tagElement: 'button',
+        itemTagsSeperator: ',',
+        tagAttr: 'data-item-tags',
+        fadeTime: 300,
+        sortAlphabetical: true,
+        sortType: 'single',
+      });
+    });
+  </script>
+{% endblock extra_js %}

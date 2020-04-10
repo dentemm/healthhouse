@@ -28,8 +28,25 @@ div.rich-text > p > b {
   color: white;
 }
 
-#corona-tags .btn {
+#corona-tags button {
+  display: inline-block;
+  font-weight: 400;
+  font-size: 1.25rem;
   padding: 0.75rem 1.5rem;
+  color: #00a1dd;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid #00a1dd;
+  margin-bottom: 0.625rem !important;
+  margin-right: 0.625rem !important;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+#corona-tags button:hover, #corona-tags button:active, #corona-tags button.active {
+  color: #fff;
+  background-color: #00a1dd;
+  border-color: #00a1dd;
 }
 
 img.hh-image {
