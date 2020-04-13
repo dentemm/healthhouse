@@ -177,6 +177,15 @@ color: rgba(255, 255, 255, 0.5);
   transform: rotateY(180deg);
 }
 
+#covid-detail .owl-carousel-single .owl-nav button.owl-prev, #covid-detail .owl-carousel-single .owl-nav button.owl-next {
+  width: 3.7rem;
+  height: 3.7rem;
+}
+
+#covid-detail .owl-nav button.owl-next::before, #covid-detail .owl-nav button.owl-prev::before {
+  line-height: 3.7rem;
+}
+
 @media (min-width: 768px) {
   .hh-parallax {
     height: 38rem;
