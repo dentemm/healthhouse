@@ -13,11 +13,10 @@
     {% endfor %}
     </div>
   </div>
-
   <div id="corona-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl" role="document">
       <div class="modal-content bg-secondary">
-        <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="true">
+        <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="false">
         {% for item in value %}
           {% image item.image fill-1200x750 as tmp_photo %}
           <figure class="photo">

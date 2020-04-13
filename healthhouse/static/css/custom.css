@@ -135,7 +135,19 @@ color: rgba(255, 255, 255, 0.5);
 
 .accordion-group-minimal .accordion-control::after {
   color: white;
-  background-color: #00a1dd;}
+  background-color: #00a1dd;
+}
+
+.tooltip-inner  {
+  padding: 1rem;
+  background-color: #00a1dd;
+  border-radius: 0.75rem;
+}
+
+.tooltip .arrow::before {
+  border-bottom-color: #00a1dd;
+
+}
 
 /* ROTATING CARD */
 .hh-rotate {

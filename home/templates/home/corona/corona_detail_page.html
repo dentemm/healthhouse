@@ -2,6 +2,10 @@
 
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% block header %}
+  {% include 'home/corona/partials/header.html' %}
+{% endblock header %}
+
 {% block main %}
 
   <!-- cover -->
@@ -84,3 +88,15 @@
   {% endif %} {% endcomment %}
 
 {% endblock main %}
+
+{% block extra_js %}
+  <script>
+
+    $(document).ready(function() {
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip('show')
+      })
+    });
+  </script>
+{% endblock extra_js %}

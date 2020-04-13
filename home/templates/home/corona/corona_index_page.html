@@ -2,12 +2,16 @@
 
 {% load static home_tags wagtailcore_tags wagtailimages_tags %}
 
+{% block header %}
+  {% include 'home/corona/partials/header.html' %}
+{% endblock header %}
+
 {% block main %}
 
   <section class="hero hero-with-header pt-10 pb-5"  id="news">
     <div class="container pt-5">
       <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-12 mb-0">
           <h1 class="mb-1">{{ page.title }}</b></h1>
           <p style="font-size: 1.25rem">{{ page.intro }}</p>
         </div>
@@ -48,7 +52,9 @@
 
     $(document).ready(function() {
 
-      console.log("ready")
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip('show')
+      })
 
       $('#corona-tags').tagSort({
         items:'.sort-item',
