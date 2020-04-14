@@ -24,6 +24,28 @@ div.rich-text > p > b {
   background-color: #29245a;
 }
 
+#corona-nav {
+  animation: float 6s linear infinite;
+}
+
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	25% {
+		transform: translatey(4px);
+  }
+  50% {
+		transform: translatey(0px);
+  } 
+  75% {
+		transform: translatey(-4px);
+  } 
+	100% {
+		transform: translatey(0px);
+	}
+}
+
 .btn-outline-primary:hover a, .btn-outline-primary a:hover {
   color: white;
 }
