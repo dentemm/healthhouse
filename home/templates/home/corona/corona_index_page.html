@@ -15,7 +15,7 @@
           <h1 class="mb-1">{{ page.title }}</b></h1>
           <p style="font-size: 1.25rem">{{ page.intro }}</p>
         </div>
-        <div class="col-md-12 pt-5" id="corona-tags">
+        <div class="col-md-12 pt-5"><span id="corona-tags"></span>
         </div>
       </div>
     </div>    
@@ -64,6 +64,7 @@
         fadeTime: 300,
         sortAlphabetical: true,
         sortType: 'single',
+        reset: '#button-tags-reset'
       });
     });
   </script>

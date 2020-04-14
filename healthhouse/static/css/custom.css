@@ -50,7 +50,7 @@ div.rich-text > p > b {
   color: white;
 }
 
-#corona-tags button {
+#corona-tags button, #button-tags-reset {
   display: inline-block;
   font-weight: 400;
   font-size: 1.25rem;
@@ -65,7 +65,7 @@ div.rich-text > p > b {
   cursor: pointer;
 }
 
-#corona-tags button:hover, #corona-tags button:active, #corona-tags button.active {
+#corona-tags button:hover, #corona-tags button:active, #corona-tags button.active, #button-tags-reset:hover, #button-tags-reset.active {
   color: #fff;
   background-color: #00a1dd;
   border-color: #00a1dd;
