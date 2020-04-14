@@ -11,7 +11,7 @@
       itemTagsElement: false,
       sortType: 'exclusive',
       fadeTime: 0,
-      sortAlphabetical: false,
+      sortAlphabetical: true,
       reset: false,
       tagAttr: 'data-item-tags',
       tagDelimiter: ',',
@@ -146,9 +146,12 @@
         tagSortEngine.tagElements = tagSortEngine.container.find(tagSortEngine.options.tagElement);
 
         if (tagSortEngine.options.sortAlphabetical) {
+
+            console.log("going to sort --")
+
             // Sort values.
             var sortedTags = tagSortEngine.tagElements.toArray().sort(function(a, b) {
-                return a.innerText > b.innerText;
+                return a.innerText > b.innerText ? 1 : -1;
             });
 
             // Remove unsorted values.
