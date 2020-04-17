@@ -56,7 +56,8 @@ INSTALLED_APPS = [
     'storages',
     'widget_tweaks',
     'captcha',
-    'wagtailcaptcha'
+    'wagtailcaptcha',
+    'wand'
 ]
 
 MIDDLEWARE = [
