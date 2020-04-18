@@ -31,6 +31,14 @@ class CoronaImageBlock(StructBlock):
         icon = 'image'
         label = 'Single Image'
 
+class GifImageBlock(StructBlock):
+    image = ImageChooserBlock()
+
+    class Meta:
+        template = 'home/corona/blocks/gif.html'
+        icon = 'image'
+        label = 'Gif image'
+
 class CustomEmbedBlock(EmbedBlock):
 
     class Meta:
@@ -195,6 +203,7 @@ class CoronaArticleStreamBlock(StreamBlock):
 class CoronaSidebarStreamBlock(StreamBlock):
 
     image = CoronaImageBlock()
+    gif_image = GifImageBlock()
     embed = CoronaEmbedBlock()
     gallery = CoronaCarouselBlock(child_block=CoronaImageBlock)
     
