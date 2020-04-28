@@ -97,8 +97,13 @@
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% slugurl 'calendar' %}" role="button">
-              Calendar
+              <a class="nav-link" href="{% slugurl 'calendar'  %}">
+                <span>Calendar</span>
+              </a>
+          </li>
+          <li class="nav-item">
+            <a id="corona-nav" tabindex="0" class="nav-link text-white bg-primary" style="border-radius: 7px;" href="{% slugurl 'corona'  %}" role="button">
+              Corona
             </a>
           </li>
         </ul>
