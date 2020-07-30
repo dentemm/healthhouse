@@ -184,7 +184,7 @@ class BlogPageStreamBlock(StreamBlock):
     gallery = CarouselBlock(child_block=ImageWithCaptionblock)
     unordered_list = CustomListBlock(child_block=ListItemBlock)
     image = ImageWithCaptionblock()
-    rich_text = CustomRichTextBlock()
+    rich_text = CustomRichTextBlock(features=['bold', 'italic', 'link', 'document-link', 'ol', 'ul'])
     embed = CustomEmbedBlock()
     link = ButtonLinkBlock()
 
@@ -196,7 +196,7 @@ class CoronaArticleStreamBlock(StreamBlock):
 
     subtitle = CoronaSubtitleBlock()
     paragraph = CoronaParagraphBlock()
-    rich_text = CoronaRichTextBlock()
+    rich_text = CustomRichTextBlock(features=['bold', 'italic', 'link', 'document-link', 'ol', 'ul'])
     unordered_list = CoronaListBlock(child_block=ListItemBlock)
     link = CoronaButtonLinkBlock()
 
