@@ -1,10 +1,63 @@
 import csv
 
+from ..models.pages import HomePage
+
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
+
+import mailchimp_marketing as MailchimpMarketing
+from mailchimp_marketing.api_client import ApiClientError
+
+def mailchimp(request):
+
+    try:
+        mailchimp = MailchimpMarketing.Client()
+        mailchimp.set_config({
+            'api_key': 'fbad732a46ab8b211a1bb0ae680f61c8-us13',
+            'server': 'us13'
+        })
+
+        list_id = "9bb5a9f1da"
+        email_address = request.POST.get('email_address')
+
+        print('-------')
+        print(email_address)
+
+        member_info = {
+            "email_address": email_address,
+            "status": "pending",
+            "merge_fields": {
+                "FNAME": "",
+                "LNAME": ""
+                }
+            }
+
+        response = mailchimp.lists.add_list_member(list_id, member_info)
+        print("response: {}".format(response))
+
+        message = "Your e-mail address was successfully added to our mailing list, please check your inbox for a confirmation e-mail!"
+
+        response = JsonResponse({"result": {
+            "success": message
+            }
+        })
+
+        return response
+
+    except ApiClientError as error:
+
+        print("An exception occurred: {}".format(error.text))
+
+        message = "This e-mail address could not be added to our mailing list ..."
+
+        response = JsonResponse({"result": {
+            "error": message
+            }
+        })
+        return response
 
 def search(request):
 

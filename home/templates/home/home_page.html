@@ -85,3 +85,54 @@
 {% endif %}
 
 {% endblock main %}
+
+{% block extra_js %}
+  <script>
+    $(document).ready(function() {
+
+      var form = $("#mailchimp-form");
+      var messages = $("#messages");
+
+      form.submit(function(event) {
+
+        event.preventDefault();
+
+        var url = form.attr("action");
+        
+        console.log("*** form:-")
+        console.log(form.serialize());
+
+        $.ajax({
+          type: form.attr('method'),
+          url: url,
+          data: form.serialize(),
+          success: function(result) {
+
+            document.getElementById("mailchimp-form").reset();
+
+            var msg = ""
+            var data = result['result'];
+
+            console.log(data);
+
+            if (data['error']) {
+              msg = data['error']
+              messages.addClass("text-danger")
+              
+            } else if (data['success']) {
+              msg = data['success']
+              messages.addClass("text-white")
+            }
+
+            messages.html(msg);
+          },
+          error: function(result) {
+            console.log("---- error")
+            console.log(error)
+          }
+        });
+
+      })
+    });
+  </script>
+{% endblock extra_js %}

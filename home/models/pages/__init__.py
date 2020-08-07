@@ -24,6 +24,9 @@ from taggit.models import TaggedItemBase, Tag
 
 from wagtailcaptcha.models import WagtailCaptchaForm
 
+import mailchimp_marketing as MailchimpMarketing
+from mailchimp_marketing.api_client import ApiClientError
+
 from .events import EventListPage, PrivateEventListPage
 from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock
 from ..snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
