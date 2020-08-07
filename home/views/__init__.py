@@ -4,6 +4,7 @@ from ..models.pages import HomePage
 
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from django.conf import settings
 
 from wagtail.core.models import Page
 from wagtail.search.models import Query
@@ -16,7 +17,7 @@ def mailchimp(request):
     try:
         mailchimp = MailchimpMarketing.Client()
         mailchimp.set_config({
-            'api_key': 'fbad732a46ab8b211a1bb0ae680f61c8-us13',
+            'api_key': settings.MAILCHIMP_API_KEY,
             'server': 'us13'
         })
 
