@@ -8,7 +8,7 @@
     <div class="container pt-5">
       <div class="row justify-content-center">
         <div class="col-lg-10">
-          <h2>Visitors ({{page.event.visitors.count}} / {{page.event.max_attendees}})</h2>
+          <h2>Visitors ({{ page.event.visitors.count }} / {{ page.event.max_attendees }})</h2>
           <h4 class="text-primary">{{ page.event.title }}</h4>
           <div class="d-flex flex-column mt-3">
           {% for visitor in page.event.visitors.all %}

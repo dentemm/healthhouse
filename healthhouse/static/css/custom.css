@@ -276,7 +276,6 @@ color: rgba(255, 255, 255, 0.5);
   }
 
   .news-cta {
-    display: flex;  
     position: fixed;
     right: 0px;
     top: 25vh;
@@ -289,20 +288,19 @@ color: rgba(255, 255, 255, 0.5);
     background-color: #29245a;
     background-color: #00a1dd;
     background-color: white;
-    box-shadow: -8px -8px 4px #29245aaa; 
+    box-shadow: 5px -5px 3px #29245aaa; 
     transform: skew(0deg, 13deg);
   }
 
   .news-cta_header__text {
     font-size: 1.5em;
-    width: 100px;
-    padding: 20px;
+    margin: 20px;
+    padding-right: 20px;
     writing-mode: vertical-rl;
     transform: skew(0deg, -13deg);
   }
 
   .news-cta_content {
-    width: 150px;
     border: 5px solid #00a1dd;
     border-left: none;
     border-right: none;

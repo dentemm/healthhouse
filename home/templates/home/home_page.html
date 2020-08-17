@@ -49,23 +49,15 @@
     </div>
     <div class="swiper-pagination swiper-pagination-vertical"></div>
   </div>
-  <div id="" class="news-cta">
+  {% if user.is_authenticated %}
+  <a id="" class="news-cta" href="#cta-modal" data-toggle="modal">
     <div class="news-cta_header text-primary font-weight-bold">
       <div class="news-cta_header__text">
         Discover
       </div>
     </div>
-    <div class="news-cta_content">
-      <div class="news-cta_content__inner">
-        content
-      </div>
-    </div>
-    <div class="news-cta_part3">
-      <div class="news-cta_part3__inner">
-        content
-      </div>
-    </div>
-  </div>
+  </a>
+  {% endif %}
 </section>
 <!-- / cover -->
 
@@ -91,15 +83,51 @@
 
 {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
 
-{% if page.numbers.all and page.number_title %}
- {% comment %} {
-    % include 'home/partials/numbers.html' with numbers=page.numbers.all title=page.number_title img=page.number_image %}
- {% endcomment %}
-{% endif %}
-
 {% if page.recent_visitors.all %}
   {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
 {% endif %}
+
+<!-- MODAL -->
+<div class="modal fade" id="cta-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <!-- mailchimp news letter  -->
+  <form action="mailchimp/" method="POST" id="mailchimp-form">
+           
+  {% csrf_token %}
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-body text-center pb-0">
+          <button type="button" class="close close-absolute" data-dismiss="modal" aria-label="Close" style="margin-top: -22px; margin-right: -22px;">
+            <span aria-hidden="true" class="icon-x"></span>
+          </button>
+          <h3 class="mb-0 text-dark-blue">The future of health & care!</h3>
+          <p>
+            Maecenas sed diam eget risus varius blandit sit amet non magna.
+            Nullam quis risus eget urna mollis ornare vel eu leo.
+            Nullam id dolor id nibh ultricies vehicula ut id elit.
+            Etiam porta sem malesuada magna mollis euismod.
+          </p>
+          <div>
+            <div class="input-group align-self-center">
+              <input type="email" autocapitalize="off" autocorrect="off" name="email_address" id="email_address" value="" placeholder="Email" aria-describedby="basic-addon2" class="form-control text-primary">
+              <div class="input-group-append">
+                <span class="input-group-text bg-primary text-white" id="basic-addon2">@</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer gutter-1">
+          <div class="container-fluid">
+            <div class="row gutter-1">
+              <div class="col-12">
+                <button type="submit" class="btn btn-block btn-outline-primary">Keep me informed!</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
 {% endblock main %}
 
@@ -115,9 +143,6 @@
         event.preventDefault();
 
         var url = form.attr("action");
-        
-        console.log("*** form:-")
-        console.log(form.serialize());
 
         $.ajax({
           type: form.attr('method'),
@@ -129,8 +154,6 @@
 
             var msg = ""
             var data = result['result'];
-
-            console.log(data);
 
             if (data['error']) {
               msg = data['error']
@@ -148,8 +171,9 @@
             console.log(error)
           }
         });
-
       })
     });
   </script>
 {% endblock extra_js %}
+
+
