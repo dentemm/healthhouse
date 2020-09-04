@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'captcha',
     'wagtailcaptcha',
     'mailchimp_marketing',
+    'six'
     # 'magickwand',
     # 'wand'
 ]
