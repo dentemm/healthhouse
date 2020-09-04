@@ -270,9 +270,6 @@ class HomePage(Page):
         related_name='+'
     )
 
-    def latest_articles(self): 
-        return BlogPage.objects.live().order_by('-first_published_at')[0:8]
-
     def upcoming_events(self):
         # return Event.objects.all()
         return Event.objects.all() \
@@ -304,13 +301,6 @@ class HomePage(Page):
 
     def recent_visitors(self):
         return Partner.objects.all().filter(recent_visitor=True)
-
-    def get_context(self, request):
-
-        context = super().get_context(request)
-        context['latest_articles'] = self.latest_articles
-        
-        return context
 
 HomePage.content_panels = Page.content_panels + [
     MultiFieldPanel(
@@ -879,17 +869,6 @@ class CoronaArticlePage(Page):
 
         if self.tags.length == 0:
             return all_articles
-
-            
-
-        # else:
-
-
-
-        # for tag in self.tags:
-        #     print(tag)
-
-
 
 CoronaArticlePage.content_panels = [
     MultiFieldPanel([
