@@ -39,7 +39,7 @@ DATABASES['default'] =  dj_database_url.config()
 # STATIC FILES
 #
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 #
 # MEDIA FILES
