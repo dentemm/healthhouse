@@ -1,23 +1,43 @@
-{% load wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
-<section class="py-0">
+<section class="pb-0 pt-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <h2>Latest news</h2>
+      </div>
+    </div>
+  </div>
   <div class="container-full">
     <div class="row">
       <div class="col">
         <ul class="row gutter-0 gallery filtr-container">
           {% for item in list %}
-          {% image item.image width-520 as bg_img %}
-          {% image item.image width-1400 as img%}
+          {% image item.cover_image width-520 as bg_img %}
+          {% image item.cover_image width-1400 as img %}
           <li class="col-6 col-md-4 col-lg-3 filtr-item" data-category="all, branding" data-sort="value">
-            <figure class="photo equal {% cycle '' 'equal-short' '' 'equal-short' 'equal-short' %} ">
-              <a href="{{ img.url }}" 
-                style="background-image: url({{ bg_img.url }});">
-              </a>
-            </figure>
+            <a href="{{ item.url }}" class="user-photo">
+              <figure class="photo equal {% cycle '' 'equal-short' '' 'equal-short' 'equal-short' %} ">
+                <span href="{{ item.url }}" class="masonry-item"
+                  style="background-image: url({{ bg_img.url }});">
+                </span>
+                <figcaption class="user-caption">
+                  <h4>{{ item.title }}</h4>
+                  <ul class="socials">
+                    <button type="button" class="btn btn-with-ico btn-primary">Read more <i class="icon-angle-right"></i></button>
+                  </ul>
+                </figcaption>
+              </figure>
+            </a>
           </li>
           {% endfor %}
         </ul>
       </div>
     </div>
+  </div>
+  <div class="container">
+    <a href="{% slugurl 'news' %}" class="btn btn-with-ico btn-primary mb-2">
+      News overview <i class="icon-angle-right"></i>
+    </a>
   </div>
 </section> 

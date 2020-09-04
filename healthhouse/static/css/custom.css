@@ -67,6 +67,12 @@ div.rich-text > p > b {
   border-color: #00a1dd;
 }
 
+span.masonry-item {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 img.hh-image {
   display: block;
   margin-left: auto;
@@ -164,7 +170,6 @@ color: rgba(255, 255, 255, 0.5);
 
 .tooltip .arrow::before {
   border-bottom-color: #00a1dd;
-
 }
 
 /* ROTATING CARD */

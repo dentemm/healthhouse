@@ -271,7 +271,7 @@ class HomePage(Page):
     )
 
     def latest_articles(self): 
-        return BlogPage.objects.live().order_by('-first_published_at')[0:4]
+        return BlogPage.objects.live().order_by('-first_published_at')[0:8]
 
     def upcoming_events(self):
         # return Event.objects.all()

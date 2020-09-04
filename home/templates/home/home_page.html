@@ -63,29 +63,38 @@
 
 {% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link_1 link_text=page.discover_link_text link2=page.discover_link_2 link2_text=page.discover_link2_text %}
 
-{% if latest_articles %}
+{% comment %} {% if latest_articles %}
   {% include 'home/partials/news_widget.html' with list=latest_articles %}
-{% endif %}
+{% endif %} {% endcomment %} <!-- needs to be move downward and refactored -->
 
 {% if page.features.all %}
   {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
+{% endif %}
+
+{% if page.recent_visitors.all %}
+  {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
 {% endif %}
 
 {% if page.testimonials.all %}
   {% include 'home/partials/testimonials.html' with list=page.testimonials.all %}
 {% endif %}
 
-{% if page.masonry_images.all %}
+{% comment %} {% if page.masonry_images.all %}
   {% include 'home/partials/home_masonry.html' with list=page.masonry_images.all %}
+{% endif %} {% endcomment %} <!-- masonry will be removed, but still is kept for news items -->
+
+{% if latest_articles %}
+  {% comment %} {% include 'home/partials/news_widget.html' with list=latest_articles %} {% endcomment %}
+  {% include 'home/partials/home_masonry.html' with list=latest_articles %}
 {% endif %}
 
 {% include 'home/partials/events_widget.html' with list=page.upcoming_events %}
 
-{% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %}
+{% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %} <!-- needs to be refactored! (modal + footer!)-->
 
-{% if page.recent_visitors.all %}
+{% comment %} {% if page.recent_visitors.all %}
   {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
-{% endif %}
+{% endif %} {% endcomment %} <!-- needs to be move upward-->
 
 <!-- MODAL -->
 <div class="modal fade" id="cta-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -175,5 +184,3 @@
     });
   </script>
 {% endblock extra_js %}
-
-
