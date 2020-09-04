@@ -29,7 +29,7 @@ l18n==2018.5
 magickwand==0.2
 mailchimp-marketing==3.0.12
 openpyxl==3.0.5
-Pillow==5.2.0
+Pillow==7.1.0
 psycopg2==2.7.5
 python-dateutil==2.7.3
 pytz==2018.5
