@@ -75,8 +75,8 @@
   {% include 'home/partials/testimonials.html' with list=page.testimonials.all %}
 {% endif %}
 
-{% if latest_articles %}
-  {% include 'home/partials/home_masonry.html' with list=latest_articles %}
+{% if page.latest_articles %}
+  {% include 'home/partials/home_masonry.html' with list=page.latest_articles %}
 {% endif %}
 
 {% include 'home/partials/events_widget.html' with list=page.upcoming_events %}

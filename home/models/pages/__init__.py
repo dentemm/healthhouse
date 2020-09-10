@@ -302,6 +302,9 @@ class HomePage(Page):
     def recent_visitors(self):
         return Partner.objects.all().filter(recent_visitor=True)
 
+    def latest_articles(self): 
+        return BlogPage.objects.live().order_by('-first_published_at')[0:8]
+
 HomePage.content_panels = Page.content_panels + [
     MultiFieldPanel(
         [
