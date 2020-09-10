@@ -358,19 +358,6 @@ HomePage.content_panels = Page.content_panels + [
     ),
     MultiFieldPanel(
         [
-            InlinePanel(
-                'masonry_images',
-                label='Masonry images',
-                help_text='Currently designed to hold 8 images',
-                min_num=8,
-                max_num=8
-            )
-        ],
-        heading='Masonry images (designed for 8 images)',
-        classname='collapsible collapsed'
-    ),
-    MultiFieldPanel(
-        [
             FieldPanel('newsletter_title'),
             FieldPanel('newsletter_info')
         ],
@@ -961,6 +948,24 @@ PartnerPage.content_panels = [
 
 PartnerPage.parent_page_types = ['home.HomePage']
 PartnerPage.subpage_types = []
+
+class SOPPage(Page):
+
+    intro = models.TextField(null=True)
+    cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+    content = StreamField(BlogPageStreamBlock(), null=True)
+
+SOPPage.content_panels = [
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('intro'),
+        ImageChooserPanel('cover_image'),
+    ], heading='Title & intro'),
+    MultiFieldPanel([
+        StreamFieldPanel('content')
+    ], heading='Content')
+]
+
 
 class PrivacyPage(Page):
 
