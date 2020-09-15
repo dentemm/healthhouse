@@ -444,7 +444,7 @@ class DirectionsBullets(GeneralBullet):
 
 class CalendarItem(models.Model):
 
-    title = models.CharField(max_length=40)
+    title = models.CharField(max_length=64)
     description = models.TextField()
     date = models.DateField(default=date.today)
     start = models.TimeField(default=time(9, 00))
