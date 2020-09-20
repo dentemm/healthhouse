@@ -16,6 +16,8 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.search import index
 
+from wagtailmedia.edit_handlers import MediaChooserPanel
+
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from modelcluster.contrib.taggit import ClusterTaggableManager
@@ -198,6 +200,14 @@ class HealthHouseRelatedLink(Orderable, RelatedLink):
 
 class HomePage(Page):
 
+    video = models.ForeignKey(
+        'wagtailmedia.Media',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+
     logo = models.ForeignKey(
         'wagtailimages.Image',
         null=True,
@@ -312,6 +322,13 @@ HomePage.content_panels = Page.content_panels + [
         ],
         heading='General information',
         classname='collapsible'
+    ),
+    MultiFieldPanel(
+        [
+            MediaChooserPanel('video'),
+        ],
+        heading='Showreel',
+        classname='collapsible collapsed'
     ),
     MultiFieldPanel(
         [

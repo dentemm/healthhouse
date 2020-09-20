@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'captcha',
     'wagtailcaptcha',
     'mailchimp_marketing',
-    'six'
+    'six',
+    'wagtailmedia'
     # 'magickwand',
     # 'wand'
 ]
@@ -74,8 +75,6 @@ MIDDLEWARE = [
 
     # Added
     'django.middleware.locale.LocaleMiddleware',
-
-    'wagtail.core.middleware.SiteMiddleware',
     'wagtail.contrib.redirects.middleware.RedirectMiddleware',
 ]
 
