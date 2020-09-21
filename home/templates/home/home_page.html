@@ -13,18 +13,39 @@
   >
     <div class="swiper-wrapper">
     {% if user.is_authenticated %}
-        <div class="swiper-slide vh-100">
+        <!-- video (not visble on small screen sizes)-->
+        <div class="swiper-slide vh-100 d-none d-sm-block">
           <div class="image image-overlay">
-            <video autoplay muted loop id="videoreel">
-              
+            <video autoplay muted loop id="videoreel">    
               <source src="{{ page.video.file.url }}" type="video/mp4">
-
-              {% comment %} <source src="https://zwift-web.cdn.prismic.io/zwift-web/8dbce915-c2c9-40bb-9a29-45d5b0323d32_HOMEPAGE_HERO_G_2020.mp4" type="video/mp4"> {% endcomment %}
-
-
             </video>
           </div>
         </div>
+
+        <!-- intro image (available on smartphone screen size only)-->
+        <div class="swiper-slide vh-80 d-block d-sm-none ">
+            {% image page.cover_images.all.0.image width-800 as cover_image %}
+          <div class="image image-overlay" style="background-image:url({{ cover_image.url }})"></div>
+          <div class="caption">
+            <div class="container">
+              <div class="row justify-content-between vh-80">
+                <div class="col-md-8 offset-md-2 align-self-center" data-swiper-parallax-y="-250%">
+                  {% image page.logo original as img_logo %}
+                  <div 
+                    class="vh-25" 
+                    style="
+                      background-image:url({{ img_logo.image.file.url }});
+                      background-size:contain;
+                      background-repeat:no-repeat;
+                      background-position:center;
+                    "
+                  >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>        
     {% else %}
 
       {% for item in page.cover_images.all %}
@@ -87,12 +108,12 @@
   {% include 'home/partials/visitors.html' with list=page.recent_visitors.all title=page.visit_title info_text=page.visit_text %}
 {% endif %}
 
-{% if page.testimonials.all %}
-  {% include 'home/partials/testimonials.html' with list=page.testimonials.all %}
-{% endif %}
-
 {% if page.latest_articles %}
   {% include 'home/partials/home_masonry.html' with list=page.latest_articles %}
+{% endif %}
+
+{% if page.testimonials.all %}
+  {% include 'home/partials/testimonials.html' with list=page.testimonials.all %}
 {% endif %}
 
 {% include 'home/partials/events_widget.html' with list=page.upcoming_events %}
@@ -147,6 +168,8 @@
   <script>
     $(document).ready(function() {
 
+    {% if user.is_authenticated %}
+
       var triggerPoint = $("#visitors").offset().top;
       var didShowModal = false;
 
@@ -156,6 +179,8 @@
           didShowModal = true;
         }
       });
+
+    {% endif %}
 
       var form = $("#mailchimp-form");
       var messages = $("#messages");
