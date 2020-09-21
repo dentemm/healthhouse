@@ -73,12 +73,6 @@ div.rich-text > p > b {
   border-color: #00a1dd;
 }
 
-#nl-selector {
-  position: absolute;
-  right: -60px;
-  top: 20px;
-}
-
 span.masonry-item {
   background-repeat: no-repeat;
   background-size: cover;
