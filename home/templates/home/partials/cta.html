@@ -17,7 +17,7 @@
             <a
               href="{{ page.discover_link_1 }}"
               class="btn btn-with-ico btn-info mb-2"
-            {% if not link|startswith:'/' %}
+            {% if not page.discover_link_1|startswith:'/' %}
               target="_blank"
             {% endif %}
             >
