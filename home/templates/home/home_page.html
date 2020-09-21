@@ -108,7 +108,9 @@
 
 {% include 'home/partials/events_widget.html' with list=page.upcoming_events %}
 
-{% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %} <!-- needs to be refactored! (modal + footer!)-->
+{% if user.is_authenticated %}
+  {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %} <!-- needs to be refactored! (modal + footer!)-->
+{% endif %}
 
 <!-- MODAL -->
 <div class="modal fade" id="cta-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -142,6 +144,7 @@
                 <button type="submit" class="btn btn-block btn-outline-primary">Keep me informed!</button>
               </div>
             </div>
+            <div id="messages"></div>
           </div>
         </div>
       </div>
