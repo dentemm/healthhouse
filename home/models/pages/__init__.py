@@ -280,17 +280,17 @@ class HomePage(Page):
         related_name='+'
     )
 
-    mailform_title = models.CharField(
-        verbose_name='title',
-        max_length=63,
-        null=True
-    )
+    # mailform_title = models.CharField(
+    #     verbose_name='title',
+    #     max_length=63,
+    #     null=True
+    # )
 
-    mailform_text = models.CharField(
-        verbose_name='info text',
-        max_lenght=256,
-        null=True
-    )
+    # mailform_text = models.CharField(
+    #     verbose_name='infotext',
+    #     max_lenght=250,
+    #     null=True
+    # )
 
     def upcoming_events(self):
         # return Event.objects.all()
@@ -409,14 +409,14 @@ HomePage.content_panels = Page.content_panels + [
         heading='Recent visits',
         classname='collapsible collapsed'
     ),
-    MultiFieldPanel(
-        [
-            FieldPanel('mailform_title'),
-            FieldPanel('mailform_text'),
-        ],
-        heading='Mailchimp form',
-        classname='collapsible collapsed'
-    ),
+    # MultiFieldPanel(
+    #     [
+    #         FieldPanel('mailform_title'),
+    #         FieldPanel('mailform_text'),
+    #     ],
+    #     heading='Mailchimp form',
+    #     classname='collapsible collapsed'
+    # ),
 ]
 
 HomePage.parent_page_types = []
