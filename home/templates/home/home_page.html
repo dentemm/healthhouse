@@ -84,17 +84,7 @@
         </div>
       </div>
     </div>
-    {% comment %} <div class="swiper-pagination swiper-pagination-vertical"></div> {% endcomment %}
   </div>
-  {% comment %} {% if user.is_authenticated %}
-  <a id="" class="news-cta" href="#cta-modal" data-toggle="modal">
-    <div class="news-cta_header text-primary font-weight-bold">
-      <div class="news-cta_header__text">
-        Discover
-      </div>
-    </div>
-  </a>
-  {% endif %} {% endcomment %}
 </section>
 <!-- / cover -->
 
@@ -132,12 +122,9 @@
           <button type="button" class="close close-absolute" data-dismiss="modal" aria-label="Close" style="margin-top: -22px; margin-right: -22px;">
             <span aria-hidden="true" class="icon-x"></span>
           </button>
-          <h3 class="mb-0 text-dark-blue">The future of health & care!</h3>
+          <h3 class="mb-0 text-dark-blue">{{ page.mailform_title }}</h3>
           <p>
-            Maecenas sed diam eget risus varius blandit sit amet non magna.
-            Nullam quis risus eget urna mollis ornare vel eu leo.
-            Nullam id dolor id nibh ultricies vehicula ut id elit.
-            Etiam porta sem malesuada magna mollis euismod.
+            {{ page.mailform_text }}
           </p>
           <div>
             <div class="input-group align-self-center">
