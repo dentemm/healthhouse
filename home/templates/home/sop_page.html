@@ -2,11 +2,6 @@
 
 {% load static wagtailcore_tags wagtailimages_tags %}
 
-{% block extra_css %}
-  {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% static 'css/sop_page.css' %}">
-{% endblock extra_css %}
-
 {% block main %}
 
   <!-- cover -->
@@ -26,7 +21,7 @@
     </div>
   </section>
   <div id="nl-selector">
-    <a href="#lang-nl" class="btn btn-with-ico btn-primary mb-2">
+    <a href="#lang_nl" class="btn btn-with-ico btn-primary mb-2">
       Naar NL <i class="icon-angle-right"></i>
     </a>
   </div>
