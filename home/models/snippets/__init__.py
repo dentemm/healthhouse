@@ -3,6 +3,7 @@ import ssl
 from datetime import date, time
 
 from django.db import models
+from django.utils import timezone
 
 from wagtail.core.models import Orderable
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPanel, InlinePanel
@@ -199,6 +200,7 @@ InterestingNumber.panels = [
 @register_snippet
 class Storyline(ClusterableModel, models.Model):
 
+    last_edited = models.DateTimeField(auto_now=True, default=timezone.now)
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
     image = models.ForeignKey(
@@ -217,7 +219,7 @@ class Storyline(ClusterableModel, models.Model):
         return self.title
 
     class Meta:
-        ordering = ['pk']
+        ordering = ['last_edited']
 
 Storyline.panels = [
     MultiFieldPanel([
@@ -240,6 +242,7 @@ class StorylineBullet(GeneralBullet):
 @register_snippet
 class ExpoArea(ClusterableModel, models.Model):
 
+    last_edited = models.DateTimeField(auto_now=True, default=timezone.now)
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
     image = models.ForeignKey(
@@ -252,7 +255,7 @@ class ExpoArea(ClusterableModel, models.Model):
         return self.title
 
     class Meta:
-        ordering=['id']
+        ordering = ['last_edited']
 
 ExpoArea.panels = [
     MultiFieldPanel([
@@ -274,6 +277,7 @@ class ExpoAreaBullet(GeneralBullet):
 @register_snippet
 class MeetingRoom(ClusterableModel, models.Model):
 
+    last_edited = models.DateTimeField(auto_now=True, default=timezone.now)
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
     image = models.ForeignKey(
@@ -286,7 +290,7 @@ class MeetingRoom(ClusterableModel, models.Model):
         return self.title
 
     class Meta:
-        ordering=['id']
+        ordering = ['last_edited']
 
 MeetingRoom.panels = [
     MultiFieldPanel([
@@ -308,6 +312,7 @@ class MeetingRoomBullet(GeneralBullet):
 @register_snippet
 class Project(ClusterableModel, models.Model):
 
+    last_edited = models.DateTimeField(auto_now=True, default=timezone.now)
     title = models.CharField(max_length=155, null=True, blank=False)
     text = models.TextField(null=True)
     image = models.ForeignKey(
@@ -329,7 +334,7 @@ class Project(ClusterableModel, models.Model):
         return self.title
 
     class Meta:
-        ordering = ['pk']
+        ordering = ['last_edited']
 
 Project.panels = [
     MultiFieldPanel([
