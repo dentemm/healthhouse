@@ -101,10 +101,19 @@
                 <span>Calendar</span>
               </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-primary font-weight-bold" href="{% slugurl 'corona'  %}" role="button">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Covid-19
             </a>
+            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% slugurl 'sop'  %}">
+                <span>SOP</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% slugurl 'corona'  %}">
+                <span>Health Innovations</span>
+              </a>
+            </div>
           </li>
         </ul>
         <form class="form-inline" action="{% url 'search' %}" method="get">
