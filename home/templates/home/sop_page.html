@@ -2,10 +2,15 @@
 
 {% load static wagtailcore_tags wagtailimages_tags %}
 
+{% block extra_css %}
+  {{ block.super }}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/sop_page.css' %}">
+{% endblock extra_css %}
+
 {% block main %}
 
   <!-- cover -->
-  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous %}
+  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image %}
 
   <section class="pt-5 pb-7">
     <div class="container">
@@ -14,16 +19,16 @@
           <p class="lead text-center">{{ page.intro }}</p>
           <hr class="w-50">
         </div>
+          <div id="nl-selector">
+            <a href="#lang_nl" class="btn btn-with-ico btn-primary mb-2">
+              Naar NL <i class="icon-angle-right"></i>
+            </a>
+          </div>
       </div>
     {% for block in page.content %}
       {% include_block block %}
     {% endfor %} 
     </div>
   </section>
-  <div id="nl-selector">
-    <a href="#lang_nl" class="btn btn-with-ico btn-primary mb-2">
-      Naar NL <i class="icon-angle-right"></i>
-    </a>
-  </div>
 
 {% endblock main %}

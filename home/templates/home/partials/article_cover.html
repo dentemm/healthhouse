@@ -32,12 +32,13 @@
         <div class="container-fluid">
           <div class="row">
             <div class="col">
-
+            {% if previous %}
               <a href="{{ previous }}">
                 <button class="btn btn-lg btn-ico btn-blue btn-rounded" style="margin: 15px">
                   <i class="icon-arrow-left2 fs-20"></i>
                 </button>
               </a>
+            {% endif %}
             </div>
             <div class="col text-center">
               <div class="mouse"></div>
