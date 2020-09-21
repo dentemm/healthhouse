@@ -133,6 +133,12 @@ class SubtitleBlock(CharBlock):
         template = 'home/partials/blocks/subtitle.html'
         icon = 'title'
 
+class IntroBlock(CharBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/intro.html'
+        icon = 'tick-inverse'
+
 class CoronaSubtitleBlock(CharBlock):
 
     class Meta:
@@ -187,6 +193,10 @@ class BlogPageStreamBlock(StreamBlock):
     rich_text = CustomRichTextBlock(features=['bold', 'italic', 'link', 'document-link', 'ol', 'ul'])
     embed = CustomEmbedBlock()
     link = ButtonLinkBlock()
+
+class SOPPageStreamBlock(BlogPageStreamBlock):
+
+    intro = IntroBlock()
 
 class DiscoveryPageStreamBlock(StreamBlock):
 

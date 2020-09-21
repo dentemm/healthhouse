@@ -11,8 +11,8 @@
     <div class="container">
       <div class="row justify-content-center mb-1">
         <div class="col-md-10 col-lg-8">
-          <p class="lead">{{ page.intro }}</p>
-          <hr class="w-25">
+          <p class="lead text-center">{{ page.intro }}</p>
+          <hr class="w-50">
         </div>
       </div>
     {% for block in page.content %}
@@ -20,48 +20,5 @@
     {% endfor %} 
     </div>
   </section>
-
-  <!-- news -->
-  {% if page.latest_articles %}
-  <section class="bg-light pattern pattern-dark separator-top py-4">
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <h2>Latest News</h2>
-        </div>
-      </div>
-      <div class="row gutter-2">
-        {% for item in other_articles %}
-
-
-        {% image item.cover_image fill-450x450 as tmp_img %}
-        <div class="col-md-6 col-lg-4">
-            <article class="tile">
-              <div
-                class="tile-image"
-                style="background: linear-gradient(
-                  rgba(0, 0, 0, 0.3), 
-                  rgba(0, 0, 0, 0.3)
-                ), url({{ tmp_img.url }})"
-              ></div>
-              <a href="{{ item.url }}">
-                <div class="tile-header">
-                  <span class="eyebrow mb-1"> </span>
-                  <h3 class="text-white">{{ item.title }}</h3>
-                </div>
-                <div class="tile-footer">
-                  <button class="btn btn-ico btn-outline-white btn-rounded">
-                    <i class="icon-arrow-right2 fs-20"></i>
-                  </button>
-                </div>
-              </a>
-            </article>
-          </div>
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  <!-- / news -->
-  {% endif %}
 
 {% endblock main %}

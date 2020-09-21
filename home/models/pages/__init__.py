@@ -30,7 +30,7 @@ import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
 
 from .events import EventListPage, PrivateEventListPage
-from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock
+from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock, SOPPageStreamBlock
 from ..snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
@@ -971,7 +971,7 @@ class SOPPage(Page):
 
     intro = models.TextField(null=True)
     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-    content = StreamField(BlogPageStreamBlock(), null=True)
+    content = StreamField(SOPPageStreamBlock(), null=True)
 
 SOPPage.content_panels = [
     MultiFieldPanel([
