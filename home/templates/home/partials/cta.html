@@ -1,47 +1,37 @@
-{% load home_tags %}
+{% load home_tags wagtailimages_tags %}
 
 <section class="py-0 bg-blue">
   <div class="text-white">
-    <div class="container">
-      <div class="p-4">
+    <div class="container p-0">
+      <div class="py-4">
         <div class="row justify-content-between align-items-center text-center text-md-left">
-          <div class="col-md-2">
-            <i class="svg-icon fs-60 text-white">
-                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
-                <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M32,1c14.359,0,27,12.641,27,27S46.359,55,32,55
-                  c-10,0-13-4-13-4" style="stroke-dasharray: 99px, 101px; stroke-dashoffset: 0px;"></path>
-                <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M12,28A20,20 0,1,1 52,28A20,20 0,1,1 12,28" style="stroke-dasharray: 126px, 128px; stroke-dashoffset: 0px;"></path>
-                <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M32,54L32,64" style="stroke-dasharray: 10px, 12px; stroke-dashoffset: 0px;"></path>
-                <path fill="none" stroke="#000000" stroke-width="2" stroke-miterlimit="10" d="M22,63L42,63" style="stroke-dasharray: 20px, 22px; stroke-dashoffset: 0px;"></path>
-                </svg>
-              </i>
+          <div class="col-6 offset-3 col-md-4 offset-md-4 col-lg-2 offset-lg-0 p-3">
+          {% image page.logo original as img %}
+            <img src="{{ img.file.url }}" class="img-fluid"/> 
           </div>
-          <div class="col-md-6">
-            <h3 class="mb-1"><span id="typed" class="text-white"></span></h3>
-            <div id="typed-strings">
-                <p>{{ title }}</p>
-            </div>
-            <p class="mb-2">{{ subtitle }}</p>
+          <div class="col-md-8 col-lg-6 offset-lg-1">
+            <h3 class="mb-1">{{ page.discover_title }}</h3>
+            <p class="mb-2">{{ page.discover_text }}</p>
           </div>
-          <div class="col-md-4 pl-4">
+          <div class="col-md-4 col-lg-3 pl-3 pr-0">
             <a
-              href="{{ link }}"
+              href="{{ page.discover_link_1 }}"
               class="btn btn-with-ico btn-info mb-2"
             {% if not link|startswith:'/' %}
               target="_blank"
             {% endif %}
             >
-            {{ link_text }} <i class="icon-angle-right"></i>
+            {{ page.discover_link_text }} <i class="icon-angle-right"></i>
             </a>
           {% if link2 %}
             <a
-              href="{{ link2 }}"
+              href="{{ page.discover_link_2 }}"
               class="btn btn-with-ico btn-white"
               {% if not link2|startswith:'/' %}
                 target="_blank"
               {% endif %}
             >
-              {{ link2_text }} <i class="icon-angle-right"></i>
+              {{ page.discover_link2_text }} <i class="icon-angle-right"></i>
             </a>
           {% endif %}
           </div>

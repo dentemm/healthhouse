@@ -98,7 +98,7 @@
 </section>
 <!-- / cover -->
 
-{% include 'home/partials/cta.html' with title=page.discover_title subtitle=page.discover_text link=page.discover_link_1 link_text=page.discover_link_text link2=page.discover_link_2 link2_text=page.discover_link2_text %}
+{% include 'home/partials/cta.html' with page=page %}
 
 {% if page.features.all %}
   {% include 'home/partials/features.html' with list=page.features.all title=page.feature_title %}
