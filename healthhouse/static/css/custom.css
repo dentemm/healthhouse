@@ -75,8 +75,8 @@ div.rich-text > p > b {
 
 #nl-selector {
   position: absolute;
-  right: 50px;
-  top: 90vh;
+  right: -60px;
+  top: 20px;
 }
 
 span.masonry-item {
