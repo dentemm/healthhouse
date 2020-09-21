@@ -409,7 +409,8 @@ HomePage.subpage_types = [
     EventListPage,
     PrivateEventListPage,
     'home.PrivacyPage',
-    'home.CoronaIndexPage'
+    'home.CoronaIndexPage',
+    'home.SOPPage'
 ]
 
 class HomePageCoverImage(Orderable):
@@ -983,6 +984,8 @@ SOPPage.content_panels = [
     ], heading='Content')
 ]
 
+SOPPage.parent_page_types = ['home.HomePage']
+SOPPage.subpage_types = []
 
 class PrivacyPage(Page):
 
