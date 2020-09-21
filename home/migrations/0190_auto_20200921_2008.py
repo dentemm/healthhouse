@@ -14,21 +14,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='expoarea',
             name='last_edited',
-            field=models.DateTimeField(auto_now=True, default=django.utils.timezone.now),
+            field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
             model_name='meetingroom',
             name='last_edited',
-            field=models.DateTimeField(auto_now=True, default=django.utils.timezone.now),
+            field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
             model_name='project',
             name='last_edited',
-            field=models.DateTimeField(auto_now=True, default=django.utils.timezone.now),
+            field=models.DateTimeField(auto_now=True),
         ),
         migrations.AddField(
             model_name='storyline',
             name='last_edited',
-            field=models.DateTimeField(auto_now=True, default=django.utils.timezone.now),
+            field=models.DateTimeField(auto_now=True),
         ),
     ]
