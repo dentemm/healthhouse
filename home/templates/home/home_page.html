@@ -108,7 +108,7 @@
 
 {% include 'home/partials/events_widget.html' with list=page.upcoming_events %}
 
-{% if user.is_authenticated %}
+{% if not user.is_authenticated %}
   {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %} <!-- needs to be refactored! (modal + footer!)-->
 {% endif %}
 
