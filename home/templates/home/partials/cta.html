@@ -23,11 +23,11 @@
             >
             {{ page.discover_link_text }} <i class="icon-angle-right"></i>
             </a>
-          {% if link2 %}
+          {% if page.discover_link_2 %}
             <a
               href="{{ page.discover_link_2 }}"
               class="btn btn-with-ico btn-white"
-              {% if not link2|startswith:'/' %}
+              {% if not page.discover_link_2|startswith:'/' %}
                 target="_blank"
               {% endif %}
             >
