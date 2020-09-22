@@ -62,6 +62,15 @@
         sortType: 'single',
         reset: '#button-tags-reset'
       });
+
+      let first = $('#corona-tags:first-child');
+      let all = $('#corona-tags > button:contains("All"):first');
+
+      console.log("testing");
+      console.log(all);
+
+      $("#paragraph3").insertBefore("#paragraph2");
+
     });
   </script>
 {% endblock extra_js %}
