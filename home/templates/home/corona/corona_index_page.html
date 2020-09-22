@@ -63,12 +63,9 @@
         reset: '#button-tags-reset'
       });
 
+      // Make sure All tag is first in list!
       let first = $('#corona-tags > button').first();
       let all = $('#corona-tags > button:contains("All"):first');
-
-      console.log("testing");
-      console.log(all);
-      console.log(first);
 
       $(all).insertBefore(first);
 
