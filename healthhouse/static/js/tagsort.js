@@ -147,8 +147,6 @@
 
         if (tagSortEngine.options.sortAlphabetical) {
 
-            console.log("going to sort --")
-
             // Sort values.
             var sortedTags = tagSortEngine.tagElements.toArray().sort(function(a, b) {
                 return a.innerText > b.innerText ? 1 : -1;
