@@ -12,45 +12,18 @@
     data-top-bottom="transform: translateY(250px);"
   >
     <div class="swiper-wrapper">
-    {% if user.is_authenticated %}
-        <!-- video (not visble on small screen sizes)-->
-        <div class="swiper-slide vh-100 d-none d-sm-block">
-          <div class="image image-overlay">
-            <video autoplay muted loop id="videoreel">    
-              <source src="{{ page.video.file.url }}" type="video/mp4">
-            </video>
-          </div>
+      <!-- video (not visble on small screen sizes)-->
+      <div class="swiper-slide vh-100 d-none d-sm-block">
+        <div class="image image-overlay">
+          <video autoplay muted loop id="videoreel">    
+            <source src="{{ page.video.file.url }}" type="video/mp4">
+          </video>
         </div>
+      </div>
 
-        <!-- intro image (available on smartphone screen size only)-->
-        <div class="swiper-slide vh-80 d-block d-sm-none ">
-            {% image page.cover_images.all.0.image width-800 as cover_image %}
-          <div class="image image-overlay" style="background-image:url({{ cover_image.url }})"></div>
-          <div class="caption">
-            <div class="container">
-              <div class="row justify-content-between vh-80">
-                <div class="col-md-8 offset-md-2 align-self-center" data-swiper-parallax-y="-250%">
-                  {% image page.logo original as img_logo %}
-                  <div 
-                    class="vh-25" 
-                    style="
-                      background-image:url({{ img_logo.image.file.url }});
-                      background-size:contain;
-                      background-repeat:no-repeat;
-                      background-position:center;
-                    "
-                  >
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>        
-    {% else %}
-
-      {% for item in page.cover_images.all %}
-      <div class="swiper-slide vh-80">
-          {% image item.image width-1800 as cover_image %}
+      <!-- intro image (available on smartphone screen size only)-->
+      <div class="swiper-slide vh-80 d-block d-sm-none ">
+          {% image page.cover_images.all.0.image width-800 as cover_image %}
         <div class="image image-overlay" style="background-image:url({{ cover_image.url }})"></div>
         <div class="caption">
           <div class="container">
@@ -72,8 +45,6 @@
           </div>
         </div>
       </div>        
-      {% endfor %}
-    {% endif %}
       <div class="swiper-footer">
         <div class="container-fluid">
           <div class="row">
@@ -107,10 +78,6 @@
 {% endif %}
 
 {% include 'home/partials/events_widget.html' with list=page.upcoming_events %}
-
-{% if not user.is_authenticated %}
-  {% include 'home/partials/news_letter.html' with title=page.newsletter_title info_text=page.newsletter_info %} <!-- needs to be refactored! (modal + footer!)-->
-{% endif %}
 
 <!-- MODAL -->
 <div class="modal fade" id="cta-modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -158,8 +125,6 @@
   <script>
     $(document).ready(function() {
 
-    {% if user.is_authenticated %}
-
       var triggerPoint = $("#visitors").offset().top;
       var didShowModal = false;
 
@@ -169,8 +134,6 @@
           didShowModal = true;
         }
       });
-
-    {% endif %}
 
       var form = $("#mailchimp-form");
       var messages = $("#messages");
