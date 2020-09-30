@@ -218,6 +218,10 @@ color: rgba(255, 255, 255, 0.5);
   transform: rotateY(180deg);
 }
 
+.owl-carousel .owl-stage-outer .owl-stage .owl-item img {
+  width: 100%;
+}
+
 #covid-detail .owl-carousel-single .owl-nav button.owl-prev, #covid-detail .owl-carousel-single .owl-nav button.owl-next {
   width: 3.7rem;
   height: 3.7rem;
