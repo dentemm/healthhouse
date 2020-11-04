@@ -1,8 +1,8 @@
 {% load wagtailimages_tags %}
 
 <div class="row justify-content-center">
-  <div class="col-md-8 col-lg-6 text-center">
-    {% image value.image width-800 as img%}
+  <div class="col-md-10 col-lg-8 text-center">
+    {% image value.image width-900 as img%}
     <img src="{{ img.url }}" class="img-fluid" alt="{{ value.caption }}"/>
   </div>
 </div>
