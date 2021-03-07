@@ -64,6 +64,15 @@ INSTALLED_APPS = [
     # 'wand'
 ]
 
+WAGTAILEMBEDS_FINDERS = [
+    {
+        'class': 'wagtail.embeds.finders.oembed'
+    },
+    {
+        'class': 'home.utils.embeds.GoogleForms',
+    }
+]
+
 MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

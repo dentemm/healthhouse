@@ -46,6 +46,13 @@ class CustomEmbedBlock(EmbedBlock):
         icon = 'media'
         label = 'Video Embed'
 
+class GoogleFormEmbed(EmbedBlock):
+
+    class Meta:
+        template = 'home/partials/blocks/embed.html'
+        icon = 'doc-full'
+        label = 'Google Form'
+
 class CoronaEmbedBlock(EmbedBlock):
 
     class Meta:
@@ -192,6 +199,7 @@ class BlogPageStreamBlock(StreamBlock):
     image = ImageWithCaptionblock()
     rich_text = CustomRichTextBlock(features=['bold', 'italic', 'link', 'document-link', 'ol', 'ul'])
     embed = CustomEmbedBlock()
+    google_form = GoogleFormEmbed()
     link = ButtonLinkBlock()
 
 class SOPPageStreamBlock(BlogPageStreamBlock):
