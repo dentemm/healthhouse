@@ -1,8 +1,9 @@
+import os
 from datetime import date
 
 from django.db import models
 from django.core.mail import EmailMessage
-from django.template.loader import get_template
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
 from django.contrib import messages
@@ -28,6 +29,8 @@ from wagtailcaptcha.models import WagtailCaptchaForm
 
 import mailchimp_marketing as MailchimpMarketing
 from mailchimp_marketing.api_client import ApiClientError
+import sendgrid
+from sendgrid.helpers.mail import Mail
 
 from .events import EventListPage, PrivateEventListPage
 from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock, SOPPageStreamBlock
@@ -571,11 +574,35 @@ class ContactPage(WagtailCaptchaForm, AbstractEmailForm):
 
         ctx = {}
         ctx['form'] = form
-        content = get_template('home/mails/contact_form.html').render(ctx)
+        content = render_to_string('home/mails/contact_form.html', ctx)
+
+        try:
+            sg = sendgrid.SendGridAPIClient(api_key=os.environ.get('SENDGRID_API_KEY'))
+            data = {
+                "personalizations": [{
+                    "to": [
+                        {"email": self.to_address}
+                    ],
+                    "subject": subject
+                }],
+                "from": {
+                    "email": sender
+                },
+                "content": [{
+                    "type": "text/html",
+                    "value": content
+                }]
+            }
+
+            sg.client.mail.send.post(request_body=data)
+
+        except Exception as error:
+            print("+++ error", error)
+
         
-        msg = EmailMessage(subject, content, to=receivers, from_email=sender)
-        msg.content_subtype = 'html'
-        msg.send()
+        # msg = EmailMessage(subject, content, to=receivers, from_email=sender)
+        # msg.content_subtype = 'html'
+        # msg.send()
 
     class Meta:
         verbose_name = 'Contact page'
