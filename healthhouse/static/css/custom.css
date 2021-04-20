@@ -30,7 +30,7 @@ div.rich-text > p > b {
   background-color: #29245a;
 }
 
-.richtext a, .richtext b a {
+.richtext a, .richtext a b {
   color: #00a1dd;
 }
 
