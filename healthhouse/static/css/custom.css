@@ -30,6 +30,11 @@ div.rich-text > p > b {
   background-color: #29245a;
 }
 
+.richtext a, .richtext b a {
+  color: #00a1dd;
+}
+
+
 @keyframes float {
 	0% {
 		transform: translatey(0px);
