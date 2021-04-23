@@ -51,4 +51,7 @@ def startswith(text, starts):
 
 @register.filter(name='split')
 def split(value, key):
-    return value.split(key)
+
+    intermediate = value.split(key)[1]
+
+    return intermediate.split('&')[0]
