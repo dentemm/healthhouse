@@ -48,3 +48,7 @@ def startswith(text, starts):
         return text.startswith(starts)
     
     return False
+
+@register.filter(name='split')
+def split(value, key):
+    return value.split(key)
