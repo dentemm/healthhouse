@@ -79,7 +79,12 @@
 
       const iFrames = $('.hh-embed');
 
+      console.log(iFrames);
+
       iFrames.each((index, embed) => {
+
+        console.log(embed);
+
         const videoId = embed.attr('src');
 
         if (videoId) {
