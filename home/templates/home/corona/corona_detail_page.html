@@ -107,7 +107,8 @@
 
       iFrames.each((index, embed) => {
 
-        const videoId = $(embed).attr('src');
+        const originalUrl = $(embed).attr('src');
+        const videoId = getId(original);
 
         if (videoId) {
           console.log(`videoId: ${videoId}`);
