@@ -43,9 +43,10 @@ soupsieve==2.0.1
 sqlparse==0.3.1
 starkbank-ecdsa==1.1.0
 tablib==2.0.0
+telepath==0.1.1
 Unidecode==0.4.21
 urllib3==1.24.2
-wagtail==2.12.4
+wagtail==2.13
 wagtail-django-recaptcha==1.0
 wagtailmedia==0.6.0
 Wand==0.5.9
