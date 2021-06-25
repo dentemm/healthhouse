@@ -109,11 +109,11 @@
                 <span>Calendar</span>
               </a>
           </li>
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link text-primary font-weight-bold" href="{% slugurl 'sop'  %}" role="button">
               Covid-19
             </a>
-          </li>
+          </li> {% endcomment %}
         </ul>
         <form class="form-inline" action="{% url 'search' %}" method="get">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
