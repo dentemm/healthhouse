@@ -155,19 +155,17 @@ from django.utils.translation import ugettext_lazy as _
 
 LANGUAGE_CODE = 'en'
 
-LANGUAGES = (
-    ('en', _("English")),
-    # ('nl', _("Dutch")),
-)
-
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+WAGTAIL_I18N_ENABLED = True
 USE_L10N = True
-
 USE_TZ = True
 
+WAGTAIL_CONTENT_LANGUAGES = LANGUAGES = [
+    ('en', _("English")),
+    ('nl', _("Dutch")),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
