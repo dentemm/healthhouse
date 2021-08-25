@@ -33,7 +33,7 @@ import sendgrid
 from sendgrid.helpers.mail import Mail
 
 from .events import EventListPage, PrivateEventListPage
-from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock, SOPPageStreamBlock
+from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock, SOPPageStreamBlock, CoronaFullWidthStreamBlock
 from ..snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
@@ -895,6 +895,7 @@ class CoronaArticlePage(Page):
 
     content = StreamField(CoronaArticleStreamBlock(), null=True)
     sidebar = StreamField(CoronaSidebarStreamBlock(), null=True)
+    fullwidth = StreamField(CoronaFullWidthStreamBlock(), null=True)
 
     tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
 
@@ -937,6 +938,9 @@ CoronaArticlePage.content_panels = [
     MultiFieldPanel([
         StreamFieldPanel('sidebar')
     ], heading='Sidebar content'),
+    MultiFieldPanel([
+        StreamFieldPanel('fullwidth')
+    ], heading='Bottom fullwidth content'),
     MultiFieldPanel([
         FieldPanel('related_title')
     ], heading='Related articles'),

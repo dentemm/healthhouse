@@ -38,6 +38,11 @@
         </div>
       </div>
     </div>
+    <div class="w-100">
+      {% for block in page.fullwidth %}
+        {% include_block block %}
+      {% endfor %} 
+    </div>
   </div>
 
   <!-- news -->

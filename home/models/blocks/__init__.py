@@ -224,4 +224,8 @@ class CoronaSidebarStreamBlock(StreamBlock):
     gif_image = GifImageBlock()
     embed = CoronaEmbedBlock()
     gallery = CoronaCarouselBlock(child_block=CoronaImageBlock)
-    
+
+class CoronaFullWidthStreamBlock(StreamBlock):
+
+    gallery = CoronaCarouselBlock(child_block=CoronaImageBlock)
+    embed = CoronaEmbedBlock()
