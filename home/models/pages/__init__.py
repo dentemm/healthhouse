@@ -894,8 +894,8 @@ class CoronaArticlePage(Page):
     author = models.CharField('Author or resource', max_length=64, null=True, blank=True)
 
     content = StreamField(CoronaArticleStreamBlock(), null=True)
-    sidebar = StreamField(CoronaSidebarStreamBlock(), null=True)
-    fullwidth = StreamField(CoronaFullWidthStreamBlock(), null=True)
+    sidebar = StreamField(CoronaSidebarStreamBlock(), null=True, blank=True)
+    fullwidth = StreamField(CoronaFullWidthStreamBlock(), null=True, blank=True)
 
     tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
 
