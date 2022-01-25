@@ -1,0 +1,6 @@
+{% load wagtailimages_tags %}
+
+<div>
+  {% image value.image width-2000 as img %}
+  <img src="{{ img.url }}" class="img-fluid" alt="{{ value.caption }}"/>
+</div>
