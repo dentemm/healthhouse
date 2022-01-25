@@ -2,7 +2,6 @@ import os
 from datetime import date
 
 from django.db import models
-from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 from django.shortcuts import render
@@ -12,7 +11,6 @@ from wagtail.core.models import Page, Orderable
 from wagtail.core.fields import StreamField, RichTextField
 from wagtail.admin.edit_handlers import FieldPanel, InlinePanel, StreamFieldPanel, MultiFieldPanel, FieldRowPanel, PageChooserPanel
 from wagtail.images.edit_handlers import ImageChooserPanel
-from wagtail.snippets.edit_handlers import SnippetChooserPanel
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.search import index
@@ -23,18 +21,17 @@ from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
 from modelcluster.contrib.taggit import ClusterTaggableManager
 
-from taggit.models import TaggedItemBase, Tag
+from taggit.models import TaggedItemBase
 
 from wagtailcaptcha.models import WagtailCaptchaForm
 
-import mailchimp_marketing as MailchimpMarketing
-from mailchimp_marketing.api_client import ApiClientError
 import sendgrid
-from sendgrid.helpers.mail import Mail
 
-from .events import EventListPage, PrivateEventListPage
-from ..blocks import HomePageStreamBlock, BlogPageStreamBlock, DiscoveryPageStreamBlock, CoronaArticleStreamBlock, CoronaSidebarStreamBlock, SOPPageStreamBlock, CoronaFullWidthStreamBlock
-from ..snippets import InterestingNumber, Partner, TeamMember, Location, Storyline, ExpoArea, MeetingRoom, Project, Testimonial, PressArticle, Directions, Event
+from .events import *
+from .blog import *
+from .corona import *
+from ..blocks import DiscoveryPageStreamBlock, SOPPageStreamBlock
+from ..snippets import *
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
 
 #
@@ -773,189 +770,114 @@ AboutPageTopic.search_fields = [
     index.SearchField('title'),
     index.SearchField('description')
 ]
- 
-class BlogIndexPage(Page):
 
-    introduction = models.TextField(null=True)
-    press_title = models.CharField(max_length=32, null=True)
-    press_text = models.CharField(max_length=255, null=True)
+# class CoronaIndexPage(Page):
 
-    template = 'home/blog_index_page.html'
+#     intro = models.CharField('Introduction', max_length=512, default='Introduction text here ...')
+#     info_tags = models.CharField
 
-    def blogs(self): 
-        return BlogPage.objects.live().order_by('-first_published_at')
+#     template = 'home/corona/corona_index_page.html'
 
-    def press_articles(self):
-        return PressArticle.objects.all().order_by('-id')
+#     def articles(self): 
+#         return CoronaArticlePage.objects.live().order_by('-last_published_at')
 
-BlogIndexPage.content_panels = Page.content_panels + [
-    FieldPanel('introduction'),
-    MultiFieldPanel([
-        FieldPanel('press_title'),
-        FieldPanel('press_text')
-    ],
-    heading='Press',
-    classname='collapsible collapsed'
-    )
-]
+#     def all_tags(self):
 
-BlogIndexPage.parent_page_types = ['home.HomePage']
-BlogIndexPage.subpage_types = ['home.BlogPage']
+#         tags = []
+#         pages = CoronaArticlePage.objects.live()
 
-class BlogpageTag(TaggedItemBase):
+#         for page in pages:
+#             tags += page.get_tags()
 
-    content_object = ParentalKey('home.BlogPage', on_delete=models.CASCADE, related_name='tagged_blogs')
+#         tags = sorted(set(tags))
 
-class BlogPage(Page):
+#         return tags
 
-    intro = models.TextField(null=True)
-    cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-    content = StreamField(BlogPageStreamBlock(), null=True)
+# CoronaIndexPage.content_panels = [
+#     MultiFieldPanel([
+#         FieldPanel('title'),
+#         FieldPanel('intro')
+#     ],
+#         heading='General information'
+#     ),
+# ]
 
-    tags = ClusterTaggableManager(through=BlogpageTag, blank=True)
-
-    template = 'home/blog_article_page.html'
-    
-    def latest_articles(self):
-        return BlogPage.objects.live().sibling_of(self, inclusive=False).order_by('-first_published_at')[0:3]
-
-    def get_context(self, request):
-
-        context = super().get_context(request)
-        context['other_articles'] = self.latest_articles()
-        context['previous'] = request.META.get('HTTP_REFERER')
-
-        return context
-
-BlogPage.content_panels = [
-    MultiFieldPanel([
-        FieldPanel('title'),
-        FieldPanel('intro'),
-        ImageChooserPanel('cover_image'),
-    ], heading='Title & intro'),
-    MultiFieldPanel([
-        StreamFieldPanel('content')
-    ], heading='Content'),
-    MultiFieldPanel([
-        FieldPanel('tags')
-    ], heading='Tags')
-]
-
-BlogPage.search_fields = Page.search_fields + [
-    index.SearchField('intro'),
-    index.SearchField('tags')
-]
-
-BlogPage.parent_page_types = ['home.BlogIndexPage']
-BlogPage.subpage_types = []
-
-class CoronaIndexPage(Page):
-
-    intro = models.CharField('Introduction', max_length=512, default='Introduction text here ...')
-    info_tags = models.CharField
-
-    template = 'home/corona/corona_index_page.html'
-
-    def articles(self): 
-        return CoronaArticlePage.objects.live().order_by('-last_published_at')
-
-    def all_tags(self):
-
-        tags = []
-        pages = CoronaArticlePage.objects.live()
-
-        for page in pages:
-            tags += page.get_tags()
-
-        tags = sorted(set(tags))
-
-        return tags
-
-CoronaIndexPage.content_panels = [
-    MultiFieldPanel([
-        FieldPanel('title'),
-        FieldPanel('intro')
-    ],
-        heading='General information'
-    ),
-]
-
-CoronaIndexPage.parent_page_types = ['home.HomePage']
-CoronaIndexPage.subpage_types = ['home.CoronaArticlePage']
+# CoronaIndexPage.parent_page_types = ['home.HomePage']
+# CoronaIndexPage.subpage_types = ['home.CoronaArticlePage']
 
 
-class CoronaArticlePageTag(TaggedItemBase):
+# class CoronaArticlePageTag(TaggedItemBase):
 
-    content_object = ParentalKey('home.CoronaArticlePage', on_delete=models.CASCADE, related_name='tagged_corona_articles')
+#     content_object = ParentalKey('home.CoronaArticlePage', on_delete=models.CASCADE, related_name='tagged_corona_articles')
 
-class CoronaArticlePage(Page):
+# class CoronaArticlePage(Page):
 
-    cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
-    author = models.CharField('Author or resource', max_length=64, null=True, blank=True)
+#     cover_image = models.ForeignKey('wagtailimages.Image', on_delete=models.SET_NULL, related_name='+', null=True)
+#     author = models.CharField('Author or resource', max_length=64, null=True, blank=True)
 
-    content = StreamField(CoronaArticleStreamBlock(), null=True)
-    sidebar = StreamField(CoronaSidebarStreamBlock(), null=True, blank=True)
-    fullwidth = StreamField(CoronaFullWidthStreamBlock(), null=True, blank=True)
+#     content = StreamField(CoronaArticleStreamBlock(), null=True)
+#     sidebar = StreamField(CoronaSidebarStreamBlock(), null=True, blank=True)
+#     fullwidth = StreamField(CoronaFullWidthStreamBlock(), null=True, blank=True)
 
-    tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
+#     tags = ClusterTaggableManager(through=CoronaArticlePageTag, blank=True)
 
-    template = 'home/corona/corona_detail_page.html'
+#     template = 'home/corona/corona_detail_page.html'
 
-    # related articles
-    related_title = models.CharField(verbose_name='Title related art.', max_length=64, default='Related articles')
+#     # related articles
+#     related_title = models.CharField(verbose_name='Title related art.', max_length=64, default='Related articles')
 
-    def get_context(self, request):
+#     def get_context(self, request):
 
-        context = super().get_context(request)
-        context['previous'] = request.META.get('HTTP_REFERER')
+#         context = super().get_context(request)
+#         context['previous'] = request.META.get('HTTP_REFERER')
 
-        return context
+#         return context
 
-    def get_tags(self):
-        tags = self.tags.all()
+#     def get_tags(self):
+#         tags = self.tags.all()
 
-        return tags
+#         return tags
 
-    def related_articles(self):
+#     def related_articles(self):
 
-        all_articles = CoronaArticlePage.objects.all()
+#         all_articles = CoronaArticlePage.objects.all()
 
-        if all_articles.count <= 4:
-            return all_articles
+#         if all_articles.count <= 4:
+#             return all_articles
 
-        if self.tags.length == 0:
-            return all_articles
+#         if self.tags.length == 0:
+#             return all_articles
 
-CoronaArticlePage.content_panels = [
-    MultiFieldPanel([
-        FieldPanel('title'),
-        FieldPanel('author'),
-        ImageChooserPanel('cover_image'),
-    ], heading='Title & intro'),
-    MultiFieldPanel([
-        StreamFieldPanel('content')
-    ], heading='Main content'),
-    MultiFieldPanel([
-        StreamFieldPanel('sidebar')
-    ], heading='Sidebar content'),
-    MultiFieldPanel([
-        StreamFieldPanel('fullwidth')
-    ], heading='Bottom fullwidth content'),
-    MultiFieldPanel([
-        FieldPanel('related_title')
-    ], heading='Related articles'),
-    MultiFieldPanel([
-        FieldPanel('tags')
-    ], heading='Tags')
-]
+# CoronaArticlePage.content_panels = [
+#     MultiFieldPanel([
+#         FieldPanel('title'),
+#         FieldPanel('author'),
+#         ImageChooserPanel('cover_image'),
+#     ], heading='Title & intro'),
+#     MultiFieldPanel([
+#         StreamFieldPanel('content')
+#     ], heading='Main content'),
+#     MultiFieldPanel([
+#         StreamFieldPanel('sidebar')
+#     ], heading='Sidebar content'),
+#     MultiFieldPanel([
+#         StreamFieldPanel('fullwidth')
+#     ], heading='Bottom fullwidth content'),
+#     MultiFieldPanel([
+#         FieldPanel('related_title')
+#     ], heading='Related articles'),
+#     MultiFieldPanel([
+#         FieldPanel('tags')
+#     ], heading='Tags')
+# ]
 
-CoronaArticlePage.search_fields = Page.search_fields + [
-    # index.SearchField('intro'),
-    index.SearchField('tags')
-]
+# CoronaArticlePage.search_fields = Page.search_fields + [
+#     # index.SearchField('intro'),
+#     index.SearchField('tags')
+# ]
 
-CoronaArticlePage.parent_page_types = ['home.CoronaIndexPage']
-CoronaArticlePage.subpage_types = []
+# CoronaArticlePage.parent_page_types = ['home.CoronaIndexPage']
+# CoronaArticlePage.subpage_types = []
 
 
 class PartnerPage(Page):
