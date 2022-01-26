@@ -228,7 +228,3 @@ class CoronaFullWidthStreamBlock(StreamBlock):
 
     gallery = CoronaCarouselBlock(child_block=CoronaImageBlock)
     embed = CoronaEmbedBlock()
-
-class QuestionsPageStreamBlock(StreamBlock):
-
-    paragraph = 

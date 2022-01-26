@@ -2,7 +2,9 @@ from wagtail.core.blocks import (
   CharBlock,
   ListBlock,
   TextBlock,
-  StructBlock
+  StructBlock,
+  StreamBlock,
+  RichTextBlock,
 )
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
@@ -43,3 +45,15 @@ class EmbedBlock(EmbedBlock):
     template = 'home/questions/blocks/embed.html'
     icon = 'media'
     label = 'Video embed'
+
+class CustomRichTextBlock(RichTextBlock):
+
+  class Meta:
+    template = 'home/questions/blocks/rich_text.html'
+    label = 'Richtext'
+
+class QuestionsPageStreamBlock(StreamBlock):
+
+    paragraph = ParagraphBlock()
+    gallery = CarouselBlock(child_block=ImageWithCaptionblock)
+    richtext = CustomRichTextBlock()

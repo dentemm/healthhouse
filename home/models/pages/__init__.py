@@ -27,6 +27,7 @@ import sendgrid
 from .events import *
 from .blog import *
 from .corona import *
+from .questions import *
 from ..blocks import DiscoveryPageStreamBlock, SOPPageStreamBlock
 from ..snippets import *
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
@@ -427,7 +428,8 @@ HomePage.subpage_types = [
     PrivateEventListPage,
     'home.PrivacyPage',
     'home.CoronaIndexPage',
-    'home.SOPPage'
+    'home.SOPPage',
+    QuestionsOverview,
 ]
 
 class HomePageCoverImage(Orderable):
@@ -736,6 +738,31 @@ AboutPageQuestion.panels = [
         FieldPanel('question'),
         FieldPanel('answer')
     ])
+]
+
+class AboutPageTopic(Orderable):
+
+    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='topics')
+    title = models.CharField(verbose_name='Name', max_length=28)
+    description = models.TextField(verbose_name='Content')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Topic: (mission, vision, ...)'
+        verbose_name_plural = 'Topics'
+
+AboutPageTopic.panels = [
+    MultiFieldPanel([
+        FieldPanel('title'),
+        FieldPanel('description')
+    ])
+]
+
+AboutPageTopic.search_fields = [
+    index.SearchField('title'),
+    index.SearchField('description')
 ]
 
 class PartnerPage(Page):
