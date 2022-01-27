@@ -2,6 +2,9 @@ from django.db import models
 
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
+from wagtail.admin.edit_handlers import (
+  FieldPanel,
+)
 
 from ..blocks.questions import QuestionsPageStreamBlock
 
@@ -21,8 +24,13 @@ class QuestionsOverview(Page):
     return QuestionsPage.objects.all() \
       .order_by('-first_published_at')[:-1]
 
-QuestionsOverview.content_panels = Page.content_panels + [
+  def get_context(self, request):
+    context = super().get_context(request)
+    context['previous'] = request.META.get('HTTP_REFERER')
+    return context
 
+QuestionsOverview.content_panels = Page.content_panels + [
+  FieldPanel('info_text')
 ]
 
 QuestionsOverview.parent_page_types = ['home.HomePage']
@@ -41,3 +49,6 @@ class QuestionsPage(Page):
   )
 
 QuestionsPage.content_panels = Page.content_panels + []
+
+QuestionsPage.parent_page_types = ['home.QuestionsOverview']
+QuestionsPage.subpage_types = []

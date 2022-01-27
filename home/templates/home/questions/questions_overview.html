@@ -3,4 +3,165 @@
 {% load static %}
 
 {% block main %}
+
+<section class="hero hero-with-header pt-10 pb-2 bg-light pattern pattern-dark" id="news">
+  <div class="container pt-5">
+    <div class="row">
+      <div class="col-md-10">
+        <h1>{{ page.title }}</b></h1>
+        <p>{{ page.info_text }}</p>
+      </div>
+    </div>
+  </div> 
+  <div class="container">
+    <div class="boxed bg-blue p-1 text-white mt-2 mb-4">
+      <div class="row justify-content-between align-items-center text-center py-1">
+        <div class="col-md-2">
+          <h3>Jan 31</h3>
+        </div>
+        <div class="col-md-7 py-2 text-left">
+          <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+        </div>
+        <div class="col-md-3 text-center">
+          <a href="" class="btn btn-white btn-rounded px-3 py-2">
+            Find out
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<div class="container">
+
+  <h2 class="mb-2 mt-5 text-dark-blue">
+    <b class="text-dark-blue">Previous</b> Questions
+  </h2>
+
+  <div class="col-md-12 pt-3">
+    <span id="corona-tags"></span>
+  </div>
+
+  <div class="boxed bg-blue p-1 text-white sort-item mb-5 mt-2" data-item-tags="All, Tweede, Derde">
+    <div class="row justify-content-between align-items-center text-center py-1">
+      <div class="col-md-2">
+        <h3>Jan 31</h3>
+      </div>
+      <div class="col-md-7 py-2">
+        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="" class="btn btn-white btn-rounded px-3 py-2">
+          Find out
+        </a>
+      </div>
+    </div>
+  </div>
+
+    <div class="boxed bg-blue p-1 text-white sort-item my-5" data-item-tags="All, Tweede, Derde">
+    <div class="row justify-content-between align-items-center text-center py-1">
+      <div class="col-md-2">
+        <h3>Jan 31</h3>
+      </div>
+      <div class="col-md-7 py-2">
+        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="" class="btn btn-white btn-rounded px-3 py-2">
+          Find out
+        </a>
+      </div>
+    </div>
+  </div>
+
+    <div class="boxed bg-blue p-1 text-white sort-item my-5" data-item-tags="All, Eerste, Tweede">
+    <div class="row justify-content-between align-items-center text-center py-1">
+      <div class="col-md-2">
+        <h3>Jan 31</h3>
+      </div>
+      <div class="col-md-7 py-2">
+        <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+      </div>
+      <div class="col-md-3 text-center">
+        <a href="" class="btn btn-white btn-rounded px-3 py-2">
+          Find out
+        </a>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
 {% endblock main %}
+
+
+{% block extra_js %}
+  <script type="text/javascript" src="{% static 'js/tagsort.js' %}"></script>
+  <script>
+
+    $(document).ready(function() {
+
+      $(function () {
+        $('[data-toggle="tooltip"]').tooltip('show')
+      })
+
+      $('#corona-tags').tagSort({
+        items:'.sort-item',
+        tagElement: 'button',
+        itemTagsSeperator: ',',
+        tagAttr: 'data-item-tags',
+        fadeTime: 500,
+        sortAlphabetical: true,
+        sortType: 'single',
+        reset: '#button-tags-reset'
+      });
+
+      // Make sure All tag is first in list!
+      let first = $('#corona-tags > button').first();
+      let all = $('#corona-tags > button:contains("All"):first');
+
+      $(all).insertBefore(first);
+    });
+  </script>
+{% endblock extra_js %}
+
+  <!-- <div class="bordered bg-light px-3 py-1 mb-5">
+    <div class="row justify-content-between align-items-center text-md-left">
+      <div class="col-md-2">
+        <span class="svg-icon fs-40 text-blue">
+          Jan 31
+        </span>
+      </div>
+      <div class="col-md-7">
+        <h4>Get in touch with us. Donec sed odio dui. Donec sed odio dui.</h4>
+      </div>
+      <div class="col-md-3 text-lg-right">
+        <a href="/en/news/" class="btn btn-with-ico btn-primary">
+          Find out<i class="icon-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="boxed bg-primary px-3 py-1 mb-5">
+    <div class="row justify-content-between align-items-center text-md-left">
+      <div class="col-md-2">
+        <span class="svg-icon fs-40 text-white">
+          Jan 31
+        </span>
+      </div>
+      <div class="col-md-7 text-white">
+        <h4>Get in touch with us. Donec sed odio dui. Donec sed odio dui.</h4>
+      </div>
+      <div class="col-md-3 text-lg-right">
+        <a href="/en/news/" class="btn btn-with-ico btn-info">
+          Find out<i class="icon-angle-right"></i>
+        </a>
+      </div>
+    </div>
+  </div> -->

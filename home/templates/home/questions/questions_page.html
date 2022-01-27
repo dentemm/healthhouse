@@ -1,0 +1,11 @@
+{% extends 'home/layout.html' %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block main %}
+  {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous %}
+
+
+
+
+{% endblock main %}

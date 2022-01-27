@@ -1,0 +1,49 @@
+{% load wagtailimages_tags %}
+
+<section class="p-0">
+  <div class="swiper-container text-white"
+    data-top-top="transform: translateY(0px);" 
+    data-top-bottom="transform: translateY(250px);">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide vh-60">
+        {% image img width-1800 as cover_image %}
+        <div
+          class="image image-overlay image-zoom"
+          style="background: linear-gradient(
+            rgba(0, 0, 0, 0.3), 
+            rgba(0, 0, 0, 0.3)
+          ), url({{ cover_image.url }});
+          background-size:cover;"
+        ></div>
+        <div class="caption">
+          <div class="container">
+            <div class="row align-items-center vh-80">
+              <div class="col-md-9" data-swiper-parallax-y="-250%">
+                <h1 class="display-2 {% if author %}mb-0{% endif %}">{{ title }}</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="swiper-footer mb-5">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col">
+            {% if previous %}
+              <a href="{{ previous }}">
+                <button class="btn btn-lg btn-ico btn-blue btn-rounded" style="margin: 15px">
+                  <i class="icon-arrow-left2 fs-20"></i>
+                </button>
+              </a>
+            {% endif %}
+            </div>
+            <div class="col text-center">
+              <div class="mouse"></div>
+            </div>
+            <div class="col"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
