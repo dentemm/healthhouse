@@ -5,7 +5,12 @@
 {% block main %}
   {% include 'home/partials/article_cover.html' with title=page.title img=page.cover_image previous=previous %}
 
-
-
+  <section class="hero bg-light">
+  <div id="questionspage" class="container pt-3">
+    <div class="col-lg-10 offset-lg-1">
+    {{ page.content }}
+    </div>
+  </div>
+  <section>
 
 {% endblock main %}

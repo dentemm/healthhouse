@@ -1,0 +1,14 @@
+<div class="col-md-10 offset-md-1 blockquote-list mb-2">
+  <blockquote class="blockquote gray blockquote-2 bg-primary boxed py-2">
+    <p class="text-white">{{ value.question }}</p>
+    {% if value.question_asker %}
+    <footer class="blockquote-footer text-dark-blue">{{ value.question_asker }}</footer>
+    {% endif %}
+  </blockquote>
+  <blockquote class="blockquote blockquote-2 boxed py-2">
+    <p>{{ value.answer }}</p>
+    {% if value.answerer %}
+    <footer class="blockquote-footer">{{ value.answerer }}</footer>
+    {% endif %}
+  </blockquote>
+</div>

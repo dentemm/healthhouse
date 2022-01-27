@@ -3,6 +3,8 @@ from django.db import models
 from wagtail.core.models import Page
 from wagtail.core.fields import StreamField
 from wagtail.admin.edit_handlers import (
+  MultiFieldPanel,
+  StreamFieldPanel,
   FieldPanel,
 )
 
@@ -38,6 +40,8 @@ QuestionsOverview.subpage_types = ['home.QuestionsPage']
 
 class QuestionsPage(Page):
 
+  template = 'home/questions/questions_page.html'
+
   content = StreamField(QuestionsPageStreamBlock(), null=True)
   
   cover_image = models.ForeignKey(
@@ -48,7 +52,11 @@ class QuestionsPage(Page):
     blank=True
   )
 
-QuestionsPage.content_panels = Page.content_panels + []
+QuestionsPage.content_panels = Page.content_panels + [
+  MultiFieldPanel([
+    StreamFieldPanel('content')
+  ], heading='Content')
+]
 
 QuestionsPage.parent_page_types = ['home.QuestionsOverview']
 QuestionsPage.subpage_types = []

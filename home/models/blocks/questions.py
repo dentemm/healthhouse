@@ -49,11 +49,27 @@ class EmbedBlock(EmbedBlock):
 class CustomRichTextBlock(RichTextBlock):
 
   class Meta:
-    template = 'home/questions/blocks/rich_text.html'
+    template = 'home/questions/blocks/richtext.html'
     label = 'Richtext'
+
+class QuestionAnswerBlock(StructBlock):
+
+  question = CharBlock(max_length=300)
+  question_asker = CharBlock(max_length=64, required=False)
+  answer = TextBlock(max_length=512)
+  answerer = CharBlock(max_length=128, required=False)
+
+  class Meta:
+    template = 'home/questions/blocks/question_answer.html'
+    icon = 'help'
+    label = 'Question + Answer'
 
 class QuestionsPageStreamBlock(StreamBlock):
 
-    paragraph = ParagraphBlock()
-    gallery = CarouselBlock(child_block=ImageWithCaptionblock)
-    richtext = CustomRichTextBlock()
+  subtitle = SubtitleBlock()
+  paragraph = ParagraphBlock()
+  image = ImageWithCaptionblock()
+  gallery = CarouselBlock(child_block=ImageWithCaptionblock)
+  richtext = CustomRichTextBlock()
+  question_answer = QuestionAnswerBlock()
+    
