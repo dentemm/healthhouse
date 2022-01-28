@@ -4,7 +4,7 @@
   <div class="col-md-10 offset-md-1">
     <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="true">
     {% for item in value %}
-      {% image item.image fill-800x500 as tmp_photo %}
+      {% image item.image fill-800x480 as tmp_photo %}
       <a role="button" href="#" data-toggle="modal" data-target="#corona-modal">
         <figure class="photo">
           <img src="{{ tmp_photo.url }}" alt="Image" class="hh-image">
@@ -18,7 +18,7 @@
       <div class="modal-content bg-secondary">
         <div class="owl-carousel owl-carousel-single" data-dots="true" data-nav="true" data-autoplay="false">
         {% for item in value %}
-          {% image item.image fill-1200x750 as tmp_photo %}
+          {% image item.image fill-1200x720 as tmp_photo %}
           <figure class="photo">
             <img src="{{ tmp_photo.url }}" alt="Image" class="hh-image">
           </figure>

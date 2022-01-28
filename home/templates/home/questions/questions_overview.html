@@ -1,6 +1,6 @@
 {% extends 'home/layout.html' %}
 
-{% load static %}
+{% load static wagtailcore_tags %}
 
 {% block main %}
 
@@ -17,13 +17,13 @@
     <div class="boxed bg-blue p-1 text-white mt-2 mb-4">
       <div class="row justify-content-between align-items-center text-center py-1">
         <div class="col-md-2">
-          <h3>Jan 31</h3>
+          <h3>{{ page.featured.first_published_at|date:"M j" }}</h3>
         </div>
         <div class="col-md-7 py-2 text-left">
-          <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
+          <h5>{{ page.featured.title }}</h5>
         </div>
         <div class="col-md-3 text-center">
-          <a href="" class="btn btn-white btn-rounded px-3 py-2">
+          <a href="{% pageurl page.featured %}" class="btn btn-white btn-rounded px-3 py-2">
             Find out
           </a>
         </div>
@@ -32,12 +32,9 @@
   </div>
 </section>
 
-
-
-
-
 <div class="container">
 
+  {% comment %} {% if page.others %} {% endcomment %}
   <h2 class="mb-2 mt-5 text-dark-blue">
     <b class="text-dark-blue">Previous</b> Questions
   </h2>
@@ -49,7 +46,7 @@
   <div class="boxed bg-blue p-1 text-white sort-item mb-5 mt-2" data-item-tags="All, Tweede, Derde">
     <div class="row justify-content-between align-items-center text-center py-1">
       <div class="col-md-2">
-        <h3>Jan 31</h3>
+        <h3>Jan 25</h3>
       </div>
       <div class="col-md-7 py-2">
         <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
@@ -65,7 +62,7 @@
     <div class="boxed bg-blue p-1 text-white sort-item my-5" data-item-tags="All, Tweede, Derde">
     <div class="row justify-content-between align-items-center text-center py-1">
       <div class="col-md-2">
-        <h3>Jan 31</h3>
+        <h3>Jan 22</h3>
       </div>
       <div class="col-md-7 py-2">
         <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
@@ -81,7 +78,7 @@
     <div class="boxed bg-blue p-1 text-white sort-item my-5" data-item-tags="All, Eerste, Tweede">
     <div class="row justify-content-between align-items-center text-center py-1">
       <div class="col-md-2">
-        <h3>Jan 31</h3>
+        <h3>Jan 17</h3>
       </div>
       <div class="col-md-7 py-2">
         <h5>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</h5>
@@ -94,6 +91,7 @@
     </div>
   </div>
 
+  {% comment %} {% endif %} {% endcomment %}
 
 </div>
 

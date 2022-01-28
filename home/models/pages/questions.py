@@ -23,8 +23,12 @@ class QuestionsOverview(Page):
 
   # All but last
   def others(self):
-    return QuestionsPage.objects.all() \
-      .order_by('-first_published_at')[:-1]
+
+    if QuestionsPage.objects.count() > 1:
+      return QuestionsPage.objects.all() \
+        .order_by('-first_published_at')[:-1]
+
+    return None
 
   def get_context(self, request):
     context = super().get_context(request)
