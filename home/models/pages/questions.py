@@ -6,9 +6,24 @@ from wagtail.admin.edit_handlers import (
   MultiFieldPanel,
   StreamFieldPanel,
   FieldPanel,
+  InlinePanel,
 )
+from wagtail.images.edit_handlers import ImageChooserPanel
+from modelcluster.fields import ParentalKey
 
 from ..blocks.questions import QuestionsPageStreamBlock
+
+class QuestionsOverviewCategory(models.Model):
+
+  page = ParentalKey('home.QuestionsOverview', on_delete=models.CASCADE, related_name='categories')
+
+  name = models.CharField(max_length=164)
+  description = models.TextField()
+
+QuestionsOverviewCategory.panels = [
+  FieldPanel('name', classname='col12'),
+  FieldPanel('description', classname='col12')
+]
 
 class QuestionsOverview(Page):
 
@@ -36,7 +51,10 @@ class QuestionsOverview(Page):
     return context
 
 QuestionsOverview.content_panels = Page.content_panels + [
-  FieldPanel('info_text')
+  FieldPanel('info_text'),
+  MultiFieldPanel([
+    InlinePanel('categories')
+  ], heading='Categories')
 ]
 
 QuestionsOverview.parent_page_types = ['home.HomePage']
@@ -57,6 +75,9 @@ class QuestionsPage(Page):
   )
 
 QuestionsPage.content_panels = Page.content_panels + [
+  MultiFieldPanel([
+    ImageChooserPanel('cover_imgage')
+  ]),
   MultiFieldPanel([
     StreamFieldPanel('content')
   ], heading='Content')
