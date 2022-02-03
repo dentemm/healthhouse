@@ -76,7 +76,7 @@ class QuestionsPage(Page):
 
 QuestionsPage.content_panels = Page.content_panels + [
   MultiFieldPanel([
-    ImageChooserPanel('cover_imgage')
+    ImageChooserPanel('cover_image')
   ]),
   MultiFieldPanel([
     StreamFieldPanel('content')
