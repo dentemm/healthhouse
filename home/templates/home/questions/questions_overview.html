@@ -29,23 +29,21 @@
   </div>
 </section>
 
-<div class="container pb-5 pt-5">
-
-  <div class="boxed bg-blue p-1 text-white mt-2 mb-4">
-    <div class="row justify-content-between align-items-center text-center py-1">
+<div class="container pb-5 pt-5">  
+  <a class="d-block bg-primary boxed boxed-link p-1 text-white mt-2 mb-4" href="{% pageurl page.featured %}">
+    <div class="row align-items-center text-center py-1">
       <div class="col-md-2">
         <h3>{{ page.featured.first_published_at|date:"M j" }}</h3>
       </div>
-      <div class="col-md-7 py-2 text-left">
+      <div class="col-md-8 py-2 text-left">
         <h5>{{ page.featured.title }}</h5>
       </div>
-      <div class="col-md-3 text-center">
-        <a href="{% pageurl page.featured %}" class="btn btn-white btn-rounded px-3 py-2">
-          Find out
-        </a>
+      <div class="col-md-2 text-center">
+          <i class="icon-arrow-circle-right fs-60 text-white">
+        </i>
       </div>
     </div>
-  </div>
+  </a>
 
 {% if page.others %}
   <h2 class="mb-2 mt-5 text-dark-blue">

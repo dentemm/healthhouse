@@ -245,6 +245,10 @@ color: rgba(255, 255, 255, 0.5);
   top: 1rem !important;
 }
 
+a.boxed-link:hover, a.boxed-link:focus {
+  background-color: #29245a;
+}
+
 @media (min-width: 768px) {
   .hh-parallax {
     height: 38rem;
