@@ -32,6 +32,13 @@ class QuestionsOverview(Page):
 
   template = 'home/questions/questions_overview.html'
 
+  cover_image = models.ForeignKey(
+    'wagtailimages.Image',
+    on_delete=models.SET_NULL,
+    related_name='+',
+    null=True,
+    blank=False
+  )
   info_text = models.TextField(verbose_name='description', null=True)
   
   # last
@@ -55,6 +62,7 @@ class QuestionsOverview(Page):
 
 QuestionsOverview.content_panels = Page.content_panels + [
   FieldPanel('info_text'),
+  ImageChooserPanel('cover_image'),
   MultiFieldPanel([
     InlinePanel('categories')
   ], heading='Categories')
