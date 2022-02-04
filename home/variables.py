@@ -32,6 +32,13 @@ PARTNER_CHOICES = (
     (5, 'Trusted member')
 )
 
+QUESTION_CATEGORY_CHOICES = (
+    (1, 'Answers'),
+    (2, 'Testimonials'),
+    (3, 'Experience'),
+    (4, 'Innovations'),
+)
+
 ICON_CHOICES = [
     ('icon-basic_target', 'Target'),
     ('icon-basic_heart', 'Heart'),

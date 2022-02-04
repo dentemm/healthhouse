@@ -39,7 +39,7 @@ class CarouselBlock(ListBlock):
     icon = 'image'
     label = 'Gallery'
 
-class EmbedBlock(EmbedBlock):
+class QuestionsEmbedBlock(EmbedBlock):
 
   class Meta:
     template = 'home/questions/blocks/embed.html'
@@ -72,4 +72,5 @@ class QuestionsPageStreamBlock(StreamBlock):
   gallery = CarouselBlock(child_block=ImageWithCaptionblock)
   richtext = CustomRichTextBlock()
   question_answer = QuestionAnswerBlock()
+  video_embed = QuestionsEmbedBlock()
     

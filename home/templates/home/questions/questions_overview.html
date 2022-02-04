@@ -15,17 +15,19 @@
   </div> 
   <div class="container mt-3">
     <div class="col-lg-10">
-    {% for item in page.categories.all %}
+  {% for item in page.categories.all %}
+    {% if not item.hide %}
     <h4 class="mb-1">
       <b class="text-primary">{{ item.name }}</b>
     </h4>
     <p class="text-dark">{{ item.description }}</p>
-    {% endfor %}
+    {% endif %}
+  {% endfor %}
     </div>
   </div>
 </section>
 
-<div class="container pb-5">
+<div class="container pb-5 pt-5">
 
   <div class="container">
     <div class="boxed bg-blue p-1 text-white mt-2 mb-4">

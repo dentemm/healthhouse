@@ -12,6 +12,7 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from modelcluster.fields import ParentalKey
 
 from ..blocks.questions import QuestionsPageStreamBlock
+from ...variables import QUESTION_CATEGORY_CHOICES
 
 class QuestionsOverviewCategory(models.Model):
 
@@ -19,10 +20,12 @@ class QuestionsOverviewCategory(models.Model):
 
   name = models.CharField(max_length=164)
   description = models.TextField()
+  hide = models.BooleanField(default=True)
 
 QuestionsOverviewCategory.panels = [
   FieldPanel('name', classname='col12'),
-  FieldPanel('description', classname='col12')
+  FieldPanel('description', classname='col12'),
+  FieldPanel('hide', classname='col6')
 ]
 
 class QuestionsOverview(Page):
@@ -64,8 +67,6 @@ class QuestionsPage(Page):
 
   template = 'home/questions/questions_page.html'
 
-  content = StreamField(QuestionsPageStreamBlock(), null=True)
-  
   cover_image = models.ForeignKey(
     'wagtailimages.Image',
     on_delete=models.SET_NULL,
@@ -73,11 +74,14 @@ class QuestionsPage(Page):
     null=True,
     blank=True
   )
+  category = models.IntegerField(choices=QUESTION_CATEGORY_CHOICES, default=1)
+  content = StreamField(QuestionsPageStreamBlock(), null=True)
 
 QuestionsPage.content_panels = Page.content_panels + [
   MultiFieldPanel([
-    ImageChooserPanel('cover_image')
-  ]),
+    ImageChooserPanel('cover_image', classname='col12'),
+    FieldPanel('category', classname='col12')
+  ], heading='Info'),
   MultiFieldPanel([
     StreamFieldPanel('content')
   ], heading='Content')
