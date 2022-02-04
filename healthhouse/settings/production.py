@@ -15,7 +15,7 @@ WSGI_APPLICATION = 'healthhouse.wsgi.application'
 
 SECRET_KEY = os.environ['SECRET_KEY']
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '.health-house.be', '.aws.amazon.com', '.herokuapp.com']
+ALLOWED_HOSTS = ['health-house.be', 'localhost', '127.0.0.1', '.health-house.be', '.aws.amazon.com', '.herokuapp.com']
 
 # Enforce SSL
 SECURE_SSL_REDIRECT = True
