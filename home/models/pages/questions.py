@@ -49,7 +49,7 @@ class QuestionsOverview(Page):
   # All but last
   def others(self):
 
-    if QuestionsPage.objects.count() > 1:
+    if QuestionsPage.objects.count() > 2:
       return QuestionsPage.objects.all() \
         .order_by('-first_published_at')[:-1]
 
