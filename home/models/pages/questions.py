@@ -43,14 +43,14 @@ class QuestionsOverview(Page):
   
   # last
   def featured(self):
-    return QuestionsPage.objects.all() \
+    return QuestionsPage.objects.live() \
       .order_by('-first_published_at')[0]
 
   # All but last
   def others(self):
 
-    if QuestionsPage.objects.count() > 2:
-      return QuestionsPage.objects.all() \
+    if QuestionsPage.objects.live().count() > 1:
+      return QuestionsPage.objects.live() \
         .order_by('-first_published_at')[:-1]
 
     return None
