@@ -49,6 +49,22 @@
   <h2 class="mb-2 mt-5 text-dark-blue">
     <b class="text-dark-blue">Previous</b> Questions
   </h2>
+  {% for item in page.others %}
+  <a class="d-block bg-primary boxed boxed-link p-1 text-white mt-2 mb-4" href="{% pageurl page.featured %}">
+    <div class="row align-items-center text-center py-1">
+      <div class="col-md-2">
+        <h3>{{ item.first_published_at|date:"M j" }}</h3>
+      </div>
+      <div class="col-md-8 py-2 text-left">
+        <h5>{{ item.title }}</h5>
+      </div>
+      <div class="col-md-2 text-center">
+          <i class="icon-arrow-circle-right fs-60 text-white">
+        </i>
+      </div>
+    </div>
+  </a>
+  {% endfor %}
 {% endif %}
 
   {% comment %} <div class="col-md-12 pt-3">
