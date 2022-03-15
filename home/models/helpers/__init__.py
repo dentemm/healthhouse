@@ -1,5 +1,6 @@
 from django.db import models
 
+from wagtail.core.models import Orderable
 from wagtail.admin.edit_handlers import FieldPanel, MultiFieldPanel, FieldRowPanel
 
 from django_countries.fields import CountryField
@@ -46,12 +47,15 @@ Address.panels = [
 	)
 ]
 
-class GeneralBullet(models.Model):
+class GeneralBullet(Orderable, models.Model):
 
-		item = models.CharField(max_length=128)
+	item = models.CharField(max_length=128)
 
-		def __str__(self):
-			return self.item
+	def __str__(self):
+		return self.item
+
+	class Meta:
+		ordering = ['sort_order']
 
 GeneralBullet.panels = [
 	FieldPanel('item')

@@ -27,17 +27,17 @@ class Location(Address, index.Indexed):
     latitude = models.DecimalField(max_digits=10, decimal_places=7, blank=True, null=True)
     
     class Meta:
-		    verbose_name = 'location'
-		    verbose_name_plural = 'locations'
-		    ordering = ['name', ]
+        verbose_name = 'location'
+        verbose_name_plural = 'locations'
+        ordering = ['name', ]
         
     def __str__(self):
-		    return self.name
+        return self.name
         
     @property
     def to_string(self):
-		    return '%s %s %s' % (self.street, self.number, self.city)
-        
+        return '%s %s %s' % (self.street, self.number, self.city)
+    
     def save(self, *args, **kwargs):
 
         ctx = ssl.create_default_context()
