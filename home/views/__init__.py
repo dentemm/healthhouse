@@ -1,7 +1,5 @@
 import csv
 
-from ..models.pages import HomePage
-
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from django.conf import settings
