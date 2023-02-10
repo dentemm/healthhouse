@@ -1,4 +1,4 @@
- {% load static wagtailcore_tags home_tags %}   
+ {% load static wagtailcore_tags home_tags menu_tags %}   
     
 <header class="header-sticky header-light bg-white">
   <div class="container">
@@ -7,109 +7,33 @@
         <img class="navbar-logo navbar-logo-light" src="{% static 'images/hh/hh_logo_minimal.png' %}" alt="Logo">
         <img class="navbar-logo navbar-logo-dark" src="{% static 'images/hh/hh_logo_minimal.png' %}" alt="Logo">
       </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="burger"><span></span></span></button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="burger"><span></span></span>
+      </button>
+      {% get_menu 'main-navigation' as navigation %}
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav align-items-center mr-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Discover
+        {% for item in navigation.menu_items.all %}
+          {% with item.link_page.get_specific.subpages as subitemlist %}
+          <li class="nav-item {% if item.children.all %}dropdown{% endif %}">
+            <a class="nav-link {% if item.children.all%}dropdown-toggle href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"{% endif %}">
+              {{ item.title }}
+            {% if item.children.all %}
+              </a>
+              <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
+              {% for subitem in item.children.all %}
+              <a class="dropdown-item" href="{{ subitem.link }}">
+                <span>{{ subitem.title }}</span>
+              </a>
+              {% endfor %}
+              </div>
+            {% else %}
             </a>
-            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% slugurl 'discover' %}">
-                <span>Overview</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'meeting-rooms' %}">
-                <span>Meeting rooms</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'storylines' %}">
-                <span>Storylines</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'projects' %}">
-                <span>Projects</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'health-innovations' %}">
-                <span>Health Innovations</span>
-              </a>
-            </div>
+            {% endif %}
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              News
-            </a>
-            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% slugurl 'news'  %}#news">
-                <span>News</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'news'  %}#press">
-                <span>Press</span>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              About
-            </a>
-            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% slugurl 'about'  %}#mission">
-                <span>Mission & Vision</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'about'  %}#team">
-                <span>Team</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'about'  %}#faq">
-                <span>FAQ</span>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Partners
-            </a>
-            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% slugurl 'our-partners'  %}#founding">
-                <span>Founding</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'our-partners'  %}#structural">
-                <span>Structural</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'our-partners'  %}#trusted">
-                <span>Trusted members</span>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Contact
-            </a>
-            <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="{% slugurl 'contact'  %}#contact">
-                <span>Contact us</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="{% slugurl 'contact'  %}#directions">
-                <span>Map & Directions</span>
-              </a>
-            </div>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="{% slugurl 'calendar'  %}">
-                <span>Calendar</span>
-              </a>
-          </li>
-          {% comment %} <li class="nav-item">
-            <a class="nav-link text-primary font-weight-bold" href="{% slugurl 'sop'  %}" role="button">
-              Covid-19
-            </a>
-          </li> {% endcomment %}
+          {% endwith %}
+        {% endfor %}
         </ul>
         <form class="form-inline" action="{% url 'search' %}" method="get">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query">
