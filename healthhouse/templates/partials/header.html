@@ -28,7 +28,7 @@
               </a>
               <div class="dropdown-menu bg-blue" aria-labelledby="navbarDropdown">
               {% for subitem in item.children.all %}
-              <a class="dropdown-item" href="">
+              <a class="dropdown-item" href="{{ subitem.link }}">
                 <span>{{ subitem.title }}</span>
               </a>
               {% endfor %}
