@@ -28,6 +28,7 @@ from .events import *
 from .blog import *
 from .corona import *
 from .questions import *
+from .friends import *
 from ..blocks import DiscoveryPageStreamBlock, SOPPageStreamBlock
 from ..snippets import *
 from ...variables import SOCIAL_MEDIA_CHOICES, ICON_CHOICES, DISCOVERY_PAGE_CHOICES
@@ -430,6 +431,7 @@ HomePage.subpage_types = [
     'home.CoronaIndexPage',
     'home.SOPPage',
     QuestionsOverview,
+    'home.FriendsPage'
 ]
 
 class HomePageCoverImage(Orderable):
